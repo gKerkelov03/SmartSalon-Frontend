@@ -1,0 +1,15 @@
+@use '../../../../assets/styles/breakpoints' as *;
+@use '../../../../assets/styles/variables' as *;
+
+header {
+    nav {
+        a {
+            text-decoration: none;
+            background-color: gray;
+            color: $accent;
+            padding: 1rem;
+            border-radius: 30px;
+            display: inline-block;
+        }
+    }
+}

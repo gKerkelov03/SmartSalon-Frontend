@@ -1,0 +1,33 @@
+@use '../../../../assets/styles/variables' as *;
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+
+    .lock {
+        color: $accent;
+        width: 10rem;
+        height: 10rem;
+        font-size: 10rem;
+        margin: 0 auto 30px auto;
+    }
+
+    .title {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .suggestion {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .btn {
+        display: block;
+        margin: auto;
+        margin-top: 30px;
+    }
+}

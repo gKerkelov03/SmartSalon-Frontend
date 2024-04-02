@@ -1,0 +1,11 @@
+<li [ngClass]="isOpen ? 'sidebar-list-item open' : 'sidebar-list-item'">
+	<span
+		class="sidebar-link"
+		[title]="title"
+		[routerLink]="'/' + path"
+		routerLinkActive="active"
+	>
+		<mat-icon class="sidebar-icon">{{ icon }}</mat-icon>
+		<div class="hidden-sidebar">{{ title }}</div>
+	</span>
+</li>

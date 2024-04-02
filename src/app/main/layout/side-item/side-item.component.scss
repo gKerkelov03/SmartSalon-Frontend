@@ -1,0 +1,77 @@
+@use '../../../../assets/styles/variables' as *;
+
+.sidebar-list-item {
+	position: relative;
+	width: 100%;
+    color: $primary;
+
+	&:hover {
+        background-color: $white; 
+
+        &::before {
+            content: '';
+            background-color: $primary;
+            height: 100%;
+            left: 0;
+            width: 3px;
+            position: absolute;
+        }
+	}
+
+	&.open {
+		.hidden-sidebar {
+			width: 100%;
+			height: auto;
+			opacity: 1;
+		}
+
+		.sidebar-link {
+			justify-content: flex-start;
+		}
+	}
+
+	.sidebar-link {
+		display: flex;
+		width: 100%;
+		padding: 0.5rem 0;
+		cursor: pointer;
+		align-items: center;
+		padding-left: 25px;
+
+		&.active {
+			background-color: $white; 
+
+			&::before {
+				content: '';
+				background-color: $primary;
+				height: 100%;
+				left: 0;
+				width: 3px;
+				position: absolute;
+			}
+
+            .hidden-sidebar {
+                color: $black;
+            }
+		}
+
+        &:hover {
+            .hidden-sidebar {
+                color: $black;
+            }
+        }	
+
+        .hidden-sidebar {
+            margin-left: 1.5rem;
+            white-space: nowrap;
+            width: 0;
+            color: #fff;
+        }
+
+        .sidebar-icon {
+            width: 25px;
+            height: 25px;
+            flex-shrink: 0;
+        }
+	}
+}
