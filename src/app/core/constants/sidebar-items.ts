@@ -18,8 +18,18 @@ export const sidebarItems: SidebarItem[] = [
         path: '/main/bookings/customer-active-bookings',
     },
     {
-        title: 'Worker calendar',
+        title: 'My salons',
         icon: 'calendar_month',
-        path: '/main/bookings/worker-bookings',
+        path: '/main/salons/my-salons',
+    },
+    {
+        title: 'My bookings',
+        icon: 'calendar_month',
+        path: '/main/bookings/my-bookings',
+    },
+    {
+        title: 'My calendar',
+        icon: 'calendar_month',
+        path: '/main/bookings/my-calendar',
     },
 ];

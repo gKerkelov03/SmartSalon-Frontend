@@ -7,7 +7,6 @@ import { User } from '../models/user.model';
 @Injectable({
     providedIn: 'root',
 })
-//TODO: think about moving the createXXXX methods into another users service in admins module for example
 export class UsersService {
     usersBackendUrl: string = `${environment.backendUrl}/users/`;
 

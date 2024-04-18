@@ -12,12 +12,17 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedModule } from '../../shared/shared.module';
+import { MySalonsPageComponent } from './pages/my-salons-page/my-salons-page.component';
 import { SalonDetailsPageComponent } from './pages/salon-details-page/salon-details-page.component';
 import { SearchSalonsPageComponent } from './pages/search-salons-page/search-salons-page.component';
 import { SalonsRoutingModule } from './salons-routing.module';
 
 @NgModule({
-    declarations: [SalonDetailsPageComponent, SearchSalonsPageComponent],
+    declarations: [
+        SalonDetailsPageComponent,
+        SearchSalonsPageComponent,
+        MySalonsPageComponent,
+    ],
     imports: [
         CommonModule,
         FormsModule,

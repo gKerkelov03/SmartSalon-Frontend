@@ -1,0 +1,27 @@
+.socials {
+    a {
+        height: 5rem;
+        width: 5rem;
+        line-height: 4.5rem;
+        font-size: 2.5rem;
+        margin: 1.5rem;
+        border-radius: 50%;
+        background-color: white;
+
+        &:hover {
+            background-color: green;
+        }
+
+        &.facebook,
+        &.twitter,
+        &.linkedin {
+            color: blue;
+            border: 0.3rem solid blue;
+        }
+
+        &.instagram {
+            color: orange;
+            border: 0.3rem solid orange;
+        }
+    }
+}

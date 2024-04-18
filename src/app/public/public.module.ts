@@ -7,15 +7,22 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from './components/footer/footer.component';
+import { FormsSocialsComponent } from './components/forms-socials/forms-socials.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { RestorePasswordFormComponent } from './components/restore-password-form/restore-password-form.component';
+import { EmailsHandlerPageComponent } from './pages/emails-handler-page/emails-handler-page.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { RestorePasswordPageComponent } from './pages/restore-password-page/restore-password-page.component';
 import { PublicRoutingModule } from './public-routing.module';
 
 @NgModule({
@@ -25,10 +32,17 @@ import { PublicRoutingModule } from './public-routing.module';
         LandingPageComponent,
         RegisterPageComponent,
         LoginPageComponent,
+        LoginFormComponent,
+        RegisterFormComponent,
+        FormsSocialsComponent,
+        RestorePasswordPageComponent,
+        RestorePasswordFormComponent,
+        EmailsHandlerPageComponent,
     ],
     imports: [
         RouterModule,
         CommonModule,
+        MatProgressSpinnerModule,
         ReactiveFormsModule,
         MatNativeDateModule,
         MatButtonModule,

@@ -9,7 +9,7 @@ const routes: Routes = [
         component: CustomerActiveBookingsPageComponent,
     },
     {
-        path: 'worker-bookings',
+        path: 'my-calendar',
         component: WorkerBookingsPageComponent,
     },
 ];

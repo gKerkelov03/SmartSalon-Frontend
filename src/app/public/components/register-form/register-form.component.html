@@ -1,0 +1,157 @@
+<section>
+    <form
+        [formGroup]="registerForm"
+        (ngSubmit)="onSubmit()"
+        class="register-form"
+    >
+        <app-forms-socials></app-forms-socials>
+
+        <div class="flex-container">
+            <div class="form-fields-container">
+                <mat-form-field>
+                    <input
+                        matInput
+                        placeholder="Username"
+                        formControlName="username"
+                    />
+                </mat-form-field>
+
+                <app-error-message [control]="usernameControl">
+                </app-error-message>
+                <mat-form-field>
+                    <input
+                        matInput
+                        placeholder="Email"
+                        formControlName="email"
+                    />
+                </mat-form-field>
+
+                <app-error-message [control]="emailControl">
+                </app-error-message>
+                <mat-form-field>
+                    <input
+                        matInput
+                        [type]="isPasswordVisible ? 'text' : 'password'"
+                        placeholder="Password"
+                        formControlName="password"
+                    />
+                    <mat-hint class="password-hint">
+                        Must be at least six characters with a number and
+                        special symbol
+                    </mat-hint>
+
+                    <mat-icon
+                        matSuffix
+                        *ngIf="
+                            passwordControl?.value.length && isPasswordVisible
+                        "
+                        (click)="togglePasswordVisibility()"
+                    >
+                        visibility_off
+                    </mat-icon>
+                    <mat-icon
+                        matSuffix
+                        *ngIf="
+                            passwordControl?.value.length && !isPasswordVisible
+                        "
+                        (click)="togglePasswordVisibility()"
+                    >
+                        visibility
+                    </mat-icon>
+                </mat-form-field>
+                <app-error-message
+                    class="password-error-message"
+                    [control]="passwordControl"
+                >
+                </app-error-message>
+
+                <mat-form-field>
+                    <input
+                        matInput
+                        [type]="isConfirmPasswordVisible ? 'text' : 'password'"
+                        placeholder="Confirm password"
+                        formControlName="confirmPassword"
+                    />
+                    <mat-icon
+                        matSuffix
+                        *ngIf="
+                            confirmPasswordControl?.value.length &&
+                            isConfirmPasswordVisible
+                        "
+                        (click)="toggleConfirmPasswordVisibility()"
+                    >
+                        visibility_off
+                    </mat-icon>
+                    <mat-icon
+                        matSuffix
+                        *ngIf="
+                            confirmPasswordControl?.value.length &&
+                            !isConfirmPasswordVisible
+                        "
+                        (click)="toggleConfirmPasswordVisibility()"
+                    >
+                        visibility
+                    </mat-icon>
+                </mat-form-field>
+                <app-error-message [control]="confirmPasswordControl">
+                </app-error-message>
+
+                <mat-radio-group formControlName="gender">
+                    <mat-radio-button
+                        *ngFor="let gender of genders"
+                        value="{{ gender }}"
+                    >
+                        {{ gender | titlecase }}
+                    </mat-radio-button>
+                </mat-radio-group>
+
+                <mat-form-field>
+                    <input
+                        matInput
+                        type="number"
+                        placeholder="Height"
+                        formControlName="height"
+                    />
+                </mat-form-field>
+                <app-error-message [control]="heightControl">
+                </app-error-message>
+
+                <mat-form-field>
+                    <input
+                        matInput
+                        [matDatepicker]="picker"
+                        placeholder="Date of birth"
+                        formControlName="dateOfBirth"
+                    />
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="profile-picture-container">
+                <img
+                    [src]="profilePictureControl?.value"
+                    alt="profile-picture"
+                    class="profile-picture"
+                />
+
+                <app-upload-widget
+                    (newPictureUploaded)="updateProfilePicture($event)"
+                ></app-upload-widget>
+            </div>
+        </div>
+
+        <button
+            mat-raised-button
+            type="submit"
+            [disabled]="!registerForm.valid"
+            class="btn submit-btn"
+        >
+            Submit
+        </button>
+    </form>
+</section>
