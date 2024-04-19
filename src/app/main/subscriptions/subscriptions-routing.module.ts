@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CustomerOngoingSubscriptionsPageComponent } from './pages/customer-ongoing-subscriptions-page/customer-ongoing-subscriptions-page.component';
+import { CustomerSubscriptionsPageComponent } from './pages/customer-subscriptions-page/customer-subscriptions-page.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: CustomerOngoingSubscriptionsPageComponent,
+        component: CustomerSubscriptionsPageComponent,
         pathMatch: 'full',
     },
 ];

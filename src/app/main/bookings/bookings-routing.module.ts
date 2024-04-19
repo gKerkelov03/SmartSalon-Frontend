@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CustomerActiveBookingsPageComponent } from './pages/customer-active-bookings-page/customer-active-bookings-page.component';
-import { WorkerBookingsPageComponent } from './pages/worker-bookings-page/worker-bookings-page.component';
+import { CustomerBookingsPageComponent } from './pages/customer-bookings-page/customer-bookings-page.component';
+import { CustomerHistoryPageComponent } from './pages/customer-history-page/customer-history-page.component';
+import { WorkerCalendarPageComponent } from './pages/worker-calendar-page/worker-calendar-page.component';
 
 const routes: Routes = [
     {
         path: 'my-bookings',
-        component: CustomerActiveBookingsPageComponent,
+        component: CustomerBookingsPageComponent,
     },
     {
         path: 'my-calendar',
-        component: WorkerBookingsPageComponent,
+        component: WorkerCalendarPageComponent,
+    },
+    {
+        path: 'customer-history',
+        component: CustomerHistoryPageComponent,
     },
 ];
 
