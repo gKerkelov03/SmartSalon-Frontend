@@ -11,7 +11,7 @@ export class ThemeService {
     colorTheme!: string;
 
     constructor(
-        private rendererFactory: RendererFactory2,
+        rendererFactory: RendererFactory2,
         private localStorageUtil: LocalStorageService
     ) {
         this.renderer = rendererFactory.createRenderer(null, null);
@@ -32,6 +32,10 @@ export class ThemeService {
 
     isLightMode(): boolean {
         return this.colorTheme === Theme.lightMode;
+    }
+
+    isDarkMode(): boolean {
+        return this.colorTheme === Theme.darkMode;
     }
 
     setColorTheme(theme: Theme): void {

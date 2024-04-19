@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { jwtTokenKey } from '../constants/local-storage-keys';
 import { LoginRequest } from '../models/login-request.model';
 import { LoginResponse } from '../models/login-response.model';
-import { RegisterCustomerRequest } from '../models/register-request.model';
+import { RegisterRequest } from '../models/register-request.model';
 import { RegisterResponse } from '../models/register-response.model';
 import { LocalStorageService } from './local-storage.service';
 
@@ -34,10 +34,10 @@ export class AuthService {
             );
     }
 
-    register(customer: RegisterCustomerRequest): Observable<RegisterResponse> {
+    register(user: RegisterRequest): Observable<RegisterResponse> {
         return this.httpClient.post<RegisterResponse>(
             `${environment.backendUrl}/Auth/Register`,
-            customer
+            user
         );
     }
 

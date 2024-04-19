@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay, of, switchMap } from 'rxjs';
 import { EmailType } from '../../../core/enums/email-type';
+import { getErrorMessage } from '../../../core/utils/get-error-message';
 import { EmailsService } from '../../services/emails.service';
 
 @Component({
@@ -36,7 +37,7 @@ export class EmailsHandlerPageComponent {
                 }
             },
             error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open(httpError.error.errors[0], 'Close');
+                this.snackBar.open(getErrorMessage(httpError), 'Close');
             },
         };
 

@@ -1,11 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
 export function getErrorMessage(error: HttpErrorResponse) {
-	let errors = error.error.errors;
+    const firstError = error.error.errors[0];
 
-	if (errors) {
-		return Object.values(errors)[0] + '';
-	}
-
-	return error.error;
+    if (typeof firstError === 'string') {
+        return firstError;
+    } else {
+        return firstError['Description'];
+    }
 }

@@ -79,8 +79,7 @@ export class RegisterFormComponent implements OnInit {
             next: (user: RegisterResponse) => {
                 const snackBarRef = this.snackBar.open(
                     'You registered successfully!',
-                    'Login',
-                    { panelClass: 'round-white-background' }
+                    'Login'
                 );
 
                 this.allSubscriptions.push(

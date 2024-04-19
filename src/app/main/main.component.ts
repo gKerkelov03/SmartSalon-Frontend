@@ -44,9 +44,11 @@ export class MainComponent {
         this.changeIcon = !this.changeIcon;
         this.isLightMode = this.themeService.isLightMode();
 
-        this.isLightMode
-            ? this.themeService.update(Theme.darkMode)
-            : this.themeService.update(Theme.lightMode);
+        if (this.isLightMode) {
+            this.themeService.update(Theme.darkMode);
+        } else {
+            this.themeService.update(Theme.lightMode);
+        }
     }
 
     logout(): void {

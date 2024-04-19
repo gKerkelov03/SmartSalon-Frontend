@@ -11,8 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { passwordRegex } from '../../../core/constants/regexes';
-import { LoginResponse } from '../../../core/models/login-response.model';
 import { AuthService } from '../../../core/services/auth.service';
+import { getErrorMessage } from '../../../core/utils/get-error-message';
 
 @Component({
     selector: 'app-restore-password-form',
@@ -49,13 +49,19 @@ export class RestorePasswordFormComponent implements OnInit {
 
     onSubmit(): void {
         const observer = {
-            next: (user: LoginResponse) => {
-                this.router.navigate(['main']);
+            next: () => {
+                const snackBarRef = this.snackBar.open(
+                    'You resetted you password successfully!',
+                    'Login'
+                );
+
+                snackBarRef
+                    .afterDismissed()
+                    .pipe(take(1))
+                    .subscribe(() => this.router.navigate(['public/login']));
             },
             error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open('Invalid credentials', 'Close', {
-                    panelClass: 'round-white-background',
-                });
+                this.snackBar.open(getErrorMessage(httpError), 'Close');
             },
         };
 

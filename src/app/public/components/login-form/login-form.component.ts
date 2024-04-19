@@ -60,9 +60,7 @@ export class LoginFormComponent implements OnInit {
                 this.router.navigate(['main']);
             },
             error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open('Invalid credentials', 'Close', {
-                    panelClass: 'round-white-background',
-                });
+                this.snackBar.open('Invalid credentials', 'Close');
             },
         };
 
