@@ -1,20 +1,26 @@
-mat-sidenav {
-    a {
-        display: block;
-        padding: 0.5rem 1rem;
-        margin-bottom: 1rem;
+@use '../../assets/styles/variables' as *;
 
-        mat-icon {
-            position: relative;
-            top: 5px;
-        }
+section {
+    mat-sidenav {
+        a {
+            display: block;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1rem;
+            color: $primary;
 
-        &:hover {
-            background-color: gray;
+            .text {
+                position: relative;
+                bottom: 5px;
+                margin: 0 0.5rem;
+            }
+
+            &:hover {
+                background-color: $white;
+            }
         }
     }
-}
 
-mat-sidenav-content {
-    height: 90vh;
+    mat-sidenav-content {
+        height: 100vh;
+    }
 }

@@ -1,15 +1,32 @@
-<app-header (toggleSide)="onSidebarToggle()"></app-header>
-<mat-sidenav-container class="example-container">
-    <mat-sidenav [opened]="isOpen" #sidebar [mode]="'over'">
-        @for (item of sidenavItems; track item.path) {
-        <a routerLink="{{ item.path }}" (click)="onSidebarToggle()">
-            <mat-icon>{{ item.icon }}</mat-icon>
-            {{ item.title }}
-        </a>
-        }
-    </mat-sidenav>
+<section>
+    <mat-toolbar color="primary">
+        <button mat-icon-button (click)="onSidebarToggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>SmartSalon</span>
+        <span class="example-spacer"></span>
+        <button mat-icon-button>
+            <mat-icon>favorite</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon>share</mat-icon>
+        </button>
+    </mat-toolbar>
 
-    <mat-sidenav-content>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+    <mat-sidenav-container class="example-container">
+        <mat-sidenav [opened]="isOpen" #sidebar [mode]="'over'">
+            @for (item of sidenavItems; track item.path) {
+            <a routerLink="{{ item.path }}" (click)="onSidebarToggle()">
+                <mat-icon>{{ item.icon }}</mat-icon>
+                <span class="text">
+                    {{ item.title }}
+                </span>
+            </a>
+            }
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</section>
