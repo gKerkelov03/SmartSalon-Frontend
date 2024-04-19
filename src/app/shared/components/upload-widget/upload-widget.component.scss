@@ -1,16 +1,1 @@
-@use '../../../../assets/styles/variables' as *;
 
-button {
-    letter-spacing: 0.1rem;
-    background-color: $white;
-    outline: 0.2rem solid $primary;
-    color: $primary;
-    font-size: 2em;
-    transition: letter-spacing 0.2s linear;
-    padding: 0.4rem;
-
-    &:hover {
-        letter-spacing: 0.4rem;
-        cursor: pointer;
-    }
-}

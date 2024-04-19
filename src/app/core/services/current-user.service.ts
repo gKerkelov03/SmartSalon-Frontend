@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Role } from '../enums/role';
-import { RegisterCustomerResponse } from '../models/register-customer-response.model';
+import { RegisterResponse } from '../models/register-response.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CurrentUserService {
-    private currentUserSubject: BehaviorSubject<RegisterCustomerResponse | null> =
-        new BehaviorSubject<RegisterCustomerResponse | null>(null);
+    private currentUserSubject: BehaviorSubject<RegisterResponse | null> =
+        new BehaviorSubject<RegisterResponse | null>(null);
 
-    currentUserObservable: Observable<RegisterCustomerResponse | null> =
+    currentUserObservable: Observable<RegisterResponse | null> =
         this.currentUserSubject.asObservable();
 
-    get currentUser(): RegisterCustomerResponse | null {
+    get currentUser(): RegisterResponse | null {
         return this.currentUserSubject.getValue();
     }
 
@@ -33,7 +33,7 @@ export class CurrentUserService {
         return this.hasRole(Role.Admin);
     }
 
-    setCurrentUser(user: RegisterCustomerResponse): void {
+    setCurrentUser(user: RegisterResponse): void {
         if (user === null) {
             this.clearCurrentUser();
             return;
@@ -47,13 +47,8 @@ export class CurrentUserService {
     }
 
     private hasRole(role: Role): boolean {
-        const currentUserRole: Role | undefined =
-            this.currentUserSubject.getValue()?.role as Role;
-
-        if (currentUserRole === undefined) {
-            return false;
-        }
-
-        return currentUserRole === role;
+        return (
+            this.currentUserSubject.getValue()?.roles.includes(role) ?? false
+        );
     }
 }

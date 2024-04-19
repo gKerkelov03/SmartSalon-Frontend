@@ -5,7 +5,7 @@ import { WorkerBookingsPageComponent } from './pages/worker-bookings-page/worker
 
 const routes: Routes = [
     {
-        path: 'customer-active-bookings',
+        path: 'my-bookings',
         component: CustomerActiveBookingsPageComponent,
     },
     {

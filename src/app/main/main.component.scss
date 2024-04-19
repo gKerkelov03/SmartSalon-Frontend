@@ -1,9 +1,17 @@
 mat-sidenav {
     a {
         display: block;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+
+        mat-icon {
+            position: relative;
+            top: 5px;
+        }
+
+        &:hover {
+            background-color: gray;
+        }
     }
 }
 

@@ -6,7 +6,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
-import { PasswordInputComponent } from './components/password-input/password-input.component';
 import { UploadWidgetComponent } from './components/upload-widget/upload-widget.component';
 import { AccessDeniedPageComponent } from './pages/access-denied-page/access-denied-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
@@ -14,7 +13,6 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 @NgModule({
     declarations: [
         ErrorMessageComponent,
-        PasswordInputComponent,
         UploadWidgetComponent,
         AccessDeniedPageComponent,
         NotFoundPageComponent,
@@ -29,7 +27,6 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     ],
     exports: [
         ErrorMessageComponent,
-        PasswordInputComponent,
         UploadWidgetComponent,
         AccessDeniedPageComponent,
         NotFoundPageComponent,

@@ -13,7 +13,6 @@ import { take } from 'rxjs';
 import { passwordRegex } from '../../../core/constants/regexes';
 import { LoginResponse } from '../../../core/models/login-response.model';
 import { AuthService } from '../../../core/services/auth.service';
-import { CurrentUserService } from '../../../core/services/current-user.service';
 
 @Component({
     selector: 'app-restore-password-form',
@@ -28,18 +27,20 @@ export class RestorePasswordFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private authService: AuthService,
         private snackBar: MatSnackBar,
-        private router: Router,
-        private currentUserService: CurrentUserService
+        private router: Router
     ) {}
 
     get newPasswordControl(): AbstractControl | null {
-        return this.restorePasswordForm.get('NewPassword');
+        return this.restorePasswordForm.get('newPassword');
     }
 
     ngOnInit(): void {
+        this.setupTheRestorePasswordForm();
+    }
+
+    setupTheRestorePasswordForm() {
         this.restorePasswordForm = this.formBuilder.group({
-            email: new FormControl('', [Validators.required, Validators.email]),
-            password: new FormControl('', [
+            newPassword: new FormControl('', [
                 Validators.required,
                 Validators.pattern(passwordRegex),
             ]),

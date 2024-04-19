@@ -1,111 +1,79 @@
-section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+@use '../../../../assets/styles/variables' as *;
 
-    .register-form {
-        box-shadow: blue;
-        width: 75%;
+.register-form {
+    box-shadow: $form-shadow;
+    width: 50%;
+    margin: auto;
+    padding: 2rem;
+    background-color: $white;
+    border-radius: 30px;
+
+    app-forms-socials {
+        text-align: center;
+    }
+
+    .flex-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .form-fields-container {
+            width: 55%;
+
+            mat-form-field {
+                display: block;
+                font-size: 1em;
+
+                .password-hint {
+                    font-size: 1rem;
+                }
+
+                .eye-icon {
+                    color: $primary;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: $accent;
+                    }
+                }
+            }
+        }
+
+        .profile-picture-container {
+            width: 40%;
+
+            .profile-picture {
+                max-width: 100%;
+                margin-bottom: 20px;
+                border-radius: 30px;
+            }
+
+            app-upload-widget {
+                display: block;
+                text-align: center;
+            }
+        }
+    }
+
+    .submit-btn {
+        display: block;
         margin: auto;
-        padding: 2rem;
-        background-color: white;
-        border-radius: 30px;
-
-        app-forms-socials {
-            text-align: center;
-        }
-
-        .flex-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            .form-fields-container {
-                width: 60%;
-
-                mat-radio-group {
-                    display: block;
-                    text-align: center;
-
-                    mat-radio-button {
-                        margin-right: 10px;
-                        font-size: 1.75rem;
-                    }
-                }
-
-                mat-form-field {
-                    display: block;
-                    font-size: 1.75em;
-
-                    .password-hint {
-                        font-size: 1.25rem;
-                    }
-
-                    mat-icon {
-                        color: green;
-                        cursor: pointer;
-
-                        &:hover {
-                            color: yellow;
-                        }
-                    }
-                }
-
-                app-error-message {
-                    font-size: 1.125rem;
-                    &:not(.password-error-message) {
-                        position: relative;
-                        bottom: 1.75rem;
-                    }
-                }
-
-                mat-datepicker-toggle {
-                    line-height: 4rem;
-                    font-size: 4rem;
-                }
-            }
-
-            .profile-picture-container {
-                width: 35%;
-
-                .profile-picture {
-                    max-width: 100%;
-                    margin-bottom: 20px;
-                    border: 0.2rem solid orange;
-                    border-radius: 30px2;
-                }
-
-                app-upload-widget {
-                    display: block;
-                    text-align: center;
-                }
-            }
-        }
-
-        .submit-btn {
-            display: block;
-            margin: auto;
-            margin-top: 2rem;
-        }
     }
 }
 
 @media (max-width: 700px) {
-    section {
-        .register-form {
-            .flex-container {
-                flex-direction: column;
-                align-items: center;
+    .register-form {
+        .flex-container {
+            flex-direction: column;
+            align-items: center;
 
-                .profile-picture-container {
-                    order: 0;
-                }
+            .profile-picture-container {
+                order: 0;
+            }
 
-                .form-fields-container {
-                    order: 1;
-                    width: 100%;
-                }
+            .form-fields-container {
+                order: 1;
+                width: 100%;
             }
         }
     }

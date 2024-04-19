@@ -3,5 +3,6 @@ export interface RegisterCustomerRequest {
     lastName: string;
     email: string;
     phoneNumber: string;
+    password: string;
     profilePictureUrl: string;
 }

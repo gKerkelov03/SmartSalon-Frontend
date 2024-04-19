@@ -21,20 +21,20 @@ export class JwtTokenInterceptor implements HttpInterceptor {
     ) {}
 
     intercept(
-        req: HttpRequest<unknown>,
+        request: HttpRequest<unknown>,
         next: HttpHandler
     ): Observable<HttpEvent<unknown>> {
         const jwt = this.localStorage.getItem(jwtTokenKey);
 
         if (jwt) {
-            req = req.clone({
+            request = request.clone({
                 setHeaders: {
                     Authorization: `Bearer ${jwt}`,
                 },
             });
         }
 
-        return next.handle(req).pipe(
+        return next.handle(request).pipe(
             tap({
                 next: () => {},
                 error: (err: unknown) => {

@@ -1,6 +1,6 @@
-import { SidebarItem } from '../models/side-nav-item.model';
+import { SidenavItem } from '../models/side-nav-item.model';
 
-export const sidebarItems: SidebarItem[] = [
+export const sidenavItems: SidenavItem[] = [
     { title: 'Profile', icon: 'account_circle', path: '/main/users' },
     {
         title: 'Search salons',
@@ -13,19 +13,14 @@ export const sidebarItems: SidebarItem[] = [
         path: '/main/subscriptions',
     },
     {
-        title: 'Customer bookings',
+        title: 'My bookings',
         icon: 'bookmark_added',
-        path: '/main/bookings/customer-active-bookings',
+        path: '/main/bookings/my-bookings',
     },
     {
         title: 'My salons',
-        icon: 'calendar_month',
+        icon: 'storefront',
         path: '/main/salons/my-salons',
-    },
-    {
-        title: 'My bookings',
-        icon: 'calendar_month',
-        path: '/main/bookings/my-bookings',
     },
     {
         title: 'My calendar',

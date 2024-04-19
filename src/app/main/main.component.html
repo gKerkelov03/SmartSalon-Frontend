@@ -1,7 +1,7 @@
 <app-header (toggleSide)="onSidebarToggle()"></app-header>
 <mat-sidenav-container class="example-container">
     <mat-sidenav [opened]="isOpen" #sidebar [mode]="'over'">
-        @for (item of sidebarItems; track item.path) {
+        @for (item of sidenavItems; track item.path) {
         <a routerLink="{{ item.path }}" (click)="onSidebarToggle()">
             <mat-icon>{{ item.icon }}</mat-icon>
             {{ item.title }}

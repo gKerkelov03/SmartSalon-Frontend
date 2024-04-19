@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { passwordRegex } from '../../../core/constants/regexes';
 import { blankProfilePictureUrl } from '../../../core/constants/urls';
-import { RegisterCustomerResponse } from '../../../core/models/register-customer-response.model';
+import { RegisterResponse } from '../../../core/models/register-response.model';
 import { AuthService } from '../../../core/services/auth.service';
 import { AreMatchingValidator } from '../../../core/utils/validators/matching.validator';
 
@@ -39,8 +39,12 @@ export class RegisterFormComponent implements OnInit {
         return this.registerForm.get('profilePictureUrl');
     }
 
-    get usernameControl(): AbstractControl | null {
-        return this.registerForm.get('username');
+    get firstNameControl(): AbstractControl | null {
+        return this.registerForm.get('firstName');
+    }
+
+    get lastNameControl(): AbstractControl | null {
+        return this.registerForm.get('lastName');
     }
 
     get emailControl(): AbstractControl | null {
@@ -55,8 +59,8 @@ export class RegisterFormComponent implements OnInit {
         return this.registerForm.get('confirmPassword');
     }
 
-    get heightControl(): AbstractControl | null {
-        return this.registerForm.get('height');
+    get phoneNumberControl(): AbstractControl | null {
+        return this.registerForm.get('phoneNumber');
     }
 
     ngOnInit(): void {
@@ -72,7 +76,7 @@ export class RegisterFormComponent implements OnInit {
 
     onSubmit(): void {
         const observer = {
-            next: (user: RegisterCustomerResponse) => {
+            next: (user: RegisterResponse) => {
                 const snackBarRef = this.snackBar.open(
                     'You registered successfully!',
                     'Login',
@@ -102,10 +106,15 @@ export class RegisterFormComponent implements OnInit {
     setupTheRegisterForm(): void {
         this.registerForm = this.formBuilder.group({
             profilePictureUrl: new FormControl(blankProfilePictureUrl),
-            username: new FormControl('', [
+            firstName: new FormControl('', [
                 Validators.required,
                 Validators.minLength(2),
-                Validators.maxLength(25),
+                Validators.maxLength(30),
+            ]),
+            lastName: new FormControl('', [
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(30),
             ]),
             email: new FormControl('', [Validators.required, Validators.email]),
             password: new FormControl('', [
@@ -116,13 +125,7 @@ export class RegisterFormComponent implements OnInit {
                 Validators.required,
                 AreMatchingValidator('password'),
             ]),
-            gender: new FormControl('male', [Validators.required]),
-            height: new FormControl('', [
-                Validators.required,
-                Validators.min(100),
-                Validators.max(230),
-            ]),
-            dateOfBirth: new FormControl('', [Validators.required]),
+            phoneNumber: new FormControl('', [Validators.required]),
         });
     }
 

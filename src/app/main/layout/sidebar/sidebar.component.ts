@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { sidebarItems } from '../../../core/constants/sidebar-items';
-import { SidebarItem } from '../../../core/models/side-nav-item.model';
+import { sidenavItems } from '../../../core/constants/sidenav-items';
+import { SidenavItem } from '../../../core/models/side-nav-item.model';
 import { CurrentUserService } from '../../../core/services/current-user.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { CurrentUserService } from '../../../core/services/current-user.service'
 export class SidebarComponent {
     @Input() isOpen!: boolean;
     @Output() sideClick = new EventEmitter();
-    sidenavItems: SidebarItem[] = sidebarItems;
+    sidenavItems: SidenavItem[] = sidenavItems;
 
     constructor(public currentUserService: CurrentUserService) {}
 

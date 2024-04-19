@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay, of, switchMap } from 'rxjs';
+import { EmailType } from '../../../core/enums/email-type';
 import { EmailsService } from '../../services/emails.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class EmailsHandlerPageComponent {
 
     ngOnInit(): void {
         var observer = {
-            next: (response: unknown) => {
+            next: () => {
                 if (this.emailType == EmailType.EmailConfirmation) {
                     this.router.navigate(['/main/users']);
                 } else if (this.emailType == EmailType.OwnerInvitation) {
@@ -62,11 +63,4 @@ export class EmailsHandlerPageComponent {
             .pipe(delay(500))
             .subscribe(observer);
     }
-}
-
-enum EmailType {
-    EmailConfirmation = 1,
-    OwnerInvitation = 2,
-    WorkerInvitation = 3,
-    RestorePassword = 4,
 }

@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { sidebarItems } from '../core/constants/sidebar-items';
-import { SidebarItem } from '../core/models/side-nav-item.model';
+import { sidenavItems } from '../core/constants/sidenav-items';
+import { SidenavItem } from '../core/models/side-nav-item.model';
 
 @Component({
     selector: 'app-main',
@@ -9,7 +9,7 @@ import { SidebarItem } from '../core/models/side-nav-item.model';
     styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnDestroy {
-    sidebarItems: SidebarItem[] = sidebarItems;
+    sidenavItems: SidenavItem[] = sidenavItems;
     isOpen: boolean = false;
 
     constructor(private dialogRef: MatDialog) {}

@@ -1,3 +1,2 @@
-//Must be at least 6 characters long with a number and special symbol
-export const passwordRegex =
-	'^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-+_(){}<>,;]).{6,}$';
+//6 characters, uppercase and lowercase letters
+export const passwordRegex = '^(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6,}$';

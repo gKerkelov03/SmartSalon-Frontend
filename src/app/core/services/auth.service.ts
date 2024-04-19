@@ -5,17 +5,14 @@ import { environment } from '../../../environments/environment';
 import { jwtTokenKey } from '../constants/local-storage-keys';
 import { LoginRequest } from '../models/login-request.model';
 import { LoginResponse } from '../models/login-response.model';
-import { RegisterCustomerRequest } from '../models/register-customer-request.model';
-import { RegisterCustomerResponse } from '../models/register-customer-response.model';
+import { RegisterCustomerRequest } from '../models/register-request.model';
+import { RegisterResponse } from '../models/register-response.model';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    loginUrl: string = `${environment.backendUrl}/Authentication/login`;
-    registerUrl: string = `${environment.backendUrl}/Users/client`;
-
     constructor(
         private httpClient: HttpClient,
         private localStorageUtil: LocalStorageService
@@ -23,7 +20,10 @@ export class AuthService {
 
     login(credentials: LoginRequest): Observable<LoginResponse> {
         return this.httpClient
-            .post<LoginResponse>(this.loginUrl, credentials)
+            .post<LoginResponse>(
+                `${environment.backendUrl}/Auth/Login`,
+                credentials
+            )
             .pipe(
                 tap((response) =>
                     this.localStorageUtil.setItem(
@@ -34,14 +34,14 @@ export class AuthService {
             );
     }
 
-    logout(): void {}
-
-    register(
-        customer: RegisterCustomerRequest
-    ): Observable<RegisterCustomerResponse> {
-        return this.httpClient.post<RegisterCustomerResponse>(
-            this.registerUrl,
+    register(customer: RegisterCustomerRequest): Observable<RegisterResponse> {
+        return this.httpClient.post<RegisterResponse>(
+            `${environment.backendUrl}/Auth/Register`,
             customer
         );
+    }
+
+    logout(): void {
+        this.localStorageUtil.deleteItem(jwtTokenKey);
     }
 }
