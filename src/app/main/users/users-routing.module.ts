@@ -5,8 +5,12 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 const routes: Routes = [
     {
         path: '',
-        component: ProfilePageComponent,
+        redirectTo: 'profile',
         pathMatch: 'full',
+    },
+    {
+        path: 'profile',
+        component: ProfilePageComponent,
     },
 ];
 

@@ -1,4 +1,4 @@
-export interface SalonSpecialty {
+export interface Specialty {
     text: string;
     salonId: string;
 }

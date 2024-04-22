@@ -1,4 +1,4 @@
-export interface SalonWorkingTime {
+export interface WorkingTime {
     salonId: string;
 
     mondayFrom: string;
