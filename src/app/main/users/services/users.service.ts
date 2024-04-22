@@ -16,12 +16,14 @@ export class UsersService {
         return this.httpClient.get<User>(this.usersBackendUrl + id);
     }
 
-    update(id: string, newUser: User): Observable<void> {
+    update(id: string, newUser: Partial<User>): Observable<void> {
         return this.httpClient.patch<void>(this.usersBackendUrl + id, newUser);
     }
 
-    delete(id: string): Observable<void> {
-        return this.httpClient.delete<void>(this.usersBackendUrl + id);
+    delete(id: string, password: string): Observable<void> {
+        return this.httpClient.delete<void>(this.usersBackendUrl + id, {
+            body: password,
+        });
     }
 
     changePassword(

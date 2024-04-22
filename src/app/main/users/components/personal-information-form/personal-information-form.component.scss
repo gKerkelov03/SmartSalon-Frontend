@@ -1,0 +1,19 @@
+@use '../../../../../assets/styles/variables' as *;
+
+form {
+    mat-form-field {
+        display: block;
+        font-size: 1rem;
+    }
+
+    app-upload-widget {
+        display: flex;
+        justify-content: center;
+    }
+
+    .actions {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+}

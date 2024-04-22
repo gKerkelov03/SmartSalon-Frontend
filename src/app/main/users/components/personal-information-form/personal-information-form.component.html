@@ -1,0 +1,40 @@
+<form [formGroup]="personalInformationForm">
+    <mat-form-field>
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName" readonly="{{ !canEdit }}" />
+    </mat-form-field>
+    <app-error-message [control]="firstNameControl"> </app-error-message>
+
+    <mat-form-field>
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName" readonly="{{ !canEdit }}" />
+    </mat-form-field>
+    <app-error-message [control]="lastNameControl"> </app-error-message>
+
+    <mat-form-field>
+        <mat-label>Phone number</mat-label>
+        <input
+            matInput
+            formControlName="phoneNumber"
+            readonly="{{ !canEdit }}"
+        />
+    </mat-form-field>
+    <app-error-message [control]="phoneNumberControl" />
+
+    <app-upload-widget
+        buttonText="Upload picture"
+        (newPictureUploaded)="changeProfilePicture($event)"
+    ></app-upload-widget>
+
+    <div *ngIf="canEdit" class="actions">
+        <button mat-raised-button (click)="cancel()">Cancel</button>
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="saveClicked()"
+            [disabled]="!personalInformationForm.valid"
+        >
+            Save
+        </button>
+    </div>
+</form>

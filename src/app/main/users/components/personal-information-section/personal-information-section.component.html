@@ -1,0 +1,15 @@
+<mat-expansion-panel expanded class="panel">
+    <mat-expansion-panel-header class="header">
+        <mat-panel-title>Personal information</mat-panel-title>
+        <mat-icon class="edit-icon" (click)="editIconClicked()">
+            edit_square
+        </mat-icon>
+    </mat-expansion-panel-header>
+
+    <mat-card-content class="content">
+        <app-personal-information-form
+            [canEdit]="canEdit"
+            (setCanEditToFalse)="setCanEditToFalse()"
+        ></app-personal-information-form>
+    </mat-card-content>
+</mat-expansion-panel>
