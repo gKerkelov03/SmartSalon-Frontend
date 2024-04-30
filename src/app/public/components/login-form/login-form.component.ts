@@ -9,11 +9,16 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { take } from 'rxjs';
+import { switchMap, take } from 'rxjs';
 import { passwordRegex } from '../../../core/constants/regexes';
+import { JwtData } from '../../../core/models/jwt-data.model';
 import { LoginResponse } from '../../../core/models/login-response.model';
+import { User } from '../../../core/models/user.model';
 import { AuthService } from '../../../core/services/auth.service';
 import { CurrentUserService } from '../../../core/services/current-user.service';
+import { LocalStorageService } from '../../../core/services/local-storage.service';
+import { parseJwt } from '../../../core/utils/parse-jwt';
+import { UsersService } from '../../../main/users/services/users.service';
 
 @Component({
     selector: 'app-login-form',
@@ -29,7 +34,9 @@ export class LoginFormComponent implements OnInit {
         private authService: AuthService,
         private snackBar: MatSnackBar,
         private router: Router,
-        private currentUserService: CurrentUserService
+        private currentUserService: CurrentUserService,
+        private usersService: UsersService,
+        private localStorageService: LocalStorageService
     ) {}
 
     get emailControl(): AbstractControl | null {
@@ -56,7 +63,8 @@ export class LoginFormComponent implements OnInit {
 
     onSubmit(): void {
         const observer = {
-            next: (user: LoginResponse) => {
+            next: (user: User) => {
+                this.currentUserService.setCurrentUser(user);
                 this.router.navigate(['main']);
             },
             error: (httpError: HttpErrorResponse) => {
@@ -67,6 +75,12 @@ export class LoginFormComponent implements OnInit {
         this.authService
             .login(this.loginForm.value)
             .pipe(take(1))
+            .pipe(
+                switchMap((response: LoginResponse) => {
+                    var decodedJwt: JwtData = parseJwt(response.jwtToken);
+                    return this.usersService.getById(decodedJwt.sub);
+                })
+            )
             .subscribe(observer);
     }
 

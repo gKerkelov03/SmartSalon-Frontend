@@ -18,11 +18,11 @@ export class AuthService {
         private localStorageUtil: LocalStorageService
     ) {}
 
-    login(credentials: LoginRequest): Observable<LoginResponse> {
+    login(request: LoginRequest): Observable<LoginResponse> {
         return this.httpClient
             .post<LoginResponse>(
                 `${environment.backendUrl}/Auth/Login`,
-                credentials
+                request
             )
             .pipe(
                 tap((response) =>

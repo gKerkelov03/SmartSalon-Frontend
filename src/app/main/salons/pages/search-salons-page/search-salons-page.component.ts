@@ -6,7 +6,5 @@ import { Component, OnInit } from '@angular/core';
     styleUrl: './search-salons-page.component.scss',
 })
 export class SearchSalonsPageComponent implements OnInit {
-    ngOnInit(): void {
-        console.log('search salons is called');
-    }
+    ngOnInit(): void {}
 }
