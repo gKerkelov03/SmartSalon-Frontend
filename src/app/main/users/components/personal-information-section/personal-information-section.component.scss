@@ -2,29 +2,25 @@
 
 .panel {
     width: 50%;
-    padding-top: 1rem;
-    border-radius: 20px;
+    border-radius: 10px;
     margin: auto;
     margin-bottom: 4rem;
 
     .header {
         font-size: 1.25rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
 
         mat-panel-title {
             color: $primary;
         }
+    }
 
-        .edit-icon {
-            color: $primary;
-            cursor: pointer;
-
-            &:hover {
-                border-radius: 30%;
-                background-color: $white;
-            }
-        }
+    .edit-icon {
+        display: block;
+        margin-left: auto;
+        margin-bottom: 1rem;
+        // position: relative;
+        // right: 1.5rem;
+        color: $primary;
+        cursor: pointer;
     }
 }

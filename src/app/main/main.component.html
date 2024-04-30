@@ -13,7 +13,7 @@
         </button>
     </mat-toolbar>
 
-    <mat-sidenav-container class="example-container">
+    <mat-sidenav-container class="sidenav">
         <mat-sidenav [opened]="isOpen" #sidebar [mode]="'over'">
             @for (item of sidenavItems; track item.path) {
             <a routerLink="{{ item.path }}" (click)="onSidebarToggle()">
@@ -25,7 +25,7 @@
             }
         </mat-sidenav>
 
-        <mat-sidenav-content>
+        <mat-sidenav-content class="content">
             <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>

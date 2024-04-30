@@ -3,12 +3,7 @@
 section {
     display: flex;
     justify-content: space-evenly;
-    background-color: $white;
-    margin-bottom: 5rem;
-    // background-image: url('../../../../../assets/images/profile-header-background-image.svg');
-    background-position: bottom right;
-    background-repeat: no-repeat;
-    background-size: 20vw;
+    margin: 5rem;
 
     .content {
         text-align: center;
@@ -21,13 +16,13 @@ section {
 
         .name {
             font-size: 2rem;
-            margin-bottom: 5px;
+            margin-bottom: 1rem;
             letter-spacing: 2px;
             font-weight: 500;
         }
 
-        .info {
-            font-size: 2rem;
+        .email {
+            font-size: 1rem;
             color: $primary;
         }
     }
