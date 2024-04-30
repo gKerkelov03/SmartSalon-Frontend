@@ -1,45 +1,52 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { BehaviorSubject, Observable, Subject, finalize } from 'rxjs';
+import {
+    BehaviorSubject,
+    Observable,
+    finalize,
+    of,
+    retry,
+    switchMap,
+    throwError,
+} from 'rxjs';
 import { UsersService } from '../../main/users/services/users.service';
 import { jwtTokenKey } from '../constants/local-storage-keys';
 import { Role } from '../enums/role';
-import { Customer } from '../models/customer.model';
-import { Owner } from '../models/owner.model';
 import { User } from '../models/user.model';
-import { Worker } from '../models/worker.model';
 import { parseJwt } from '../utils/parse-jwt';
 import { LocalStorageService } from './local-storage.service';
-import { OwnersService } from './owners.service';
-import { WorkersService } from './workers.service';
-
-type UserType = Worker | Owner | Customer | User | null;
 
 @Injectable({
     providedIn: 'root',
 })
 export class CurrentUserService {
+    public static initialized: boolean = false;
+
     private currentUserSubject: BehaviorSubject<User | null> =
-        new BehaviorSubject<UserType>(null);
+        new BehaviorSubject<User | null>(null);
 
     public currentUserObservable: Observable<User | null> =
-        this.currentUserSubject.asObservable();
+        this.currentUserSubject.asObservable().pipe(
+            switchMap((user) => {
+                if (!CurrentUserService.initialized) {
+                    return throwError(
+                        () =>
+                            new Error('CurrentUserService not initialized yet')
+                    );
+                }
 
-    public static initialized: Subject<boolean> = new BehaviorSubject<boolean>(
-        false
-    );
+                return of(user);
+            }),
+            retry({ delay: 100 })
+        );
 
     constructor(
         private usersService: UsersService,
-        private ownersService: OwnersService,
-        private workersService: WorkersService,
-        private snackBar: MatSnackBar,
         localStorageService: LocalStorageService
     ) {
         const jwtToken = localStorageService.getItem(jwtTokenKey);
 
         if (jwtToken === null) {
-            CurrentUserService.initialized.next(true);
+            CurrentUserService.initialized = true;
             return;
         }
 
@@ -48,11 +55,11 @@ export class CurrentUserService {
 
         this.usersService
             .getById(decodedJwt.sub)
-            .pipe(finalize(() => CurrentUserService.initialized.next(true)))
+            .pipe(finalize(() => (CurrentUserService.initialized = true)))
             .subscribe((user: User) => this.currentUserSubject.next(user));
     }
 
-    get currentUser(): UserType | null {
+    get currentUser(): User | null {
         return this.currentUserSubject.getValue();
     }
 
