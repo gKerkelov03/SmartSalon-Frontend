@@ -1,27 +1,13 @@
 .socials {
-    a {
-        height: 3.5rem;
-        width: 3.5rem;
-        line-height: 3rem;
-        font-size: 1.5rem;
-        margin: 1.5rem;
-        border-radius: 50%;
-        background-color: white;
+    display: flex;
+    justify-content: space-evenly;
+
+    img {
+        height: 2.5rem;
+        width: 2.5rem;
 
         &:hover {
-            background-color: green;
-        }
-
-        &.facebook,
-        &.twitter,
-        &.linkedin {
-            color: blue;
-            border: 0.3rem solid blue;
-        }
-
-        &.instagram {
-            color: orange;
-            border: 0.3rem solid orange;
+            cursor: pointer;
         }
     }
 }

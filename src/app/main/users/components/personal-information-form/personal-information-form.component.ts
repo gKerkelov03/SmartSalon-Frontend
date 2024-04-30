@@ -31,7 +31,6 @@ export class PersonalInformationFormComponent implements OnInit, OnDestroy {
     @Output() setCanEditToFalse = new EventEmitter();
     userTemplate!: User | null;
     personalInformationForm!: FormGroup;
-    genders: string[] = ['male', 'female'];
     allSubscriptions: Subscription[] = [];
 
     constructor(

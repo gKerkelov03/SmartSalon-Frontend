@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from './components/footer/footer.component';
@@ -46,6 +47,7 @@ import { PublicRoutingModule } from './public-routing.module';
         ReactiveFormsModule,
         MatNativeDateModule,
         MatButtonModule,
+        MatTooltipModule,
         MatInputModule,
         MatFormFieldModule,
         MatRadioModule,

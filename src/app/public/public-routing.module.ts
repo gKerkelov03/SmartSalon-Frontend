@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { loggedOutGuard } from '../core/guards/logged-out.guard';
 import { AccessDeniedPageComponent } from '../shared/pages/access-denied-page/access-denied-page.component';
 import { EmailsHandlerPageComponent } from './pages/emails-handler-page/emails-handler-page.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
@@ -18,12 +17,10 @@ const routes: Routes = [
     {
         path: 'login',
         component: LoginPageComponent,
-        canLoad: [loggedOutGuard],
     },
     {
         path: 'register',
         component: RegisterPageComponent,
-        canLoad: [loggedOutGuard],
     },
     {
         path: 'restore-password',

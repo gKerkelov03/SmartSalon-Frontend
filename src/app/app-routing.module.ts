@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { loggedInGuard } from './core/guards/logged-in.guard';
-import { loggedOutGuard } from './core/guards/logged-out.guard';
 import { NotFoundPageComponent } from './shared/pages/not-found-page/not-found-page.component';
 
 const routes: Routes = [
@@ -12,7 +11,6 @@ const routes: Routes = [
     },
     {
         path: 'public',
-        canLoad: [loggedOutGuard],
         loadChildren: () =>
             import('./public/public.module').then(
                 (publicModule) => publicModule.PublicModule
