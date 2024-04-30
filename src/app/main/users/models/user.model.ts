@@ -3,8 +3,8 @@ export interface User {
     firstName: string;
     lastName: string;
     email: string;
+    isEmailConfirmed: boolean;
     phoneNumber: string;
-    password: string;
     profilePictureUrl: string;
     roles: string[];
 }

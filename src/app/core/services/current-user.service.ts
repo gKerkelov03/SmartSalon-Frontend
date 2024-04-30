@@ -8,10 +8,10 @@ import {
     switchMap,
     throwError,
 } from 'rxjs';
+import { User } from '../../main/users/models/user.model';
 import { UsersService } from '../../main/users/services/users.service';
 import { jwtTokenKey } from '../constants/local-storage-keys';
 import { Role } from '../enums/role';
-import { User } from '../models/user.model';
 import { parseJwt } from '../utils/parse-jwt';
 import { LocalStorageService } from './local-storage.service';
 
@@ -62,7 +62,7 @@ export class CurrentUserService {
     get currentUser(): User | null {
         if (!CurrentUserService.initialized) {
             throw new Error(
-                'You are trying to access the current user before the CurrentUserService has determined it. You cannot use the currentUser property in your case and you should consider subscribing to the currentUserObservable property to get notified when the current user is determined'
+                'You are trying to access the current user before the CurrentUserService has determined it. You cannot use the currentUser property in this case and you should consider subscribing to the currentUserObservable property to get notified when the current user is determined'
             );
         }
 
@@ -86,44 +86,12 @@ export class CurrentUserService {
     }
 
     setCurrentUser(user: User): void {
-        // var observer = {
-        //     next: (user: UserType) => {
-        //         console.log(user);
-        //         this.currentUserSubject.next(user);
-        //     },
-        //     error: (httpError: HttpErrorResponse) => {
-        //         this.snackBar.open(getErrorMessage(httpError), 'Close');
-        //     },
-        // };
-
         if (user === null) {
             this.currentUserSubject.next(null);
             return;
         }
-        console.log(user);
+
         this.currentUserSubject.next(user);
-        // else {
-        //     this.usersService
-        //         .getById(user.id)
-        //         .pipe(
-        //             switchMap((user: any) => {
-        //                 if (user.roles.includes(Role.Worker)) {
-        //                     return this.workersService.getById(user.id);
-        //                 }
-
-        //                 if (user.roles.includes(Role.Owner)) {
-        //                     return this.ownersService.getById(user.id);
-        //                 }
-
-        //                 if (user.roles.includes(Role.Customer)) {
-        //                     return this.workersService.getById(user.id);
-        //                 }
-
-        //                 return of(user);
-        //             })
-        //         )
-        // .subscribe(observer);
-        // }
     }
 
     clearCurrentUser(): void {

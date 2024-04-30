@@ -5,10 +5,10 @@ import { CurrentUserService } from '../services/current-user.service';
 
 export const loggedInGuard: CanActivateFn = () => {
     const router = inject(Router);
-    const currentUserService = inject(CurrentUserService);
 
-    return currentUserService.currentUserObservable.pipe(
+    return inject(CurrentUserService).currentUserObservable.pipe(
         map((user) => {
+            console.log(user);
             if (user === null) {
                 router.navigate(['/public/login']);
                 return false;

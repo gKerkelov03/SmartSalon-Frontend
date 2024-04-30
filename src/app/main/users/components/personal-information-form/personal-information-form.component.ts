@@ -16,9 +16,9 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription, take } from 'rxjs';
-import { User } from '../../../../core/models/user.model';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { getErrorMessage } from '../../../../core/utils/get-error-message';
+import { User } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
 
 @Component({

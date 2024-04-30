@@ -5,9 +5,8 @@ import { CurrentUserService } from '../services/current-user.service';
 
 export const loggedOutGuard: CanActivateFn = () => {
     const router = inject(Router);
-    const currentUserService = inject(CurrentUserService);
 
-    return currentUserService.currentUserObservable.pipe(
+    return inject(CurrentUserService).currentUserObservable.pipe(
         map((user) => {
             if (user === null) {
                 return true;
