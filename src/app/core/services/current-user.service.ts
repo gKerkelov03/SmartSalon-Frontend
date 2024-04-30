@@ -60,6 +60,12 @@ export class CurrentUserService {
     }
 
     get currentUser(): User | null {
+        if (!CurrentUserService.initialized) {
+            throw new Error(
+                'You are trying to access the current user before the CurrentUserService has determined it. You cannot use the currentUser property in your case and you should consider subscribing to the currentUserObservable property to get notified when the current user is determined'
+            );
+        }
+
         return this.currentUserSubject.getValue();
     }
 
