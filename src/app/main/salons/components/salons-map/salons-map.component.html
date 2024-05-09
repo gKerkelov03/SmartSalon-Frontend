@@ -1,0 +1,13 @@
+<google-map
+    height="400px"
+    width="750px"
+    [center]="center"
+    [zoom]="zoom"
+    [mapId]="mapId"
+    (mapClick)="moveMap($event)"
+    [options]="mapOptions"
+>
+    @for (salon of salons; track salon.id) {
+    <map-advanced-marker [position]="salon.coordinates" />
+    }
+</google-map>

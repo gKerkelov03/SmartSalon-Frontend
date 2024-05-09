@@ -1,6 +1,7 @@
 @use './assets/styles/variables' as *;
 @use '@angular/material' as mat;
 @include mat.core();
+@import '../node_modules/angular-calendar/css/angular-calendar.css';
 
 $my-primary: mat.define-palette(mat.$indigo-palette);
 $my-accent: mat.define-palette(mat.$pink-palette);
@@ -30,6 +31,8 @@ $my-theme: mat.define-light-theme(
 }
 
 html {
+    height: 100%;
+
     &::-webkit-scrollbar {
         width: 0.8rem;
         background-color: $white;
@@ -40,5 +43,7 @@ html {
         border-radius: 5rem;
     }
 
-    height: 100%;
+    body {
+        height: 100%;
+    }
 }

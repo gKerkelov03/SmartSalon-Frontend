@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { Booking } from '../models/bookings.model';
+import { BookingChange } from '../models/booking-change-model';
+import { Booking } from '../models/booking.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class BookingsService {
-    bookingsBackendUrl: string = `${environment.backendUrl}/Users/`;
+    bookingsBackendUrl: string = `${environment.backendUrl}/Bookings/`;
+    bookingsChangeSubject: Subject<BookingChange> = new Subject();
 
     constructor(private httpClient: HttpClient) {}
 
@@ -20,6 +22,10 @@ export class BookingsService {
         return this.httpClient.get<Booking>(this.bookingsBackendUrl + id);
     }
 
+    getAll(): Observable<Booking[]> {
+        return this.httpClient.get<Booking[]>(this.bookingsBackendUrl);
+    }
+
     update(id: string, newBooking: Partial<Booking>): Observable<void> {
         return this.httpClient.patch<void>(
             this.bookingsBackendUrl + id,
@@ -27,9 +33,7 @@ export class BookingsService {
         );
     }
 
-    delete(id: string, password: string): Observable<void> {
-        return this.httpClient.delete<void>(this.bookingsBackendUrl + id, {
-            body: password,
-        });
+    delete(id: string): Observable<void> {
+        return this.httpClient.delete<void>(this.bookingsBackendUrl + id);
     }
 }

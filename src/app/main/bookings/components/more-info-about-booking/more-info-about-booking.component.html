@@ -1,0 +1,43 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<div mat-dialog-content *ngIf="!isLoading" class="modal-container scrollbar">
+    <div class="actions">
+        <button type="button" mat-icon-button class="action">
+            <mat-icon mat-dialog-close>close</mat-icon>
+        </button>
+        <button
+            type="button"
+            (click)="editIconClicked()"
+            mat-icon-button
+            class="action"
+        >
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button
+            type="button"
+            (click)="deleteIconClicked()"
+            mat-icon-button
+            class="action"
+            mat-icon-button
+            class="action"
+        >
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+
+    <div class="header">
+        <h3 class="booking-data title">This is hard coded</h3>
+    </div>
+
+    <p class="booking-data">Start date: {{ startDate }}</p>
+    <p class="booking-data">Start time: {{ startTime }}</p>
+
+    <p class="booking-data" *ngIf="bookingHoursDuration !== 0">
+        Duration: {{ bookingHoursDuration }} hours and
+        {{ bookingMinutesDuration }} minutes
+    </p>
+
+    <p class="booking-data" *ngIf="bookingHoursDuration === 0">
+        Duration: {{ bookingMinutesDuration }} minutes
+    </p>
+</div>

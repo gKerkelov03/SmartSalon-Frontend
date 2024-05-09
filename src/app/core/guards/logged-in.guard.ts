@@ -8,7 +8,6 @@ export const loggedInGuard: CanActivateFn = () => {
 
     return inject(CurrentUserService).currentUserObservable.pipe(
         map((user) => {
-            console.log(user);
             if (user === null) {
                 router.navigate(['/public/login']);
                 return false;

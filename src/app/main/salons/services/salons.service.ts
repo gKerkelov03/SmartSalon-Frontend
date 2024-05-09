@@ -20,6 +20,10 @@ export class SalonsService {
         return this.httpClient.get<Salon>(this.salonsBackendUrl + id);
     }
 
+    getAll(): Observable<Salon[]> {
+        return this.httpClient.get<Salon[]>(this.salonsBackendUrl);
+    }
+
     delete(id: string): Observable<void> {
         return this.httpClient.delete<void>(this.salonsBackendUrl + id);
     }

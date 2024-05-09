@@ -1,1 +1,8 @@
-<p>search-salons-page works!</p>
+<section>
+    <h2>Search barbershop</h2>
+    <app-salons-search-bar></app-salons-search-bar>
+    <app-salons-map
+        [center]="userLocation"
+        [zoom]="mapZoomLevel"
+    ></app-salons-map>
+</section>

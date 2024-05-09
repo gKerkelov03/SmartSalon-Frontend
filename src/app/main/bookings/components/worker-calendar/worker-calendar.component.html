@@ -1,0 +1,93 @@
+<header>
+    <div class="navigation-buttons">
+        <button
+            mat-raised-button
+            color="primary"
+            mwlCalendarPreviousView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+        >
+            Previous
+        </button>
+        <button
+            mat-raised-button
+            color="primary"
+            mwlCalendarToday
+            [(viewDate)]="viewDate"
+        >
+            Today
+        </button>
+        <button
+            mat-raised-button
+            color="primary"
+            mwlCalendarNextView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+        >
+            Next
+        </button>
+    </div>
+
+    <h3 class="title">
+        {{ viewDate | calendarDate : view + 'ViewTitle' : 'en' }}
+    </h3>
+
+    <div class="views-buttons-container">
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="setView(CalendarView.Month)"
+            [class.active]="view === CalendarView.Month"
+        >
+            Month
+        </button>
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="setView(CalendarView.Week); scrollToTheCurrentTimeMarker()"
+            [class.active]="view === CalendarView.Week"
+        >
+            Week
+        </button>
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="setView(CalendarView.Day); scrollToTheCurrentTimeMarker()"
+            [class.active]="view === CalendarView.Day"
+        >
+            Day
+        </button>
+    </div>
+</header>
+
+<div [ngSwitch]="view" class="calendar-container">
+    <mwl-calendar-month-view
+        *ngSwitchCase="CalendarView.Month"
+        [viewDate]="viewDate"
+        [events]="calendarEvents"
+        [activeDayIsOpen]="activeDayIsOpen"
+        (dayClicked)="dayClicked($event.day)"
+        (eventClicked)="bookingClicked($event.event)"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+        *ngSwitchCase="CalendarView.Week"
+        [viewDate]="viewDate"
+        [events]="calendarEvents"
+        [hourSegments]="4"
+        (hourSegmentClicked)="hourSegmentClicked($event)"
+        (eventClicked)="bookingClicked($event.event)"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+        *ngSwitchCase="CalendarView.Day"
+        [viewDate]="viewDate"
+        [events]="calendarEvents"
+        [hourSegments]="4"
+        (hourSegmentClicked)="hourSegmentClicked($event)"
+        (eventClicked)="bookingClicked($event.event)"
+    >
+    </mwl-calendar-day-view>
+</div>

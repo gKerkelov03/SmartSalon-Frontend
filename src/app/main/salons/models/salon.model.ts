@@ -1,12 +1,13 @@
 export interface Salon {
+    id: string;
     name: string;
     description: string;
     location: string;
     profilePictureUrl?: string;
     workingTimeId: string;
 
-    defaultTimePenalty: number;
-    defaultBookingsInAdvance: number;
+    timePenalty: number;
+    bookingsInAdvance: number;
     subscriptionsEnabled: boolean;
     sectionsEnabled: boolean;
     workersCanMoveBookings: boolean;

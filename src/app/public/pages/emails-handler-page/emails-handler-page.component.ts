@@ -25,15 +25,20 @@ export class EmailsHandlerPageComponent {
 
     ngOnInit(): void {
         var observer = {
-            next: () => {
+            next: (token: unknown) => {
                 if (this.emailType == EmailType.EmailConfirmation) {
                     this.router.navigate(['/main/users']);
                 } else if (this.emailType == EmailType.OwnerInvitation) {
                     this.router.navigate(['/main/salons/my-salons']);
                 } else if (this.emailType == EmailType.WorkerInvitation) {
                     this.router.navigate(['/main/bookings/my-calendar']);
-                } else if (this.emailType == EmailType.RestorePassword) {
-                    this.router.navigate(['/public/restore-password']);
+                } else if (
+                    this.emailType == EmailType.RestorePassword &&
+                    typeof token == 'string'
+                ) {
+                    this.router.navigate(['/public/restore-password'], {
+                        queryParams: { token },
+                    });
                 }
             },
             error: (httpError: HttpErrorResponse) => {
@@ -44,8 +49,8 @@ export class EmailsHandlerPageComponent {
         this.route.queryParams
             .pipe(
                 switchMap((params) => {
-                    this.token = params['token'];
                     this.emailType = parseInt(params['email-type']);
+                    this.token = params['token'];
 
                     if (this.emailType == EmailType.EmailConfirmation) {
                         return this.emailsService.changeEmail(this.token);
@@ -53,11 +58,8 @@ export class EmailsHandlerPageComponent {
                         return this.emailsService.inviteOwner(this.token);
                     } else if (this.emailType == EmailType.WorkerInvitation) {
                         return this.emailsService.inviteWorker(this.token);
-                    } else if (this.emailType == EmailType.RestorePassword) {
-                        //TODO: change
-                        return this.emailsService.changeEmail(this.token);
                     } else {
-                        return of(null);
+                        return of(this.token);
                     }
                 })
             )

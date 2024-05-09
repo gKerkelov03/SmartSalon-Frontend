@@ -1,0 +1,88 @@
+.create-event-form {
+	//Layout
+	margin: auto;
+	padding: 2rem;
+
+	//Styling
+	border-radius: 30px;
+	background-color: var(--background-light);
+
+	.form-header {
+		display: flex;
+		justify-content: space-between;
+
+		.title {
+			color: var(--blue-orange);
+			font-size: 2.5rem;
+			margin-bottom: 0.5rem;
+			font-weight: 500;
+		}
+
+		.actions {
+			mat-icon {
+				font-size: 1.75rem;
+				height: 1.75rem;
+				width: 1.75rem;
+				color: var(--blue-orange);
+				cursor: pointer;
+				z-index: 1;
+			}
+		}
+	}
+
+	mat-form-field {
+		display: block;
+		font-size: 1rem;
+
+		input {
+			caret-color: var(--blue-orange);
+
+			&.time-input {
+				&::-webkit-datetime-edit-fields-wrapper {
+					display: flex;
+				}
+
+				&::-webkit-datetime-edit-text {
+					padding: 10px 10px;
+				}
+
+				&::-webkit-datetime-edit-hour-field,
+				&::-webkit-datetime-edit-minute-field,
+				&::-webkit-datetime-edit-ampm-field {
+					background-color: var(--primary);
+					border-radius: 15%;
+					padding: 10px 10px;
+					color: black;
+				}
+
+				&.white-theme::-webkit-datetime-edit-hour-field,
+				&.white-theme::-webkit-datetime-edit-minute-field,
+				&.white-theme::-webkit-datetime-edit-ampm-field {
+					color: white;
+				}
+
+				&::-webkit-calendar-picker-indicator {
+					filter: invert(1);
+					scale: 1.25;
+					cursor: pointer;
+				}
+
+				&.white-theme::-webkit-calendar-picker-indicator {
+					filter: invert(0);
+				}
+			}
+		}
+	}
+
+	app-error-message {
+		font-size: 0.75rem;
+		position: relative;
+		bottom: 1rem;
+	}
+
+	.submit-btn {
+		display: block;
+		margin: auto;
+		margin-top: 2rem;
+	}
+}

@@ -1,12 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import {
-    Component,
-    EventEmitter,
-    Input,
-    OnDestroy,
-    OnInit,
-    Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
     AbstractControl,
     FormBuilder,
@@ -15,7 +8,7 @@ import {
     Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subscription, take } from 'rxjs';
+import { take } from 'rxjs';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { getErrorMessage } from '../../../../core/utils/get-error-message';
 import { User } from '../../models/user.model';
@@ -26,12 +19,11 @@ import { UsersService } from '../../services/users.service';
     templateUrl: './personal-information-form.component.html',
     styleUrls: ['./personal-information-form.component.scss'],
 })
-export class PersonalInformationFormComponent implements OnInit, OnDestroy {
+export class PersonalInformationFormComponent implements OnInit {
     @Input() canEdit!: boolean;
     @Output() setCanEditToFalse = new EventEmitter();
     userTemplate!: User | null;
     personalInformationForm!: FormGroup;
-    allSubscriptions: Subscription[] = [];
 
     constructor(
         private formBuilder: FormBuilder,
@@ -55,12 +47,6 @@ export class PersonalInformationFormComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.userTemplate = this.currentUserService.currentUser;
         this.setupThePersonalInformationForm();
-    }
-
-    ngOnDestroy(): void {
-        this.allSubscriptions.forEach((subscription) =>
-            subscription.unsubscribe()
-        );
     }
 
     saveClicked(): void {

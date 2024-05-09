@@ -27,14 +27,24 @@ export class UsersService {
     }
 
     changePassword(
-        id: string,
+        userId: string,
         password: string,
         newPassword: string
     ): Observable<void> {
-        return this.httpClient.patch<void>(this.usersBackendUrl + id, {
+        return this.httpClient.patch<void>(this.usersBackendUrl + userId, {
             password,
             newPassword,
         });
+    }
+
+    restorePassword(token: string, newPassword: string): Observable<void> {
+        return this.httpClient.patch<void>(
+            `${this.usersBackendUrl}RestorePassword`,
+            {
+                token,
+                newPassword,
+            }
+        );
     }
 
     sendEmailConfirmation(

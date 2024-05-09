@@ -8,11 +8,12 @@ import {
     Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { passwordRegex } from '../../../core/constants/regexes';
 import { AuthService } from '../../../core/services/auth.service';
 import { getErrorMessage } from '../../../core/utils/get-error-message';
+import { UsersService } from '../../../main/users/services/users.service';
 
 @Component({
     selector: 'app-restore-password-form',
@@ -22,11 +23,14 @@ import { getErrorMessage } from '../../../core/utils/get-error-message';
 export class RestorePasswordFormComponent implements OnInit {
     restorePasswordForm!: FormGroup;
     isPasswordVisible: boolean = false;
+    token!: string;
 
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthService,
+        private usersService: UsersService,
         private snackBar: MatSnackBar,
+        private route: ActivatedRoute,
         private router: Router
     ) {}
 
@@ -35,7 +39,14 @@ export class RestorePasswordFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getTokenFromQueryParams();
         this.setupTheRestorePasswordForm();
+    }
+
+    getTokenFromQueryParams() {
+        this.route.queryParams.subscribe(
+            (params) => (this.token = params['token'])
+        );
     }
 
     setupTheRestorePasswordForm() {
@@ -50,23 +61,23 @@ export class RestorePasswordFormComponent implements OnInit {
     onSubmit(): void {
         const observer = {
             next: () => {
-                const snackBarRef = this.snackBar.open(
-                    'You resetted you password successfully!',
+                this.router.navigate(['public/login']);
+
+                this.snackBar.open(
+                    'You resetted your password successfully!',
                     'Login'
                 );
-
-                snackBarRef
-                    .afterDismissed()
-                    .pipe(take(1))
-                    .subscribe(() => this.router.navigate(['public/login']));
             },
             error: (httpError: HttpErrorResponse) => {
                 this.snackBar.open(getErrorMessage(httpError), 'Close');
             },
         };
 
-        this.authService
-            .login(this.restorePasswordForm.value)
+        this.usersService
+            .restorePassword(
+                this.token,
+                this.restorePasswordForm.value.newPassword
+            )
             .pipe(take(1))
             .subscribe(observer);
     }
