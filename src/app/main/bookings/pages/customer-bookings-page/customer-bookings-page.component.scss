@@ -1,0 +1,16 @@
+section {
+    .booking-card {
+        max-width: 30%;
+        margin: auto;
+        margin-bottom: 3rem;
+
+        .card-content {
+            font-size: 1.25rem;
+        }
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-between;
+    }
+}

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -29,6 +30,7 @@ import { WorkerCalendarPageComponent } from './pages/worker-calendar-page/worker
     imports: [
         CommonModule,
         MatButtonModule,
+        MatCardModule,
         BoookingsRoutingModule,
         SharedModule,
         MatIconModule,

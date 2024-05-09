@@ -4,8 +4,15 @@ export interface Booking {
     startTime: string;
     endTime: string;
     durationInMinutes: number;
-    ServiceId: string;
-    CustomerId: string;
-    SalonId: string;
-    WorkerId: string;
+
+    serviceName: string;
+    customerName: string;
+    workerNickname: string;
+    salonName: string;
+    salonProfilePictureUrl: string;
+
+    serviceId: string;
+    customerId: string;
+    salonId: string;
+    workerId: string;
 }

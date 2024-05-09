@@ -5,12 +5,29 @@
         </button>
         <span>SmartSalon</span>
         <span class="example-spacer"></span>
-        <button mat-icon-button>
-            <mat-icon>favorite</mat-icon>
+        <button
+            class="menu-btn"
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Example icon-button with a menu"
+        >
+            <mat-icon>more_vert</mat-icon>
         </button>
-        <button mat-icon-button>
-            <mat-icon>share</mat-icon>
-        </button>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item class="menu-item">
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+            </button>
+            <button mat-menu-item disabled class="menu-item">
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voice mail</span>
+            </button>
+            <button mat-menu-item class="menu-item">
+                <mat-icon>logout</mat-icon>
+                <span>Logout</span>
+            </button>
+        </mat-menu>
     </mat-toolbar>
 
     <mat-sidenav-container class="sidenav">
