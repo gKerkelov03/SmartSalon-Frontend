@@ -1,0 +1,104 @@
+.calendar-container {
+    width: 90vw;
+    margin: auto;
+    margin-bottom: 3rem;
+    color: black;
+
+    mwl-calendar-month-view,
+    mwl-calendar-week-view,
+    mwl-calendar-day-view {
+        .cal-month-view,
+        .cal-week-view,
+        .cal-day-view {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            background-color: var(--calendar-background);
+            border: none;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+
+            .cal-current-time-marker {
+                background-color: red;
+            }
+
+            mwl-calendar-month-view-header {
+                .cal-cell-row.cal-header,
+                .cal-cell.cal-future.cal-weekend {
+                    border-radius: 30px;
+                }
+                .cal-cell {
+                    padding: 0.75rem 0;
+                }
+            }
+
+            .cal-days,
+            .day-headers,
+            .cal-all-day-events {
+                border: none;
+
+                .cal-events-row {
+                    margin: 0 40px;
+                }
+
+                .cal-open-day-events {
+                    background-color: var(--calendar-events-for-the-day);
+                    box-shadow: none;
+
+                    .cal-draggable {
+                        margin: 5px 0;
+                    }
+
+                    mwl-calendar-event-actions {
+                        .cal-event-actions {
+                            .cal-event-action {
+                                .event-action-button {
+                                    color: white;
+                                    margin-left: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .cal-event {
+                border-radius: 10px;
+
+                .cal-event-title {
+                    color: #fff;
+                }
+            }
+        }
+
+        .cal-month-view {
+            .cal-day-badge {
+                background-color: var(--accent);
+                color: #fff;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .calendar-container {
+        width: 70vw;
+
+        .cal-month-view {
+            .cal-day-number {
+                margin-top: 0;
+                margin-left: 0;
+                font-size: 1em;
+            }
+
+            .cal-today {
+                .cal-day-number {
+                    font-size: 1em;
+                }
+            }
+
+            .cal-day-badge {
+                margin-top: 0px;
+                margin-left: 0px;
+            }
+        }
+    }
+}

@@ -1,5 +1,6 @@
 @use './assets/styles/variables' as *;
 @use '@angular/material' as mat;
+@use './assets/styles/worker-calendar.scss';
 @include mat.core();
 @import '../node_modules/angular-calendar/css/angular-calendar.css';
 
