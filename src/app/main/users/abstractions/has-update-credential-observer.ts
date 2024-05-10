@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CurrentUserService } from '../../../core/services/current-user.service';
+import { getErrorMessage } from '../../../core/utils/get-error-message';
 
 export abstract class HasUpdateCredentialObserver {
     constructor(
@@ -15,7 +16,10 @@ export abstract class HasUpdateCredentialObserver {
             this.snackBar.open('Your change was successfull!', 'Close');
         },
         error: (httpError: HttpErrorResponse) => {
-            this.snackBar.open(httpError.error.message, 'Close');
+            this.snackBar.open(
+                getErrorMessage(httpError.error.message),
+                'Close'
+            );
         },
     };
 }

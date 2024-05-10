@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-personal-information-section',
-    templateUrl: './personal-information-section.component.html',
-    styleUrls: ['./personal-information-section.component.scss'],
+    selector: 'app-personal-information',
+    templateUrl: './personal-information.component.html',
+    styleUrls: ['./personal-information.component.scss'],
 })
-export class ProfileChangeDataSectionComponent {
+export class PersonalInformation {
     canEdit: boolean = false;
     isEditIconVisible: boolean = true;
 

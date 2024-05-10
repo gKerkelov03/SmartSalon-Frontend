@@ -1,3 +1,5 @@
-<mat-error *ngFor="let errorMessage of errorMessagesToShow()">
-	{{ errorMessage }}
-</mat-error>
+@for (errorMessage of errorMessagesToShow(); track errorMessage) {
+  <mat-error>
+    {{ errorMessage }}
+  </mat-error>
+}

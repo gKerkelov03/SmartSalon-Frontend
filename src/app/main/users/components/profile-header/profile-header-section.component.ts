@@ -5,17 +5,12 @@ import { CurrentUserService } from '../../../../core/services/current-user.servi
 import { User } from '../../models/user.model';
 
 @Component({
-    selector: 'app-profile-header-section',
-    templateUrl: './profile-header-section.component.html',
-    styleUrls: ['./profile-header-section.component.scss'],
+    selector: 'app-profile-header',
+    templateUrl: './profile-header.component.html',
+    styleUrls: ['./profile-header.component.scss'],
 })
-export class ProfileHeaderSectionComponent implements OnInit {
-    firstName!: string;
-    lastName!: string;
-    email!: string;
-    phoneNumber!: string;
-    profilePictureUrl!: string;
-
+export class ProfileHeaderComponent implements OnInit {
+    userToDisplay!: User;
     constructor(private currentUserService: CurrentUserService) {}
 
     ngOnInit(): void {
@@ -26,11 +21,7 @@ export class ProfileHeaderSectionComponent implements OnInit {
                     user.profilePictureUrl = blankProfilePictureUrl;
                 }
 
-                this.firstName = user!.firstName;
-                this.lastName = user!.lastName;
-                this.email = user!.email;
-                this.phoneNumber = user!.phoneNumber;
-                this.profilePictureUrl = user!.profilePictureUrl;
+                this.userToDisplay = user!;
             });
     }
 }

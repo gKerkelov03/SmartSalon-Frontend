@@ -100,9 +100,7 @@ export class PersonalInformationFormComponent implements OnInit {
                 this.currentUserService.setCurrentUser(this.userTemplate);
             },
             error: (httpError: HttpErrorResponse) =>
-                this.snackBar.open(httpError.error.message, 'Close', {
-                    panelClass: 'round-white-background',
-                }),
+                this.snackBar.open(httpError.error.message, 'Close'),
         };
 
         this.usersService

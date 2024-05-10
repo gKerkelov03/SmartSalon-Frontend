@@ -14,6 +14,7 @@ import { passwordRegex } from '../../../core/constants/regexes';
 import { blankProfilePictureUrl } from '../../../core/constants/urls';
 import { RegisterResponse } from '../../../core/models/register-response.model';
 import { AuthService } from '../../../core/services/auth.service';
+import { getErrorMessage } from '../../../core/utils/get-error-message';
 import { AreMatchingValidator } from '../../../core/utils/validators/matching.validator';
 
 @Component({
@@ -89,9 +90,7 @@ export class RegisterFormComponent implements OnInit {
                 );
             },
             error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open(httpError.error.message, 'Close', {
-                    panelClass: 'round-white-background',
-                });
+                this.snackBar.open(getErrorMessage(httpError), 'Close');
             },
         };
 

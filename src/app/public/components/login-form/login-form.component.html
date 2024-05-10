@@ -1,50 +1,52 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-    <app-forms-socials></app-forms-socials>
+  <app-forms-socials></app-forms-socials>
 
-    <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" />
-    </mat-form-field>
-    <app-error-message [control]="emailControl"> </app-error-message>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" />
+  </mat-form-field>
+  <app-error-message [control]="emailControl"> </app-error-message>
 
-    <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input
-            matInput
-            [type]="isPasswordVisible ? 'text' : 'password'"
-            formControlName="password"
-        />
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      [type]="isPasswordVisible ? 'text' : 'password'"
+      formControlName="password"
+      />
 
-        <mat-icon
-            class="eye-icon"
-            matSuffix
-            *ngIf="passwordControl?.value.length && isPasswordVisible"
-            (click)="togglePasswordVisibility()"
+    @if (passwordControl?.value.length && isPasswordVisible) {
+      <mat-icon
+        class="eye-icon"
+        matSuffix
+        (click)="togglePasswordVisibility()"
         >
-            visibility_off
-        </mat-icon>
-        <mat-icon
-            class="eye-icon"
-            matSuffix
-            *ngIf="passwordControl?.value.length && !isPasswordVisible"
-            (click)="togglePasswordVisibility()"
+        visibility_off
+      </mat-icon>
+    }
+    @if (passwordControl?.value.length && !isPasswordVisible) {
+      <mat-icon
+        class="eye-icon"
+        matSuffix
+        (click)="togglePasswordVisibility()"
         >
-            visibility
-        </mat-icon>
-    </mat-form-field>
-    <app-error-message
-        class="password-error-message"
-        [control]="passwordControl"
+        visibility
+      </mat-icon>
+    }
+  </mat-form-field>
+  <app-error-message
+    class="password-error-message"
+    [control]="passwordControl"
     >
-    </app-error-message>
+  </app-error-message>
 
-    <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="!loginForm.valid"
-        class="btn submit-btn"
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!loginForm.valid"
+    class="btn submit-btn"
     >
-        Submit
-    </button>
+    Submit
+  </button>
 </form>

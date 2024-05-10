@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { idRouteParameterName } from '../../core/constants/routing';
 import { MySalonsPageComponent } from './pages/my-salons-page/my-salons-page.component';
 import { SalonDetailsPageComponent } from './pages/salon-details-page/salon-details-page.component';
 import { SearchSalonsPageComponent } from './pages/search-salons-page/search-salons-page.component';
@@ -15,7 +16,7 @@ const routes: Routes = [
         component: MySalonsPageComponent,
     },
     {
-        path: ':id',
+        path: `:${idRouteParameterName}`,
         component: SalonDetailsPageComponent,
     },
 ];

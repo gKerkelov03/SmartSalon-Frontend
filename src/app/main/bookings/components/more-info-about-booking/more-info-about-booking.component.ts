@@ -84,7 +84,7 @@ export class MoreInfoAboutBookingComponent implements OnInit {
             .pipe(take(1))
             .subscribe((isDeletedSuccessfully: boolean) => {
                 if (isDeletedSuccessfully) {
-                    this.snackBar.open('Successfully deleted an booking', 'Ok');
+                    this.snackBar.open('Successfully canceled a booking', 'Ok');
                     this.dialogRef.close();
                 }
             });

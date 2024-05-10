@@ -1,0 +1,15 @@
+<section>
+    <div class="content">
+        <img
+            [src]="userToDisplay.profilePictureUrl"
+            alt="Profile picture"
+            class="profile-picture"
+        />
+
+        <h1 class="name">
+            {{ userToDisplay.firstName + ' ' + userToDisplay.lastName }}
+        </h1>
+
+        <p class="email">{{ userToDisplay.email }}</p>
+    </div>
+</section>

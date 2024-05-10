@@ -1,6 +1,7 @@
-<mat-spinner *ngIf="isLoading"></mat-spinner>
-
-<div mat-dialog-content *ngIf="!isLoading" class="modal-container scrollbar">
+@if (isLoading) {
+    <mat-spinner></mat-spinner>
+} @else {
+    < mat-dialog-content class="modal-container scrollbar">
     <div class="actions">
         <button type="button" mat-icon-button class="action">
             <mat-icon mat-dialog-close>close</mat-icon>
@@ -32,12 +33,15 @@
     <p class="booking-data">Start date: {{ startDate }}</p>
     <p class="booking-data">Start time: {{ startTime }}</p>
 
-    <p class="booking-data" *ngIf="bookingHoursDuration !== 0">
-        Duration: {{ bookingHoursDuration }} hours and
-        {{ bookingMinutesDuration }} minutes
-    </p>
-
-    <p class="booking-data" *ngIf="bookingHoursDuration === 0">
-        Duration: {{ bookingMinutesDuration }} minutes
-    </p>
-</div>
+    @if (bookingHoursDuration !== 0) {
+        <p class="booking-data">
+            Duration: {{ bookingHoursDuration }} hours and
+            {{ bookingMinutesDuration }} minutes
+        </p>
+    }
+    @if (bookingHoursDuration === 0) {
+        <p class="booking-data">
+            Duration: {{ bookingMinutesDuration }} minutes
+        </p>
+    }
+}

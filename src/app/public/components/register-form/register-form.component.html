@@ -1,116 +1,120 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
-    <app-forms-socials></app-forms-socials>
+  <app-forms-socials></app-forms-socials>
 
-    <div class="flex-container">
-        <div class="form-fields-container">
-            <mat-form-field>
-                <mat-label>First name</mat-label>
-                <input matInput formControlName="firstName" />
-            </mat-form-field>
-            <app-error-message [control]="firstNameControl"></app-error-message>
+  <div class="flex-container">
+    <div class="form-fields-container">
+      <mat-form-field>
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName" />
+      </mat-form-field>
+      <app-error-message [control]="firstNameControl"></app-error-message>
 
-            <mat-form-field>
-                <mat-label>Last name</mat-label>
-                <input matInput formControlName="lastName" />
-            </mat-form-field>
-            <app-error-message [control]="lastNameControl"> </app-error-message>
+      <mat-form-field>
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName" />
+      </mat-form-field>
+      <app-error-message [control]="lastNameControl"> </app-error-message>
 
-            <mat-form-field>
-                <mat-label>Emai</mat-label>
-                <input matInput formControlName="email" />
-            </mat-form-field>
-            <app-error-message [control]="emailControl"> </app-error-message>
+      <mat-form-field>
+        <mat-label>Emai</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+      <app-error-message [control]="emailControl"> </app-error-message>
 
-            <mat-form-field>
-                <mat-label>Password</mat-label>
-                <input
-                    matInput
-                    [type]="isPasswordVisible ? 'text' : 'password'"
-                    formControlName="password"
-                />
-                <mat-hint class="password-hint">
-                    Six characters, uppercase letter and a number
-                </mat-hint>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="isPasswordVisible ? 'text' : 'password'"
+          formControlName="password"
+          />
+        <mat-hint class="password-hint">
+          Six characters, uppercase letter and a number
+        </mat-hint>
 
-                <mat-icon
-                    class="eye-icon"
-                    matSuffix
-                    *ngIf="passwordControl?.value.length && isPasswordVisible"
-                    (click)="togglePasswordVisibility()"
-                >
-                    visibility_off
-                </mat-icon>
-                <mat-icon
-                    class="eye-icon"
-                    matSuffix
-                    *ngIf="passwordControl?.value.length && !isPasswordVisible"
-                    (click)="togglePasswordVisibility()"
-                >
-                    visibility
-                </mat-icon>
-            </mat-form-field>
-            <app-error-message
-                class="password-error-message"
-                [control]="passwordControl"
+        @if (passwordControl?.value.length && isPasswordVisible) {
+          <mat-icon
+            class="eye-icon"
+            matSuffix
+            (click)="togglePasswordVisibility()"
             >
-            </app-error-message>
+            visibility_off
+          </mat-icon>
+        }
+        @if (passwordControl?.value.length && !isPasswordVisible) {
+          <mat-icon
+            class="eye-icon"
+            matSuffix
+            (click)="togglePasswordVisibility()"
+            >
+            visibility
+          </mat-icon>
+        }
+      </mat-form-field>
+      <app-error-message
+        class="password-error-message"
+        [control]="passwordControl"
+        >
+      </app-error-message>
 
-            <mat-form-field>
-                <mat-label>confirmPassword</mat-label>
-                <input
-                    matInput
-                    [type]="isConfirmPasswordVisible ? 'text' : 'password'"
-                    formControlName="confirmPassword"
-                />
-                <mat-icon
-                    matSuffix
-                    *ngIf="
-                        confirmPasswordControl?.value.length &&
-                        isConfirmPasswordVisible
-                    "
-                    (click)="toggleConfirmPasswordVisibility()"
-                >
-                    visibility_off
-                </mat-icon>
-                <mat-icon
-                    matSuffix
-                    *ngIf="
-                        confirmPasswordControl?.value.length &&
-                        !isConfirmPasswordVisible
-                    "
-                    (click)="toggleConfirmPasswordVisibility()"
-                >
-                    visibility
-                </mat-icon>
-            </mat-form-field>
-            <app-error-message [control]="confirmPasswordControl">
-            </app-error-message>
+      <mat-form-field>
+        <mat-label>confirmPassword</mat-label>
+        <input
+          matInput
+          [type]="isConfirmPasswordVisible ? 'text' : 'password'"
+          formControlName="confirmPassword"
+          />
+        @if (
+          confirmPasswordControl?.value.length &&
+          isConfirmPasswordVisible
+          ) {
+          <mat-icon
+            matSuffix
+            (click)="toggleConfirmPasswordVisibility()"
+            >
+            visibility_off
+          </mat-icon>
+        }
+        @if (
+          confirmPasswordControl?.value.length &&
+          !isConfirmPasswordVisible
+          ) {
+          <mat-icon
+            matSuffix
+            (click)="toggleConfirmPasswordVisibility()"
+            >
+            visibility
+          </mat-icon>
+        }
+      </mat-form-field>
+      <app-error-message [control]="confirmPasswordControl">
+      </app-error-message>
 
-            <mat-form-field>
-                <mat-label>Phone number</mat-label>
-                <input matInput formControlName="phoneNumber" />
-            </mat-form-field>
-            <app-error-message [control]="phoneNumberControl">
-            </app-error-message>
-        </div>
-        <div class="profile-picture-container">
-            <img
-                [src]="profilePictureControl?.value"
-                alt="profile-picture"
-                class="profile-picture"
-            />
-
-            <app-upload-widget
-                (newPictureUploaded)="updateProfilePicture($event)"
-            ></app-upload-widget>
-        </div>
+      <mat-form-field>
+        <mat-label>Phone number</mat-label>
+        <input matInput formControlName="phoneNumber" />
+      </mat-form-field>
+      <app-error-message [control]="phoneNumberControl">
+      </app-error-message>
     </div>
-    <button
-        mat-raised-button
-        type="submit"
-        [disabled]="!registerForm.valid"
-        class="btn submit-btn"
+    <div class="profile-picture-container">
+      <img
+        [src]="profilePictureControl?.value"
+        alt="profile-picture"
+        class="profile-picture"
+        />
+
+      <app-upload-widget
+        (newPictureUploaded)="updateProfilePicture($event)"
+      ></app-upload-widget>
+    </div>
+  </div>
+  <button
+    mat-raised-button
+    type="submit"
+    [disabled]="!registerForm.valid"
+    class="btn submit-btn"
     >
-        Submit
-    </button>
+    Submit
+  </button>
 </form>

@@ -97,9 +97,10 @@ export class SalonInfoFormComponent {
                 this.salonTemplate = Object.assign({}, this.salonTemplate);
             },
             error: (httpError: HttpErrorResponse) =>
-                this.snackBar.open(httpError.error.message, 'Close', {
-                    panelClass: 'round-white-background',
-                }),
+                this.snackBar.open(
+                    getErrorMessage(httpError.error.message),
+                    'Close'
+                ),
         };
 
         this.salonsService

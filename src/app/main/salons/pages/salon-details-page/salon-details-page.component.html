@@ -1,1 +1,5 @@
-<p>salon-details-page works!</p>
+@if (salonToDisplay) {
+  <app-salon-details-header
+    [salonToDisplay]="salonToDisplay"
+  ></app-salon-details-header>
+}

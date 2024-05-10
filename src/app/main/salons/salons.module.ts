@@ -14,13 +14,14 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedModule } from '../../shared/shared.module';
+import { SalonDetailsHeaderComponent } from './components/salon-details-header/salon-details-header.component';
 import { SalonInfoFormComponent } from './components/salon-info-form/salon-info-form.component';
 import { SalonsMapComponent } from './components/salons-map/salons-map.component';
+import { SalonsSearchBarComponent } from './components/salons-search-bar/salons-search-bar.component';
 import { MySalonsPageComponent } from './pages/my-salons-page/my-salons-page.component';
 import { SalonDetailsPageComponent } from './pages/salon-details-page/salon-details-page.component';
 import { SearchSalonsPageComponent } from './pages/search-salons-page/search-salons-page.component';
 import { SalonsRoutingModule } from './salons-routing.module';
-import { SalonsSearchBarComponent } from './components/salons-search-bar/salons-search-bar.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { SalonsSearchBarComponent } from './components/salons-search-bar/salons-
         SalonsMapComponent,
         SalonInfoFormComponent,
         SalonsSearchBarComponent,
+        SalonDetailsHeaderComponent,
     ],
     imports: [
         CommonModule,
