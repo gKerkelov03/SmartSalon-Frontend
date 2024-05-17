@@ -1,37 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { jwtTokenKey } from '../core/constants/local-storage-keys';
 import { sidenavItems } from '../core/constants/sidenav-items';
+import { blankProfilePictureUrl } from '../core/constants/urls';
 import { Theme } from '../core/enums/theme';
 import { SidenavItem } from '../core/models/side-nav-item.model';
 import { CurrentUserService } from '../core/services/current-user.service';
-import { LocalStorageService } from '../core/services/local-storage.service';
 import { ThemeService } from '../core/services/theme.service';
-//TODO: when the sidenav is closed by clicking on the side you need to click the menu button again
 @Component({
     selector: 'app-main',
     templateUrl: './main.component.html',
     styleUrls: ['./main.component.scss'],
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
     sidenavItems: SidenavItem[] = sidenavItems;
-    isOpen: boolean = false;
-    isLightMode: boolean;
+    isSidenavExpanded: boolean = false;
+    isLightMode!: boolean;
     changeIcon: boolean = true;
+    profilePictureUrl!: string;
 
     constructor(
         private router: Router,
-        private localStorageUtil: LocalStorageService,
         public currentUser: CurrentUserService,
         public theme: ThemeService,
-    ) {
+    ) {}
+
+    ngOnInit(): void {
         this.theme.initTheme();
         this.isLightMode = this.theme.isLightMode();
-    }
-    ngOnDestroy(): void {}
-
-    onSidebarToggle(): void {
-        this.isOpen = !this.isOpen;
+        this.profilePictureUrl =
+            this.currentUser.currentUser?.profilePictureUrl ??
+            blankProfilePictureUrl;
     }
 
     navigateToProfile(): void {
@@ -49,11 +47,5 @@ export class MainComponent {
         } else {
             this.theme.update(Theme.lightMode);
         }
-    }
-
-    logout(): void {
-        this.localStorageUtil.deleteItem(jwtTokenKey);
-        this.currentUser.clearCurrentUser();
-        this.router.navigate(['public']);
     }
 }

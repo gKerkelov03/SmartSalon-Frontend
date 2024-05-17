@@ -1,49 +1,71 @@
 @use '../../assets/styles/variables' as *;
 
 section {
+    display: flex;
     height: 100%;
 
-    .toolbar {
-        box-shadow: 0px -5px 10px 0px;
-
+    .sidenav {
         display: flex;
+        flex-direction: column;
         align-items: baseline;
+        padding: 1rem;
+        width: max-content;
+        box-shadow: -9px 2px 20px;
+        height: 100%;
 
-        .menu-btn {
-            display: inline-block;
-            margin-left: auto;
+        .profile-picture {
+            border-radius: 50%;
+            max-width: 3.25rem;
+            max-height: 3.25rem;
         }
 
-        .menu-item {
-            mat-icon {
-                font-size: 1rem;
+        .divider {
+            margin: 1rem 0;
+        }
+
+        .nav-item {
+            margin-bottom: 1rem;
+            border-radius: 1rem;
+            padding: 0.75rem;
+
+            .icon {
+                font-size: 1.75rem;
+                line-height: 1.75rem;
+                width: 1.75rem;
+                height: 1.75rem;
+            }
+
+            &:hover,
+            &.active:hover {
+                cursor: pointer;
+                background-color: $darker-white;
+            }
+
+            &.active {
+                background-color: $white;
+
+                .icon {
+                    color: $primary;
+                }
+            }
+
+            .icon {
+                color: $black;
+            }
+        }
+
+        .logo-container {
+            margin-top: auto;
+
+            .logo {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+                min-width: 3rem;
             }
         }
     }
 
-    .sidenav {
-        height: 100%;
-        margin-top: 0.5rem;
-
-        a {
-            display: block;
-            padding: 0.5rem 1rem;
-            margin-bottom: 1rem;
-            color: $primary;
-
-            .text {
-                position: relative;
-                bottom: 5px;
-                margin: 0 0.5rem;
-            }
-
-            &:hover {
-                background-color: $background;
-            }
-        }
-
-        .content {
-            background-color: $background;
-        }
+    .content {
+        flex: 1;
     }
 }
