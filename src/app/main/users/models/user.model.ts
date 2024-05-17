@@ -3,7 +3,7 @@ export interface User {
     firstName: string;
     lastName: string;
     email: string;
-    isEmailConfirmed: boolean;
+    emailConfirmed: boolean;
     phoneNumber: string;
     profilePictureUrl: string;
     roles: string[];

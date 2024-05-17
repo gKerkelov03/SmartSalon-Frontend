@@ -6,10 +6,13 @@
 }
 
 section {
-    border-radius: 30px;
-    background-color: $white;
-    padding: 3rem;
-    box-shadow: $form-shadow;
+    margin-left: 3rem;
+
+    .title {
+        margin-bottom: 2rem;
+        font-size: 1.75rem;
+        color: $black;
+    }
 
     .other-accepted-currencies {
         display: block;

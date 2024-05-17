@@ -6,17 +6,15 @@
     />
     <app-salon-working-time class="working-time" [workingTime]="workingTime" />
 
-    <section>
-        <app-salon-description
-            class="description"
-            [description]="salon.description"
-        />
+    <app-salon-description
+        class="description"
+        [description]="salon.description"
+    />
 
-        <app-salon-specialties
-            class="specialties"
-            [specialties]="salon.specialties"
-        />
-    </section>
+    <app-salon-specialties
+        class="specialties"
+        [specialties]="salon.specialties"
+    />
 
     <app-salon-images class="images" [images]="salon.images" />
 
@@ -26,6 +24,9 @@
         [otherAcceptedCurrencies]="salon.otherAcceptedCurrencies"
         [salonId]="salon.id"
     />
+
+    <app-salon-team class="team" />
+    <!-- [team]="workers" /> -->
 
     <app-salon-location
         class="location"

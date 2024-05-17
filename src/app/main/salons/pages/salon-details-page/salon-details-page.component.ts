@@ -6,6 +6,8 @@ import { switchMap } from 'rxjs';
 import { idRouteParameterName } from '../../../../core/constants/routing';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { getErrorMessages } from '../../../../core/utils/get-error-message';
+import { Worker } from '../../../users/models/worker.model';
+import { WorkersService } from '../../../users/services/workers.service';
 import { Salon } from '../../models/salon.model';
 import { WorkingTime } from '../../models/working-time.model';
 import { SalonsService } from '../../services/salons.service';
@@ -19,9 +21,11 @@ import { WorkingTimesService } from '../../services/working-times.service';
 export class SalonDetailsPageComponent implements OnInit {
     salon!: Salon | null;
     workingTime!: WorkingTime;
+    workers!: Worker[];
 
     constructor(
         private salonsService: SalonsService,
+        private workersService: WorkersService,
         private workingTimesService: WorkingTimesService,
         private route: ActivatedRoute,
         private snackBar: MatSnackBar,
@@ -36,9 +40,10 @@ export class SalonDetailsPageComponent implements OnInit {
     fetchSalon(): void {
         const observer = {
             next: (salon: Salon) => {
-                console.log(salon);
                 this.salon = salon;
                 this.fetchWorkingTime();
+                this.fetchWorkers();
+                console.log(salon);
             },
             error: (httpError: HttpErrorResponse) => {
                 this.snackBar
@@ -72,5 +77,19 @@ export class SalonDetailsPageComponent implements OnInit {
         this.workingTimesService
             .getWorkingTimeById(this.salon!.workingTimeId)
             .subscribe(observer);
+    }
+
+    fetchWorkers(): void {
+        const observer = {
+            next: (workers: Worker[]) => {
+                this.workers = workers ?? [];
+                console.log(workers);
+            },
+            error: (httpError: HttpErrorResponse) => {
+                this.snackBar.open(getErrorMessages(httpError), 'Close');
+            },
+        };
+
+        this.workersService.getMany(this.salon!.workers).subscribe(observer);
     }
 }

@@ -1,0 +1,32 @@
+@use '../../../../../assets/styles/variables' as *;
+
+section {
+    margin-left: 3rem;
+
+    .title {
+        margin-bottom: 2rem;
+        font-size: 1.75rem;
+        color: $black;
+    }
+
+    .flex-container {
+        display: flex;
+        gap: 3rem;
+
+        .team-member {
+            max-width: 10rem;
+            max-height: 10rem;
+            margin-bottom: 2rem;
+
+            img {
+                border-radius: 50%;
+                max-width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            .nickname {
+                text-align: center;
+            }
+        }
+    }
+}

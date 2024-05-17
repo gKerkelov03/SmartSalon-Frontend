@@ -7,7 +7,7 @@ import { SidenavItem } from '../core/models/side-nav-item.model';
 import { CurrentUserService } from '../core/services/current-user.service';
 import { LocalStorageService } from '../core/services/local-storage.service';
 import { ThemeService } from '../core/services/theme.service';
-
+//TODO: when the sidenav is closed by clicking on the side you need to click the menu button again
 @Component({
     selector: 'app-main',
     templateUrl: './main.component.html',

@@ -1,11 +1,12 @@
 <section>
-    <mat-toolbar color="primary">
+    <div class="toolbar">
         <button mat-icon-button (click)="onSidebarToggle()">
             <mat-icon>menu</mat-icon>
         </button>
-        <span>SmartSalon</span>
-        <span class="example-spacer"></span>
-        <button
+
+        <p>SmartSalon</p>
+
+        <!-- <button
             class="menu-btn"
             mat-icon-button
             [matMenuTriggerFor]="menu"
@@ -19,31 +20,33 @@
                 <mat-icon>dialpad</mat-icon>
                 <span>Redial</span>
             </button>
+
             <button mat-menu-item disabled class="menu-item">
                 <mat-icon>voicemail</mat-icon>
                 <span>Check voice mail</span>
             </button>
+
             <button mat-menu-item class="menu-item">
                 <mat-icon>logout</mat-icon>
                 <span>Logout</span>
             </button>
-        </mat-menu>
-    </mat-toolbar>
+        </mat-menu> -->
+    </div>
 
-    <mat-sidenav-container class="sidenav">
+    <!-- <mat-sidenav-container class="sidenav">
         <mat-sidenav [opened]="isOpen" #sidebar [mode]="'over'">
             @for (item of sidenavItems; track item.path) {
-            <a routerLink="{{ item.path }}" (click)="onSidebarToggle()">
-                <mat-icon>{{ item.icon }}</mat-icon>
-                <span class="text">
-                    {{ item.title }}
-                </span>
-            </a>
+                <a routerLink="{{ item.path }}" (click)="onSidebarToggle()">
+                    <mat-icon>{{ item.icon }}</mat-icon>
+                    <span class="text">
+                        {{ item.title }}
+                    </span>
+                </a>
             }
         </mat-sidenav>
 
         <mat-sidenav-content class="content">
             <router-outlet></router-outlet>
         </mat-sidenav-content>
-    </mat-sidenav-container>
+    </mat-sidenav-container> -->
 </section>
