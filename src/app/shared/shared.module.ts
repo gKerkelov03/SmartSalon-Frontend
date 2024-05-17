@@ -9,6 +9,8 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
 import { UploadWidgetComponent } from './components/upload-widget/upload-widget.component';
 import { AccessDeniedPageComponent } from './pages/access-denied-page/access-denied-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { OnlyFirstLetterCapitalPipe } from './pipes/only-first-letter-capital.pipe';
+import { OnlyHourAndMinutesPipe } from './pipes/only-hour-and-minutes.pipe';
 
 @NgModule({
     declarations: [
@@ -16,6 +18,8 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
         UploadWidgetComponent,
         AccessDeniedPageComponent,
         NotFoundPageComponent,
+        OnlyFirstLetterCapitalPipe,
+        OnlyHourAndMinutesPipe,
     ],
     imports: [
         CommonModule,
@@ -26,6 +30,8 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
         MatIconModule,
     ],
     exports: [
+        OnlyFirstLetterCapitalPipe,
+        OnlyHourAndMinutesPipe,
         ErrorMessageComponent,
         UploadWidgetComponent,
         AccessDeniedPageComponent,

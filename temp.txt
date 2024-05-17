@@ -1,0 +1,6 @@
+
+export interface Salon {
+    sections: string[];
+    categories: string[];
+    services: string[];
+}

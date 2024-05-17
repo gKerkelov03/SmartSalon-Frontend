@@ -21,8 +21,8 @@
         }"
     >
         @if (isWorking) {
-            {{ openingTime }} -
-            {{ closingTime }}
+            {{ openingTime | onlyHourAndMinutes }} -
+            {{ closingTime | onlyHourAndMinutes }}
         } @else {
             Closed
         }

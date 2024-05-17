@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DayOfWeek } from '../../../../core/enums/day-of-week';
 import { WorkingTime } from '../../models/working-time.model';
 
@@ -7,15 +7,11 @@ import { WorkingTime } from '../../models/working-time.model';
     templateUrl: './salon-working-time.component.html',
     styleUrl: './salon-working-time.component.scss',
 })
-export class SalonWorkingTimeComponent implements OnInit {
+export class SalonWorkingTimeComponent {
     @Input()
     workingTime!: WorkingTime;
     today: DayOfWeek = this.getCurrentDay();
     DayOfWeek = DayOfWeek;
-
-    ngOnInit(): void {
-        this.removeTheSecondsFromTheStartingAndClosingTimes();
-    }
 
     getCurrentDay(): DayOfWeek {
         const date = new Date();
@@ -32,15 +28,5 @@ export class SalonWorkingTimeComponent implements OnInit {
         ];
 
         return days[dayOfWeek];
-    }
-
-    removeTheSecondsFromTheStartingAndClosingTimes(): void {
-        Object.keys(this.workingTime).forEach((key) => {
-            if (typeof this.workingTime[key] === 'string') {
-                this.workingTime[key] = this.workingTime[key]
-                    .toString()
-                    .substring(0, 5);
-            }
-        });
     }
 }

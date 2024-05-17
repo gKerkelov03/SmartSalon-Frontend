@@ -1,15 +1,8 @@
 @use '../../../../../assets/styles/variables' as *;
 
-.currency {
-    // font-size: 1.25rem;
-    // margin-bottom: 0.5rem;
-    // margin-left: 1rem;
-
-    .currency-code {
-        // margin-left: 0.5rem;
-        // position: relative;
-        // bottom: 0.2rem;
-    }
+.autocomplete-currency-logo {
+    max-height: 1rem;
+    max-width: 1rem;
 }
 
 section {
