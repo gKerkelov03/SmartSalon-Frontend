@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { passwordRegex } from '../../../core/constants/regexes';
 import { AuthService } from '../../../core/services/auth.service';
-import { getErrorMessage } from '../../../core/utils/get-error-message';
+import { getErrorMessages } from '../../../core/utils/get-error-message';
 import { UsersService } from '../../../main/users/services/users.service';
 
 @Component({
@@ -31,7 +31,7 @@ export class RestorePasswordFormComponent implements OnInit {
         private usersService: UsersService,
         private snackBar: MatSnackBar,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
     ) {}
 
     get newPasswordControl(): AbstractControl | null {
@@ -45,7 +45,7 @@ export class RestorePasswordFormComponent implements OnInit {
 
     getTokenFromQueryParams() {
         this.route.queryParams.subscribe(
-            (params) => (this.token = params['token'])
+            (params) => (this.token = params['token']),
         );
     }
 
@@ -65,18 +65,18 @@ export class RestorePasswordFormComponent implements OnInit {
 
                 this.snackBar.open(
                     'You resetted your password successfully!',
-                    'Login'
+                    'Login',
                 );
             },
             error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open(getErrorMessage(httpError), 'Close');
+                this.snackBar.open(getErrorMessages(httpError), 'Close');
             },
         };
 
         this.usersService
             .restorePassword(
                 this.token,
-                this.restorePasswordForm.value.newPassword
+                this.restorePasswordForm.value.newPassword,
             )
             .pipe(take(1))
             .subscribe(observer);

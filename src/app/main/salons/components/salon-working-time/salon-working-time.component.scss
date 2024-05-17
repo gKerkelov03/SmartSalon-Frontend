@@ -1,0 +1,16 @@
+@use '../../../../../assets/styles/variables' as *;
+
+section {
+    padding: 3rem;
+
+    .title {
+        margin-bottom: 2rem;
+        font-size: 1.75rem;
+        color: $black;
+    }
+
+    app-daily-working-time {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+}

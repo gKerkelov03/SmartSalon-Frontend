@@ -30,20 +30,20 @@ export class CurrentUserService {
                 if (!CurrentUserService.initialized) {
                     return throwError(
                         () =>
-                            new Error('CurrentUserService not initialized yet')
+                            new Error('CurrentUserService not initialized yet'),
                     );
                 }
 
                 return of(user);
             }),
-            retry({ delay: 100 })
+            retry({ delay: 100 }),
         );
 
     constructor(
         private usersService: UsersService,
-        localStorageService: LocalStorageService
+        localStorage: LocalStorageService,
     ) {
-        const jwtToken = localStorageService.getItem(jwtTokenKey);
+        const jwtToken = localStorage.getItem(jwtTokenKey);
 
         if (jwtToken === null) {
             CurrentUserService.initialized = true;
@@ -62,7 +62,7 @@ export class CurrentUserService {
     get currentUser(): User | null {
         if (!CurrentUserService.initialized) {
             throw new Error(
-                'You are trying to access the current user before the CurrentUserService has determined it. You cannot use the currentUser property in this case and you should consider subscribing to the currentUserObservable property to get notified when the current user is determined'
+                'You are trying to access the current user before the CurrentUserService has determined it. You cannot use the currentUser property in this case and you should consider subscribing to the currentUserObservable property to get notified when the current user is determined',
             );
         }
 

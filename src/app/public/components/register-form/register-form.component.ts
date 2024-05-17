@@ -14,7 +14,7 @@ import { passwordRegex } from '../../../core/constants/regexes';
 import { blankProfilePictureUrl } from '../../../core/constants/urls';
 import { RegisterResponse } from '../../../core/models/register-response.model';
 import { AuthService } from '../../../core/services/auth.service';
-import { getErrorMessage } from '../../../core/utils/get-error-message';
+import { getErrorMessages } from '../../../core/utils/get-error-message';
 import { AreMatchingValidator } from '../../../core/utils/validators/matching.validator';
 
 @Component({
@@ -33,7 +33,7 @@ export class RegisterFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private authService: AuthService,
         private snackBar: MatSnackBar,
-        private router: Router
+        private router: Router,
     ) {}
 
     get profilePictureControl(): AbstractControl | null {
@@ -71,7 +71,7 @@ export class RegisterFormComponent implements OnInit {
 
     ngOnDestroy(): void {
         this.allSubscriptions.forEach((subscription) =>
-            subscription?.unsubscribe()
+            subscription?.unsubscribe(),
         );
     }
 
@@ -80,24 +80,26 @@ export class RegisterFormComponent implements OnInit {
             next: (user: RegisterResponse) => {
                 const snackBarRef = this.snackBar.open(
                     'You registered successfully!',
-                    'Login'
+                    'Login',
                 );
 
                 this.allSubscriptions.push(
                     snackBarRef
                         .afterDismissed()
-                        .subscribe(() => this.router.navigate(['public/login']))
+                        .subscribe(() =>
+                            this.router.navigate(['public/login']),
+                        ),
                 );
             },
             error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open(getErrorMessage(httpError), 'Close');
+                this.snackBar.open(getErrorMessages(httpError), 'Close');
             },
         };
 
         this.allSubscriptions.push(
             this.authService
                 .register(this.registerForm.value)
-                .subscribe(observer)
+                .subscribe(observer),
         );
     }
 
@@ -130,8 +132,8 @@ export class RegisterFormComponent implements OnInit {
     checkIfConfirmPasswordIsValidEveryTimePasswordChanges(): void {
         this.allSubscriptions.push(
             this.passwordControl?.valueChanges.subscribe(() =>
-                this.confirmPasswordControl?.updateValueAndValidity()
-            )
+                this.confirmPasswordControl?.updateValueAndValidity(),
+            ),
         );
     }
 

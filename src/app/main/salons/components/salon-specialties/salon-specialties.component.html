@@ -1,0 +1,12 @@
+@if (specialties.length) {
+    <section>
+        <h3 class="title">Specialties</h3>
+
+        @for (specialty of specialties; track specialty.id) {
+            <p class="specialty">
+                <span class="specialty-number">{{ $index + 1 }}.</span>
+                {{ specialty.text }}
+            </p>
+        }
+    </section>
+}

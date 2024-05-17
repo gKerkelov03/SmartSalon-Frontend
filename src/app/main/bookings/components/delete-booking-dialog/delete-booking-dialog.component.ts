@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs';
 import { CrudAction } from '../../../../core/enums/crud-action';
-import { getErrorMessage } from '../../../../core/utils/get-error-message';
+import { getErrorMessages } from '../../../../core/utils/get-error-message';
 import { BookingsService } from '../../services/bookings.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class DeleteBookingDialogComponent {
         public bookingId: string,
         private dialogRef: MatDialogRef<DeleteBookingDialogComponent>,
         private bookingsService: BookingsService,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
     ) {}
 
     deleteEvent(): void {
@@ -31,7 +31,7 @@ export class DeleteBookingDialogComponent {
                 });
             },
             error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open(getErrorMessage(httpError), 'Close');
+                this.snackBar.open(getErrorMessages(httpError), 'Close');
             },
         };
 

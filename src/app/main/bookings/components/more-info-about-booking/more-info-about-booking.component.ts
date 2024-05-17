@@ -18,7 +18,7 @@ import { DeleteBookingDialogComponent } from '../delete-booking-dialog/delete-bo
 })
 export class MoreInfoAboutBookingComponent implements OnInit {
     isLoading: boolean = false;
-    bookingToDisplay!: Booking;
+    booking!: Booking;
     bookingHoursDuration!: number;
     bookingMinutesDuration!: number;
     startDate!: string;
@@ -30,7 +30,7 @@ export class MoreInfoAboutBookingComponent implements OnInit {
         private bookingId: string,
         private dialogRef: MatDialogRef<MoreInfoAboutBookingComponent>,
         private dialog: MatDialog,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
     ) {}
 
     ngOnInit(): void {
@@ -40,7 +40,7 @@ export class MoreInfoAboutBookingComponent implements OnInit {
             .pipe(take(1))
             .subscribe((booking: Booking) => {
                 this.isLoading = false;
-                this.bookingToDisplay = booking;
+                this.booking = booking;
                 this.bookingHoursDuration =
                     (booking.durationInMinutes / 60) | 0;
                 this.bookingMinutesDuration = booking.durationInMinutes % 60;
@@ -53,7 +53,7 @@ export class MoreInfoAboutBookingComponent implements OnInit {
                         hour12: true,
                         hour: 'numeric',
                         minute: 'numeric',
-                    }
+                    },
                 );
             });
     }
@@ -76,7 +76,7 @@ export class MoreInfoAboutBookingComponent implements OnInit {
                 data: this.bookingId,
                 autoFocus: false,
                 panelClass: 'round-without-padding',
-            }
+            },
         );
 
         deleteBookingDialogRef

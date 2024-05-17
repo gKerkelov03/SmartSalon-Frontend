@@ -1,15 +1,15 @@
 <section>
     <div class="content">
         <img
-            [src]="userToDisplay.profilePictureUrl"
+            [src]="user.profilePictureUrl"
             alt="Profile picture"
             class="profile-picture"
         />
 
         <h1 class="name">
-            {{ userToDisplay.firstName + ' ' + userToDisplay.lastName }}
+            {{ user.firstName + ' ' + user.lastName }}
         </h1>
 
-        <p class="email">{{ userToDisplay.email }}</p>
+        <p class="email">{{ user.email }}</p>
     </div>
 </section>

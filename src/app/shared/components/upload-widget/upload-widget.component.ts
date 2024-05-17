@@ -28,7 +28,7 @@ export class UploadWidgetComponent {
             const pictureUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${uploadResult.info.path}`;
 
             this.newPictureUploaded.emit(pictureUrl);
-        }
+        },
     );
 
     showWidget(): void {

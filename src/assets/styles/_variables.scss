@@ -1,6 +1,10 @@
 $black: #26262d;
 $white: #eee;
 
+$background: white;
+$background-light: white;
+$background-dark: #eee;
+
 $primary: #1660b4;
 $primary-light: #1660b4;
 $primary-dark: #1660b4;
@@ -9,5 +13,6 @@ $accent: orange;
 $accent-light: #b06fa7;
 $accent-dark: #b06fa7;
 
-$form-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+$form-shadow:
+    rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;

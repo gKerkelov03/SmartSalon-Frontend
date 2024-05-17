@@ -10,18 +10,18 @@ import { User } from '../../models/user.model';
     styleUrls: ['./profile-header.component.scss'],
 })
 export class ProfileHeaderComponent implements OnInit {
-    userToDisplay!: User;
-    constructor(private currentUserService: CurrentUserService) {}
+    user!: User;
+    constructor(private currentUser: CurrentUserService) {}
 
     ngOnInit(): void {
-        this.currentUserService.currentUserObservable
+        this.currentUser.currentUserObservable
             .pipe(take(1))
             .subscribe((user: User | null) => {
                 if (user?.profilePictureUrl === null) {
                     user.profilePictureUrl = blankProfilePictureUrl;
                 }
 
-                this.userToDisplay = user!;
+                this.user = user!;
             });
     }
 }

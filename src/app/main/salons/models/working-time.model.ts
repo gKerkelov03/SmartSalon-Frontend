@@ -1,24 +1,33 @@
 export interface WorkingTime {
     salonId: string;
 
-    mondayFrom: string;
-    mondayTo: string;
+    mondayIsWorking: boolean;
+    mondayOpeningTime: string;
+    mondayClosingTime: string;
 
-    tuesdayFrom: string;
-    tuesdayTo: string;
+    tuesdayIsWorking: boolean;
+    tuesdayOpeningTime: string;
+    tuesdayClosingTime: string;
 
-    wednesdayFrom: string;
-    wednesdayTo: string;
+    wednesdayIsWorking: boolean;
+    wednesdayOpeningTime: string;
+    wednesdayClosingTime: string;
 
-    thursdayFrom: string;
-    thursdayTo: string;
+    thursdayIsWorking: boolean;
+    thursdayOpeningTime: string;
+    thursdayClosingTime: string;
 
-    fridayFrom: string;
-    fridayTo: string;
+    fridayIsWorking: boolean;
+    fridayOpeningTime: string;
+    fridayClosingTime: string;
 
-    saturdayFrom: string;
-    saturdayTo: string;
+    saturdayIsWorking: boolean;
+    saturdayOpeningTime: string;
+    saturdayClosingTime: string;
 
-    sundayFrom: string;
-    sundayTo: string;
+    sundayIsWorking: boolean;
+    sundayOpeningTime: string;
+    sundayClosingTime: string;
+
+    [propertyName: string]: string | boolean;
 }

@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs';
-import { getErrorMessage } from '../../../../core/utils/get-error-message';
+import { getErrorMessages } from '../../../../core/utils/get-error-message';
 import { Salon } from '../../models/salon.model';
 import { SalonsService } from '../../services/salons.service';
 
@@ -27,7 +27,7 @@ export class SalonInfoFormComponent {
     constructor(
         private formBuilder: FormBuilder,
         private snackBar: MatSnackBar,
-        private salonsService: SalonsService
+        private salonsService: SalonsService,
     ) {}
 
     get nameControl(): AbstractControl | null {
@@ -54,7 +54,7 @@ export class SalonInfoFormComponent {
         const observer = {
             next: () => {},
             error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open(getErrorMessage(httpError), 'Close');
+                this.snackBar.open(getErrorMessages(httpError), 'Close');
             },
         };
 
@@ -83,7 +83,7 @@ export class SalonInfoFormComponent {
             ]),
             bookingsInAdvance: new FormControl(
                 this.salonTemplate.bookingsInAdvance,
-                [Validators.required]
+                [Validators.required],
             ),
             timePenalty: new FormControl(this.salonTemplate.timePenalty, [
                 Validators.required,
@@ -98,8 +98,8 @@ export class SalonInfoFormComponent {
             },
             error: (httpError: HttpErrorResponse) =>
                 this.snackBar.open(
-                    getErrorMessage(httpError.error.message),
-                    'Close'
+                    getErrorMessages(httpError.error.message),
+                    'Close',
                 ),
         };
 

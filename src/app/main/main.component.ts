@@ -22,11 +22,11 @@ export class MainComponent {
     constructor(
         private router: Router,
         private localStorageUtil: LocalStorageService,
-        public currentUserService: CurrentUserService,
-        public themeService: ThemeService
+        public currentUser: CurrentUserService,
+        public theme: ThemeService,
     ) {
-        this.themeService.initTheme();
-        this.isLightMode = this.themeService.isLightMode();
+        this.theme.initTheme();
+        this.isLightMode = this.theme.isLightMode();
     }
     ngOnDestroy(): void {}
 
@@ -35,25 +35,25 @@ export class MainComponent {
     }
 
     navigateToProfile(): void {
-        const userId = this.currentUserService.currentUser!.id;
+        const userId = this.currentUser.currentUser!.id;
         this.router.navigate(['main/users', userId]);
     }
 
     toggleLightMode(event: Event): void {
         event.stopPropagation();
         this.changeIcon = !this.changeIcon;
-        this.isLightMode = this.themeService.isLightMode();
+        this.isLightMode = this.theme.isLightMode();
 
         if (this.isLightMode) {
-            this.themeService.update(Theme.darkMode);
+            this.theme.update(Theme.darkMode);
         } else {
-            this.themeService.update(Theme.lightMode);
+            this.theme.update(Theme.lightMode);
         }
     }
 
     logout(): void {
         this.localStorageUtil.deleteItem(jwtTokenKey);
-        this.currentUserService.clearCurrentUser();
+        this.currentUser.clearCurrentUser();
         this.router.navigate(['public']);
     }
 }

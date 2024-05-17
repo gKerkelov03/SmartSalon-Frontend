@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { mapId } from '../../../../core/constants/googleMaps';
 import { SalonWithCoordinates } from '../../models/salon-with-coordinates.model';
 
 @Component({
@@ -13,7 +14,7 @@ export class SalonsMapComponent {
     zoom!: number;
     @Input()
     salons!: SalonWithCoordinates[];
-    mapId = '39695147-2c5e-4b85-b91d-62e7ddb14893';
+    mapId = mapId;
     mapOptions: google.maps.MapOptions = {
         mapTypeControl: false,
     };

@@ -1,5 +1,38 @@
-@if (salonToDisplay) {
-  <app-salon-details-header
-    [salonToDisplay]="salonToDisplay"
-  ></app-salon-details-header>
+@if (workingTime && salon) {
+    <app-salon-header
+        class="header"
+        [name]="salon.name"
+        [profilePictureUrl]="salon.profilePictureUrl"
+    />
+    <app-salon-working-time class="working-time" [workingTime]="workingTime" />
+
+    <section>
+        <app-salon-description
+            class="description"
+            [description]="salon.description"
+        />
+
+        <app-salon-specialties
+            class="specialties"
+            [specialties]="salon.specialties"
+        />
+    </section>
+
+    <app-salon-images class="images" [images]="salon.images" />
+
+    <app-salon-currencies
+        class="currencies"
+        [mainCurrency]="salon.mainCurrency"
+        [otherAcceptedCurrencies]="salon.otherAcceptedCurrencies"
+        [salonId]="salon.id"
+    />
+
+    <app-salon-location
+        class="location"
+        [location]="salon.googleMapsLocation"
+    />
+} @else {
+    <div class="spinner-container">
+        <mat-spinner mode="indeterminate" diameter="200"></mat-spinner>
+    </div>
 }

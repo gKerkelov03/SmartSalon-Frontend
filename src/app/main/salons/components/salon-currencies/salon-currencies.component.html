@@ -1,0 +1,106 @@
+<section>
+    <mat-form-field class="main-currency">
+        <mat-label>Main currency</mat-label>
+
+        <mat-chip-grid #mainCurrencyChipGrid>
+            <mat-chip-row class="currency">
+                <img
+                    matChipAvatar
+                    class="currency-logo"
+                    [src]="mainCurrency.logoUrl"
+                    alt="Currency logo"
+                />
+
+                <span class="currency-code">{{ mainCurrency.code }}</span>
+            </mat-chip-row>
+            <input
+                [placeholder]="canEdit ? 'Change main currency...' : ''"
+                [formControl]="mainCurrencyInputControl"
+                [disabled]="!canEdit"
+                [matChipInputFor]="mainCurrencyChipGrid"
+                [matAutocomplete]="auto"
+                matInput
+            />
+        </mat-chip-grid>
+
+        <!-- <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            (optionSelected)="addCurrency($event)"
+        >
+            @for (
+                currencyOption of autocompleteOptions | async;
+                track currencyOption
+            ) {
+                <mat-option [value]="currencyOption">
+                    <img
+                        class="currency-logo"
+                        [src]="currencyOption.logoUrl"
+                        alt="Currency logo"
+                    />
+
+                    {{ currencyOption.code }}
+                </mat-option>
+            }
+        </mat-autocomplete> -->
+    </mat-form-field>
+
+    <mat-form-field class="other-accepted-currencies">
+        <mat-label>Other accepted currencies</mat-label>
+
+        <mat-chip-grid #otherAcceptedCurrenciesChipGrid>
+            @for (currency of otherAcceptedCurrencies; track currency.id) {
+                <mat-chip-row
+                    (removed)="removeCurrency(currency)"
+                    class="currency"
+                >
+                    <img
+                        matChipAvatar
+                        class="currency-logo"
+                        [src]="currency.logoUrl"
+                        alt="Currency logo"
+                    />
+
+                    <span class="currency-code">{{ currency.code }}</span>
+
+                    @if (canEdit) {
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    }
+                </mat-chip-row>
+            }
+
+            <input
+                #otherAcceptedCurrenciesInput
+                [placeholder]="canEdit ? 'New currency...' : ''"
+                [matChipInputFor]="otherAcceptedCurrenciesChipGrid"
+                [formControl]="otherAcceptedCurrenciesInputControl"
+                [disabled]="!canEdit"
+                [matAutocomplete]="auto"
+                matInput
+            />
+
+            <mat-autocomplete
+                autoActiveFirstOption
+                #auto="matAutocomplete"
+                (optionSelected)="addCurrency($event)"
+            >
+                @for (
+                    currencyOption of autocompleteOptions | async;
+                    track currencyOption
+                ) {
+                    <mat-option [value]="currencyOption">
+                        <img
+                            class="currency-logo"
+                            [src]="currencyOption.logoUrl"
+                            alt="Currency logo"
+                        />
+
+                        {{ currencyOption.code }}</mat-option
+                    >
+                }
+            </mat-autocomplete>
+        </mat-chip-grid>
+    </mat-form-field>
+</section>

@@ -1,0 +1,11 @@
+<google-map
+    height="400px"
+    width="750px"
+    [center]="userLocation"
+    [zoom]="zoom"
+    [mapId]="mapId"
+    (mapClick)="moveMap($event)"
+    [options]="mapOptions"
+>
+    <map-advanced-marker [position]="userLocation" />
+</google-map>

@@ -13,7 +13,7 @@ import { Subject, finalize, take, takeUntil } from 'rxjs';
 import { CrudAction } from '../../../../core/enums/crud-action';
 import { LocalStorageService } from '../../../../core/services/local-storage.service';
 import { formatDate } from '../../../../core/utils/format-date';
-import { getErrorMessage } from '../../../../core/utils/get-error-message';
+import { getErrorMessages } from '../../../../core/utils/get-error-message';
 import { Booking } from '../../models/booking.model';
 import { BookingsService } from '../../services/bookings.service';
 
@@ -39,7 +39,7 @@ export class BookingsFormComponent implements OnInit, OnDestroy {
             | { date: Date; isMonthView: boolean }
             | null, //if the dialogData is number then it's an bookingId
         private dialogRef: MatDialogRef<BookingsFormComponent>,
-        private localStorage: LocalStorageService
+        private localStorage: LocalStorageService,
     ) {}
 
     get startDateControl(): AbstractControl | null {
@@ -104,7 +104,7 @@ export class BookingsFormComponent implements OnInit, OnDestroy {
                 this.snackBar.open('Successfully created an booking', 'Ok');
             },
             error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open(getErrorMessage(httpError), 'Close');
+                this.snackBar.open(getErrorMessages(httpError), 'Close');
             },
         };
 
@@ -112,7 +112,7 @@ export class BookingsFormComponent implements OnInit, OnDestroy {
             .create(formValue)
             .pipe(
                 takeUntil(this.destroy$),
-                finalize(() => (this.loading = false))
+                finalize(() => (this.loading = false)),
             )
             .subscribe(observer);
     }
@@ -136,7 +136,7 @@ export class BookingsFormComponent implements OnInit, OnDestroy {
                 });
             },
             error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open(getErrorMessage(httpError), 'Close');
+                this.snackBar.open(getErrorMessages(httpError), 'Close');
             },
         };
 

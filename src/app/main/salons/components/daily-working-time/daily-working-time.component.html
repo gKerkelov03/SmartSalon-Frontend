@@ -1,0 +1,30 @@
+<div class="working-time">
+    <div class="circle-day-container">
+        <div
+            class="circle"
+            [ngClass]="{
+                'red-background': !isWorking,
+                'green-background': isWorking
+            }"
+        ></div>
+        <div
+            [ngClass]="{
+                bold: dayDisplaying === today
+            }"
+        >
+            {{ dayDisplaying }}
+        </div>
+    </div>
+    <div
+        [ngClass]="{
+            bold: dayDisplaying === today
+        }"
+    >
+        @if (isWorking) {
+            {{ openingTime }} -
+            {{ closingTime }}
+        } @else {
+            Closed
+        }
+    </div>
+</div>

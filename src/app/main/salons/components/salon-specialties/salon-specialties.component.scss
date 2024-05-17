@@ -1,0 +1,23 @@
+@use '../../../../../assets/styles/variables' as *;
+
+section {
+    border-radius: 30px;
+    background-color: $white;
+    padding: 3rem;
+    box-shadow: $form-shadow;
+
+    .title {
+        margin-bottom: 2rem;
+        font-size: 1.75rem;
+        color: $accent;
+    }
+
+    .specialty {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .specialty-number {
+        font-weight: bold;
+    }
+}

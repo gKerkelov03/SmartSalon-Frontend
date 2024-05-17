@@ -10,7 +10,7 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
-import { getErrorMessage } from '../../../../core/utils/get-error-message';
+import { getErrorMessages } from '../../../../core/utils/get-error-message';
 import { User } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
 
@@ -29,7 +29,7 @@ export class PersonalInformationFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private snackBar: MatSnackBar,
         private usersService: UsersService,
-        private currentUserService: CurrentUserService
+        private currentUser: CurrentUserService,
     ) {}
 
     get firstNameControl(): AbstractControl | null {
@@ -45,7 +45,7 @@ export class PersonalInformationFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.userTemplate = this.currentUserService.currentUser;
+        this.userTemplate = this.currentUser.currentUser;
         this.setupThePersonalInformationForm();
     }
 
@@ -53,14 +53,14 @@ export class PersonalInformationFormComponent implements OnInit {
         const observer = {
             next: () => {},
             error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open(getErrorMessage(httpError), 'Close');
+                this.snackBar.open(getErrorMessages(httpError), 'Close');
             },
         };
 
         this.usersService
             .update(
-                this.currentUserService.currentUser!.id,
-                this.personalInformationForm.value
+                this.currentUser.currentUser!.id,
+                this.personalInformationForm.value,
             )
             .pipe(take(1))
             .subscribe(observer);
@@ -97,14 +97,14 @@ export class PersonalInformationFormComponent implements OnInit {
         var updateObserver = {
             next: () => {
                 this.userTemplate = Object.assign({}, this.userTemplate);
-                this.currentUserService.setCurrentUser(this.userTemplate);
+                this.currentUser.setCurrentUser(this.userTemplate);
             },
             error: (httpError: HttpErrorResponse) =>
                 this.snackBar.open(httpError.error.message, 'Close'),
         };
 
         this.usersService
-            .update(this.currentUserService.currentUser!.id, {
+            .update(this.currentUser.currentUser!.id, {
                 profilePictureUrl: newProfilePictureUrl,
             })
             .pipe(take(1))

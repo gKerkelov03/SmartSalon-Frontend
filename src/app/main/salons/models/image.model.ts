@@ -1,4 +1,4 @@
 export interface Image {
-    Url: string;
-    SalonId: string;
+    url: string;
+    id: string;
 }

@@ -22,19 +22,19 @@ export class ChangeEmailComponent extends HasUpdateCredentialObserver {
 
     constructor(
         private usersService: UsersService,
-        currentUserService: CurrentUserService,
-        snackBar: MatSnackBar
+        currentUser: CurrentUserService,
+        snackBar: MatSnackBar,
     ) {
-        super(snackBar, currentUserService);
+        super(snackBar, currentUser);
     }
 
     submit(formData: ChangeCredentialSubmitResult): void {
         this.usersService
             //TODO: check the empty strings
             .sendEmailConfirmation(
-                this.currentUserService.currentUser?.id ?? '',
+                this.currentUser.currentUser?.id ?? '',
                 formData.currentPassword,
-                formData?.credential ?? ''
+                formData?.credential ?? '',
             )
             .pipe(take(1))
             .subscribe(this.updateCredentialObserver);

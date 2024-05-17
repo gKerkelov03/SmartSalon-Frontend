@@ -39,7 +39,7 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
     constructor(
         private bookingsService: BookingsService,
         private dialog: MatDialog,
-        public currentUserService: CurrentUserService
+        public currentUser: CurrentUserService,
     ) {}
 
     ngOnInit(): void {
@@ -63,9 +63,9 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
                             //We are returning both booking and bookingId because if a booking
                             //gets deleted the booking parameter will be null and we cannot access its id with booking.id
                             return { action, booking, bookingId };
-                        })
-                    )
-                )
+                        }),
+                    ),
+                ),
             )
             .subscribe((result) => {
                 const { action, booking, bookingId } = result;
@@ -96,7 +96,7 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
 
     openTheBookingsFormWithPrefilledStartTime(
         date: Date,
-        isMonthView: boolean
+        isMonthView: boolean,
     ): void {
         if (isMonthView) {
             const today = new Date();
@@ -159,7 +159,7 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
             .pipe(delay(300))
             .subscribe(() => {
                 const element = document.querySelector(
-                    currentTimeMarkerSelector
+                    currentTimeMarkerSelector,
                 );
 
                 element?.scrollIntoView({

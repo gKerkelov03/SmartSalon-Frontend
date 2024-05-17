@@ -34,9 +34,9 @@ export class LoginFormComponent implements OnInit {
         private authService: AuthService,
         private snackBar: MatSnackBar,
         private router: Router,
-        private currentUserService: CurrentUserService,
+        private currentUser: CurrentUserService,
         private usersService: UsersService,
-        private localStorageService: LocalStorageService
+        private localStorage: LocalStorageService,
     ) {}
 
     get emailControl(): AbstractControl | null {
@@ -64,7 +64,7 @@ export class LoginFormComponent implements OnInit {
     onSubmit(): void {
         const observer = {
             next: (user: User) => {
-                this.currentUserService.setCurrentUser(user);
+                this.currentUser.setCurrentUser(user);
                 this.router.navigate(['main']);
             },
             error: (httpError: HttpErrorResponse) => {
@@ -79,7 +79,7 @@ export class LoginFormComponent implements OnInit {
                 switchMap((response: LoginResponse) => {
                     var decodedJwt: JwtData = parseJwt(response.jwtToken);
                     return this.usersService.getById(decodedJwt.sub);
-                })
+                }),
             )
             .subscribe(observer);
     }

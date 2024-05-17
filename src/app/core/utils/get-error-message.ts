@@ -1,12 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ValidationError } from '../models/validation-error.model';
 
-export function getErrorMessage(error: HttpErrorResponse) {
-    const firstError: ValidationError | string = error.error.errors[0];
+export function getErrorMessages(error: HttpErrorResponse): string {
     console.log(error);
-    if (typeof firstError === 'string') {
-        return firstError;
-    } else {
-        return firstError['validationViolations'][0];
+    const title: string = error.error?.title;
+    const errors: (ValidationError | string)[] = error.error?.errors;
+    const errorMessages: string = errors?.length ? errors.join(', ') : title;
+
+    if (errorMessages) {
+        return errorMessages;
     }
+
+    return 'Unknown error';
 }

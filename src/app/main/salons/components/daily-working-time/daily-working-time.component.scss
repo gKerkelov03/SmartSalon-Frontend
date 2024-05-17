@@ -1,0 +1,37 @@
+.green-background {
+    background-color: rgb(116, 231, 116);
+}
+
+.red-background {
+    background-color: rgb(219, 64, 64);
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.working-time {
+    display: flex;
+    justify-content: space-between;
+
+    .circle-day-container {
+        display: flex;
+        align-items: baseline;
+
+        .circle {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+    }
+
+    .working-time {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+
+        .time {
+            margin-left: 2rem;
+        }
+    }
+}

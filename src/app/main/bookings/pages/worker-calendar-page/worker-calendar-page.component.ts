@@ -11,7 +11,7 @@ import { BookingsFormComponent } from '../../components/bookings-form/bookings-f
 export class WorkerCalendarPageComponent {
     constructor(
         private dialog: MatDialog,
-        public currentUserService: CurrentUserService
+        public currentUser: CurrentUserService,
     ) {}
 
     displayEventDialog(): void {

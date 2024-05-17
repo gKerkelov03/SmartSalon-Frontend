@@ -1,0 +1,35 @@
+@use '../../../../../assets/styles/variables' as *;
+
+.currency {
+    // font-size: 1.25rem;
+    // margin-bottom: 0.5rem;
+    // margin-left: 1rem;
+
+    .currency-code {
+        // margin-left: 0.5rem;
+        // position: relative;
+        // bottom: 0.2rem;
+    }
+}
+
+section {
+    border-radius: 30px;
+    background-color: $white;
+    padding: 3rem;
+    box-shadow: $form-shadow;
+
+    .other-accepted-currencies {
+        display: block;
+
+        mat-label {
+            font-size: 1.25rem;
+        }
+    }
+
+    .main-currency {
+        display: block;
+        mat-label {
+            font-size: 1.25rem;
+        }
+    }
+}
