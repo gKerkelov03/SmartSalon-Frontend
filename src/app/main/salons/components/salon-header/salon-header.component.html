@@ -1,9 +1,36 @@
 <section>
-    <h2 class="name">{{ name }}</h2>
+    <h3 class="name">{{ name }}</h3>
 
-    <img
-        [src]="profilePictureUrl ?? blankProfilePictureUrl"
-        alt="Profile picture"
-        class="profile-picture"
-    />
+    <div class="stars-container">
+        <span class="rating">{{ rating | rating }}</span>
+
+        @for (_ of createRange(rating); track $index) {
+            <img
+                class="star"
+                src="../../../../../assets/icons/review-star.svg"
+                alt="Star"
+            />
+        }
+
+        @if (shouldDisplayHalfReviewStar()) {
+            <img
+                class="star"
+                src="../../../../../assets/icons/review-half-star.svg"
+                alt="Half star"
+            />
+        }
+
+        @for (
+            _ of createRange(
+                6 - (shouldDisplayHalfReviewStar() ? rating + 1 : rating)
+            );
+            track $index
+        ) {
+            <img
+                class="star"
+                src="../../../../../assets/icons/review-empty-star.svg"
+                alt="Star"
+            />
+        }
+    </div>
 </section>

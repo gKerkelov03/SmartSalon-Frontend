@@ -33,6 +33,7 @@ import { SearchSalonsPageComponent } from './pages/search-salons-page/search-sal
 import { SalonsRoutingModule } from './salons-routing.module';
 import { DailyWorkingTimeComponent } from './components/daily-working-time/daily-working-time.component';
 import { SalonTeamComponent } from './components/salon-team/salon-team.component';
+import { SalonMainPictureComponent } from './components/salon-main-picture/salon-main-picture.component';
 
 @NgModule({
     declarations: [
@@ -52,6 +53,7 @@ import { SalonTeamComponent } from './components/salon-team/salon-team.component
         SalonLocationComponent,
         DailyWorkingTimeComponent,
         SalonTeamComponent,
+        SalonMainPictureComponent,
     ],
     imports: [
         CommonModule,

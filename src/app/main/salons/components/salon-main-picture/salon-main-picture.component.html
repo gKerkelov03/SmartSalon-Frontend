@@ -1,0 +1,15 @@
+<section>
+    <div class="container">
+        <div
+            [ngStyle]="{
+                'background-image':
+                    'url(' + (profilePictureUrl ?? blankProfilePictureUrl) + ')'
+            }"
+            alt="Profile picture"
+            class="profile-picture"
+        ></div>
+        <button class="upload-button" mat-raised-button color="primary">
+            Upload
+        </button>
+    </div>
+</section>

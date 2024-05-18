@@ -2,8 +2,15 @@
     <app-salon-header
         class="header"
         [name]="salon.name"
-        [profilePictureUrl]="salon.profilePictureUrl"
+        [rating]="3.3"
+        [googleMapsLocation]="salon.googleMapsLocation"
     />
+
+    <app-salon-main-picture
+        [profilePictureUrl]="salon.profilePictureUrl"
+        class="main-picture"
+    />
+
     <app-salon-working-time class="working-time" [workingTime]="workingTime" />
 
     <app-salon-description

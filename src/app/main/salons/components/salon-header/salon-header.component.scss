@@ -1,25 +1,28 @@
 @use '../../../../../assets/styles/variables' as *;
 
 section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .profile-picture {
-        width: 50%;
-        margin-bottom: 2rem;
-    }
+    margin-left: 3rem;
 
     .name {
         font-size: 2rem;
         margin-bottom: 1rem;
-        letter-spacing: 2px;
-        font-weight: 500;
+        font-weight: bold;
+        color: $black;
     }
 
-    .email {
-        font-size: 1rem;
-        color: $primary;
+    .stars-container {
+        display: flex;
+        gap: 0.1rem;
+
+        .rating {
+            margin-right: 0.4rem;
+            font-weight: bold;
+        }
+
+        .star {
+            width: 1rem;
+            height: 1rem;
+            color: $black;
+        }
     }
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { blankProfilePictureUrl } from '../../../../core/constants/urls';
+import { createRange } from '../../../../core/utils/create-range';
 
 @Component({
     selector: 'app-salon-header',
@@ -9,11 +9,22 @@ import { blankProfilePictureUrl } from '../../../../core/constants/urls';
 export class SalonHeaderComponent {
     @Input()
     name!: string;
+
     @Input()
-    profilePictureUrl!: string | null;
-    blankProfilePictureUrl = blankProfilePictureUrl;
+    rating!: number;
 
-    constructor() {}
+    @Input()
+    googleMapsLocation!: string;
 
-    ngOnInit(): void {}
+    createRange = createRange;
+
+    shouldDisplayHalfReviewStar() {
+        const fractionalPart = this.rating - parseInt(this.rating.toString());
+
+        if (fractionalPart > 0.5) {
+            return true;
+        }
+
+        return false;
+    }
 }

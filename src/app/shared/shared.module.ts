@@ -11,6 +11,7 @@ import { AccessDeniedPageComponent } from './pages/access-denied-page/access-den
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { OnlyFirstLetterCapitalPipe } from './pipes/only-first-letter-capital.pipe';
 import { OnlyHourAndMinutesPipe } from './pipes/only-hour-and-minutes.pipe';
+import { RatingPipe } from './pipes/rating.pipe';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { OnlyHourAndMinutesPipe } from './pipes/only-hour-and-minutes.pipe';
         AccessDeniedPageComponent,
         NotFoundPageComponent,
         OnlyFirstLetterCapitalPipe,
+        RatingPipe,
         OnlyHourAndMinutesPipe,
     ],
     imports: [
@@ -32,6 +34,7 @@ import { OnlyHourAndMinutesPipe } from './pipes/only-hour-and-minutes.pipe';
     exports: [
         OnlyFirstLetterCapitalPipe,
         OnlyHourAndMinutesPipe,
+        RatingPipe,
         ErrorMessageComponent,
         UploadWidgetComponent,
         AccessDeniedPageComponent,
