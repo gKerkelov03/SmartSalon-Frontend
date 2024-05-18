@@ -1,14 +1,23 @@
 @use '../../../../assets/styles/variables' as *;
+
 .switch {
     margin-bottom: 1rem;
-    background-color: $white;
     border-radius: 10px;
-    max-width: 3rem;
+    background-color: white;
+    border: none;
 
     .toggle {
-        background-color: $white;
         border-radius: 10px;
         border: none !important;
+        background-color: white;
+
+        &.light-mode-toggle {
+            margin-bottom: 0.5rem;
+        }
+
+        .icon {
+            color: $black;
+        }
 
         &.light-mode-toggle:hover {
             .icon {
@@ -23,15 +32,17 @@
         }
 
         &.active {
-            background-color: white;
-
             &.light-mode-toggle {
+                background-color: $light-theme-background-switch;
+
                 .icon {
-                    color: orange;
+                    color: rgb(255, 166, 0);
                 }
             }
 
             &.dark-mode-toggle {
+                background-color: $dark-theme-background-switch;
+
                 .icon {
                     color: blue;
                 }

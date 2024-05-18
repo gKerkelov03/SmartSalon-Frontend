@@ -47,7 +47,7 @@ export class ThemeService {
         const userTheme = localStorage.getItem(userThemeKey);
 
         if (!userTheme) {
-            this.colorTheme = Theme.darkMode;
+            this.colorTheme = Theme.lightMode;
         } else {
             this.colorTheme = userTheme;
         }
