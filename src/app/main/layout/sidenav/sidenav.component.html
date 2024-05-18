@@ -1,0 +1,21 @@
+<nav class="sidenav">
+    <div class="profile-picture-container">
+        <img
+            class="profile-picture"
+            [src]="profilePictureUrl"
+            alt="Profile picture"
+        />
+        <mat-divider class="divider" />
+    </div>
+
+    @for (sidenavItemData of sidenavItems; track $index) {
+        <app-sidenav-item [sidenavItemData]="sidenavItemData" />
+    }
+
+    <div class="logo-container">
+        <app-theme-switch />
+        <mat-divider class="divider" />
+
+        <img src="../../assets/icons/logo.svg" class="logo" alt="logo" />
+    </div>
+</nav>

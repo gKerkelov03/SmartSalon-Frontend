@@ -12,7 +12,7 @@ export class ThemeService {
 
     constructor(
         rendererFactory: RendererFactory2,
-        private localStorageUtil: LocalStorageService
+        private localStorageUtil: LocalStorageService,
     ) {
         this.renderer = rendererFactory.createRenderer(null, null);
     }
@@ -45,7 +45,8 @@ export class ThemeService {
 
     getColorTheme(): void {
         const userTheme = localStorage.getItem(userThemeKey);
-        if (userTheme === null) {
+
+        if (!userTheme) {
             this.colorTheme = Theme.darkMode;
         } else {
             this.colorTheme = userTheme;

@@ -1,0 +1,28 @@
+<mat-button-toggle-group
+    class="switch"
+    vertical
+    (valueChange)="onToggle($event)"
+    [value]="selectedValue"
+>
+    <mat-button-toggle
+        disableRipple
+        class="toggle dark-mode-toggle"
+        [value]="darkModeValue"
+        [ngClass]="{
+            active: selectedValue === darkModeValue
+        }"
+    >
+        <mat-icon class="icon"> dark_mode </mat-icon>
+    </mat-button-toggle>
+
+    <mat-button-toggle
+        disableRipple
+        class="toggle light-mode-toggle"
+        [value]="lightModeValue"
+        [ngClass]="{
+            active: selectedValue === lightModeValue
+        }"
+    >
+        <mat-icon class="icon">light_mode</mat-icon>
+    </mat-button-toggle>
+</mat-button-toggle-group>

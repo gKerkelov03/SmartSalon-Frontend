@@ -1,6 +1,6 @@
-import { SidenavItem } from '../models/side-nav-item.model';
+import { SidenavItemData } from '../models/sidenav-item-data.model';
 
-export const sidenavItems: SidenavItem[] = [
+export const sidenavItems: SidenavItemData[] = [
     { title: 'Profile', icon: 'account_circle', path: '/main/users' },
     {
         title: 'Search salons',

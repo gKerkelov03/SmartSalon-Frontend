@@ -1,0 +1,41 @@
+@use '../../../../assets/styles/variables' as *;
+.switch {
+    margin-bottom: 1rem;
+    background-color: $white;
+    border-radius: 10px;
+    max-width: 3rem;
+
+    .toggle {
+        background-color: $white;
+        border-radius: 10px;
+        border: none !important;
+
+        &.light-mode-toggle:hover {
+            .icon {
+                color: orange;
+            }
+        }
+
+        &.dark-mode-toggle:hover {
+            .icon {
+                color: blue;
+            }
+        }
+
+        &.active {
+            background-color: white;
+
+            &.light-mode-toggle {
+                .icon {
+                    color: orange;
+                }
+            }
+
+            &.dark-mode-toggle {
+                .icon {
+                    color: blue;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+<div
+    mat-fab
+    routerLink="{{ sidenavItemData.path }}"
+    routerLinkActive="active"
+    [matTooltip]="sidenavItemData.title"
+    matTooltipClass="tooltip"
+    matTooltipPosition="right"
+    class="sidenav-item"
+>
+    <mat-icon class="icon">{{ sidenavItemData.icon }}</mat-icon>
+</div>
