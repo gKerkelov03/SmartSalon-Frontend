@@ -1,3 +1,7 @@
+:host {
+    width: max-content;
+}
+
 .sidenav {
     display: flex;
     flex-direction: column;
@@ -5,6 +9,7 @@
     padding: 1rem;
     width: max-content;
     box-shadow: -9px 2px 20px;
+    position: fixed;
     height: 100%;
 
     .profile-picture {

@@ -7,20 +7,20 @@ import { environment } from '../../../../environments/environment';
     providedIn: 'root',
 })
 export class ImagesService {
-    salonsBackendUrl: string = `${environment.backendUrl}/Salons/`;
+    salonsBackendUrl: string = `${environment.backendUrl}/Images/`;
 
     constructor(private httpClient: HttpClient) {}
 
-    addImage(url: string): Observable<void> {
+    addImage(url: string, salonId: string): Observable<void> {
         return this.httpClient.post<void>(
-            `${this.salonsBackendUrl}/AddImage/${url}`,
-            {}
+            `${this.salonsBackendUrl}/AddImage/`,
+            { url, salonId },
         );
     }
 
     removeImage(imageId: string): Observable<void> {
         return this.httpClient.delete<void>(
-            `${this.salonsBackendUrl}/RemoveImage/${imageId}`
+            `${this.salonsBackendUrl}/RemoveImage/${imageId}`,
         );
     }
 }

@@ -1,7 +1,7 @@
 import { SidenavItemData } from '../models/sidenav-item-data.model';
 
 export const sidenavItems: SidenavItemData[] = [
-    { title: 'Profile', icon: 'account_circle', path: '/main/users' },
+    { title: 'Profile', icon: 'account_circle', path: '/main/users/profile' },
     {
         title: 'Search salons',
         icon: 'search',

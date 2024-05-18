@@ -2,6 +2,7 @@
     mat-fab
     routerLink="{{ sidenavItemData.path }}"
     routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
     [matTooltip]="sidenavItemData.title"
     matTooltipClass="tooltip"
     matTooltipPosition="right"
