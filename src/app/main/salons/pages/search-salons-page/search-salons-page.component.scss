@@ -1,10 +1,27 @@
+@use '../../../../../assets/styles/variables' as *;
+
 section {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    height: 100%;
 
-    app-salons-search-bar {
-        width: 100%;
+    .container {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+
+        app-salons-map {
+            display: flex;
+            flex: 1;
+        }
+    }
+
+    .search-side {
+        width: 20%;
+
+        .title {
+            margin: 2rem;
+            font-size: 1.75rem;
+            color: $black;
+        }
     }
 }

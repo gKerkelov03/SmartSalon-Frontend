@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { mapId } from '../../../../core/constants/googleMaps';
 import { Salon } from '../../models/salon.model';
 
@@ -20,6 +21,8 @@ export class SalonsMapComponent {
         fullscreenControl: false,
     };
 
+    myControl = new FormControl('');
+    options: string[] = ['One', 'Two', 'Three'];
     openMoreInfoAboutSalonDialog(event: google.maps.MapMouseEvent) {
         var salon = this.salons.find(
             (salon) =>

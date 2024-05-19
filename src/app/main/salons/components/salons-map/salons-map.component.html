@@ -1,15 +1,31 @@
-<google-map
-    height="400px"
-    width="750px"
-    [center]="center"
-    [zoom]="zoom"
-    [mapId]="mapId"
-    [options]="mapOptions"
->
-    @for (salon of salons; track salon.id) {
-        <map-advanced-marker
-            (mapClick)="openMoreInfoAboutSalonDialog($event)"
-            [position]="getCoordinates(salon)"
+<section>
+    <mat-form-field>
+        <mat-icon matPrefix class="icon">search</mat-icon>
+        <input
+            type="text"
+            placeholder="Type name or address"
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"
         />
-    }
-</google-map>
+
+        <mat-autocomplete #auto="matAutocomplete">
+            @for (option of options; track option) {
+                <mat-option [value]="option">{{ option }}</mat-option>
+            }
+        </mat-autocomplete>
+    </mat-form-field>
+    <google-map
+        [center]="center"
+        [zoom]="zoom"
+        [mapId]="mapId"
+        [options]="mapOptions"
+    >
+        @for (salon of salons; track salon.id) {
+            <map-advanced-marker
+                (mapClick)="openMoreInfoAboutSalonDialog($event)"
+                [position]="getCoordinates(salon)"
+            />
+        }
+    </google-map>
+</section>

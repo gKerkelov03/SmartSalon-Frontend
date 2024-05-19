@@ -1,8 +1,9 @@
 <section>
-    <h2 class="page-title">Search barbershop</h2>
-
+    <div class="search-side">
+        <h3 class="title">Nearest salons</h3>
+    </div>
     <div class="container">
-        <app-salons-search-bar></app-salons-search-bar>
+        <app-salons-search-bar />
         <app-salons-map
             [center]="userLocation"
             [zoom]="mapZoomLevel"
