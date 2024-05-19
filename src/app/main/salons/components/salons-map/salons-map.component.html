@@ -4,10 +4,12 @@
     [center]="center"
     [zoom]="zoom"
     [mapId]="mapId"
-    (mapClick)="moveMap($event)"
     [options]="mapOptions"
 >
     @for (salon of salons; track salon.id) {
-    <map-advanced-marker [position]="salon.coordinates" />
+        <map-advanced-marker
+            (mapClick)="openMoreInfoAboutSalonDialog($event)"
+            [position]="getCoordinates(salon)"
+        />
     }
 </google-map>

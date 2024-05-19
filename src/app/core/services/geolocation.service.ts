@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -6,16 +7,22 @@ import { Injectable } from '@angular/core';
 export class GeolocationService {
     private geocoder = new google.maps.Geocoder();
 
-    getCoordinates(address: string) {
-        return this.geocoder.geocode({
-            address,
-        });
+    getCoordinates(address: string): Observable<google.maps.GeocoderResponse> {
+        return from(
+            this.geocoder.geocode({
+                address,
+            }),
+        );
     }
 
-    geocode(coordinates: google.maps.LatLngLiteral) {
-        return this.geocoder.geocode({
-            location: coordinates,
-        });
+    geocode(
+        coordinates: google.maps.LatLngLiteral,
+    ): Observable<google.maps.GeocoderResponse> {
+        return from(
+            this.geocoder.geocode({
+                location: coordinates,
+            }),
+        );
     }
 
     getCurrentPosition(callback: (position: GeolocationPosition) => void) {

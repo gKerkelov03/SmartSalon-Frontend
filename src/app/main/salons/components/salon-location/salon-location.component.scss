@@ -1,0 +1,10 @@
+section {
+    .map-container {
+        width: 100%;
+        .map {
+            flex-grow: 1;
+            // display: block;
+            // width: 100%;
+        }
+    }
+}

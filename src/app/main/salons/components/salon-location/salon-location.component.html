@@ -1,11 +1,22 @@
-<google-map
-    height="400px"
-    width="750px"
-    [center]="userLocation"
-    [zoom]="zoom"
-    [mapId]="mapId"
-    (mapClick)="moveMap($event)"
-    [options]="mapOptions"
->
-    <map-advanced-marker [position]="userLocation" />
-</google-map>
+<section>
+    <div class="map-container">
+        <google-map
+            class="map"
+            [center]="userLocation"
+            [zoom]="zoom"
+            [mapId]="mapId"
+            [options]="mapOptions"
+        >
+            <map-advanced-marker [position]="userLocation" />
+        </google-map>
+    </div>
+    <p class="google-maps-location">{{ googleMapsLocation }}</p>
+
+    <a
+        href="https://www.google.com/maps?q={{ lat }},{{ lngt }}"
+        mat-raised-button
+        color="primary"
+    >
+        Get directions
+    </a>
+</section>

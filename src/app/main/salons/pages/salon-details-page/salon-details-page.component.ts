@@ -9,8 +9,10 @@ import { getErrorMessages } from '../../../../core/utils/get-error-message';
 import { Worker } from '../../../users/models/worker.model';
 import { WorkersService } from '../../../users/services/workers.service';
 import { Salon } from '../../models/salon.model';
+import { Section } from '../../models/section.model';
 import { WorkingTime } from '../../models/working-time.model';
 import { SalonsService } from '../../services/salons.service';
+import { SectionsService } from '../../services/sections.service';
 import { WorkingTimesService } from '../../services/working-times.service';
 
 @Component({
@@ -22,10 +24,12 @@ export class SalonDetailsPageComponent implements OnInit {
     salon!: Salon | null;
     workingTime!: WorkingTime;
     workers!: Worker[];
+    sections!: Section[];
 
     constructor(
         private salonsService: SalonsService,
         private workersService: WorkersService,
+        private sectionsService: SectionsService,
         private workingTimesService: WorkingTimesService,
         private route: ActivatedRoute,
         private snackBar: MatSnackBar,
@@ -43,6 +47,7 @@ export class SalonDetailsPageComponent implements OnInit {
                 this.salon = salon;
                 this.fetchWorkingTime();
                 this.fetchWorkers();
+                this.fetchSections();
                 console.log(salon);
             },
             error: (httpError: HttpErrorResponse) => {
@@ -83,7 +88,6 @@ export class SalonDetailsPageComponent implements OnInit {
         const observer = {
             next: (workers: Worker[]) => {
                 this.workers = workers ?? [];
-                console.log(workers);
             },
             error: (httpError: HttpErrorResponse) => {
                 this.snackBar.open(getErrorMessages(httpError), 'Close');
@@ -91,5 +95,18 @@ export class SalonDetailsPageComponent implements OnInit {
         };
 
         this.workersService.getMany(this.salon!.workers).subscribe(observer);
+    }
+
+    fetchSections(): void {
+        const observer = {
+            next: (sections: Section[]) => {
+                this.sections = sections ?? [];
+            },
+            error: (httpError: HttpErrorResponse) => {
+                this.snackBar.open(getErrorMessages(httpError), 'Close');
+            },
+        };
+
+        this.sectionsService.getMany(this.salon!.sections).subscribe(observer);
     }
 }

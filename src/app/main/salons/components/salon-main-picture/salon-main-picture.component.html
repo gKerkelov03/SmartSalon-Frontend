@@ -8,8 +8,9 @@
             alt="Profile picture"
             class="profile-picture"
         ></div>
-        <button class="upload-button" mat-raised-button color="primary">
-            Upload
-        </button>
+
+        @if (currentUser.isAdmin || currentUser.isOwner) {
+            <app-upload-widget class="upload-button"></app-upload-widget>
+        }
     </div>
 </section>

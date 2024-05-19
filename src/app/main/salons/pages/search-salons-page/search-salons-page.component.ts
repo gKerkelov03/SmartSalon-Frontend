@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject, switchMap } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { mapZoomLevelConstants } from '../../../../core/constants/googleMaps';
 import { GeolocationService } from '../../../../core/services/geolocation.service';
-import { SalonWithCoordinates } from '../../models/salon-with-coordinates.model';
 import { Salon } from '../../models/salon.model';
 import { SalonsService } from '../../services/salons.service';
 
@@ -14,13 +13,13 @@ import { SalonsService } from '../../services/salons.service';
 export class SearchSalonsPageComponent implements OnInit {
     cityName: string = 'Sofia';
     countryName: string = 'Bulgaria';
-    mapZoomLevel: number = mapZoomLevelConstants.country;
+    mapZoomLevel: number = mapZoomLevelConstants.city;
     userLocation: google.maps.LatLngLiteral = {
         lat: 42.698334,
         lng: 23.319941,
     };
 
-    salonsWithCoordinates: SalonWithCoordinates[] = [];
+    salons: Salon[] = [];
 
     constructor(
         private salonsService: SalonsService,
@@ -28,24 +27,9 @@ export class SearchSalonsPageComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.getUserLocationInfo()
-            .pipe(switchMap(() => this.salonsService.getAll()))
-            .subscribe(
-                async (salons: Salon[]) =>
-                    await Promise.all(
-                        salons.map(async (salon) => {
-                            const geocoderResponse =
-                                await this.geolocation.getCoordinates(
-                                    salon.googleMapsLocation,
-                                );
-                            console.log(geocoderResponse.results);
-                            return {
-                                ...salon,
-                                coordinates: geocoderResponse,
-                            };
-                        }),
-                    ),
-            );
+        this.salonsService
+            .getAll('bulgaria')
+            .subscribe((salons: Salon[]) => (this.salons = salons));
     }
 
     private getUserLocationInfo(): Observable<void> {
@@ -57,16 +41,19 @@ export class SearchSalonsPageComponent implements OnInit {
                 lng: coords.longitude,
             };
 
-            const result: google.maps.GeocoderResult = (
-                await this.geolocation.geocode(this.userLocation)
-            ).results[0];
+            this.geolocation
+                .geocode(this.userLocation)
+                .subscribe((response: google.maps.GeocoderResponse) => {
+                    const result: google.maps.GeocoderResult =
+                        response.results[0];
 
-            this.countryName = result.address_components.find((result) =>
-                result.types.includes('country'),
-            )!.long_name;
+                    this.countryName = result.address_components.find(
+                        (result) => result.types.includes('country'),
+                    )!.long_name;
 
-            this.mapZoomLevel = mapZoomLevelConstants.city;
-            subject.next();
+                    this.mapZoomLevel = mapZoomLevelConstants.city;
+                    subject.next();
+                });
         });
 
         return subject;

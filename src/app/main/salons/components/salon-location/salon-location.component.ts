@@ -12,8 +12,15 @@ import { GeolocationService } from '../../../../core/services/geolocation.servic
 })
 export class SalonLocationComponent implements OnInit {
     @Input()
-    location!: string;
-    userLocation!: google.maps.LatLngLiteral;
+    googleMapsLocation!: string;
+    @Input()
+    lat!: number;
+    @Input()
+    lngt!: number;
+    userLocation: google.maps.LatLngLiteral = {
+        lat: 42.649439,
+        lng: 23.344503,
+    };
     zoom: number = mapZoomLevelConstants.city;
     mapId = mapId;
     mapOptions: google.maps.MapOptions = {
@@ -22,9 +29,7 @@ export class SalonLocationComponent implements OnInit {
 
     constructor(private geolocation: GeolocationService) {}
 
-    ngOnInit(): void {
-        this.getUserLocationInfo();
-    }
+    ngOnInit(): void {}
 
     private getUserLocationInfo(): void {
         this.geolocation.getCurrentPosition(async ({ coords }) => {
@@ -33,9 +38,5 @@ export class SalonLocationComponent implements OnInit {
                 lng: coords.longitude,
             };
         });
-    }
-
-    moveMap(event: google.maps.MapMouseEvent) {
-        this.userLocation = event.latLng!.toJSON();
     }
 }

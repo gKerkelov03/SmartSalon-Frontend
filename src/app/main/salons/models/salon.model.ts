@@ -7,6 +7,8 @@ export interface Salon {
     name: string;
     description: string;
     googleMapsLocation: string;
+    latitude: string;
+    longitude: string;
     country: string;
     profilePictureUrl: string | null;
     workingTimeId: string;

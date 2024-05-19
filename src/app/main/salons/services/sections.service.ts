@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Section } from '../models/section.model';
 
@@ -20,10 +20,20 @@ export class SectionsService {
         return this.httpClient.get<Section>(this.sectionsBackendUrl + id);
     }
 
+    getMany(ids: string[]): Observable<Section[]> {
+        const observables: Observable<Section>[] = [];
+
+        for (const id of ids) {
+            observables.push(this.getById(id));
+        }
+
+        return forkJoin(observables);
+    }
+
     update(id: string, newSection: Partial<Section>): Observable<void> {
         return this.httpClient.patch<void>(
             this.sectionsBackendUrl + id,
-            newSection
+            newSection,
         );
     }
 

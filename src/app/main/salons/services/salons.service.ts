@@ -20,8 +20,10 @@ export class SalonsService {
         return this.httpClient.get<Salon>(this.salonsBackendUrl + id);
     }
 
-    getAll(): Observable<Salon[]> {
-        return this.httpClient.get<Salon[]>(this.salonsBackendUrl);
+    getAll(country: string): Observable<Salon[]> {
+        return this.httpClient.get<Salon[]>(this.salonsBackendUrl, {
+            params: { country },
+        });
     }
 
     delete(id: string): Observable<void> {
@@ -31,14 +33,14 @@ export class SalonsService {
     update(id: string, newSalon: Partial<Salon>): Observable<void> {
         return this.httpClient.patch<void>(
             this.salonsBackendUrl + id,
-            newSalon
+            newSalon,
         );
     }
 
     sendOwnerInvitation(
         id: string,
         password: string,
-        newPassword: string
+        newPassword: string,
     ): Observable<void> {
         return this.httpClient.patch<void>(this.salonsBackendUrl + id, {
             password,
@@ -49,7 +51,7 @@ export class SalonsService {
     sendWorkerInvitation(
         id: string,
         password: string,
-        newEmail: string
+        newEmail: string,
     ): Observable<void> {
         return this.httpClient.post<void>(this.salonsBackendUrl + id, {
             password,

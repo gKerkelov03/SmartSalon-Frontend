@@ -3,7 +3,11 @@
 
     <div class="container">
         <app-salons-search-bar></app-salons-search-bar>
-        <app-salons-map [center]="userLocation" [zoom]="mapZoomLevel">
+        <app-salons-map
+            [center]="userLocation"
+            [zoom]="mapZoomLevel"
+            [salons]="salons"
+        >
         </app-salons-map>
     </div>
 </section>

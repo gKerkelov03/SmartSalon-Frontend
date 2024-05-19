@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { mapId } from '../../../../core/constants/googleMaps';
-import { SalonWithCoordinates } from '../../models/salon-with-coordinates.model';
+import { Salon } from '../../models/salon.model';
 
 @Component({
     selector: 'app-salons-map',
@@ -13,13 +13,27 @@ export class SalonsMapComponent {
     @Input()
     zoom!: number;
     @Input()
-    salons!: SalonWithCoordinates[];
+    salons!: Salon[];
     mapId = mapId;
     mapOptions: google.maps.MapOptions = {
         mapTypeControl: false,
+        fullscreenControl: false,
     };
 
-    moveMap(event: google.maps.MapMouseEvent) {
-        this.center = event.latLng!.toJSON();
+    openMoreInfoAboutSalonDialog(event: google.maps.MapMouseEvent) {
+        var salon = this.salons.find(
+            (salon) =>
+                parseFloat(salon.latitude) === event.latLng?.lat() &&
+                parseFloat(salon.longitude) === event.latLng?.lng(),
+        );
+
+        console.log(salon?.name);
+    }
+
+    getCoordinates(salon: Salon): google.maps.LatLngLiteral {
+        return {
+            lat: parseFloat(salon.latitude),
+            lng: parseFloat(salon.longitude),
+        };
     }
 }
