@@ -67,3 +67,14 @@ html {
         padding: 0.6rem 0.8rem !important;
     }
 }
+
+.round-without-padding {
+    mat-dialog-container {
+        div {
+            div {
+                padding: 0px !important;
+                border-radius: 30px !important;
+            }
+        }
+    }
+}

@@ -1,0 +1,40 @@
+<section>
+    <div mat-dialog-title class="header">
+        <img
+            [src]="salon.profilePictureUrl"
+            alt="salon-image"
+            class="main-image"
+        />
+
+        <h3 class="title">{{ salon.name }}</h3>
+
+        <button
+            type="button"
+            mat-dialog-close
+            mat-icon-button
+            class="close-button"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content class="content">
+        <app-salon-images [images]="salon.images" class="images" />
+
+        <app-salon-specialties
+            [specialties]="salon.specialties"
+            class="specialties"
+        />
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="actions" align="center">
+        <button
+            mat-raised-button
+            color="primary"
+            mat-dialog-close
+            (click)="openSalonDetailsPage()"
+        >
+            See more
+        </button>
+    </mat-dialog-actions>
+</section>

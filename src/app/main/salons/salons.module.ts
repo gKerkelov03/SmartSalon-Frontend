@@ -16,24 +16,23 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedModule } from '../../shared/shared.module';
+import { DailyWorkingTimeComponent } from './components/daily-working-time/daily-working-time.component';
 import { SalonCurrenciesComponent } from './components/salon-currencies/salon-currencies.component';
 import { SalonDescriptionComponent } from './components/salon-description/salon-description.component';
 import { SalonHeaderComponent } from './components/salon-header/salon-header.component';
 import { SalonImagesComponent } from './components/salon-images/salon-images.component';
-import { SalonInfoFormComponent } from './components/salon-info-form/salon-info-form.component';
+import { SalonInfoDialogComponent } from './components/salon-info-form/salon-info-dialog.component';
 import { SalonLocationComponent } from './components/salon-location/salon-location.component';
+import { SalonMainPictureComponent } from './components/salon-main-picture/salon-main-picture.component';
 import { SalonSectionsComponent } from './components/salon-sections/salon-sections.component';
 import { SalonSpecialtiesComponent } from './components/salon-specialties/salon-specialties.component';
+import { SalonTeamComponent } from './components/salon-team/salon-team.component';
 import { SalonWorkingTimeComponent } from './components/salon-working-time/salon-working-time.component';
 import { SalonsMapComponent } from './components/salons-map/salons-map.component';
-import { SalonsSearchBarComponent } from './components/salons-search-bar/salons-search-bar.component';
 import { MySalonsPageComponent } from './pages/my-salons-page/my-salons-page.component';
 import { SalonDetailsPageComponent } from './pages/salon-details-page/salon-details-page.component';
 import { SearchSalonsPageComponent } from './pages/search-salons-page/search-salons-page.component';
 import { SalonsRoutingModule } from './salons-routing.module';
-import { DailyWorkingTimeComponent } from './components/daily-working-time/daily-working-time.component';
-import { SalonTeamComponent } from './components/salon-team/salon-team.component';
-import { SalonMainPictureComponent } from './components/salon-main-picture/salon-main-picture.component';
 
 @NgModule({
     declarations: [
@@ -42,8 +41,7 @@ import { SalonMainPictureComponent } from './components/salon-main-picture/salon
         MySalonsPageComponent,
         SalonsMapComponent,
         SalonHeaderComponent,
-        SalonInfoFormComponent,
-        SalonsSearchBarComponent,
+        SalonInfoDialogComponent,
         SalonSpecialtiesComponent,
         SalonCurrenciesComponent,
         SalonImagesComponent,

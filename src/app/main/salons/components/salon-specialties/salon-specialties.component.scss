@@ -1,10 +1,7 @@
 @use '../../../../../assets/styles/variables' as *;
 
 section {
-    border-radius: 30px;
-    background-color: $white;
     padding: 3rem;
-    box-shadow: $form-shadow;
 
     .title {
         margin-bottom: 2rem;

@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { mapId } from '../../../../core/constants/googleMaps';
 import { Salon } from '../../models/salon.model';
+import { SalonInfoDialogComponent } from '../salon-info-form/salon-info-dialog.component';
 
 @Component({
     selector: 'app-salons-map',
@@ -21,6 +23,8 @@ export class SalonsMapComponent {
         fullscreenControl: false,
     };
 
+    constructor(private dialog: MatDialog) {}
+
     myControl = new FormControl('');
     options: string[] = ['One', 'Two', 'Three'];
     openMoreInfoAboutSalonDialog(event: google.maps.MapMouseEvent) {
@@ -30,7 +34,13 @@ export class SalonsMapComponent {
                 parseFloat(salon.longitude) === event.latLng?.lng(),
         );
 
-        console.log(salon?.name);
+        this.dialog.open(SalonInfoDialogComponent, {
+            width: '50vw',
+            autoFocus: false,
+            panelClass: 'round-without-padding',
+            data: salon,
+            enterAnimationDuration: '300ms',
+        });
     }
 
     getCoordinates(salon: Salon): google.maps.LatLngLiteral {
