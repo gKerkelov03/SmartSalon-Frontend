@@ -1,5 +1,5 @@
-<section>
-    <div class="map-container">
+@if (lat && lng) {
+    <section>
         <google-map
             class="map"
             [center]="userLocation"
@@ -9,14 +9,21 @@
         >
             <map-advanced-marker [position]="userLocation" />
         </google-map>
-    </div>
-    <p class="google-maps-location">{{ googleMapsLocation }}</p>
 
-    <a
-        href="https://www.google.com/maps?q={{ lat }},{{ lngt }}"
-        mat-raised-button
-        color="primary"
-    >
-        Get directions
-    </a>
-</section>
+        <div class="directions-container">
+            <p class="google-maps-location">{{ googleMapsLocation }}</p>
+
+            <a
+                target="_blank"
+                matTooltip="Open in google maps"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip"
+                href="https://www.google.com/maps?q={{ lat }},{{ lng }}"
+                color="primary"
+                class="directions-link"
+            >
+                See
+            </a>
+        </div>
+    </section>
+}

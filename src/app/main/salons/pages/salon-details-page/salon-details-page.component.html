@@ -21,6 +21,8 @@
     <app-salon-location
         class="location"
         [googleMapsLocation]="salon.googleMapsLocation"
+        [lat]="salon.latitude"
+        [lng]="salon.longitude"
     />
 
     <app-salon-images class="images" [images]="salon.images" />

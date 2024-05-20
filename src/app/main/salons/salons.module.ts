@@ -15,6 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from '../../shared/shared.module';
 import { DailyWorkingTimeComponent } from './components/daily-working-time/daily-working-time.component';
 import { SalonCurrenciesComponent } from './components/salon-currencies/salon-currencies.component';
@@ -73,6 +74,7 @@ import { SalonsRoutingModule } from './salons-routing.module';
         MatNativeDateModule,
         MatRadioModule,
         MatSelectModule,
+        MatTooltipModule,
     ],
 })
 export class SalonsModule {}

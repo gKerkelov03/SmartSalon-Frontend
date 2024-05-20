@@ -52,7 +52,7 @@ export class SalonDetailsPageComponent implements OnInit {
             },
             error: (httpError: HttpErrorResponse) => {
                 this.snackBar
-                    .open(getErrorMessages(httpError), 'Close')
+                    .open(getErrorMessages(httpError), 'OK')
                     .afterDismissed()
                     .subscribe(() => this.router.navigate(['main/salons']));
             },

@@ -23,7 +23,7 @@
     >
         @for (salon of salons; track salon.id) {
             <map-advanced-marker
-                (mapClick)="openMoreInfoAboutSalonDialog($event)"
+                (mapClick)="showMoreInfoAboutSalon($event)"
                 [position]="getCoordinates(salon)"
             />
         }

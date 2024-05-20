@@ -14,9 +14,9 @@ export class SalonLocationComponent implements OnInit {
     @Input()
     googleMapsLocation!: string;
     @Input()
-    lat!: number;
+    lat!: string;
     @Input()
-    lngt!: number;
+    lng!: string;
     userLocation: google.maps.LatLngLiteral = {
         lat: 42.649439,
         lng: 23.344503,
@@ -29,7 +29,10 @@ export class SalonLocationComponent implements OnInit {
 
     constructor(private geolocation: GeolocationService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        console.log(this.lat);
+        console.log(this.lng);
+    }
 
     private getUserLocationInfo(): void {
         this.geolocation.getCurrentPosition(async ({ coords }) => {

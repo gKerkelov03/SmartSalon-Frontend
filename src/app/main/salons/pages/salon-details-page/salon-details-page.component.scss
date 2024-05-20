@@ -5,12 +5,19 @@
 .description,
 .team,
 .images,
-.location,
 .main-picture {
     margin: auto;
     margin-top: 4rem;
     display: block;
     width: 50%;
+}
+
+.location {
+    margin: auto;
+    margin-top: 4rem;
+    display: block;
+    width: 50%;
+    height: 500px;
 }
 
 .spinner-container {

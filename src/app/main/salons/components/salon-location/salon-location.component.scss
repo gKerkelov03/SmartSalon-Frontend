@@ -1,10 +1,39 @@
+@use '../../../../../assets/styles/variables' as *;
+
 section {
-    .map-container {
+    height: 100%;
+
+    //TODO: this code is repeated in the salons-map as well think of reusing the code or the whole map somehow
+    google-map {
+        display: block;
         width: 100%;
-        .map {
-            flex-grow: 1;
-            // display: block;
-            // width: 100%;
+        height: 100%;
+
+        ::ng-deep .map-container {
+            border-radius: 30px;
+            width: 100% !important;
+            height: 100% !important;
+            box-shadow:
+                rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+                rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        }
+    }
+
+    .directions-container {
+        display: flex;
+        margin-top: 1.5rem;
+        align-items: baseline;
+        justify-content: center;
+        gap: 1rem;
+
+        .google-maps-location {
+            color: $black;
+            font-size: 1.2rem;
+        }
+
+        .directions-link {
+            color: $accent;
+            font-weight: bold;
         }
     }
 }
