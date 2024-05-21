@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
     AbstractControl,
@@ -9,7 +8,8 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { switchMap, take } from 'rxjs';
+import { switchMap } from 'rxjs';
+import { jwtTokenKey } from '../../../core/constants/local-storage-keys';
 import { passwordRegex } from '../../../core/constants/regexes';
 import { JwtData } from '../../../core/models/jwt-data.model';
 import { LoginResponse } from '../../../core/models/login-response.model';
@@ -67,17 +67,17 @@ export class LoginFormComponent implements OnInit {
                 this.currentUser.setCurrentUser(user);
                 this.router.navigate(['main']);
             },
-            error: (httpError: HttpErrorResponse) => {
+            error: () => {
                 this.snackBar.open('Invalid credentials', 'Close');
             },
         };
 
         this.authService
             .login(this.loginForm.value)
-            .pipe(take(1))
             .pipe(
                 switchMap((response: LoginResponse) => {
                     var decodedJwt: JwtData = parseJwt(response.jwtToken);
+                    this.localStorage.setItem(jwtTokenKey, response.jwtToken);
                     return this.usersService.getById(decodedJwt.sub);
                 }),
             )

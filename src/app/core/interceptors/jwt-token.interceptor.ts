@@ -17,12 +17,12 @@ import { LocalStorageService } from '../services/local-storage.service';
 export class JwtTokenInterceptor implements HttpInterceptor {
     constructor(
         private localStorage: LocalStorageService,
-        private router: Router
+        private router: Router,
     ) {}
 
     intercept(
         request: HttpRequest<unknown>,
-        next: HttpHandler
+        next: HttpHandler,
     ): Observable<HttpEvent<unknown>> {
         const jwt = this.localStorage.getItem(jwtTokenKey);
 
@@ -43,10 +43,10 @@ export class JwtTokenInterceptor implements HttpInterceptor {
                         err.status === 401
                     ) {
                         this.localStorage.clearStorage();
-                        this.router.navigate(['/landing-page']);
+                        this.router.navigate(['public/landing-page']);
                     }
                 },
-            })
+            }),
         );
     }
 }

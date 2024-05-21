@@ -1,0 +1,21 @@
+<mat-card class="salon-card">
+    <mat-card-header class="header">
+        <mat-card-title>{{ salon.name }}</mat-card-title>
+        <mat-card-subtitle>
+            {{ salon.googleMapsLocation }}
+        </mat-card-subtitle>
+    </mat-card-header>
+
+    <img
+        class="image"
+        mat-card-image
+        [src]="salon.profilePictureUrl"
+        alt="Salon profile picture"
+    />
+
+    <mat-card-actions class="actions">
+        <button mat-raised-button color="primary" (click)="openSalon(salon.id)">
+            Salon details
+        </button>
+    </mat-card-actions>
+</mat-card>

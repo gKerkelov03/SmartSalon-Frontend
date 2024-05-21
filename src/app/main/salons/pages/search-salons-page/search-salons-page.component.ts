@@ -27,6 +27,10 @@ export class SearchSalonsPageComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.fetchSalons();
+    }
+
+    fetchSalons(): void {
         this.salonsService
             .getAll('bulgaria')
             .subscribe((salons: Salon[]) => (this.salons = salons));

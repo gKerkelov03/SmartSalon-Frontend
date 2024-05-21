@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -21,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { SharedModule } from '../../shared/shared.module';
 import { DailyWorkingTimeComponent } from './components/daily-working-time/daily-working-time.component';
+import { SalonCardComponent } from './components/salon-card/salon-card.component';
 import { SalonCurrenciesComponent } from './components/salon-currencies/salon-currencies.component';
 import { SalonDescriptionComponent } from './components/salon-description/salon-description.component';
 import { SalonHeaderComponent } from './components/salon-header/salon-header.component';
@@ -56,6 +58,7 @@ import { SalonsRoutingModule } from './salons-routing.module';
         DailyWorkingTimeComponent,
         SalonTeamComponent,
         SalonMainPictureComponent,
+        SalonCardComponent,
     ],
     imports: [
         CommonModule,
@@ -80,6 +83,7 @@ import { SalonsRoutingModule } from './salons-routing.module';
         MatRadioModule,
         MatSelectModule,
         MatTooltipModule,
+        MatCardModule,
         MatDividerModule,
     ],
 })

@@ -41,9 +41,9 @@ export class CurrentUserService {
 
     constructor(
         private usersService: UsersService,
-        localStorage: LocalStorageService,
+        private localStorage: LocalStorageService,
     ) {
-        const jwtToken = localStorage.getItem(jwtTokenKey);
+        const jwtToken = this.localStorage.getItem(jwtTokenKey);
 
         if (jwtToken === null) {
             CurrentUserService.initialized = true;

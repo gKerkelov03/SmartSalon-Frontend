@@ -1,0 +1,17 @@
+@use '../../../../../assets/styles/variables' as *;
+
+.salon-card {
+    margin: auto;
+    margin-bottom: 3rem;
+    padding: 1rem;
+
+    .header {
+        margin-bottom: 2rem;
+    }
+
+    .actions {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+    }
+}

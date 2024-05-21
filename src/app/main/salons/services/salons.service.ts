@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Salon } from '../models/salon.model';
 
@@ -20,6 +20,16 @@ export class SalonsService {
         return this.httpClient.get<Salon>(this.salonsBackendUrl + id);
     }
 
+    getMany(ids: string[]): Observable<Salon[]> {
+        const observables: Observable<Salon>[] = [];
+
+        for (const id of ids) {
+            observables.push(this.getById(id));
+        }
+
+        return forkJoin(observables);
+    }
+
     getAll(country: string): Observable<Salon[]> {
         return this.httpClient.get<Salon[]>(this.salonsBackendUrl, {
             params: { country },
@@ -37,7 +47,7 @@ export class SalonsService {
         );
     }
 
-    sendOwnerInvitation(
+    sendsalonInvitation(
         id: string,
         password: string,
         newPassword: string,
