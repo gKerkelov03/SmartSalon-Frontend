@@ -9,6 +9,8 @@ import { WorkingTime } from '../../models/working-time.model';
 })
 export class SalonWorkingTimeComponent {
     @Input()
+    salonId!: string;
+    @Input()
     workingTime!: WorkingTime;
     today: DayOfWeek = this.getCurrentDay();
     DayOfWeek = DayOfWeek;

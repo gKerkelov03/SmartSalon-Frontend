@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { CloudinaryUploadResult } from '../../models/cloudinary-upload-result.model';
 
-const cloudName = environment.cloudinarySettings.cloudName,
-    uploadPreset = environment.cloudinarySettings.uploadPreset;
+const cloudName = environment.cloudinary.cloudName,
+    uploadPreset = environment.cloudinary.uploadPreset;
 
 @Component({
     selector: 'app-upload-widget',

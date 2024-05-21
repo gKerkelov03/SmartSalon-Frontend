@@ -8,14 +8,17 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { SharedModule } from '../../shared/shared.module';
 import { DailyWorkingTimeComponent } from './components/daily-working-time/daily-working-time.component';
 import { SalonCurrenciesComponent } from './components/salon-currencies/salon-currencies.component';
@@ -72,9 +75,12 @@ import { SalonsRoutingModule } from './salons-routing.module';
         MatSnackBarModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatSlideToggleModule,
+        NgxMatTimepickerModule,
         MatRadioModule,
         MatSelectModule,
         MatTooltipModule,
+        MatDividerModule,
     ],
 })
 export class SalonsModule {}

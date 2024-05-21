@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { mapId } from '../../../../core/constants/googleMaps';
+import { environment } from '../../../../../environments/environment';
 import { Salon } from '../../models/salon.model';
 import { SalonInfoDialogComponent } from '../salon-info-form/salon-info-dialog.component';
 
@@ -18,7 +18,7 @@ export class SalonsMapComponent {
     zoom!: number;
     @Input()
     salons!: Salon[];
-    mapId = mapId;
+    mapId = environment.googleMaps.mapId;
     mapOptions: google.maps.MapOptions = {
         mapTypeControl: false,
         fullscreenControl: false,

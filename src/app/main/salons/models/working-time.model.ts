@@ -1,4 +1,5 @@
 export interface WorkingTime {
+    id: string;
     salonId: string;
 
     mondayIsWorking: boolean;

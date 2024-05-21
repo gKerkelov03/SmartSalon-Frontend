@@ -16,13 +16,17 @@ export class WorkingTimesService {
     updateWorkingTime(
         salonId: string,
         dayOfWeek: DayOfWeek,
-        from: string,
-        to: string,
+        isWorking: boolean,
+        openingTime: string,
+        closingTime: string,
     ) {
-        return this.httpClient.patch<void>(
-            `${this.workingTimesBackendUrl}/ChangeWorkingTime`,
-            { salonId, dayOfWeek, from, to },
-        );
+        return this.httpClient.patch<void>(`${this.workingTimesBackendUrl}`, {
+            salonId,
+            dayOfWeek,
+            openingTime,
+            closingTime,
+            isWorking,
+        });
     }
 
     getWorkingTimeById(id: string): Observable<WorkingTime> {

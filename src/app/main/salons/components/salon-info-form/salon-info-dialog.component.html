@@ -1,10 +1,12 @@
 <section>
     <div mat-dialog-title class="header">
-        <img
-            [src]="salon.profilePictureUrl"
-            alt="salon-image"
-            class="main-image"
-        />
+        @if (salon.profilePictureUrl) {
+            <img
+                [src]="salon.profilePictureUrl"
+                alt="salon-image"
+                class="main-image"
+            />
+        }
 
         <h3 class="title">{{ salon.name }}</h3>
 

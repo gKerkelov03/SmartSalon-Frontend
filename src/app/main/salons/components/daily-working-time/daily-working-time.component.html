@@ -1,30 +1,116 @@
-<div class="working-time">
-    <div class="circle-day-container">
+@if (!canEdit) {
+    <div class="customer-working-time">
+        <div class="circle-day-container">
+            <div
+                class="circle"
+                [ngClass]="{
+                    'red-background': !isWorking,
+                    'green-background': isWorking
+                }"
+            ></div>
+            <div
+                [ngClass]="{
+                    bold: today === day
+                }"
+            >
+                {{ day }}
+            </div>
+        </div>
+
         <div
-            class="circle"
             [ngClass]="{
-                'red-background': !isWorking,
-                'green-background': isWorking
-            }"
-        ></div>
-        <div
-            [ngClass]="{
-                bold: dayDisplaying === today
+                bold: day === today
             }"
         >
-            {{ dayDisplaying }}
+            @if (isWorking) {
+                {{ openingTime | onlyHourAndMinutes }} -
+                {{ closingTime | onlyHourAndMinutes }}
+            } @else {
+                Closed
+            }
         </div>
     </div>
-    <div
-        [ngClass]="{
-            bold: dayDisplaying === today
-        }"
-    >
+} @else {
+    <div class="editable-working-time">
+        <div class="name-and-is-working-container">
+            <span class="day">{{ day }}</span>
+
+            <mat-slide-toggle
+                color="primary"
+                [(ngModel)]="isWorking"
+                (change)="saveChanges()"
+                [checked]="isWorking"
+                class="is-working-toggle"
+                (toggleChange)="updateIsWorking()"
+            />
+        </div>
+
         @if (isWorking) {
-            {{ openingTime | onlyHourAndMinutes }} -
-            {{ closingTime | onlyHourAndMinutes }}
+            <div class="container">
+                <span>Opens</span>
+                <mat-form-field class="time-picker" appearance="outline">
+                    <input
+                        #openingTimeInput
+                        matInput
+                        [ngxMatTimepicker]="openingTimePicker"
+                        [placeholder]="openingTime | onlyHourAndMinutes"
+                        readonly
+                    />
+
+                    <button
+                        matSuffix
+                        mat-icon-button
+                        color="primary"
+                        (click)="openingTimePicker.open()"
+                    >
+                        <mat-icon (click)="openingTimePicker.open()">
+                            schedule
+                        </mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <span>Closes</span>
+                <mat-form-field class="time-picker" appearance="outline">
+                    <input
+                        #closingTimeInput
+                        matInput
+                        [ngxMatTimepicker]="closingTimePicker"
+                        [placeholder]="closingTime | onlyHourAndMinutes"
+                        readonly
+                    />
+
+                    <button
+                        matSuffix
+                        mat-icon-button
+                        color="primary"
+                        (click)="closingTimePicker.open()"
+                    >
+                        <mat-icon> schedule </mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
         } @else {
-            Closed
+            <div class="closed">Closed</div>
         }
+
+        <ngx-mat-timepicker
+            #openingTimePicker
+            [format]="24"
+            dottedMinutesInGap
+            enableKeyboardInput
+            (timeSet)="updateOpeningTime($event)"
+            timepickerClass="time-picker-dialog"
+        />
+
+        <ngx-mat-timepicker
+            #closingTimePicker
+            [format]="24"
+            dottedMinutesInGap
+            enableKeyboardInput
+            (timeSet)="updateClosingTime($event)"
+            timepickerClass="time-picker-dialog"
+        />
     </div>
-</div>
+
+    <mat-divider class="divider"></mat-divider>
+}

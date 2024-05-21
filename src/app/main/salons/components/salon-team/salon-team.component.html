@@ -4,7 +4,12 @@
     <div class="flex-container">
         @for (worker of team; track $index) {
             <div class="team-member">
-                <img [src]="worker.profilePictureUrl" alt="Team member image" />
+                <img
+                    [src]="worker.profilePictureUrl"
+                    alt="Team member image"
+                    class="image"
+                />
+                <span class="rating">3.33**</span>
                 <p class="nickname">{{ worker.nickname }}</p>
             </div>
         }

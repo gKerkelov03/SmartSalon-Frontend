@@ -17,7 +17,7 @@ export class AppComponent {
     includeGoogleMapsScripts(): void {
         const script = this.renderer.createElement('script');
 
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMaps.apiKey}`;
         script.defer = true;
 
         this.renderer.appendChild(document.head, script);

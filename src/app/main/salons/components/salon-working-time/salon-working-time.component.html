@@ -4,7 +4,8 @@
 
     <app-daily-working-time
         class="daily-working-time"
-        [dayDisplaying]="DayOfWeek.Monday"
+        [salonId]="salonId"
+        [day]="DayOfWeek.Monday"
         [today]="today"
         [isWorking]="workingTime.mondayIsWorking"
         [openingTime]="workingTime.mondayOpeningTime"
@@ -13,7 +14,8 @@
 
     <app-daily-working-time
         class="daily-working-time"
-        [dayDisplaying]="DayOfWeek.Tuesday"
+        [salonId]="salonId"
+        [day]="DayOfWeek.Tuesday"
         [today]="today"
         [isWorking]="workingTime.tuesdayIsWorking"
         [openingTime]="workingTime.tuesdayOpeningTime"
@@ -22,7 +24,8 @@
 
     <app-daily-working-time
         class="daily-working-time"
-        [dayDisplaying]="DayOfWeek.Wednesday"
+        [salonId]="salonId"
+        [day]="DayOfWeek.Wednesday"
         [today]="today"
         [isWorking]="workingTime.wednesdayIsWorking"
         [openingTime]="workingTime.wednesdayOpeningTime"
@@ -31,7 +34,8 @@
 
     <app-daily-working-time
         class="daily-working-time"
-        [dayDisplaying]="DayOfWeek.Thursday"
+        [salonId]="salonId"
+        [day]="DayOfWeek.Thursday"
         [today]="today"
         [isWorking]="workingTime.thursdayIsWorking"
         [openingTime]="workingTime.thursdayOpeningTime"
@@ -40,7 +44,8 @@
 
     <app-daily-working-time
         class="daily-working-time"
-        [dayDisplaying]="DayOfWeek.Friday"
+        [salonId]="salonId"
+        [day]="DayOfWeek.Friday"
         [today]="today"
         [isWorking]="workingTime.fridayIsWorking"
         [openingTime]="workingTime.fridayOpeningTime"
@@ -49,7 +54,8 @@
 
     <app-daily-working-time
         class="daily-working-time"
-        [dayDisplaying]="DayOfWeek.Saturday"
+        [salonId]="salonId"
+        [day]="DayOfWeek.Saturday"
         [today]="today"
         [isWorking]="workingTime.saturdayIsWorking"
         [openingTime]="workingTime.saturdayOpeningTime"
@@ -58,7 +64,8 @@
 
     <app-daily-working-time
         class="daily-working-time"
-        [dayDisplaying]="DayOfWeek.Sunday"
+        [salonId]="salonId"
+        [day]="DayOfWeek.Sunday"
         [today]="today"
         [isWorking]="workingTime.sundayIsWorking"
         [openingTime]="workingTime.sundayOpeningTime"

@@ -11,7 +11,11 @@
         class="main-picture"
     />
 
-    <app-salon-working-time class="working-time" [workingTime]="workingTime" />
+    <app-salon-working-time
+        class="working-time"
+        [workingTime]="workingTime"
+        [salonId]="salon.id"
+    />
 
     <app-salon-description
         class="description"

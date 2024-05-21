@@ -1,3 +1,5 @@
+@use '../../../../../assets/styles/variables' as *;
+
 .green-background {
     background-color: rgb(116, 231, 116);
 }
@@ -10,9 +12,10 @@
     font-weight: bold;
 }
 
-.working-time {
+.customer-working-time {
     display: flex;
     justify-content: space-between;
+    transition: padding 0.2s ease-in;
 
     .circle-day-container {
         display: flex;
@@ -26,12 +29,48 @@
         }
     }
 
-    .working-time {
-        font-size: 1.25rem;
-        margin-bottom: 0.5rem;
+    &:hover {
+        border-radius: 5px;
+        padding: 0.4rem;
+        background-color: $darker-white;
+        cursor: pointer;
+    }
+}
 
-        .time {
-            margin-left: 2rem;
+.editable-working-time {
+    display: flex;
+    align-items: baseline;
+
+    .name-and-is-working-container {
+        display: flex;
+        justify-content: space-between;
+        width: 20%;
+
+        .day {
+            margin-right: 1.2rem;
         }
     }
+
+    .container {
+        margin-left: auto;
+
+        .time-picker {
+            max-width: 8rem;
+            margin: 0 1.2rem;
+
+            ::ng-deep .mat-mdc-form-field-bottom-align {
+                display: none;
+            }
+        }
+    }
+
+    .closed {
+        color: red;
+        margin: 0 1.2rem;
+        margin-left: auto;
+    }
+}
+
+.divider {
+    margin-top: 0.5rem !important;
 }

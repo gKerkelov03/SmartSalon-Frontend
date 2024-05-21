@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-    mapId,
-    mapZoomLevelConstants,
-} from '../../../../core/constants/googleMaps';
+import { environment } from '../../../../../environments/environment';
+import { mapZoomLevelConstants } from '../../../../core/constants/googleMaps';
 import { GeolocationService } from '../../../../core/services/geolocation.service';
 
 @Component({
@@ -22,17 +20,14 @@ export class SalonLocationComponent implements OnInit {
         lng: 23.344503,
     };
     zoom: number = mapZoomLevelConstants.city;
-    mapId = mapId;
+    mapId = environment.googleMaps.mapId;
     mapOptions: google.maps.MapOptions = {
         mapTypeControl: false,
     };
 
     constructor(private geolocation: GeolocationService) {}
 
-    ngOnInit(): void {
-        console.log(this.lat);
-        console.log(this.lng);
-    }
+    ngOnInit(): void {}
 
     private getUserLocationInfo(): void {
         this.geolocation.getCurrentPosition(async ({ coords }) => {

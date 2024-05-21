@@ -72,6 +72,7 @@ export class SalonDetailsPageComponent implements OnInit {
         const observer = {
             next: (workingTime: WorkingTime) => {
                 this.workingTime = workingTime;
+                console.log(this.workingTime);
             },
             error: (httpError: HttpErrorResponse) => {
                 console.log();
