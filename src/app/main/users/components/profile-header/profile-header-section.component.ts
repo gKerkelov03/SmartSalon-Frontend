@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs';
 import { blankProfilePictureUrl } from '../../../../core/constants/urls';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
+import { isValidUrl } from '../../../../core/utils/is-valid-url';
 import { User } from '../../models/user.model';
 
 @Component({
@@ -14,6 +15,16 @@ export class ProfileHeaderComponent implements OnInit {
     constructor(private currentUser: CurrentUserService) {}
 
     ngOnInit(): void {
+        this.fetchUser();
+    }
+
+    setBlankProfilePictureIfNeeded(): void {
+        if (!isValidUrl(this.user.profilePictureUrl)) {
+            this.user.profilePictureUrl = blankProfilePictureUrl;
+        }
+    }
+
+    fetchUser(): void {
         this.currentUser.currentUserObservable
             .pipe(take(1))
             .subscribe((user: User | null) => {
@@ -22,6 +33,7 @@ export class ProfileHeaderComponent implements OnInit {
                 }
 
                 this.user = user!;
+                this.setBlankProfilePictureIfNeeded();
             });
     }
 }

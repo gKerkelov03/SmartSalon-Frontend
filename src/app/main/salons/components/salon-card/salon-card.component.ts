@@ -16,6 +16,10 @@ export class SalonCardComponent implements OnInit {
     constructor(private router: Router) {}
 
     ngOnInit(): void {
+        this.setBlankSalonProfilePictureIfNeeded();
+    }
+
+    setBlankSalonProfilePictureIfNeeded(): void {
         if (!isValidUrl(this.salon.profilePictureUrl)) {
             this.salon.profilePictureUrl = blankProfilePictureUrl;
         }

@@ -11,12 +11,15 @@ import { isValidUrl } from '../../../core/utils/is-valid-url';
 export class SidenavComponent implements OnInit {
     @Input()
     profilePictureUrl?: string;
+    sidenavItems = sidenavItems;
 
     ngOnInit(): void {
+        this.setBlankProfilePictureIfNeeded();
+    }
+
+    setBlankProfilePictureIfNeeded(): void {
         if (!isValidUrl(this.profilePictureUrl)) {
             this.profilePictureUrl = blankProfilePictureUrl;
         }
     }
-
-    sidenavItems = sidenavItems;
 }
