@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { blankProfilePictureUrl } from '../../../core/constants/urls';
+import { isValidUrl } from '../../../core/utils/is-valid-url';
 import { Salon } from '../models/salon.model';
 
 @Injectable({
@@ -40,14 +42,17 @@ export class SalonsService {
         return this.httpClient.delete<void>(this.salonsBackendUrl + id);
     }
 
-    update(id: string, newSalon: Partial<Salon>): Observable<void> {
-        return this.httpClient.patch<void>(
-            this.salonsBackendUrl + id,
-            newSalon,
-        );
+    update(id: string, newSalon: Salon): Observable<void> {
+        return this.httpClient.patch<void>(this.salonsBackendUrl + id, {
+            ...newSalon,
+            mainCurrencyId: newSalon.mainCurrency.id,
+            profilePictureUrl: isValidUrl(newSalon.profilePictureUrl)
+                ? newSalon.profilePictureUrl
+                : blankProfilePictureUrl,
+        });
     }
 
-    sendsalonInvitation(
+    sendOwnerInvitation(
         id: string,
         password: string,
         newPassword: string,

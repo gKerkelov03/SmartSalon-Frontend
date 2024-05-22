@@ -22,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { SharedModule } from '../../shared/shared.module';
 import { DailyWorkingTimeComponent } from './components/daily-working-time/daily-working-time.component';
+import { EditSalonDescriptionDialogComponent } from './components/edit-salon-description-dialog/edit-salon-description-dialog.component';
 import { SalonCardComponent } from './components/salon-card/salon-card.component';
 import { SalonCurrenciesComponent } from './components/salon-currencies/salon-currencies.component';
 import { SalonDescriptionComponent } from './components/salon-description/salon-description.component';
@@ -59,6 +60,7 @@ import { SalonsRoutingModule } from './salons-routing.module';
         SalonTeamComponent,
         SalonMainPictureComponent,
         SalonCardComponent,
+        EditSalonDescriptionDialogComponent,
     ],
     imports: [
         CommonModule,

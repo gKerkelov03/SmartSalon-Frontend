@@ -1,6 +1,23 @@
 <section>
-    <h3 class="title">Description</h3>
-    @if (description.length) {
-        <p>{{ description }}</p>
+    <div class="title-icon-container">
+        <h3 class="title">Description</h3>
+
+        @if (canEdit) {
+            <button mat-icon-button (click)="openEditDescriptionDialog()">
+                <mat-icon
+                    class="edit-icon"
+                    matTooltip="Edit"
+                    matTooltipPosition="left"
+                >
+                    edit_square
+                </mat-icon>
+            </button>
+        }
+    </div>
+
+    @if (salon.description.length) {
+        <p class="description">{{ salon.description }}</p>
+    } @else {
+        <p class="description">>No description yet</p>
     }
 </section>

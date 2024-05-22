@@ -3,9 +3,22 @@
 section {
     margin-left: 3rem;
 
-    .title {
-        margin-bottom: 2rem;
-        font-size: 1.75rem;
-        color: $black;
+    .title-icon-container {
+        display: flex;
+        gap: 1rem;
+        align-items: baseline;
+
+        .title {
+            margin-bottom: 2rem;
+            font-size: 1.75rem;
+            color: $black;
+        }
+
+        .edit-icon {
+            font-size: 1.75rem;
+            width: 1.75rem;
+            height: 1.75rem;
+            color: $primary;
+        }
     }
 }

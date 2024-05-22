@@ -1,0 +1,38 @@
+<section>
+    <div mat-dialog-title class="header">
+        <h3 class="title">Edit description</h3>
+
+        <button
+            type="button"
+            mat-dialog-close
+            mat-icon-button
+            class="close-button"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content class="content">
+        <mat-form-field class="description-field">
+            <mat-label>Description</mat-label>
+            <textarea
+                matInput
+                [formControl]="descriptionControl"
+                name="description"
+            ></textarea>
+        </mat-form-field>
+        <app-error-message [control]="descriptionControl"></app-error-message>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="actions" align="center">
+        <button
+            mat-raised-button
+            color="primary"
+            mat-dialog-close
+            (click)="saveClicked()"
+            class="save-button"
+        >
+            Save
+        </button>
+    </mat-dialog-actions>
+</section>

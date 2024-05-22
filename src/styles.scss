@@ -70,8 +70,8 @@ html {
 
 .round-without-padding {
     mat-dialog-container {
-        div {
-            div {
+        .mdc-dialog__container {
+            .mdc-dialog__surface {
                 padding: 0px !important;
                 border-radius: 30px !important;
             }

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Salon } from '../../models/salon.model';
@@ -8,7 +8,7 @@ import { Salon } from '../../models/salon.model';
     templateUrl: './salon-info-dialog.component.html',
     styleUrl: './salon-info-dialog.component.scss',
 })
-export class SalonInfoDialogComponent {
+export class SalonInfoDialogComponent implements OnInit {
     salon: Salon = this.dialogData;
 
     constructor(
@@ -16,6 +16,8 @@ export class SalonInfoDialogComponent {
         private dialogData: Salon,
         private router: Router,
     ) {}
+
+    ngOnInit(): void {}
 
     openSalonDetailsPage(): void {
         this.router.navigate([`main/salons/${this.salon.id}`]);
