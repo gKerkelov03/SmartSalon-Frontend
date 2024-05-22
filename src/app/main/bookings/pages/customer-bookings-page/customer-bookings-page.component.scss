@@ -2,7 +2,14 @@ section {
     .booking-card {
         max-width: 30%;
         margin: auto;
-        margin-bottom: 3rem;
+        margin-bottom: 5rem;
+        border-radius: 30px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        .salon-image {
+            margin: 2rem;
+            border-radius: 20px;
+        }
 
         .card-content {
             font-size: 1.25rem;
@@ -12,5 +19,9 @@ section {
     .actions {
         display: flex;
         justify-content: space-between;
+
+        button {
+            margin: 1rem;
+        }
     }
 }

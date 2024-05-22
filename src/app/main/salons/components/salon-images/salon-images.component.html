@@ -1,12 +1,14 @@
 @if (images.length) {
     <section>
         <div class="image-slider">
-            <button
-                mat-icon-button
-                (click)="jumpToImage(currentImageIndex - 1)"
-            >
-                <mat-icon>arrow_back_ios</mat-icon>
-            </button>
+            @if (images.length > 1) {
+                <button
+                    mat-icon-button
+                    (click)="jumpToImage(currentImageIndex - 1)"
+                >
+                    <mat-icon>arrow_back_ios</mat-icon>
+                </button>
+            }
 
             <div>
                 <div
@@ -18,23 +20,29 @@
                     class="image"
                 ></div>
 
-                <div class="indicators-container">
-                    @for (image of images; track image.id) {
-                        <div
-                            (click)="jumpToImage($index)"
-                            class="indicator"
-                            [ngClass]="{ active: $index === currentImageIndex }"
-                        ></div>
-                    }
-                </div>
+                @if (images.length > 1) {
+                    <div class="indicators-container">
+                        @for (image of images; track image.id) {
+                            <div
+                                (click)="jumpToImage($index)"
+                                class="indicator"
+                                [ngClass]="{
+                                    active: $index === currentImageIndex
+                                }"
+                            ></div>
+                        }
+                    </div>
+                }
             </div>
 
-            <button
-                mat-icon-button
-                (click)="jumpToImage(currentImageIndex + 1)"
-            >
-                <mat-icon> arrow_forward_ios </mat-icon>
-            </button>
+            @if (images.length > 1) {
+                <button
+                    mat-icon-button
+                    (click)="jumpToImage(currentImageIndex + 1)"
+                >
+                    <mat-icon> arrow_forward_ios </mat-icon>
+                </button>
+            }
         </div>
     </section>
 }

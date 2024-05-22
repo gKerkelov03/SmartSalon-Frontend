@@ -2,34 +2,30 @@
 
 <section>
     @for (booking of bookings; track booking.id) {
-    <mat-card class="booking-card">
-        <mat-card-header>
+        <mat-card class="booking-card">
+            <mat-card-header>
+                <mat-card-title>{{ booking.salonName }}</mat-card-title>
+                <mat-card-subtitle>
+                    {{ booking.date | date }} {{ booking.startTime }}
+                </mat-card-subtitle>
+            </mat-card-header>
+
             <img
-                mat-card-avatar
+                class="salon-image"
+                mat-card-image
                 src="{{ booking.salonProfilePictureUrl }}"
                 alt="Salon profile picture"
             />
-            <mat-card-title>{{ booking.salonName }}</mat-card-title>
-            <mat-card-subtitle>
-                {{ booking.date | date }} {{ booking.startTime }}
-            </mat-card-subtitle>
-        </mat-card-header>
 
-        <img
-            mat-card-image
-            src="{{ booking.salonProfilePictureUrl }}"
-            alt="Salon profile picture"
-        />
-
-        <mat-card-content class="card-content">
-            {{ booking.salonName }} is expecting you on
-            {{ booking.date | date }} for "{{ booking.serviceName }}" with
-            {{ booking.workerNickname }}
-        </mat-card-content>
-        <mat-card-actions class="actions">
-            <button mat-raised-button color="warn">Cancel</button>
-            <button mat-raised-button color="primary">Salon details</button>
-        </mat-card-actions>
-    </mat-card>
+            <mat-card-content class="card-content">
+                {{ booking.salonName }} is expecting you on
+                {{ booking.date | date }} for "{{ booking.serviceName }}" with
+                {{ booking.workerNickname }}
+            </mat-card-content>
+            <mat-card-actions class="actions">
+                <button mat-raised-button color="warn">Cancel</button>
+                <button mat-raised-button color="primary">Salon details</button>
+            </mat-card-actions>
+        </mat-card>
     }
 </section>
