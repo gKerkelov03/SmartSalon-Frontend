@@ -105,6 +105,7 @@ export class PersonalInformationFormComponent implements OnInit {
 
         this.usersService
             .update(this.currentUser.currentUser!.id, {
+                ...this.personalInformationForm.value,
                 profilePictureUrl: newProfilePictureUrl,
             })
             .pipe(take(1))

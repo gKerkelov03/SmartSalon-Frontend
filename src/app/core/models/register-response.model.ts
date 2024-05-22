@@ -1,3 +1,3 @@
-export interface RegisterResponse {
-    id: string;
+export interface CreatedResponse {
+    createdResourceId: string;
 }

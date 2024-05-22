@@ -2,13 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { CreatedResponse } from '../../../core/models/register-response.model';
 import { Worker } from '../../users/models/worker.model';
+import { CreateWorkerRequest } from '../models/create-worker-request.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class WorkersService {
     workersBackendUrl: string = `${environment.backendUrl}/Workers/`;
+
+    create(worker: CreateWorkerRequest): Observable<CreatedResponse> {
+        return this.httpClient.post<CreatedResponse>(
+            `${environment.backendUrl}`,
+            worker,
+        );
+    }
 
     constructor(private httpClient: HttpClient) {}
 

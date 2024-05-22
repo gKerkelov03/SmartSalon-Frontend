@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { CreatedResponse } from '../../../core/models/register-response.model';
 import { CreateOwnerRequest } from '../models/create-owner-request.model';
 import { Owner } from '../models/owner.model';
 
@@ -13,8 +14,11 @@ export class OwnersService {
 
     constructor(private httpClient: HttpClient) {}
 
-    create(newOwner: CreateOwnerRequest): Observable<void> {
-        return this.httpClient.post<void>(this.ownersBackendUrl, newOwner);
+    create(owner: CreateOwnerRequest): Observable<CreatedResponse> {
+        return this.httpClient.post<CreatedResponse>(
+            `${environment.backendUrl}`,
+            owner,
+        );
     }
 
     getById(id: string): Observable<Owner> {

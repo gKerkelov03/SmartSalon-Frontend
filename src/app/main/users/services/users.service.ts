@@ -16,7 +16,7 @@ export class UsersService {
         return this.httpClient.get<User>(this.usersBackendUrl + id);
     }
 
-    update(id: string, newUser: Partial<User>): Observable<void> {
+    update(id: string, newUser: User): Observable<void> {
         return this.httpClient.patch<void>(this.usersBackendUrl + id, newUser);
     }
 
@@ -29,7 +29,7 @@ export class UsersService {
     changePassword(
         userId: string,
         password: string,
-        newPassword: string
+        newPassword: string,
     ): Observable<void> {
         return this.httpClient.patch<void>(this.usersBackendUrl + userId, {
             password,
@@ -43,14 +43,14 @@ export class UsersService {
             {
                 token,
                 newPassword,
-            }
+            },
         );
     }
 
     sendEmailConfirmation(
         id: string,
         password: string,
-        newEmail: string
+        newEmail: string,
     ): Observable<void> {
         return this.httpClient.post<void>(this.usersBackendUrl + id, {
             password,

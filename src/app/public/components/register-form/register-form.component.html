@@ -1,120 +1,125 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
-  <app-forms-socials></app-forms-socials>
+    <app-forms-socials></app-forms-socials>
 
-  <div class="flex-container">
-    <div class="form-fields-container">
-      <mat-form-field>
-        <mat-label>First name</mat-label>
-        <input matInput formControlName="firstName" />
-      </mat-form-field>
-      <app-error-message [control]="firstNameControl"></app-error-message>
+    <div class="flex-container">
+        <div class="form-fields-container">
+            <mat-form-field>
+                <mat-label>First name</mat-label>
+                <input matInput formControlName="firstName" />
+            </mat-form-field>
+            <app-error-message [control]="firstNameControl"></app-error-message>
 
-      <mat-form-field>
-        <mat-label>Last name</mat-label>
-        <input matInput formControlName="lastName" />
-      </mat-form-field>
-      <app-error-message [control]="lastNameControl"> </app-error-message>
+            <mat-form-field>
+                <mat-label>Last name</mat-label>
+                <input matInput formControlName="lastName" />
+            </mat-form-field>
+            <app-error-message [control]="lastNameControl"> </app-error-message>
 
-      <mat-form-field>
-        <mat-label>Emai</mat-label>
-        <input matInput formControlName="email" />
-      </mat-form-field>
-      <app-error-message [control]="emailControl"> </app-error-message>
+            <mat-form-field>
+                <mat-label>Emai</mat-label>
+                <input matInput formControlName="email" />
+            </mat-form-field>
+            <app-error-message [control]="emailControl"> </app-error-message>
 
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input
-          matInput
-          [type]="isPasswordVisible ? 'text' : 'password'"
-          formControlName="password"
-          />
-        <mat-hint class="password-hint">
-          Six characters, uppercase letter and a number
-        </mat-hint>
+            <mat-form-field class="password-field">
+                <mat-label>Password</mat-label>
 
-        @if (passwordControl?.value.length && isPasswordVisible) {
-          <mat-icon
-            class="eye-icon"
-            matSuffix
-            (click)="togglePasswordVisibility()"
+                <input
+                    matInput
+                    [type]="isPasswordVisible ? 'text' : 'password'"
+                    formControlName="password"
+                />
+
+                <mat-hint class="password-hint">
+                    Six characters, uppercase letter and a number
+                </mat-hint>
+                @if (passwordControl?.value.length && isPasswordVisible) {
+                    <mat-icon
+                        class="eye-icon"
+                        matSuffix
+                        (click)="togglePasswordVisibility()"
+                    >
+                        visibility_off
+                    </mat-icon>
+                }
+                @if (passwordControl?.value.length && !isPasswordVisible) {
+                    <mat-icon
+                        class="eye-icon"
+                        matSuffix
+                        (click)="togglePasswordVisibility()"
+                    >
+                        visibility
+                    </mat-icon>
+                }
+            </mat-form-field>
+            <app-error-message
+                class="password-error-message"
+                [control]="passwordControl"
             >
-            visibility_off
-          </mat-icon>
-        }
-        @if (passwordControl?.value.length && !isPasswordVisible) {
-          <mat-icon
-            class="eye-icon"
-            matSuffix
-            (click)="togglePasswordVisibility()"
-            >
-            visibility
-          </mat-icon>
-        }
-      </mat-form-field>
-      <app-error-message
-        class="password-error-message"
-        [control]="passwordControl"
-        >
-      </app-error-message>
+            </app-error-message>
 
-      <mat-form-field>
-        <mat-label>confirmPassword</mat-label>
-        <input
-          matInput
-          [type]="isConfirmPasswordVisible ? 'text' : 'password'"
-          formControlName="confirmPassword"
-          />
-        @if (
-          confirmPasswordControl?.value.length &&
-          isConfirmPasswordVisible
-          ) {
-          <mat-icon
-            matSuffix
-            (click)="toggleConfirmPasswordVisibility()"
-            >
-            visibility_off
-          </mat-icon>
-        }
-        @if (
-          confirmPasswordControl?.value.length &&
-          !isConfirmPasswordVisible
-          ) {
-          <mat-icon
-            matSuffix
-            (click)="toggleConfirmPasswordVisibility()"
-            >
-            visibility
-          </mat-icon>
-        }
-      </mat-form-field>
-      <app-error-message [control]="confirmPasswordControl">
-      </app-error-message>
+            <mat-form-field>
+                <mat-label>Confirm password</mat-label>
+                <input
+                    matInput
+                    [type]="isConfirmPasswordVisible ? 'text' : 'password'"
+                    formControlName="confirmPassword"
+                />
+                @if (
+                    confirmPasswordControl?.value.length &&
+                    isConfirmPasswordVisible
+                ) {
+                    <mat-icon
+                        class="eye-icon"
+                        matSuffix
+                        (click)="toggleConfirmPasswordVisibility()"
+                    >
+                        visibility_off
+                    </mat-icon>
+                }
+                @if (
+                    confirmPasswordControl?.value.length &&
+                    !isConfirmPasswordVisible
+                ) {
+                    <mat-icon
+                        class="eye-icon"
+                        matSuffix
+                        (click)="toggleConfirmPasswordVisibility()"
+                    >
+                        visibility
+                    </mat-icon>
+                }
+            </mat-form-field>
+            <app-error-message [control]="confirmPasswordControl">
+            </app-error-message>
 
-      <mat-form-field>
-        <mat-label>Phone number</mat-label>
-        <input matInput formControlName="phoneNumber" />
-      </mat-form-field>
-      <app-error-message [control]="phoneNumberControl">
-      </app-error-message>
+            <mat-form-field>
+                <mat-label>Phone number</mat-label>
+                <input matInput formControlName="phoneNumber" />
+            </mat-form-field>
+            <app-error-message [control]="phoneNumberControl">
+            </app-error-message>
+        </div>
+        <div class="profile-picture-container">
+            <img
+                [src]="profilePictureControl?.value"
+                alt="profile-picture"
+                class="profile-picture"
+            />
+
+            <app-upload-widget
+                (newPictureUploaded)="updateProfilePicture($event)"
+            ></app-upload-widget>
+        </div>
     </div>
-    <div class="profile-picture-container">
-      <img
-        [src]="profilePictureControl?.value"
-        alt="profile-picture"
-        class="profile-picture"
-        />
 
-      <app-upload-widget
-        (newPictureUploaded)="updateProfilePicture($event)"
-      ></app-upload-widget>
-    </div>
-  </div>
-  <button
-    mat-raised-button
-    type="submit"
-    [disabled]="!registerForm.valid"
-    class="btn submit-btn"
+    <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="registerForm.valid"
+        class="btn submit-btn"
     >
-    Submit
-  </button>
+        Submit
+    </button>
 </form>

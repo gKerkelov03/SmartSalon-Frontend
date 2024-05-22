@@ -6,7 +6,7 @@ import { jwtTokenKey } from '../constants/local-storage-keys';
 import { LoginRequest } from '../models/login-request.model';
 import { LoginResponse } from '../models/login-response.model';
 import { RegisterRequest } from '../models/register-request.model';
-import { RegisterResponse } from '../models/register-response.model';
+import { CreatedResponse } from '../models/register-response.model';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
@@ -15,29 +15,29 @@ import { LocalStorageService } from './local-storage.service';
 export class AuthService {
     constructor(
         private httpClient: HttpClient,
-        private localStorageUtil: LocalStorageService
+        private localStorageUtil: LocalStorageService,
     ) {}
 
     login(request: LoginRequest): Observable<LoginResponse> {
         return this.httpClient
             .post<LoginResponse>(
                 `${environment.backendUrl}/Auth/Login`,
-                request
+                request,
             )
             .pipe(
                 tap((response) =>
                     this.localStorageUtil.setItem(
                         jwtTokenKey,
-                        response.jwtToken
-                    )
-                )
+                        response.jwtToken,
+                    ),
+                ),
             );
     }
 
-    register(user: RegisterRequest): Observable<RegisterResponse> {
-        return this.httpClient.post<RegisterResponse>(
+    register(user: RegisterRequest): Observable<CreatedResponse> {
+        return this.httpClient.post<CreatedResponse>(
             `${environment.backendUrl}/Auth/Register`,
-            user
+            user,
         );
     }
 

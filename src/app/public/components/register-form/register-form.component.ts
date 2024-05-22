@@ -1,5 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
     AbstractControl,
     FormBuilder,
@@ -9,13 +8,13 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { passwordRegex } from '../../../core/constants/regexes';
 import { blankProfilePictureUrl } from '../../../core/constants/urls';
-import { RegisterResponse } from '../../../core/models/register-response.model';
 import { AuthService } from '../../../core/services/auth.service';
-import { getErrorMessages } from '../../../core/utils/get-error-message';
 import { AreMatchingValidator } from '../../../core/utils/validators/matching.validator';
+import { Salon } from '../../../main/salons/models/salon.model';
+import { OwnersService } from '../../../main/users/services/owners.service';
+import { WorkersService } from '../../../main/users/services/workers.service';
 
 @Component({
     selector: 'app-register-form',
@@ -23,15 +22,22 @@ import { AreMatchingValidator } from '../../../core/utils/validators/matching.va
     styleUrls: ['./register-form.component.scss'],
 })
 export class RegisterFormComponent implements OnInit {
+    @Input()
+    isRegisteringOwner!: boolean;
+    @Input()
+    isRegisteringWorker!: boolean;
+    @Input()
+    salon!: Salon;
     registerForm!: FormGroup;
     genders: string[] = ['male', 'female'];
-    allSubscriptions: (Subscription | undefined)[] = [];
     isPasswordVisible: boolean = false;
     isConfirmPasswordVisible: boolean = false;
 
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthService,
+        private ownersService: OwnersService,
+        private workersService: WorkersService,
         private snackBar: MatSnackBar,
         private router: Router,
     ) {}
@@ -69,38 +75,12 @@ export class RegisterFormComponent implements OnInit {
         this.checkIfConfirmPasswordIsValidEveryTimePasswordChanges();
     }
 
-    ngOnDestroy(): void {
-        this.allSubscriptions.forEach((subscription) =>
-            subscription?.unsubscribe(),
-        );
-    }
-
     onSubmit(): void {
-        const observer = {
-            next: (user: RegisterResponse) => {
-                const snackBarRef = this.snackBar.open(
-                    'You registered successfully!',
-                    'Login',
-                );
-
-                this.allSubscriptions.push(
-                    snackBarRef
-                        .afterDismissed()
-                        .subscribe(() =>
-                            this.router.navigate(['public/login']),
-                        ),
-                );
-            },
-            error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open(getErrorMessages(httpError), 'Close');
-            },
-        };
-
-        this.allSubscriptions.push(
-            this.authService
-                .register(this.registerForm.value)
-                .subscribe(observer),
-        );
+        Object.keys(this.registerForm.controls).forEach((key) => {
+            // Get errors of every form control
+            console.log(key + ' ' + this.registerForm.get(key)?.errors);
+        });
+        return;
     }
 
     setupTheRegisterForm(): void {
@@ -126,14 +106,14 @@ export class RegisterFormComponent implements OnInit {
                 AreMatchingValidator('password'),
             ]),
             phoneNumber: new FormControl('', [Validators.required]),
+            salonId: new FormControl(this.salon?.id, []),
+            jobTitles: new FormControl([], []),
         });
     }
 
     checkIfConfirmPasswordIsValidEveryTimePasswordChanges(): void {
-        this.allSubscriptions.push(
-            this.passwordControl?.valueChanges.subscribe(() =>
-                this.confirmPasswordControl?.updateValueAndValidity(),
-            ),
+        this.passwordControl?.valueChanges.subscribe(() =>
+            this.confirmPasswordControl?.updateValueAndValidity(),
         );
     }
 
