@@ -1,12 +1,55 @@
 <div class="wrapper">
-	<h3>Are you sure you want to delete the event?</h3>
-	<div class="buttons-container">
-		<button (click)="deleteEvent()" class="default-button">Yes</button>
-		<button
-			(click)="closeDialog()"
-			class="default-button sec-accent-button"
-		>
-			No
-		</button>
-	</div>
+    <h3>Are you sure you want to delete the event?</h3>
+    <div class="buttons-container">
+        <button (click)="deleteEvent()" class="default-button">Yes</button>
+        <button
+            (click)="closeDialog()"
+            class="default-button sec-accent-button"
+        >
+            No
+        </button>
+    </div>
 </div>
+
+<!-- <section>
+    <div mat-dialog-title class="header">
+        @if (salon.profilePictureUrl) {
+            <img
+                [src]="salon.profilePictureUrl"
+                alt="salon-image"
+                class="main-image"
+            />
+        }
+
+        <h3 class="title">{{ salon.name }}</h3>
+
+        <button
+            type="button"
+            mat-dialog-close
+            mat-icon-button
+            class="close-button"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content class="content">
+        <app-salon-images [images]="salon.images" class="images" />
+
+        <app-salon-specialties
+            [specialties]="salon.specialties"
+            class="specialties"
+        />
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="actions" align="center">
+        <button
+            mat-raised-button
+            color="primary"
+            mat-dialog-close
+            (click)="openSalonDetailsPage()"
+        >
+            See more
+        </button>
+    </mat-dialog-actions>
+</section> -->

@@ -31,7 +31,11 @@ export class SpecialtiesService {
         });
     }
 
-    delete(id: string): Observable<void> {
-        return this.httpClient.delete<void>(this.specialtiesUrl + id);
+    delete(specialtyId: string, salonId: string): Observable<void> {
+        return this.httpClient.delete<void>(this.specialtiesUrl + specialtyId, {
+            body: {
+                salonId,
+            },
+        });
     }
 }

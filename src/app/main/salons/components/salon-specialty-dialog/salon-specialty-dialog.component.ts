@@ -26,7 +26,6 @@ export class SalonSpecialtyDialogComponent {
     ) {}
 
     ngOnInit(): void {
-        console.log(this.dialogData);
         this.specialtyControl = new FormControl(
             this.dialogData.specialty?.text,
             [Validators.required],
@@ -50,7 +49,7 @@ export class SalonSpecialtyDialogComponent {
                         action: this.dialogData.action,
                     });
                 });
-        } else {
+        } else if (this.dialogData.action === 'create') {
             this.specialtiesService
                 .create(this.specialtyControl.value, this.dialogData.salonId)
                 .pipe(
@@ -67,5 +66,12 @@ export class SalonSpecialtyDialogComponent {
                     }),
                 );
         }
+    }
+
+    deleteClicked(): void {
+        this.dialogRef.close({
+            specialty: this.dialogData.specialty,
+            action: 'delete',
+        });
     }
 }

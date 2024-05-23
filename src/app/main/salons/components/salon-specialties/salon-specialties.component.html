@@ -1,22 +1,22 @@
-@if (specialties.length) {
-    <section>
-        <h3 class="title">
-            Specialties
+<section>
+    <h3 class="title">
+        Specialties
 
-            @if (canEdit) {
-                <button
-                    class="icon"
-                    mat-icon-button
-                    color="primary"
-                    (click)="openSalonSpecialtyDialog('create')"
-                >
-                    <mat-icon matTooltip="Edit" matTooltipPosition="left">
-                        add_circle
-                    </mat-icon>
-                </button>
-            }
-        </h3>
+        @if (canEdit) {
+            <button
+                class="icon"
+                mat-icon-button
+                color="primary"
+                (click)="openSalonSpecialtyDialog('create')"
+            >
+                <mat-icon matTooltip="Edit" matTooltipPosition="left">
+                    add_circle
+                </mat-icon>
+            </button>
+        }
+    </h3>
 
+    @if (specialties.length) {
         @for (specialty of specialties; track specialty.id) {
             <p class="specialty">
                 <span class="specialty-number">{{ $index + 1 }}.</span>
@@ -36,5 +36,5 @@
                 }
             </p>
         }
-    </section>
-}
+    }
+</section>

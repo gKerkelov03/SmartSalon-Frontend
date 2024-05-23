@@ -42,6 +42,7 @@ import { MySalonsPageComponent } from './pages/my-salons-page/my-salons-page.com
 import { SalonDetailsPageComponent } from './pages/salon-details-page/salon-details-page.component';
 import { SearchSalonsPageComponent } from './pages/search-salons-page/search-salons-page.component';
 import { SalonsRoutingModule } from './salons-routing.module';
+import { DeleteSpecialtyDialogComponent } from './components/delete-specialty-dialog/delete-specialty-dialog.component';
 
 @NgModule({
     declarations: [
@@ -65,6 +66,7 @@ import { SalonsRoutingModule } from './salons-routing.module';
         EditSalonDescriptionDialogComponent,
         SalonJobTitlesComponent,
         SalonSpecialtyDialogComponent,
+        DeleteSpecialtyDialogComponent,
     ],
     imports: [
         CommonModule,

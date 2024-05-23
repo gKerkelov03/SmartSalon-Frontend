@@ -21,13 +21,35 @@
     </mat-dialog-content>
 
     <mat-dialog-actions class="actions" align="center">
-        <button
-            mat-raised-button
-            color="primary"
-            (click)="saveClicked()"
-            class="save-button"
-        >
-            {{ dialogData.action === 'create' ? 'Add' : 'Save' }}
-        </button>
+        @if (dialogData.action === 'create') {
+            <button
+                mat-raised-button
+                color="primary"
+                (click)="saveClicked()"
+                class="save-button"
+                [disabled]="!specialtyControl.valid"
+            >
+                Add
+            </button>
+        } @else {
+            <button
+                mat-raised-button
+                color="warn"
+                (click)="deleteClicked()"
+                class="save-button"
+            >
+                Delete
+            </button>
+
+            <button
+                mat-raised-button
+                color="primary"
+                (click)="saveClicked()"
+                class="save-button"
+                [disabled]="!specialtyControl.valid"
+            >
+                Save
+            </button>
+        }
     </mat-dialog-actions>
 </section>
