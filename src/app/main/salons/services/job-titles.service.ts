@@ -27,7 +27,7 @@ export class JobTitlesService {
     }
 
     update(
-        name: string,
+        text: string,
         salonId: string,
         jobTitleId: string,
     ): Observable<CreatedResponse> {
@@ -36,7 +36,7 @@ export class JobTitlesService {
             {
                 salonId,
                 jobTitleId,
-                name,
+                text,
             },
         );
     }

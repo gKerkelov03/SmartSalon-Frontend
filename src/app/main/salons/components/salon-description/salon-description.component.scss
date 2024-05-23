@@ -5,7 +5,7 @@ section {
 
     .title-icon-container {
         display: flex;
-        gap: 1rem;
+        gap: 0.5rem;
         align-items: baseline;
 
         .title {
@@ -15,9 +15,9 @@ section {
         }
 
         .edit-icon {
-            font-size: 1.75rem;
-            width: 1.75rem;
-            height: 1.75rem;
+            font-size: 1.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
             color: $primary;
         }
     }

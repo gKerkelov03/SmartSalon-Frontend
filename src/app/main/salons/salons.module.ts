@@ -29,10 +29,12 @@ import { SalonDescriptionComponent } from './components/salon-description/salon-
 import { SalonHeaderComponent } from './components/salon-header/salon-header.component';
 import { SalonImagesComponent } from './components/salon-images/salon-images.component';
 import { SalonInfoDialogComponent } from './components/salon-info-form/salon-info-dialog.component';
+import { SalonJobTitlesComponent } from './components/salon-job-titles/salon-job-titles.component';
 import { SalonLocationComponent } from './components/salon-location/salon-location.component';
 import { SalonMainPictureComponent } from './components/salon-main-picture/salon-main-picture.component';
 import { SalonSectionsComponent } from './components/salon-sections/salon-sections.component';
 import { SalonSpecialtiesComponent } from './components/salon-specialties/salon-specialties.component';
+import { SalonSpecialtyDialogComponent } from './components/salon-specialty-dialog/salon-specialty-dialog.component';
 import { SalonTeamComponent } from './components/salon-team/salon-team.component';
 import { SalonWorkingTimeComponent } from './components/salon-working-time/salon-working-time.component';
 import { SalonsMapComponent } from './components/salons-map/salons-map.component';
@@ -40,7 +42,6 @@ import { MySalonsPageComponent } from './pages/my-salons-page/my-salons-page.com
 import { SalonDetailsPageComponent } from './pages/salon-details-page/salon-details-page.component';
 import { SearchSalonsPageComponent } from './pages/search-salons-page/search-salons-page.component';
 import { SalonsRoutingModule } from './salons-routing.module';
-import { SalonJobTitlesComponent } from './components/salon-job-titles/salon-job-titles.component';
 
 @NgModule({
     declarations: [
@@ -63,6 +64,7 @@ import { SalonJobTitlesComponent } from './components/salon-job-titles/salon-job
         SalonCardComponent,
         EditSalonDescriptionDialogComponent,
         SalonJobTitlesComponent,
+        SalonSpecialtyDialogComponent,
     ],
     imports: [
         CommonModule,

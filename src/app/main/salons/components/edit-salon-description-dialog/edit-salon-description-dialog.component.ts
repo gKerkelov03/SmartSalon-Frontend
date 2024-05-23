@@ -20,9 +20,6 @@ export class EditSalonDescriptionDialogComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        console.log('Salon is');
-        console.log(this.salon);
-
         this.descriptionControl = new FormControl(this.salon.description, [
             Validators.required,
         ]);

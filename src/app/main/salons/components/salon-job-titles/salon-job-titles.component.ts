@@ -31,10 +31,6 @@ export class SalonJobTitlesComponent {
         private snackBar: MatSnackBar,
     ) {}
 
-    ngOnInit(): void {
-        console.log(this.jobTitles.map((jobtitle) => jobtitle.name));
-    }
-
     addJobTitle(event: MatChipInputEvent): void {
         const name = event.value;
 
@@ -52,7 +48,6 @@ export class SalonJobTitlesComponent {
             },
         };
 
-        console.log('Before create');
         this.jobTitlesService
             .create(name, this.salonId)
             .pipe(

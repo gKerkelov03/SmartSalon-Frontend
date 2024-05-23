@@ -44,6 +44,8 @@
     <app-salon-specialties
         class="specialties"
         [specialties]="salon.specialties"
+        [canEdit]="canEdit"
+        [salonId]="salon.id"
     />
 
     <app-salon-team class="team" />
