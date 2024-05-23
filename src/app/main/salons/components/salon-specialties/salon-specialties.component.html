@@ -9,9 +9,7 @@
                 color="primary"
                 (click)="openSalonSpecialtyDialog('create')"
             >
-                <mat-icon matTooltip="Edit" matTooltipPosition="left">
-                    add_circle
-                </mat-icon>
+                <mat-icon matTooltipPosition="left"> add_circle </mat-icon>
             </button>
         }
     </h3>
@@ -36,5 +34,7 @@
                 }
             </p>
         }
+    } @else {
+        <p>No specialties yet</p>
     }
 </section>
