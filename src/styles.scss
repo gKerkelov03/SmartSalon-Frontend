@@ -35,16 +35,6 @@ $my-theme: mat.define-light-theme(
 html {
     height: 100%;
 
-    &::-webkit-scrollbar {
-        width: 0.8rem;
-        background-color: $white;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: $primary;
-        border-radius: 5rem;
-    }
-
     body {
         height: 100%;
     }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { Salon } from '../../models/salon.model';
@@ -9,7 +9,7 @@ import { EditSalonDescriptionDialogComponent } from '../edit-salon-description-d
     templateUrl: './salon-description.component.html',
     styleUrl: './salon-description.component.scss',
 })
-export class SalonDescriptionComponent implements OnInit {
+export class SalonDescriptionComponent {
     @Input()
     salon!: Salon;
 
@@ -17,10 +17,6 @@ export class SalonDescriptionComponent implements OnInit {
         private currentUser: CurrentUserService,
         private dialog: MatDialog,
     ) {}
-
-    ngOnInit(): void {
-        console.log(this.salon.description);
-    }
 
     openEditDescriptionDialog(): void {
         this.dialog.open(EditSalonDescriptionDialogComponent, {

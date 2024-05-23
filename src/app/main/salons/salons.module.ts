@@ -40,6 +40,7 @@ import { MySalonsPageComponent } from './pages/my-salons-page/my-salons-page.com
 import { SalonDetailsPageComponent } from './pages/salon-details-page/salon-details-page.component';
 import { SearchSalonsPageComponent } from './pages/search-salons-page/search-salons-page.component';
 import { SalonsRoutingModule } from './salons-routing.module';
+import { SalonJobTitlesComponent } from './components/salon-job-titles/salon-job-titles.component';
 
 @NgModule({
     declarations: [
@@ -61,6 +62,7 @@ import { SalonsRoutingModule } from './salons-routing.module';
         SalonMainPictureComponent,
         SalonCardComponent,
         EditSalonDescriptionDialogComponent,
+        SalonJobTitlesComponent,
     ],
     imports: [
         CommonModule,

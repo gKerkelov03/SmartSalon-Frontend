@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { CreatedResponse } from '../../../core/models/register-response.model';
+import { CreatedResponse } from '../../../core/models/created-response.model';
 import { CreateOwnerRequest } from '../models/create-owner-request.model';
 import { Owner } from '../models/owner.model';
 

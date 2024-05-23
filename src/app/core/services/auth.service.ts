@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { jwtTokenKey } from '../constants/local-storage-keys';
+import { CreatedResponse } from '../models/created-response.model';
 import { LoginRequest } from '../models/login-request.model';
 import { LoginResponse } from '../models/login-response.model';
 import { RegisterRequest } from '../models/register-request.model';
-import { CreatedResponse } from '../models/register-response.model';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({

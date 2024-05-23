@@ -76,10 +76,6 @@ export class RegisterFormComponent implements OnInit {
     }
 
     onSubmit(): void {
-        Object.keys(this.registerForm.controls).forEach((key) => {
-            // Get errors of every form control
-            console.log(key + ' ' + this.registerForm.get(key)?.errors);
-        });
         return;
     }
 

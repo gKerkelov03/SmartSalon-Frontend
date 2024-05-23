@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { CreatedResponse } from '../../../core/models/register-response.model';
+import { CreatedResponse } from '../../../core/models/created-response.model';
 import { Worker } from '../../users/models/worker.model';
 import { CreateWorkerRequest } from '../models/create-worker-request.model';
 

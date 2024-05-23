@@ -1,0 +1,19 @@
+@use '../../../../../assets/styles/variables' as *;
+
+section {
+    margin-left: 3rem;
+
+    .title {
+        margin-bottom: 2rem;
+        font-size: 1.75rem;
+        color: $black;
+    }
+
+    .job-titles {
+        display: block;
+
+        mat-label {
+            font-size: 1.25rem;
+        }
+    }
+}

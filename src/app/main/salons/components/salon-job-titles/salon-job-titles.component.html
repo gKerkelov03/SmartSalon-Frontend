@@ -1,0 +1,34 @@
+<section>
+    <h3 class="title">JobTitles</h3>
+
+    <mat-form-field class="job-titles" appearance="outline">
+        <mat-label>Job titles</mat-label>
+
+        <mat-chip-grid #jobTitlesChipGrid>
+            @for (jobTitle of jobTitles; track jobTitle.id) {
+                <mat-chip-row
+                    (removed)="removeJobTitle(jobTitle)"
+                    [editable]="true"
+                    (edited)="editJobTitle(jobTitle, $event)"
+                >
+                    <span class="name">{{ jobTitle.name }}</span>
+
+                    @if (canEdit) {
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    }
+                </mat-chip-row>
+            }
+
+            <input
+                #jobTitlesInputs
+                [placeholder]="canEdit ? 'New job title...' : ''"
+                [matChipInputFor]="jobTitlesChipGrid"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                matChipInputAddOnBlur
+                (matChipInputTokenEnd)="addJobTitle($event)"
+            />
+        </mat-chip-grid>
+    </mat-form-field>
+</section>

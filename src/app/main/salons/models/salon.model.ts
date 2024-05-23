@@ -1,5 +1,6 @@
 import { Currency } from './currency.model';
 import { Image } from './image.model';
+import { JobTitle } from './job-title.model';
 import { Specialty } from './specialty.model';
 
 export interface Salon {
@@ -22,6 +23,7 @@ export interface Salon {
     mainCurrency: Currency;
     otherAcceptedCurrencies: Currency[];
     specialties: Specialty[];
+    jobTitles: JobTitle[];
     images: Image[];
     owners: string[];
     workers: string[];
