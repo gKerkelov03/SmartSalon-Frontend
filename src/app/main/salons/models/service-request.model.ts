@@ -1,7 +1,4 @@
-import { JobTitle } from './job-title.model';
-
-export interface Service {
-    id: string;
+export interface ServiceRequest {
     name: string;
     description: string;
     price: number;
@@ -9,7 +6,5 @@ export interface Service {
     salonId: string;
     categoryId: string;
     order: number;
-    jobTitles: JobTitle[];
-
-    [index: string]: any;
+    jobTitlesIds: string[];
 }

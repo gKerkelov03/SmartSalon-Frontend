@@ -97,7 +97,7 @@ export class BookingsFormComponent implements OnInit, OnDestroy {
                 this.dialogRef.close(booking);
 
                 this.bookingsService.bookingsChangeSubject.next({
-                    action: CrudAction.Created,
+                    action: CrudAction.Create,
                     bookingId: booking.id,
                 });
 
@@ -131,7 +131,7 @@ export class BookingsFormComponent implements OnInit, OnDestroy {
                 this.snackBar.open(`Successfully updated booking.`, 'Ok');
                 this.dialogRef.close();
                 this.bookingsService.bookingsChangeSubject.next({
-                    action: CrudAction.Updated,
+                    action: CrudAction.Update,
                     bookingId: booking.id,
                 });
             },

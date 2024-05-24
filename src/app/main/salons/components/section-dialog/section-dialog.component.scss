@@ -1,0 +1,42 @@
+@use '../../../../../assets/styles/variables' as *;
+
+section {
+    padding: 2rem;
+
+    .header {
+        display: flex;
+
+        .title {
+            display: block;
+            font-size: 1.75rem;
+            color: $black;
+        }
+
+        .close-button {
+            position: relative;
+            bottom: 1rem;
+            left: 1rem;
+            margin-left: auto;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+
+        .picture {
+            border-radius: 30px;
+            width: 50%;
+        }
+
+        .fields-container {
+            width: 100%;
+
+            .name-field {
+                width: 100%;
+            }
+        }
+    }
+}

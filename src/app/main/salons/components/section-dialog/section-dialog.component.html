@@ -1,0 +1,67 @@
+<section>
+    <div mat-dialog-title class="header">
+        @if (dialogData.action === 'create') {
+            <h3 class="title">Edit section</h3>
+        } @else {
+            <h3 class="title">Edit section</h3>
+        }
+
+        <button
+            type="button"
+            mat-dialog-close
+            mat-icon-button
+            class="close-button"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content class="content">
+        <img class="picture" [src]="pictureControl.value" />
+        <app-upload-widget
+            class="upload-widget"
+            (newPictureUploaded)="pictureUploaded($event)"
+        />
+
+        <div class="fields-container">
+            <mat-form-field class="name-field">
+                <mat-label>Name</mat-label>
+                <input matInput [formControl]="nameControl" />
+            </mat-form-field>
+            <app-error-message [control]="nameControl"></app-error-message>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="actions" align="center">
+        @if (dialogData.action === 'create') {
+            <button
+                mat-raised-button
+                color="primary"
+                (click)="saveClicked()"
+                class="save-button"
+                [disabled]="!nameControl.valid"
+            >
+                Add
+            </button>
+        } @else {
+            <button
+                mat-raised-button
+                color="warn"
+                (click)="deleteClicked()"
+                class="save-button"
+            >
+                Delete
+            </button>
+
+            <button
+                mat-raised-button
+                color="primary"
+                (click)="saveClicked()"
+                class="save-button"
+                [disabled]="!nameControl.valid"
+            >
+                Save
+            </button>
+        }
+    </mat-dialog-actions>
+</section>

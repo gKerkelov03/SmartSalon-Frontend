@@ -1,0 +1,36 @@
+@use '../../../../../assets/styles/variables' as *;
+
+section {
+    margin-left: 3rem;
+
+    .title {
+        margin-bottom: 2rem;
+        font-size: 1.75rem;
+        color: $black;
+    }
+
+    .sections {
+        display: flex;
+        gap: 2rem;
+
+        ::ng-deep .mat-mdc-tab:not(.mdc-tab--stacked) {
+            height: 100%;
+        }
+
+        .section-label {
+            margin: 1rem 0;
+
+            .section-image {
+                width: 5vw;
+                height: 5vw;
+                border-radius: 50%;
+                margin-bottom: 1rem;
+                background-size: contain;
+            }
+        }
+
+        .category-label {
+            padding: 1rem;
+        }
+    }
+}

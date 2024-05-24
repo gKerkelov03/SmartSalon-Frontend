@@ -26,7 +26,7 @@ export class DeleteBookingDialogComponent {
             next: () => {
                 this.dialogRef.close(this.bookingId);
                 this.bookingsService.bookingsChangeSubject.next({
-                    action: CrudAction.Deleted,
+                    action: CrudAction.Delete,
                     bookingId: this.bookingId,
                 });
             },

@@ -1,0 +1,35 @@
+@use '../../../../../assets/styles/variables' as *;
+
+section {
+    padding: 2rem;
+
+    .header {
+        display: flex;
+
+        .title {
+            display: block;
+            font-size: 1.75rem;
+            color: $black;
+        }
+
+        .close-button {
+            position: relative;
+            bottom: 1rem;
+            left: 1rem;
+            margin-left: auto;
+        }
+    }
+
+    .content {
+        .service-form {
+            .field {
+                width: 100%;
+            }
+
+            app-error-message {
+                position: relative;
+                bottom: 1rem;
+            }
+        }
+    }
+}

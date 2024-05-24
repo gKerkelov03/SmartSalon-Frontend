@@ -1,7 +1,9 @@
 import { Category } from './category.model';
 
 export interface Section {
-    Name: string;
-    SalonId: string;
-    Categories: Category[];
+    id: string;
+    name: string;
+    pictureUrl: string;
+    order: number;
+    categories: Category[];
 }

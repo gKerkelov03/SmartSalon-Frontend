@@ -18,10 +18,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { SharedModule } from '../../shared/shared.module';
 import { DailyWorkingTimeComponent } from './components/daily-working-time/daily-working-time.component';
+import { DeleteSpecialtyDialogComponent } from './components/delete-specialty-dialog/delete-specialty-dialog.component';
 import { EditSalonDescriptionDialogComponent } from './components/edit-salon-description-dialog/edit-salon-description-dialog.component';
 import { SalonCardComponent } from './components/salon-card/salon-card.component';
 import { SalonCurrenciesComponent } from './components/salon-currencies/salon-currencies.component';
@@ -38,11 +40,13 @@ import { SalonSpecialtyDialogComponent } from './components/salon-specialty-dial
 import { SalonTeamComponent } from './components/salon-team/salon-team.component';
 import { SalonWorkingTimeComponent } from './components/salon-working-time/salon-working-time.component';
 import { SalonsMapComponent } from './components/salons-map/salons-map.component';
+import { SectionDialogComponent } from './components/section-dialog/section-dialog.component';
 import { MySalonsPageComponent } from './pages/my-salons-page/my-salons-page.component';
 import { SalonDetailsPageComponent } from './pages/salon-details-page/salon-details-page.component';
 import { SearchSalonsPageComponent } from './pages/search-salons-page/search-salons-page.component';
 import { SalonsRoutingModule } from './salons-routing.module';
-import { DeleteSpecialtyDialogComponent } from './components/delete-specialty-dialog/delete-specialty-dialog.component';
+import { CategoryDialogComponent } from './components/category-dialog/category-dialog.component';
+import { ServiceDialogComponent } from './components/service-dialog/service-dialog.component';
 
 @NgModule({
     declarations: [
@@ -67,6 +71,9 @@ import { DeleteSpecialtyDialogComponent } from './components/delete-specialty-di
         SalonJobTitlesComponent,
         SalonSpecialtyDialogComponent,
         DeleteSpecialtyDialogComponent,
+        SectionDialogComponent,
+        CategoryDialogComponent,
+        ServiceDialogComponent,
     ],
     imports: [
         CommonModule,
@@ -91,6 +98,7 @@ import { DeleteSpecialtyDialogComponent } from './components/delete-specialty-di
         MatRadioModule,
         MatSelectModule,
         MatTooltipModule,
+        MatTabsModule,
         MatCardModule,
         MatDividerModule,
     ],

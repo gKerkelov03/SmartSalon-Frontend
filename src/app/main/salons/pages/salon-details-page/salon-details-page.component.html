@@ -1,9 +1,17 @@
-@if (workingTime && salon) {
+@if (workingTime && salon && sections) {
     <app-salon-header
         class="header"
         [name]="salon.name"
         [rating]="3.3"
         [googleMapsLocation]="salon.googleMapsLocation"
+    />
+
+    <app-salon-sections
+        class="sections"
+        [canEdit]="canEdit"
+        [sections]="sections"
+        [salonId]="salon.id"
+        [jobTitles]="salon.jobTitles"
     />
 
     <app-salon-main-picture
@@ -49,8 +57,6 @@
     />
 
     <app-salon-team class="team" />
-
-    <app-salon-sections class="sections" [sections]="sections" />
 } @else {
     <div class="spinner-container">
         <mat-spinner mode="indeterminate" diameter="200"></mat-spinner>

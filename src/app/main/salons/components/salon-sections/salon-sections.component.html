@@ -1,1 +1,104 @@
-Sections
+<section>
+    <h3 class="title">
+        Sections
+
+        @if (canEdit) {
+            <button
+                class="icon"
+                mat-icon-button
+                color="primary"
+                matTooltip="Add section"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip"
+                (click)="openSectionDialog(CrudAction.Create)"
+            >
+                <mat-icon matTooltipPosition="left"> add_circle </mat-icon>
+            </button>
+        }
+    </h3>
+
+    <mat-tab-group
+        class="sections"
+        (selectedIndexChange)="sectionIndexChanged($event)"
+    >
+        @for (section of sections; track section?.id) {
+            <mat-tab [label]="section.name">
+                <ng-template mat-tab-label>
+                    <div class="section-label">
+                        <div
+                            class="section-image"
+                            [ngStyle]="{
+                                'background-image':
+                                    'url(' + section.pictureUrl + ')'
+                            }"
+                        ></div>
+
+                        <p>
+                            {{ section.name }}
+                        </p>
+
+                        @if (selectedSectionIndex === $index) {
+                            <button
+                                mat-icon-button
+                                (click)="
+                                    openCategoryDialog(
+                                        CrudAction.Create,
+                                        section
+                                    )
+                                "
+                                color="primary"
+                                class="add-category-button"
+                            >
+                                <mat-icon>add_circle</mat-icon>
+                            </button>
+                        }
+                    </div>
+                </ng-template>
+
+                <mat-tab-group
+                    class="categories"
+                    (selectedIndexChange)="categoryIndexChanged($event)"
+                >
+                    @for (
+                        category of sections[selectedSectionIndex].categories;
+                        track category.id
+                    ) {
+                        <mat-tab [label]="category.name" class="category">
+                            <ng-template mat-tab-label>
+                                <div class="category-label">
+                                    <p>
+                                        {{ category.name }}
+                                    </p>
+
+                                    @if (selectedCategoryIndex === $index) {
+                                        <button
+                                            mat-icon-button
+                                            (click)="
+                                                openServiceDialog(
+                                                    CrudAction.Create,
+                                                    category
+                                                )
+                                            "
+                                            color="primary"
+                                            class="add-service-button"
+                                        >
+                                            <mat-icon>add_circle</mat-icon>
+                                        </button>
+                                    }
+                                </div>
+                            </ng-template>
+
+                            @for (service of category.services; track $index) {
+                                <div class="service">
+                                    <p>{{ service.name }}</p>
+                                    <p>{{ service.price }}</p>
+                                    <p>{{ service.durationInMinutes }}</p>
+                                </div>
+                            }
+                        </mat-tab>
+                    }
+                </mat-tab-group>
+            </mat-tab>
+        }
+    </mat-tab-group>
+</section>

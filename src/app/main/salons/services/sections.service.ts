@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { CreatedResponse } from '../../../core/models/created-response.model';
 import { Section } from '../models/section.model';
 
 @Injectable({
@@ -12,8 +13,16 @@ export class SectionsService {
 
     constructor(private httpClient: HttpClient) {}
 
-    create(section: Section): Observable<void> {
-        return this.httpClient.post<void>(this.sectionsBackendUrl, section);
+    create(
+        name: string,
+        pictureUrl: string,
+        salonId: string,
+    ): Observable<CreatedResponse> {
+        return this.httpClient.post<CreatedResponse>(this.sectionsBackendUrl, {
+            name,
+            pictureUrl,
+            salonId,
+        });
     }
 
     getById(id: string): Observable<Section> {
@@ -30,11 +39,11 @@ export class SectionsService {
         return forkJoin(observables);
     }
 
-    update(id: string, newSection: Partial<Section>): Observable<void> {
-        return this.httpClient.patch<void>(
-            this.sectionsBackendUrl + id,
-            newSection,
-        );
+    update(id: string, newSection: Section, salonId: string): Observable<void> {
+        return this.httpClient.patch<void>(this.sectionsBackendUrl + id, {
+            ...newSection,
+            salonId,
+        });
     }
 
     delete(id: string): Observable<void> {
