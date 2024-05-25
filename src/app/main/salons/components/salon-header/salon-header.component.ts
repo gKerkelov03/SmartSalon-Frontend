@@ -13,9 +13,6 @@ export class SalonHeaderComponent {
     @Input()
     rating!: number;
 
-    @Input()
-    googleMapsLocation!: string;
-
     createRange = createRange;
 
     shouldDisplayHalfReviewStar() {

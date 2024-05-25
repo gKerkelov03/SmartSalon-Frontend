@@ -29,3 +29,31 @@ section {
         }
     }
 }
+
+.salon-option {
+    display: flex;
+    align-items: center;
+
+    .salon-main-picture {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 8px;
+    }
+
+    .text {
+        margin-left: 2rem;
+        display: flex;
+        flex-direction: column;
+        white-space: nowrap;
+
+        .name {
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 0.875em;
+            color: gray;
+        }
+    }
+}

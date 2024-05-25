@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CrudAction } from '../../../../core/enums/crud-action';
 import { Category } from '../../models/category.model';
 import { JobTitle } from '../../models/job-title.model';
@@ -32,7 +33,10 @@ export class SalonSectionsComponent {
     selectedSectionIndex: number = 0;
     selectedCategoryIndex: number = 0;
 
-    constructor(private dialog: MatDialog) {}
+    constructor(
+        private dialog: MatDialog,
+        private snackBar: MatSnackBar,
+    ) {}
 
     sectionIndexChanged(newIndex: number) {
         this.selectedSectionIndex = newIndex;
@@ -40,6 +44,19 @@ export class SalonSectionsComponent {
 
     categoryIndexChanged(newIndex: number) {
         this.selectedCategoryIndex = newIndex;
+    }
+
+    createServiceClicked(category: Category) {
+        if (!this.jobTitles.length) {
+            this.snackBar.open(
+                'You have to add some job titles to the salon before creating a service',
+                'Close',
+            );
+
+            return;
+        }
+
+        this.openServiceDialog(CrudAction.Create, category);
     }
 
     openSectionDialog(action: CrudAction, section?: Section): void {

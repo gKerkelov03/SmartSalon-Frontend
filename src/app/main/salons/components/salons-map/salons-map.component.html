@@ -5,13 +5,34 @@
             type="text"
             placeholder="Type name or address"
             matInput
-            [formControl]="myControl"
+            [formControl]="salonsControl"
             [matAutocomplete]="auto"
         />
 
-        <mat-autocomplete #auto="matAutocomplete">
-            @for (option of options; track option) {
-                <mat-option [value]="option">{{ option }}</mat-option>
+        <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="this.salonSelected.emit($event.option.value)"
+        >
+            @for (salon of autocompleteOptions | async; track salon) {
+                <mat-option [value]="salon">
+                    <div class="salon-option">
+                        <img
+                            class="salon-main-picture"
+                            [src]="
+                                isValidUrl(salon.profilePictureUrl)
+                                    ? salon.profilePictureUrl
+                                    : blankProfilePictureUrl
+                            "
+                            alt="Salon picture"
+                        />
+                        <div class="text">
+                            <div class="name">{{ salon.name }}</div>
+                            <div class="location">
+                                {{ salon.googleMapsLocation }}
+                            </div>
+                        </div>
+                    </div>
+                </mat-option>
             }
         </mat-autocomplete>
     </mat-form-field>
@@ -23,7 +44,7 @@
     >
         @for (salon of salons; track salon.id) {
             <map-advanced-marker
-                (mapClick)="showMoreInfoAboutSalon($event)"
+                (mapClick)="mapMarkerClicked($event)"
                 [position]="getCoordinates(salon)"
             />
         }

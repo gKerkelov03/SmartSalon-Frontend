@@ -1,12 +1,37 @@
 <section>
     <div class="search-side">
         <h3 class="title">Nearest salons</h3>
+        @for (salon of salons.concat(salons); track salon.id) {
+            <div class="salon-overview">
+                <app-salon-header
+                    [name]="salon.name"
+                    [rating]="3.3"
+                ></app-salon-header>
+
+                <img
+                    class="image"
+                    [src]="
+                        isValidUrl(salon.profilePictureUrl)
+                            ? salon.profilePictureUrl
+                            : blankProfilePictureUrl
+                    "
+                />
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="showMoreInfoAboutSalon(salon)"
+                >
+                    Open
+                </button>
+            </div>
+        }
     </div>
     <div class="container">
         <app-salons-map
             [center]="userLocation"
             [zoom]="mapZoomLevel"
             [salons]="salons"
+            (salonSelected)="showMoreInfoAboutSalon($event)"
         >
         </app-salons-map>
     </div>

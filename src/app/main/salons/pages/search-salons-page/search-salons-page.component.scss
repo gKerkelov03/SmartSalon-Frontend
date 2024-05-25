@@ -17,13 +17,46 @@ section {
     }
 
     .search-side {
-        width: 20vw;
+        width: 25vw;
+        display: flex;
+        flex-direction: column;
+        max-height: 100vh;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 0.8rem;
+            background-color: $white;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $primary;
+            border-radius: 5rem;
+        }
 
         .title {
             margin-top: 2rem;
             text-align: center;
-            font-size: 1.75rem;
+            font-size: 2rem;
             color: $black;
+        }
+
+        app-salon-header {
+            font-size: 1rem;
+        }
+
+        .salon-overview {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+            margin: 3rem;
+            border-radius: 20px;
+            gap: 1rem;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+            .image {
+                border-radius: 30px;
+            }
         }
     }
 }
