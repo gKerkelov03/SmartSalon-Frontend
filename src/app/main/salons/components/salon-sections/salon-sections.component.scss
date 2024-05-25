@@ -19,6 +19,9 @@ section {
 
         .section-label {
             margin: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
             .section-image {
                 width: 5vw;
@@ -26,11 +29,15 @@ section {
                 border-radius: 50%;
                 margin-bottom: 1rem;
                 background-size: contain;
+                background-repeat: repeat;
             }
         }
 
         .category-label {
             padding: 1rem;
+            .actions {
+                margin-top: 1rem;
+            }
         }
     }
 }

@@ -37,10 +37,10 @@ export class CategoriesService {
         newCategory: Category,
         salonId: string,
     ): Observable<void> {
-        return this.httpClient.patch<void>(
-            this.categoriesBackendUrl + id,
-            newCategory,
-        );
+        return this.httpClient.patch<void>(this.categoriesBackendUrl + id, {
+            ...newCategory,
+            salonId,
+        });
     }
 
     delete(id: string): Observable<void> {

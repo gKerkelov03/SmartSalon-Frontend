@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { switchMap } from 'rxjs';
 import { CrudAction } from '../../../../core/enums/crud-action';
 import { CreatedResponse } from '../../../../core/models/created-response.model';
@@ -25,6 +26,7 @@ export class CategoryDialogComponent {
         },
         private dialogRef: MatDialogRef<CategoryDialogComponent>,
         private categoriesService: CategoriesService,
+        private snackBar: MatSnackBar,
     ) {}
 
     ngOnInit(): void {
@@ -39,6 +41,22 @@ export class CategoryDialogComponent {
 
     saveClicked(): void {
         if (this.dialogData.action === CrudAction.Update) {
+            const observer = {
+                next: () => {
+                    this.dialogData.category!.name = this.nameControl.value;
+
+                    this.dialogRef.close({
+                        category: this.dialogData.category,
+                        action: this.dialogData.action,
+                    });
+                },
+                error: () =>
+                    this.snackBar.open(
+                        'Category with this name already exist',
+                        'Close',
+                    ),
+            };
+
             this.categoriesService
                 .update(
                     this.dialogData.category!.id,
@@ -48,15 +66,22 @@ export class CategoryDialogComponent {
                     },
                     this.dialogData.salonId,
                 )
-                .subscribe(() => {
-                    this.dialogData.category!.name = this.nameControl.value;
-
+                .subscribe(observer);
+        } else if (this.dialogData.action === CrudAction.Create) {
+            const observer = {
+                next: (category: Category) => {
                     this.dialogRef.close({
-                        category: this.dialogData.category,
+                        category,
                         action: this.dialogData.action,
                     });
-                });
-        } else if (this.dialogData.action === CrudAction.Create) {
+                },
+                error: () =>
+                    this.snackBar.open(
+                        'Category with this name already exist',
+                        'Close',
+                    ),
+            };
+
             this.categoriesService
                 .create(
                     this.nameControl.value,
@@ -70,12 +95,7 @@ export class CategoryDialogComponent {
                         ),
                     ),
                 )
-                .subscribe((category: Category) =>
-                    this.dialogRef.close({
-                        category,
-                        action: this.dialogData.action,
-                    }),
-                );
+                .subscribe(observer);
         }
     }
 

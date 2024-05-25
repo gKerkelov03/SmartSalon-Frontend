@@ -38,19 +38,35 @@
                         </p>
 
                         @if (selectedSectionIndex === $index) {
-                            <button
-                                mat-icon-button
-                                (click)="
-                                    openCategoryDialog(
-                                        CrudAction.Create,
-                                        section
-                                    )
-                                "
-                                color="primary"
-                                class="add-category-button"
-                            >
-                                <mat-icon>add_circle</mat-icon>
-                            </button>
+                            <div class="actions">
+                                <button
+                                    mat-icon-button
+                                    (click)="
+                                        openCategoryDialog(
+                                            CrudAction.Create,
+                                            section
+                                        )
+                                    "
+                                    color="primary"
+                                    class="add-category-button"
+                                >
+                                    <mat-icon>add_circle</mat-icon>
+                                </button>
+
+                                <button
+                                    mat-icon-button
+                                    (click)="
+                                        openSectionDialog(
+                                            CrudAction.Update,
+                                            section
+                                        )
+                                    "
+                                    color="primary"
+                                    class="add-service-button"
+                                >
+                                    <mat-icon>edit_square</mat-icon>
+                                </button>
+                            </div>
                         }
                     </div>
                 </ng-template>
@@ -71,16 +87,35 @@
                                     </p>
 
                                     @if (selectedCategoryIndex === $index) {
-                                        <button
-                                            mat-icon-button
-                                            (click)="
-                                                createServiceClicked(category)
-                                            "
-                                            color="primary"
-                                            class="add-service-button"
-                                        >
-                                            <mat-icon>add_circle</mat-icon>
-                                        </button>
+                                        <div class="actions">
+                                            <button
+                                                mat-icon-button
+                                                (click)="
+                                                    createServiceClicked(
+                                                        category
+                                                    )
+                                                "
+                                                color="primary"
+                                                class="add-service-button"
+                                            >
+                                                <mat-icon>add_circle</mat-icon>
+                                            </button>
+
+                                            <button
+                                                mat-icon-button
+                                                (click)="
+                                                    openCategoryDialog(
+                                                        CrudAction.Update,
+                                                        section,
+                                                        category
+                                                    )
+                                                "
+                                                color="primary"
+                                                class="add-service-button"
+                                            >
+                                                <mat-icon>edit_square</mat-icon>
+                                            </button>
+                                        </div>
                                     }
                                 </div>
                             </ng-template>

@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { switchMap } from 'rxjs';
 import { blankProfilePictureUrl } from '../../../../core/constants/urls';
 import { CrudAction } from '../../../../core/enums/crud-action';
@@ -27,6 +28,7 @@ export class SectionDialogComponent {
         },
         private dialogRef: MatDialogRef<SectionDialogComponent>,
         private sectionsService: SectionsService,
+        private snackBar: MatSnackBar,
     ) {}
 
     ngOnInit(): void {
@@ -48,6 +50,24 @@ export class SectionDialogComponent {
 
     saveClicked(): void {
         if (this.dialogData.action === CrudAction.Update) {
+            const observer = {
+                next: () => {
+                    this.dialogData.section!.name = this.nameControl.value;
+                    this.dialogData.section!.pictureUrl =
+                        this.pictureControl.value;
+
+                    this.dialogRef.close({
+                        section: this.dialogData.section,
+                        action: this.dialogData.action,
+                    });
+                },
+                error: () =>
+                    this.snackBar.open(
+                        'Section with this name already exists',
+                        'Close',
+                    ),
+            };
+
             this.sectionsService
                 .update(
                     this.dialogData.section!.id,
@@ -58,15 +78,22 @@ export class SectionDialogComponent {
                     },
                     this.dialogData.salonId,
                 )
-                .subscribe(() => {
-                    this.dialogData.section!.name = this.nameControl.value;
-
+                .subscribe(observer);
+        } else if (this.dialogData.action === CrudAction.Create) {
+            const observer = {
+                next: (section: Section) => {
                     this.dialogRef.close({
-                        sectiony: this.dialogData.section,
+                        section,
                         action: this.dialogData.action,
                     });
-                });
-        } else if (this.dialogData.action === CrudAction.Create) {
+                },
+                error: () =>
+                    this.snackBar.open(
+                        'Section with this name already exist',
+                        'Close',
+                    ),
+            };
+
             this.sectionsService
                 .create(
                     this.nameControl.value,
@@ -80,12 +107,7 @@ export class SectionDialogComponent {
                         ),
                     ),
                 )
-                .subscribe((section: Section) =>
-                    this.dialogRef.close({
-                        section,
-                        action: this.dialogData.action,
-                    }),
-                );
+                .subscribe(observer);
         }
     }
 
