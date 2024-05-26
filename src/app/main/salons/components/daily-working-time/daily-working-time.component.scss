@@ -45,6 +45,7 @@
         display: flex;
         justify-content: space-between;
         width: 20%;
+        font-size: 1rem;
 
         .day {
             margin-right: 1.2rem;
@@ -52,6 +53,7 @@
     }
 
     .container {
+        font-size: 1rem;
         margin-left: auto;
 
         .time-picker {
@@ -65,6 +67,7 @@
     }
 
     .closed {
+        font-size: 1rem;
         color: red;
         margin: 0 1.2rem;
         margin-left: auto;

@@ -79,7 +79,7 @@
                         category of sections[selectedSectionIndex].categories;
                         track category.id
                     ) {
-                        <mat-tab [label]="category.name" class="category">
+                        <mat-tab [label]="category.name" bodyClass="category">
                             <ng-template mat-tab-label>
                                 <div class="category-label">
                                     <p>
@@ -121,10 +121,22 @@
                             </ng-template>
 
                             @for (service of category.services; track $index) {
-                                <div class="service">
-                                    <p>{{ service.name }}</p>
-                                    <p>{{ service.price }}</p>
-                                    <p>{{ service.durationInMinutes }}</p>
+                                <div
+                                    class="service"
+                                    (click)="serviceClicked(service, category)"
+                                >
+                                    <div>
+                                        <p class="name">{{ service.name }}</p>
+                                        <p class="duration">
+                                            {{ service.durationInMinutes }}
+                                            minutes
+                                        </p>
+                                    </div>
+
+                                    <p class="price">
+                                        {{ service.price }}
+                                        {{ mainCurrency.code.toUpperCase() }}
+                                    </p>
                                 </div>
                             }
                         </mat-tab>

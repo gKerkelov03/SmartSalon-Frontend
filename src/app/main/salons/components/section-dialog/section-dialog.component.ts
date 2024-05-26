@@ -19,12 +19,15 @@ export class SectionDialogComponent {
     nameControl!: FormControl;
     pictureControl!: FormControl;
 
+    CrudAction = CrudAction;
+
     constructor(
         @Inject(MAT_DIALOG_DATA)
         public dialogData: {
             section?: Section;
             salonId: string;
             action: CrudAction;
+            canDelete: boolean;
         },
         private dialogRef: MatDialogRef<SectionDialogComponent>,
         private sectionsService: SectionsService,

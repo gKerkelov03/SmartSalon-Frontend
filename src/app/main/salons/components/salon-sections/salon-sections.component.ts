@@ -3,10 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CrudAction } from '../../../../core/enums/crud-action';
 import { Category } from '../../models/category.model';
+import { Currency } from '../../models/currency.model';
 import { JobTitle } from '../../models/job-title.model';
 import { Section } from '../../models/section.model';
 import { Service } from '../../models/service.model';
 import { CategoryDialogComponent } from '../category-dialog/category-dialog.component';
+import { DeleteCategoryDialogComponent } from '../delete-category-dialog/delete-category-dialog.component';
+import { DeleteSectionDialogComponent } from '../delete-section-dialog/delete-section-dialog.component';
+import { DeleteServiceDialogComponent } from '../delete-service-dialog/delete-service-dialog.component';
 import { SectionDialogComponent } from '../section-dialog/section-dialog.component';
 import { ServiceDialogComponent } from '../service-dialog/service-dialog.component';
 
@@ -21,6 +25,9 @@ export class SalonSectionsComponent {
 
     @Input()
     canEdit: boolean = false;
+
+    @Input()
+    mainCurrency!: Currency;
 
     @Input()
     sections!: Section[];
@@ -64,7 +71,12 @@ export class SalonSectionsComponent {
             width: '40vw',
             autoFocus: false,
             panelClass: 'round-without-padding',
-            data: { action, section, salonId: this.salonId },
+            data: {
+                action,
+                section,
+                salonId: this.salonId,
+                canDelete: this.sections.length > 1,
+            },
             enterAnimationDuration: '300ms',
         });
 
@@ -80,33 +92,33 @@ export class SalonSectionsComponent {
                 } else if (result.action === CrudAction.Create) {
                     this.sections.push(result.section);
                 } else if (result.action === CrudAction.Delete) {
-                    //     const confirmDeletionDialogRef = this.dialog.open(
-                    //         DeleteSpecialtyDialogComponent,
-                    //         {
-                    //             width: '40vw',
-                    //             autoFocus: false,
-                    //             panelClass: 'round-without-padding',
-                    //             data: {
-                    //                 section: result.section,
-                    //                 salonId: this.salonId,
-                    //             },
-                    //             enterAnimationDuration: '300ms',
-                    //         },
-                    //     );
-                    //     confirmDeletionDialogRef
-                    //         .afterClosed()
-                    //         .subscribe((result) => {
-                    //             console.log(result);
-                    //             if (result) {
-                    //                 const index = this.sections.indexOf(
-                    //                     result.section,
-                    //                 );
-                    //                 if (index >= 0) {
-                    //                     this.sections.splice(index, 1);
-                    //                 }
-                    //             }
-                    //         });
-                    // }
+                    const confirmDeletionDialogRef = this.dialog.open(
+                        DeleteSectionDialogComponent,
+                        {
+                            width: '40vw',
+                            autoFocus: false,
+                            panelClass: 'round-without-padding',
+                            data: {
+                                section: result.section,
+                                salonId: this.salonId,
+                            },
+                            enterAnimationDuration: '300ms',
+                        },
+                    );
+
+                    confirmDeletionDialogRef
+                        .afterClosed()
+                        .subscribe((result) => {
+                            if (result) {
+                                console.log(this.sections);
+                                this.sections.splice(
+                                    this.selectedSectionIndex,
+                                    1,
+                                );
+
+                                console.log(this.sections);
+                            }
+                        });
                 }
             },
         };
@@ -147,36 +159,34 @@ export class SalonSectionsComponent {
 
                     category!.name = result.category.name;
                 } else if (result.action === CrudAction.Create) {
-                    console.log('here');
                     section.categories.push(result.category);
                 } else if (result.action === CrudAction.Delete) {
-                    //     const confirmDeletionDialogRef = this.dialog.open(
-                    //         DeleteSpecialtyDialogComponent,
-                    //         {
-                    //             width: '40vw',
-                    //             autoFocus: false,
-                    //             panelClass: 'round-without-padding',
-                    //             data: {
-                    //                 section: result.section,
-                    //                 salonId: this.salonId,
-                    //             },
-                    //             enterAnimationDuration: '300ms',
-                    //         },
-                    //     );
-                    //     confirmDeletionDialogRef
-                    //         .afterClosed()
-                    //         .subscribe((result) => {
-                    //             console.log(result);
-                    //             if (result) {
-                    //                 const index = this.sections.indexOf(
-                    //                     result.section,
-                    //                 );
-                    //                 if (index >= 0) {
-                    //                     this.sections.splice(index, 1);
-                    //                 }
-                    //             }
-                    //         });
-                    // }
+                    const confirmDeletionDialogRef = this.dialog.open(
+                        DeleteCategoryDialogComponent,
+                        {
+                            width: '40vw',
+                            autoFocus: false,
+                            panelClass: 'round-without-padding',
+                            data: {
+                                category: result.category,
+                                salonId: this.salonId,
+                            },
+                            enterAnimationDuration: '300ms',
+                        },
+                    );
+
+                    confirmDeletionDialogRef
+                        .afterClosed()
+                        .subscribe((result) => {
+                            if (result) {
+                                this.sections[
+                                    this.selectedSectionIndex
+                                ].categories.splice(
+                                    this.selectedCategoryIndex,
+                                    1,
+                                );
+                            }
+                        });
                 }
             },
         };
@@ -197,6 +207,7 @@ export class SalonSectionsComponent {
                 action,
                 salonId: this.salonId,
                 category,
+                service,
                 jobTitles: this.jobTitles,
             },
             enterAnimationDuration: '300ms',
@@ -211,7 +222,7 @@ export class SalonSectionsComponent {
 
                 if (result.action === CrudAction.Update) {
                     const service = category.services.find(
-                        (section) => section.id === result.service.id,
+                        (service) => service.id === result.service.id,
                     )!;
 
                     for (let key in service) {
@@ -219,38 +230,46 @@ export class SalonSectionsComponent {
                     }
                 } else if (result.action === CrudAction.Create) {
                     category.services.push(result.service);
+                    console.log(result.service);
                 } else if (result.action === CrudAction.Delete) {
-                    //     const confirmDeletionDialogRef = this.dialog.open(
-                    //         DeleteSpecialtyDialogComponent,
-                    //         {
-                    //             width: '40vw',
-                    //             autoFocus: false,
-                    //             panelClass: 'round-without-padding',
-                    //             data: {
-                    //                 section: result.section,
-                    //                 salonId: this.salonId,
-                    //             },
-                    //             enterAnimationDuration: '300ms',
-                    //         },
-                    //     );
-                    //     confirmDeletionDialogRef
-                    //         .afterClosed()
-                    //         .subscribe((result) => {
-                    //             console.log(result);
-                    //             if (result) {
-                    //                 const index = this.sections.indexOf(
-                    //                     result.section,
-                    //                 );
-                    //                 if (index >= 0) {
-                    //                     this.sections.splice(index, 1);
-                    //                 }
-                    //             }
-                    //         });
-                    // }
+                    const confirmDeletionDialogRef = this.dialog.open(
+                        DeleteServiceDialogComponent,
+                        {
+                            width: '40vw',
+                            autoFocus: false,
+                            panelClass: 'round-without-padding',
+                            data: {
+                                service: result.service,
+                                salonId: this.salonId,
+                            },
+                            enterAnimationDuration: '300ms',
+                        },
+                    );
+
+                    confirmDeletionDialogRef
+                        .afterClosed()
+                        .subscribe((result) => {
+                            if (result) {
+                                const services =
+                                    this.sections[this.selectedSectionIndex]
+                                        .categories[this.selectedCategoryIndex]
+                                        .services;
+
+                                const index = services.indexOf(result.service);
+
+                                services.splice(index, 1);
+                            }
+                        });
                 }
             },
         };
 
         dialogRef.afterClosed().subscribe(observer);
+    }
+
+    serviceClicked(service: Service, category: Category) {
+        if (this.canEdit) {
+            this.openServiceDialog(CrudAction.Update, category, service);
+        }
     }
 }

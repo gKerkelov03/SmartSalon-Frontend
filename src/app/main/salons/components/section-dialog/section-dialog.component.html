@@ -33,17 +33,7 @@
     </mat-dialog-content>
 
     <mat-dialog-actions class="actions" align="center">
-        @if (dialogData.action === 'create') {
-            <button
-                mat-raised-button
-                color="primary"
-                (click)="saveClicked()"
-                class="save-button"
-                [disabled]="!nameControl.valid"
-            >
-                Add
-            </button>
-        } @else {
+        @if (dialogData.canDelete) {
             <button
                 mat-raised-button
                 color="warn"
@@ -52,16 +42,15 @@
             >
                 Delete
             </button>
-
-            <button
-                mat-raised-button
-                color="primary"
-                (click)="saveClicked()"
-                class="save-button"
-                [disabled]="!nameControl.valid"
-            >
-                Save
-            </button>
         }
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="saveClicked()"
+            class="save-button"
+            [disabled]="!nameControl.valid"
+        >
+            {{ dialogData.action === CrudAction.Create ? 'Add' : 'Save' }}
+        </button>
     </mat-dialog-actions>
 </section>

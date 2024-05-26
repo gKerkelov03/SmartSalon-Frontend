@@ -32,7 +32,9 @@ export class ServicesService {
         );
     }
 
-    delete(id: string): Observable<void> {
-        return this.httpClient.delete<void>(this.servicesBackendUrl + id);
+    delete(id: string, salonId: string): Observable<void> {
+        return this.httpClient.delete<void>(this.servicesBackendUrl + id, {
+            body: { salonId },
+        });
     }
 }

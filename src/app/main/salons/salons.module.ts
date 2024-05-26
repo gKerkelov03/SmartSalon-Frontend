@@ -47,6 +47,9 @@ import { SearchSalonsPageComponent } from './pages/search-salons-page/search-sal
 import { SalonsRoutingModule } from './salons-routing.module';
 import { CategoryDialogComponent } from './components/category-dialog/category-dialog.component';
 import { ServiceDialogComponent } from './components/service-dialog/service-dialog.component';
+import { DeleteServiceDialogComponent } from './components/delete-service-dialog/delete-service-dialog.component';
+import { DeleteCategoryDialogComponent } from './components/delete-category-dialog/delete-category-dialog.component';
+import { DeleteSectionDialogComponent } from './components/delete-section-dialog/delete-section-dialog.component';
 
 @NgModule({
     declarations: [
@@ -74,6 +77,9 @@ import { ServiceDialogComponent } from './components/service-dialog/service-dial
         SectionDialogComponent,
         CategoryDialogComponent,
         ServiceDialogComponent,
+        DeleteServiceDialogComponent,
+        DeleteCategoryDialogComponent,
+        DeleteSectionDialogComponent,
     ],
     imports: [
         CommonModule,

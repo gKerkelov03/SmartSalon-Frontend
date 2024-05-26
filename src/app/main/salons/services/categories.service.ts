@@ -43,7 +43,9 @@ export class CategoriesService {
         });
     }
 
-    delete(id: string): Observable<void> {
-        return this.httpClient.delete<void>(this.categoriesBackendUrl + id);
+    delete(id: string, salonId: string): Observable<void> {
+        return this.httpClient.delete<void>(this.categoriesBackendUrl + id, {
+            body: { salonId },
+        });
     }
 }

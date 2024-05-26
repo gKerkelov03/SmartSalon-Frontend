@@ -17,11 +17,7 @@
     </div>
 
     <mat-dialog-content class="content">
-        <form
-            [formGroup]="serviceForm"
-            (ngSubmit)="saveClicked()"
-            class="service-form"
-        >
+        <form [formGroup]="serviceForm" class="service-form">
             <mat-form-field class="field">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" />
@@ -54,9 +50,9 @@
 
             <mat-form-field class="field">
                 <mat-label>Job titles</mat-label>
-                <mat-select formControlName="jobTitlesIds" multiple>
+                <mat-select formControlName="jobTitlesNames" multiple>
                     @for (jobTitle of dialogData.jobTitles; track jobTitle) {
-                        <mat-option [value]="jobTitle.id">
+                        <mat-option [value]="jobTitle.name">
                             {{ jobTitle.name }}
                         </mat-option>
                     }
@@ -89,7 +85,7 @@
             </button>
 
             <button
-                type="submit"
+                (click)="saveClicked()"
                 mat-raised-button
                 color="primary"
                 class="save-button"

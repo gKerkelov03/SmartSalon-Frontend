@@ -1,0 +1,44 @@
+<section>
+    <div mat-dialog-title class="header">
+        <h3 class="title">Delete section</h3>
+
+        <button
+            type="button"
+            mat-dialog-close
+            mat-icon-button
+            class="close-button"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content class="content">
+        <p>
+            Are you sure you want to delete section
+            {{ dialogData.section.name }}.
+
+            @if (dialogData.section.categories.length) {
+                It has
+                {{ dialogData.section.categories.length }}
+                {{
+                    dialogData.section.categories.length === 1
+                        ? 'categorie'
+                        : 'categories'
+                }}
+
+                @if (servicesCount > 0) {
+                    and {{ servicesCount }}
+                    {{ servicesCount > 1 ? 'services' : 'service' }}
+                }
+            }
+        </p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="actions" align="center">
+        <button mat-button mat-dialog-close>Close</button>
+
+        <button mat-raised-button color="warn" (click)="deleteClicked()">
+            Delete
+        </button>
+    </mat-dialog-actions>
+</section>

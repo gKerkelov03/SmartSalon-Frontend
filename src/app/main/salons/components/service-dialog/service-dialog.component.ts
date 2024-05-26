@@ -7,6 +7,7 @@ import {
     Validators,
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { switchMap } from 'rxjs';
 import { CrudAction } from '../../../../core/enums/crud-action';
 import { CreatedResponse } from '../../../../core/models/created-response.model';
@@ -41,7 +42,7 @@ export class ServiceDialogComponent {
     }
 
     get jobTitlesControl(): AbstractControl {
-        return this.serviceForm.get('jobTitlesIds')!;
+        return this.serviceForm.get('jobTitlesNames')!;
     }
 
     constructor(
@@ -56,6 +57,7 @@ export class ServiceDialogComponent {
         private dialogRef: MatDialogRef<ServiceDialogComponent>,
         private servicesService: ServicesService,
         private formBuilder: FormBuilder,
+        private snackBar: MatSnackBar,
     ) {}
 
     ngOnInit(): void {
@@ -81,26 +83,62 @@ export class ServiceDialogComponent {
                 Validators.required,
             ]),
             order: new FormControl(service?.order, []),
-            jobTitlesIds: new FormControl(
+            jobTitlesNames: new FormControl(
                 service
-                    ? [service?.jobTitles.map((jobTitle) => jobTitle.id)]
+                    ? service?.jobTitles.map((jobTitle) => jobTitle.name)
                     : [],
-                [Validators.required, IsNotEmptyArrayValidator()],
+                [IsNotEmptyArrayValidator()],
             ),
         });
     }
 
     saveClicked(): void {
+        const newService = this.serviceForm.value;
+        const jobTitlesIds = this.dialogData.jobTitles
+            .filter((jobTitle) =>
+                newService.jobTitlesNames.includes(jobTitle.name),
+            )
+            .map((jobTitle) => jobTitle.id);
+
+        const newServiceJobTitles = jobTitlesIds.map((jobTitleId: string) =>
+            this.dialogData.jobTitles.find(
+                (jobTitle) => jobTitle.id === jobTitleId,
+            ),
+        );
+
+        newService.jobTitlesIds = jobTitlesIds;
+
         if (this.dialogData.action === CrudAction.Update) {
             this.servicesService
                 .update(this.dialogData.service!.id, this.serviceForm.value)
                 .subscribe(() => {
                     this.dialogRef.close({
-                        category: this.dialogData.service,
+                        service: {
+                            ...newService,
+                            id: this.dialogData.service?.id,
+                            jobTitles: newServiceJobTitles,
+                        },
                         action: this.dialogData.action,
                     });
                 });
         } else if (this.dialogData.action === CrudAction.Create) {
+            const observer = {
+                next: (service: Service) => {
+                    this.dialogRef.close({
+                        service: {
+                            ...service,
+                            jobTitles: newServiceJobTitles,
+                        },
+                        action: this.dialogData.action,
+                    });
+                },
+                error: () =>
+                    this.snackBar.open(
+                        'Service with this name already exist',
+                        'Close',
+                    ),
+            };
+
             this.servicesService
                 .create(this.serviceForm.value)
                 .pipe(
@@ -110,18 +148,13 @@ export class ServiceDialogComponent {
                         ),
                     ),
                 )
-                .subscribe((service: Service) =>
-                    this.dialogRef.close({
-                        service,
-                        action: this.dialogData.action,
-                    }),
-                );
+                .subscribe(observer);
         }
     }
 
     deleteClicked(): void {
         this.dialogRef.close({
-            category: this.dialogData.service,
+            service: this.dialogData.service,
             action: CrudAction.Delete,
         });
     }

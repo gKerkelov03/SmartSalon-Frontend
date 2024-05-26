@@ -1,0 +1,21 @@
+@use '../../../../../assets/styles/variables' as *;
+
+section {
+    padding: 2rem;
+    border-radius: 30px;
+    height: 100%;
+
+    .header {
+        display: flex;
+
+        .title {
+            display: block;
+            font-size: 1.75rem;
+            color: $black;
+        }
+
+        .close-button {
+            margin-left: auto;
+        }
+    }
+}
