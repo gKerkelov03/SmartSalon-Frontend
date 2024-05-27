@@ -69,12 +69,11 @@ export class CategoryDialogComponent {
                 .subscribe(observer);
         } else if (this.dialogData.action === CrudAction.Create) {
             const observer = {
-                next: (category: Category) => {
+                next: (category: Category) =>
                     this.dialogRef.close({
                         category,
                         action: this.dialogData.action,
-                    });
-                },
+                    }),
                 error: () =>
                     this.snackBar.open(
                         'Category with this name already exist',

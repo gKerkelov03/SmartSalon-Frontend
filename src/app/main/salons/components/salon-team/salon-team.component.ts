@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { blankProfilePictureUrl } from '../../../../core/constants/urls';
+import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Worker } from '../../../users/models/worker.model';
+import { JobTitle } from '../../models/job-title.model';
+import { AddWorkerDialogComponent } from '../add-worker-dialog/add-worker-dialog.component';
 
 @Component({
     selector: 'app-salon-team',
@@ -8,46 +10,38 @@ import { Worker } from '../../../users/models/worker.model';
     styleUrl: './salon-team.component.scss',
 })
 export class SalonTeamComponent {
-    // @Input()
-    team: Worker[] = [
-        {
-            firstName: 'gosho',
-            lastName: 'kerkelov',
-            emailConfirmed: true,
-            salons: [],
-            nickname: 'Gosho',
-            jobTitles: [],
-            email: 'gkerkelov03@abv.bg',
-            id: 'guid',
-            phoneNumber: 'asdfsd',
-            profilePictureUrl: blankProfilePictureUrl,
-            roles: [],
-        },
-        {
-            firstName: 'gosho',
-            lastName: 'kerkelov',
-            emailConfirmed: true,
-            salons: [],
-            nickname: 'Pesho',
-            jobTitles: [],
-            email: 'gkerkelov03@abv.bg',
-            id: 'guid',
-            phoneNumber: 'asdfsd',
-            profilePictureUrl: blankProfilePictureUrl,
-            roles: [],
-        },
-        {
-            firstName: 'gosho',
-            lastName: 'kerkelov',
-            emailConfirmed: true,
-            salons: [],
-            nickname: 'Stamo',
-            jobTitles: [],
-            email: 'gkerkelov03@abv.bg',
-            id: 'guid',
-            phoneNumber: 'asdfsd',
-            profilePictureUrl: blankProfilePictureUrl,
-            roles: [],
-        },
-    ];
+    @Input()
+    team!: Worker[];
+
+    @Input()
+    canEdit!: boolean;
+
+    @Input()
+    salonId!: string;
+
+    @Input()
+    jobTitles!: JobTitle[];
+
+    constructor(private dialog: MatDialog) {}
+
+    openAddWorkerDialog(): void {
+        const dialogRef = this.dialog.open(AddWorkerDialogComponent, {
+            width: '40vw',
+            autoFocus: false,
+            panelClass: 'round-without-padding',
+            data: {
+                salonId: this.salonId,
+                jobTitles: this.jobTitles,
+            },
+            enterAnimationDuration: '300ms',
+        });
+
+        dialogRef
+            .afterClosed()
+            .subscribe((result: { worker: Worker } | undefined) => {
+                if (result?.worker) {
+                    this.team.push(result.worker);
+                }
+            });
+    }
 }

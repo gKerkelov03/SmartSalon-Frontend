@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import {
     AbstractControl,
@@ -6,13 +7,21 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { passwordRegex } from '../../../core/constants/regexes';
 import { blankProfilePictureUrl } from '../../../core/constants/urls';
+import { CreatedResponse } from '../../../core/models/created-response.model';
 import { AuthService } from '../../../core/services/auth.service';
+import { getErrorMessages } from '../../../core/utils/get-error-message';
+import { IsNotEmptyArrayValidator } from '../../../core/utils/validators/is-not-empty-array.validator';
 import { AreMatchingValidator } from '../../../core/utils/validators/matching.validator';
-import { Salon } from '../../../main/salons/models/salon.model';
+import { AddWorkerDialogComponent } from '../../../main/salons/components/add-worker-dialog/add-worker-dialog.component';
+import { JobTitle } from '../../../main/salons/models/job-title.model';
+import { Owner } from '../../../main/users/models/owner.model';
+import { Worker } from '../../../main/users/models/worker.model';
 import { OwnersService } from '../../../main/users/services/owners.service';
 import { WorkersService } from '../../../main/users/services/workers.service';
 
@@ -27,7 +36,9 @@ export class RegisterFormComponent implements OnInit {
     @Input()
     isRegisteringWorker!: boolean;
     @Input()
-    salon!: Salon;
+    salonId!: string;
+    @Input()
+    jobTitles!: JobTitle[];
     registerForm!: FormGroup;
     genders: string[] = ['male', 'female'];
     isPasswordVisible: boolean = false;
@@ -38,6 +49,7 @@ export class RegisterFormComponent implements OnInit {
         private authService: AuthService,
         private ownersService: OwnersService,
         private workersService: WorkersService,
+        private dialogRef: MatDialogRef<AddWorkerDialogComponent>,
         private snackBar: MatSnackBar,
         private router: Router,
     ) {}
@@ -70,13 +82,71 @@ export class RegisterFormComponent implements OnInit {
         return this.registerForm.get('phoneNumber');
     }
 
+    get jobTitlesNamesControl(): AbstractControl | null {
+        return this.registerForm.get('jobTitlesNames');
+    }
+
     ngOnInit(): void {
         this.setupTheRegisterForm();
         this.checkIfConfirmPasswordIsValidEveryTimePasswordChanges();
     }
 
     onSubmit(): void {
-        return;
+        const userInfo = this.registerForm.value;
+        const createWorkerObserver = {
+            next: (worker: Worker) => this.dialogRef.close({ worker }),
+            error: (error: HttpErrorResponse) =>
+                this.snackBar.open(getErrorMessages(error), 'Close'),
+        };
+
+        const createOwnerObserver = {
+            next: (owner: Owner) => this.dialogRef.close({ owner }),
+            error: (error: HttpErrorResponse) =>
+                this.snackBar.open(getErrorMessages(error), 'Close'),
+        };
+
+        const createCustomerObserver = {
+            next: () => {
+                this.router.navigate(['/public/login']);
+                this.snackBar.open('Your account is created, please login');
+            },
+            error: (error: HttpErrorResponse) =>
+                this.snackBar.open(getErrorMessages(error), 'Close'),
+        };
+
+        if (this.isRegisteringWorker) {
+            const jobTitlesIds = this.jobTitles
+                .filter((jobTitle) =>
+                    this.jobTitlesNamesControl?.value.includes(jobTitle.name),
+                )
+                .map((jobTitle) => jobTitle.id);
+
+            userInfo.jobTitlesIds = jobTitlesIds;
+        }
+
+        if (this.isRegisteringWorker) {
+            this.workersService
+                .create(userInfo)
+                .pipe(
+                    switchMap((response: CreatedResponse) =>
+                        this.workersService.getById(response.createdResourceId),
+                    ),
+                )
+                .subscribe(createWorkerObserver);
+        } else if (this.isRegisteringOwner) {
+            this.ownersService
+                .create(userInfo)
+                .pipe(
+                    switchMap((response: CreatedResponse) =>
+                        this.ownersService.getById(response.createdResourceId),
+                    ),
+                )
+                .subscribe(createOwnerObserver);
+        } else {
+            this.authService
+                .register(userInfo)
+                .subscribe(createCustomerObserver);
+        }
     }
 
     setupTheRegisterForm(): void {
@@ -102,9 +172,15 @@ export class RegisterFormComponent implements OnInit {
                 AreMatchingValidator('password'),
             ]),
             phoneNumber: new FormControl('', [Validators.required]),
-            salonId: new FormControl(this.salon?.id, []),
-            jobTitles: new FormControl([], []),
+            salonId: new FormControl(this.salonId, []),
         });
+
+        if (this.isRegisteringWorker) {
+            this.registerForm.addControl(
+                'jobTitlesNames',
+                new FormControl([], [IsNotEmptyArrayValidator]),
+            );
+        }
     }
 
     checkIfConfirmPasswordIsValidEveryTimePasswordChanges(): void {

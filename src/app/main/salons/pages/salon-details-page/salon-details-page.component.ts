@@ -23,7 +23,7 @@ import { WorkingTimesService } from '../../services/working-times.service';
 export class SalonDetailsPageComponent implements OnInit {
     salon!: Salon | null;
     workingTime!: WorkingTime;
-    workers!: Worker[];
+    workers: Worker[] = [];
     sections!: Section[];
 
     constructor(

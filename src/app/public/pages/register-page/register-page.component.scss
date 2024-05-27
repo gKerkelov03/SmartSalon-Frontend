@@ -1,6 +1,15 @@
+@use '../../../../assets/styles/variables' as *;
+
 section {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+
+    app-register-form {
+        width: 50%;
+        border-radius: 30px;
+        box-shadow: $form-shadow;
+    }
 }

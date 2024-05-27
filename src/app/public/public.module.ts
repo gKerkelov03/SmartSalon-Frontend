@@ -14,10 +14,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from './components/footer/footer.component';
-import { FormsSocialsComponent } from './components/forms-socials/forms-socials.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { RestorePasswordFormComponent } from './components/restore-password-form/restore-password-form.component';
 import { EmailsHandlerPageComponent } from './pages/emails-handler-page/emails-handler-page.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
@@ -34,8 +32,6 @@ import { PublicRoutingModule } from './public-routing.module';
         RegisterPageComponent,
         LoginPageComponent,
         LoginFormComponent,
-        RegisterFormComponent,
-        FormsSocialsComponent,
         RestorePasswordPageComponent,
         RestorePasswordFormComponent,
         EmailsHandlerPageComponent,

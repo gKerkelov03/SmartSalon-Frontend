@@ -10,9 +10,6 @@ section {
     }
 
     .sections {
-        display: flex;
-        gap: 2rem;
-
         ::ng-deep .mat-mdc-tab:not(.mdc-tab--stacked) {
             height: 100%;
         }
@@ -42,6 +39,16 @@ section {
         }
 
         .categories {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+            .categories-title {
+                color: $black;
+                margin: 1rem 0;
+            }
+
             ::ng-deep .category {
                 .mat-mdc-tab-body-content {
                     display: flex;

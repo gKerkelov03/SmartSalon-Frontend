@@ -37,7 +37,7 @@
                             {{ section.name }}
                         </p>
 
-                        @if (selectedSectionIndex === $index) {
+                        @if (selectedSectionIndex === $index && canEdit) {
                             <div class="actions">
                                 <button
                                     mat-icon-button
@@ -71,77 +71,104 @@
                     </div>
                 </ng-template>
 
-                <mat-tab-group
-                    class="categories"
-                    (selectedIndexChange)="categoryIndexChanged($event)"
-                >
-                    @for (
-                        category of sections[selectedSectionIndex].categories;
-                        track category.id
-                    ) {
-                        <mat-tab [label]="category.name" bodyClass="category">
-                            <ng-template mat-tab-label>
-                                <div class="category-label">
-                                    <p>
-                                        {{ category.name }}
-                                    </p>
+                <div class="categories">
+                    @if (sections[selectedSectionIndex].categories.length) {
+                        <h5 class="categories-title">Categories</h5>
+                    } @else {
+                        <h5 class="categories-title">No categories yet</h5>
+                    }
 
-                                    @if (selectedCategoryIndex === $index) {
-                                        <div class="actions">
-                                            <button
-                                                mat-icon-button
-                                                (click)="
-                                                    createServiceClicked(
-                                                        category
-                                                    )
-                                                "
-                                                color="primary"
-                                                class="add-service-button"
-                                            >
-                                                <mat-icon>add_circle</mat-icon>
-                                            </button>
+                    <mat-tab-group
+                        (selectedIndexChange)="categoryIndexChanged($event)"
+                    >
+                        @for (
+                            category of sections[selectedSectionIndex]
+                                .categories;
+                            track category.id
+                        ) {
+                            <mat-tab
+                                [label]="category.name"
+                                bodyClass="category"
+                            >
+                                <ng-template mat-tab-label>
+                                    <div class="category-label">
+                                        <p>
+                                            {{ category.name }}
+                                        </p>
 
-                                            <button
-                                                mat-icon-button
-                                                (click)="
-                                                    openCategoryDialog(
-                                                        CrudAction.Update,
-                                                        section,
-                                                        category
-                                                    )
-                                                "
-                                                color="primary"
-                                                class="add-service-button"
-                                            >
-                                                <mat-icon>edit_square</mat-icon>
-                                            </button>
+                                        @if (
+                                            selectedCategoryIndex === $index &&
+                                            canEdit
+                                        ) {
+                                            <div class="actions">
+                                                <button
+                                                    mat-icon-button
+                                                    (click)="
+                                                        createServiceClicked(
+                                                            category
+                                                        )
+                                                    "
+                                                    color="primary"
+                                                    class="add-service-button"
+                                                >
+                                                    <mat-icon
+                                                        >add_circle</mat-icon
+                                                    >
+                                                </button>
+
+                                                <button
+                                                    mat-icon-button
+                                                    (click)="
+                                                        openCategoryDialog(
+                                                            CrudAction.Update,
+                                                            section,
+                                                            category
+                                                        )
+                                                    "
+                                                    color="primary"
+                                                    class="add-service-button"
+                                                >
+                                                    <mat-icon
+                                                        >edit_square</mat-icon
+                                                    >
+                                                </button>
+                                            </div>
+                                        }
+                                    </div>
+                                </ng-template>
+
+                                @for (
+                                    service of category.services;
+                                    track $index
+                                ) {
+                                    <div
+                                        class="service"
+                                        (click)="
+                                            serviceClicked(service, category)
+                                        "
+                                    >
+                                        <div>
+                                            <p class="name">
+                                                {{ service.name }}
+                                            </p>
+                                            <p class="duration">
+                                                {{ service.durationInMinutes }}
+                                                minutes
+                                            </p>
                                         </div>
-                                    }
-                                </div>
-                            </ng-template>
 
-                            @for (service of category.services; track $index) {
-                                <div
-                                    class="service"
-                                    (click)="serviceClicked(service, category)"
-                                >
-                                    <div>
-                                        <p class="name">{{ service.name }}</p>
-                                        <p class="duration">
-                                            {{ service.durationInMinutes }}
-                                            minutes
+                                        <p class="price">
+                                            {{ service.price }}
+                                            {{
+                                                mainCurrency.code.toUpperCase()
+                                            }}
                                         </p>
                                     </div>
-
-                                    <p class="price">
-                                        {{ service.price }}
-                                        {{ mainCurrency.code.toUpperCase() }}
-                                    </p>
-                                </div>
-                            }
-                        </mat-tab>
-                    }
-                </mat-tab-group>
+                                }
+                            </mat-tab>
+                        }
+                    </mat-tab-group>
+                </div>
             </mat-tab>
         }
     </mat-tab-group>

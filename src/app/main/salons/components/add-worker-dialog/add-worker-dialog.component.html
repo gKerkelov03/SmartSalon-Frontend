@@ -1,0 +1,38 @@
+<section>
+    <div mat-dialog-title class="header">
+        <h3 class="title">Add worker</h3>
+
+        <button
+            type="button"
+            mat-dialog-close
+            mat-icon-button
+            class="close-button"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content class="content">
+        <mat-tab-group>
+            <mat-tab label="Create new account" bodyClass="tab">
+                <app-register-form
+                    [isRegisteringWorker]="true"
+                    [salonId]="dialogData.salonId"
+                    [jobTitles]="dialogData.jobTitles"
+                />
+            </mat-tab>
+            <mat-tab label="Add existing account" bodyClass="tab"> </mat-tab>
+        </mat-tab-group>
+    </mat-dialog-content>
+
+    <!-- <mat-dialog-actions class="actions" align="center">
+        <button
+            mat-raised-button
+            color="primary"
+            mat-dialog-close
+            (click)="openSalonDetailsPage()"
+        >
+            See more
+        </button>
+    </mat-dialog-actions> -->
+</section>

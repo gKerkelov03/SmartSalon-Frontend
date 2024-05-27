@@ -1,13 +1,14 @@
-@if (workingTime && salon && sections) {
+@if (workingTime && salon && sections && workers) {
     <app-salon-header class="header" [name]="salon.name" [rating]="3.3" />
 
     <app-salon-sections
         class="sections"
-        [canEdit]="canEdit"
         [sections]="sections"
         [salonId]="salon.id"
         [jobTitles]="salon.jobTitles"
         [mainCurrency]="salon.mainCurrency"
+        [workers]="workers"
+        [canEdit]="false"
     />
 
     <app-salon-main-picture
@@ -52,7 +53,13 @@
         [salonId]="salon.id"
     />
 
-    <app-salon-team class="team" />
+    <app-salon-team
+        class="team"
+        [team]="workers"
+        [canEdit]="true"
+        [salonId]="salon.id"
+        [jobTitles]="salon.jobTitles"
+    />
 } @else {
     <div class="spinner-container">
         <mat-spinner mode="indeterminate" diameter="200"></mat-spinner>

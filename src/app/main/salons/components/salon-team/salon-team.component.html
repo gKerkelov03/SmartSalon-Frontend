@@ -1,23 +1,40 @@
 <section>
-    <h3 class="title">Team</h3>
+    <h3 class="title">
+        Team
 
-    <div class="flex-container">
-        @for (worker of team; track $index) {
-            <div class="team-member">
-                <img
-                    [src]="worker.profilePictureUrl"
-                    alt="Team member image"
-                    class="image"
-                />
-                <div class="rating">
-                    <span> 3.33 </span>
-                    <img
-                        class="star"
-                        src="../../../../../assets/icons/review-star.svg"
-                    />
-                </div>
-                <p class="nickname">{{ worker.nickname }}</p>
-            </div>
+        @if (canEdit) {
+            <button
+                class="icon"
+                mat-icon-button
+                color="primary"
+                (click)="openAddWorkerDialog()"
+            >
+                <mat-icon matTooltipPosition="left"> add_circle </mat-icon>
+            </button>
         }
-    </div>
+    </h3>
+
+    @if (team.length) {
+        <div class="flex-container">
+            @for (worker of team; track $index) {
+                <div class="team-member">
+                    <img
+                        [src]="worker.profilePictureUrl"
+                        alt="Team member image"
+                        class="image"
+                    />
+                    <div class="rating">
+                        <span> 3.33 </span>
+                        <img
+                            class="star"
+                            src="../../../../../assets/icons/review-star.svg"
+                        />
+                    </div>
+                    <p class="nickname">{{ worker.nickname }}</p>
+                </div>
+            }
+        </div>
+    } @else {
+        No workers yet
+    }
 </section>

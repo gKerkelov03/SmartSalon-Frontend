@@ -1,8 +1,6 @@
 @use '../../../../assets/styles/variables' as *;
 
 .register-form {
-    box-shadow: $form-shadow;
-    width: 50%;
     margin: auto;
     padding: 2rem;
     background-color: $white;

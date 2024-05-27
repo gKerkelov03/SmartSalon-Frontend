@@ -33,7 +33,7 @@
     </mat-dialog-content>
 
     <mat-dialog-actions class="actions" align="center">
-        @if (dialogData.canDelete) {
+        @if (dialogData.canDelete && dialogData.action !== CrudAction.Create) {
             <button
                 mat-raised-button
                 color="warn"

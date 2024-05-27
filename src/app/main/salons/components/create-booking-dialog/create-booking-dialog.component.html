@@ -1,0 +1,77 @@
+<section>
+    <div mat-dialog-title class="header">
+        <h3 class="title">Make a booking</h3>
+
+        <button
+            type="button"
+            mat-dialog-close
+            mat-icon-button
+            class="close-button"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content class="content">
+        <form [formGroup]="createBookingForm">
+            <mat-stepper linear>
+                <mat-step [completed]="!!dateControl.value">
+                    <mat-form-field
+                        formControlName="date"
+                        class="date-picker-field"
+                    >
+                        <input
+                            matInput
+                            readonly
+                            [matDatepicker]="picker"
+                            placeholder="Choose a date"
+                            formControlName="date"
+                        />
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle
+                            matSuffix
+                            [for]="picker"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <app-error-message
+                        [control]="dateControl"
+                    ></app-error-message>
+
+                    <div class="actions">
+                        <button mat-button matStepperPrevious type="button">
+                            Back
+                        </button>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            matStepperNext
+                            type="button"
+                            [disabled]="!dateControl.valid"
+                        >
+                            Next
+                        </button>
+                    </div>
+                </mat-step>
+
+                <mat-step [completed]="!!workerControl.value">
+                    <app-salon-team></app-salon-team>
+
+                    <div class="actions">
+                        <button mat-button matStepperPrevious type="button">
+                            Back
+                        </button>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            matStepperNext
+                            type="button"
+                        >
+                            Next
+                        </button>
+                    </div>
+                </mat-step>
+            </mat-stepper>
+        </form>
+    </mat-dialog-content>
+</section>

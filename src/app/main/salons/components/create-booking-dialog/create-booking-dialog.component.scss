@@ -1,0 +1,40 @@
+@use '../../../../../assets/styles/variables' as *;
+
+section {
+    padding: 2rem;
+    border-radius: 30px;
+    height: 100%;
+
+    .header {
+        display: flex;
+
+        .main-image {
+            margin-right: 2rem;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .title {
+            display: block;
+            font-size: 1.75rem;
+            color: $black;
+        }
+
+        .close-button {
+            margin-left: auto;
+        }
+    }
+
+    .content {
+        padding: 0;
+        .actions {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        .date-picker-field {
+            width: 100%;
+        }
+    }
+}

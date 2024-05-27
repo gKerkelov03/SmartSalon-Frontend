@@ -2,12 +2,14 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CrudAction } from '../../../../core/enums/crud-action';
+import { Worker } from '../../../users/models/worker.model';
 import { Category } from '../../models/category.model';
 import { Currency } from '../../models/currency.model';
 import { JobTitle } from '../../models/job-title.model';
 import { Section } from '../../models/section.model';
 import { Service } from '../../models/service.model';
 import { CategoryDialogComponent } from '../category-dialog/category-dialog.component';
+import { CreateBookingDialogComponent } from '../create-booking-dialog/create-booking-dialog.component';
 import { DeleteCategoryDialogComponent } from '../delete-category-dialog/delete-category-dialog.component';
 import { DeleteSectionDialogComponent } from '../delete-section-dialog/delete-section-dialog.component';
 import { DeleteServiceDialogComponent } from '../delete-service-dialog/delete-service-dialog.component';
@@ -34,6 +36,9 @@ export class SalonSectionsComponent {
 
     @Input()
     jobTitles!: JobTitle[];
+
+    @Input()
+    workers!: Worker[];
 
     CrudAction = CrudAction;
 
@@ -270,6 +275,28 @@ export class SalonSectionsComponent {
     serviceClicked(service: Service, category: Category) {
         if (this.canEdit) {
             this.openServiceDialog(CrudAction.Update, category, service);
+        } else {
+            this.openCreateBookingDialog(service);
         }
+    }
+
+    openCreateBookingDialog(service: Service): void {
+        console.log(this.workers);
+        if (!this.workers?.length) {
+            this.snackBar.open('No workers in this salon yet', 'Close');
+            return;
+        }
+
+        this.dialog.open(CreateBookingDialogComponent, {
+            width: '40vw',
+            autoFocus: false,
+            panelClass: 'round-without-padding',
+            data: {
+                service,
+                workers: this.workers,
+                salonId: this.salonId,
+            },
+            enterAnimationDuration: '300ms',
+        });
     }
 }

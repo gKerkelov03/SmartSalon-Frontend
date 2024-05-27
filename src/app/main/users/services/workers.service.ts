@@ -14,7 +14,7 @@ export class WorkersService {
 
     create(worker: CreateWorkerRequest): Observable<CreatedResponse> {
         return this.httpClient.post<CreatedResponse>(
-            `${environment.backendUrl}`,
+            `${this.workersBackendUrl}`,
             worker,
         );
     }
