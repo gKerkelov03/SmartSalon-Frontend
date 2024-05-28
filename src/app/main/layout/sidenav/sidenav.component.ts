@@ -13,6 +13,11 @@ export class SidenavComponent implements OnInit {
     @Input()
     profilePictureUrl?: string;
     sidenavItems = this.getSidenavItems();
+    logoutSideNavItemData = {
+        title: 'Logout',
+        icon: 'logout',
+        path: '/public/login',
+    };
 
     constructor(private currentUser: CurrentUserService) {}
 
@@ -38,15 +43,15 @@ export class SidenavComponent implements OnInit {
             });
         } else if (this.currentUser.isWorker) {
             routes.push({
-                title: 'My salons',
-                icon: 'storefront',
-                path: '/main/salons/my-salons',
-            });
-        } else if (this.currentUser.isOwner) {
-            routes.push({
                 title: 'My calendar',
                 icon: 'calendar_month',
                 path: '/main/bookings/my-calendar',
+            });
+        } else if (this.currentUser.isOwner) {
+            routes.push({
+                title: 'My salons',
+                icon: 'storefront',
+                path: '/main/salons/my-salons',
             });
         }
 

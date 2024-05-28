@@ -12,6 +12,11 @@
         <app-sidenav-item [sidenavItemData]="sidenavItemData" />
     }
 
+    <app-sidenav-item
+        [isLogout]="true"
+        [sidenavItemData]="logoutSideNavItemData"
+    />
+
     <div class="logo-container">
         <app-theme-switch />
         <mat-divider class="divider" />

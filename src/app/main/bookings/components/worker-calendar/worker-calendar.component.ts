@@ -1,27 +1,25 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {
-    CalendarEvent,
-    CalendarMonthViewDay,
-    CalendarView,
-} from 'angular-calendar';
-import { isSameDay } from 'date-fns';
+import { CalendarEvent, CalendarView } from 'angular-calendar';
+import { isSameDay, isSameMonth } from 'date-fns';
 import {
     Subject,
     catchError,
     delay,
+    finalize,
     map,
     of,
     switchMap,
+    take,
     takeUntil,
 } from 'rxjs';
 import { CrudAction } from '../../../../core/enums/crud-action';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { BookingsFormComponent } from '../../../bookings/components/bookings-form/bookings-form.component';
-import { MoreInfoAboutBookingComponent } from '../../../bookings/components/more-info-about-booking/more-info-about-booking.component';
 import { BookingChange } from '../../../bookings/models/booking-change-model';
 import { Booking } from '../../models/booking.model';
 import { BookingsService } from '../../services/bookings.service';
+import { MoreInfoAboutBookingComponent } from '../more-info-about-booking/more-info-about-booking.component';
 
 @Component({
     selector: 'app-worker-calendar',
@@ -73,25 +71,27 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
                 if (booking === null) {
                     this.deleteBookingWithId(bookingId);
                 } else if (action === CrudAction.Create) {
-                    this.addBooking(booking);
+                    this.addCalendarEvent(booking);
                     this.calendarEvents = [...this.calendarEvents];
                 } else if (action === CrudAction.Update) {
                     this.deleteBookingWithId(bookingId);
-                    this.addBooking(booking);
+                    this.addCalendarEvent(booking);
                 }
             });
     }
 
     populateTheCalendarWithBookings(): void {
-        // this.bookingsService
-        //     .getAll()
-        //     .pipe(
-        //         take(1),
-        //         finalize(() => (this.calendarEvents = [...this.calendarEvents]))
-        //     )
-        //     .subscribe((response: Booking[]) =>
-        //         response.forEach((booking) => this.addBooking(booking))
-        //     );
+        this.bookingsService
+            .getWorkerBookings(this.currentUser.currentUser!.id)
+            .pipe(
+                take(1),
+                finalize(
+                    () => (this.calendarEvents = [...this.calendarEvents]),
+                ),
+            )
+            .subscribe((response: Booking[]) =>
+                response.forEach((booking) => this.addCalendarEvent(booking)),
+            );
     }
 
     openTheBookingsFormWithPrefilledStartTime(
@@ -116,20 +116,25 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
         });
     }
 
-    dayClicked(parameter: CalendarMonthViewDay): void {
-        const date = new Date(parameter.date);
-        this.openTheBookingsFormWithPrefilledStartTime(date, true);
-
-        if (
-            (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-            this.calendarEvents.length === 0
-        ) {
-            this.activeDayIsOpen = false;
-        } else {
-            this.activeDayIsOpen = true;
+    dayClicked({
+        date,
+        events,
+    }: {
+        date: Date;
+        events: CalendarEvent[];
+    }): void {
+        if (isSameMonth(date, this.viewDate)) {
+            if (
+                (isSameDay(this.viewDate, date) &&
+                    this.activeDayIsOpen === true) ||
+                events.length === 0
+            ) {
+                this.activeDayIsOpen = false;
+            } else {
+                this.activeDayIsOpen = true;
+            }
+            this.viewDate = date;
         }
-
-        this.viewDate = date;
     }
 
     hourSegmentClicked({ date }: { date: Date }) {
@@ -146,7 +151,13 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
         this.view = view;
     }
 
-    addBooking(booking: Booking) {}
+    addCalendarEvent(booking: Booking) {
+        this.calendarEvents.push({
+            title: booking.customerName,
+            start: new Date(`${booking.date}T${booking.startTime}`),
+            end: new Date(`${booking.date}T${booking.startTime}`),
+        });
+    }
 
     closeOpenMonthViewDay(): void {
         this.activeDayIsOpen = false;

@@ -1,11 +1,13 @@
-header {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    justify-content: center;
-    align-items: center;
+section {
+    header {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        justify-content: center;
+        align-items: center;
 
-    button {
-        margin: 0.5rem;
+        button {
+            margin: 0.5rem;
+        }
     }
 }

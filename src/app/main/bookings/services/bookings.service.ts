@@ -44,7 +44,7 @@ export class BookingsService {
 
     getWorkerBookings(workerId: string): Observable<Booking[]> {
         return this.httpClient.get<Booking[]>(
-            `${this.bookingsBackendUrl}/GetWorkerBookings/${workerId}`,
+            `${this.bookingsBackendUrl}GetWorkerBookings/${workerId}`,
         );
     }
 

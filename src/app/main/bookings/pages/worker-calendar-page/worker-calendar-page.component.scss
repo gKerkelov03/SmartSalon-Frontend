@@ -4,5 +4,15 @@
 }
 
 section {
-    padding: 2rem;
+    padding-left: 6rem;
+
+    .create-booking-button {
+        margin-left: 4rem;
+    }
+
+    app-worker-calendar {
+        margin: auto;
+        display: block;
+        width: 100%;
+    }
 }
