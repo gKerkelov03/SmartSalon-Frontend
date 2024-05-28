@@ -58,8 +58,12 @@ export class SearchSalonsPageComponent implements OnInit {
                 enterAnimationDuration: '300ms',
             });
         } else {
-            this.router.navigate([`main/salons/${salon?.id}`]);
+            this.openSalonDetails(salon);
         }
+    }
+
+    openSalonDetails(salon: Salon) {
+        this.router.navigate([`main/salons/${salon?.id}`]);
     }
 
     private getUserLocationInfo(): Observable<void> {

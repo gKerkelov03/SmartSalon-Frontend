@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { sidenavItems } from '../../../core/constants/sidenav-items';
 import { blankProfilePictureUrl } from '../../../core/constants/urls';
+import { SidenavItemData } from '../../../core/models/sidenav-item-data.model';
+import { CurrentUserService } from '../../../core/services/current-user.service';
 import { isValidUrl } from '../../../core/utils/is-valid-url';
 
 @Component({
@@ -11,7 +12,46 @@ import { isValidUrl } from '../../../core/utils/is-valid-url';
 export class SidenavComponent implements OnInit {
     @Input()
     profilePictureUrl?: string;
-    sidenavItems = sidenavItems;
+    sidenavItems = this.getSidenavItems();
+
+    constructor(private currentUser: CurrentUserService) {}
+
+    getSidenavItems(): SidenavItemData[] {
+        const routes = [
+            {
+                title: 'Profile',
+                icon: 'account_circle',
+                path: '/main/users/profile',
+            },
+            {
+                title: 'Search salons',
+                icon: 'search',
+                path: '/main/salons',
+            },
+        ];
+
+        if (this.currentUser.isCustomer) {
+            routes.push({
+                title: 'My bookings',
+                icon: 'bookmark_added',
+                path: '/main/bookings/my-bookings',
+            });
+        } else if (this.currentUser.isWorker) {
+            routes.push({
+                title: 'My salons',
+                icon: 'storefront',
+                path: '/main/salons/my-salons',
+            });
+        } else if (this.currentUser.isOwner) {
+            routes.push({
+                title: 'My calendar',
+                icon: 'calendar_month',
+                path: '/main/bookings/my-calendar',
+            });
+        }
+
+        return routes;
+    }
 
     ngOnInit(): void {
         this.setBlankProfilePictureIfNeeded();

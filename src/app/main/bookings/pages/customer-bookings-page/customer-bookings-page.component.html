@@ -6,7 +6,8 @@
             <mat-card-header>
                 <mat-card-title>{{ booking.salonName }}</mat-card-title>
                 <mat-card-subtitle>
-                    {{ booking.date | date }} {{ booking.startTime }}
+                    {{ booking.date | date }}
+                    {{ booking.startTime | onlyHourAndMinutes }}
                 </mat-card-subtitle>
             </mat-card-header>
 
