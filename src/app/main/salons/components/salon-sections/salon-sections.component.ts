@@ -8,6 +8,7 @@ import { Currency } from '../../models/currency.model';
 import { JobTitle } from '../../models/job-title.model';
 import { Section } from '../../models/section.model';
 import { Service } from '../../models/service.model';
+import { WorkingTime } from '../../models/working-time.model';
 import { CategoryDialogComponent } from '../category-dialog/category-dialog.component';
 import { CreateBookingDialogComponent } from '../create-booking-dialog/create-booking-dialog.component';
 import { DeleteCategoryDialogComponent } from '../delete-category-dialog/delete-category-dialog.component';
@@ -36,6 +37,9 @@ export class SalonSectionsComponent {
 
     @Input()
     jobTitles!: JobTitle[];
+
+    @Input()
+    workingTime!: WorkingTime;
 
     @Input()
     workers!: Worker[];
@@ -281,7 +285,6 @@ export class SalonSectionsComponent {
     }
 
     openCreateBookingDialog(service: Service): void {
-        console.log(this.workers);
         if (!this.workers?.length) {
             this.snackBar.open('No workers in this salon yet', 'Close');
             return;
@@ -295,6 +298,7 @@ export class SalonSectionsComponent {
                 service,
                 workers: this.workers,
                 salonId: this.salonId,
+                workingTime: this.workingTime,
             },
             enterAnimationDuration: '300ms',
         });

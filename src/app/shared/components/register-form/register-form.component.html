@@ -101,20 +101,21 @@
             </mat-form-field>
             <app-error-message [control]="phoneNumberControl">
             </app-error-message>
-
-            <mat-form-field class="field">
-                <mat-label>Job titles</mat-label>
-                <mat-select formControlName="jobTitlesNames" multiple>
-                    @for (jobTitle of jobTitles; track jobTitle) {
-                        <mat-option [value]="jobTitle.name">
-                            {{ jobTitle.name }}
-                        </mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-            <app-error-message
-                [control]="jobTitlesNamesControl"
-            ></app-error-message>
+            @if (isRegisteringWorker) {
+                <mat-form-field class="field">
+                    <mat-label>Job titles</mat-label>
+                    <mat-select formControlName="jobTitlesNames" multiple>
+                        @for (jobTitle of jobTitles; track jobTitle) {
+                            <mat-option [value]="jobTitle.name">
+                                {{ jobTitle.name }}
+                            </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <app-error-message
+                    [control]="jobTitlesNamesControl"
+                ></app-error-message>
+            }
         </div>
         <div class="profile-picture-container">
             <img

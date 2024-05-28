@@ -14,18 +14,17 @@
 
     <mat-dialog-content class="content">
         <form [formGroup]="createBookingForm">
-            <mat-stepper linear>
+            <mat-stepper linear #stepper>
                 <mat-step [completed]="!!dateControl.value">
-                    <mat-form-field
-                        formControlName="date"
-                        class="date-picker-field"
-                    >
+                    <mat-form-field class="date-picker-field">
                         <input
                             matInput
                             readonly
                             [matDatepicker]="picker"
+                            [matDatepickerFilter]="salonWorkingDayFilter"
                             placeholder="Choose a date"
                             formControlName="date"
+                            [min]="today"
                         />
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle
@@ -39,9 +38,6 @@
                     ></app-error-message>
 
                     <div class="actions">
-                        <button mat-button matStepperPrevious type="button">
-                            Back
-                        </button>
                         <button
                             mat-raised-button
                             color="primary"
@@ -55,19 +51,71 @@
                 </mat-step>
 
                 <mat-step [completed]="!!workerControl.value">
-                    <app-salon-team></app-salon-team>
+                    <app-salon-team
+                        [team]="dialogData.workers"
+                        [jobTitlesFilter]="dialogData.service.jobTitles"
+                        (workerSelectedEvent)="workerSelected($event)"
+                    >
+                    </app-salon-team>
+                </mat-step>
+
+                <mat-step [completed]="!!timeControl.value">
+                    @if (!timeSlotsAvailable) {
+                        <mat-spinner></mat-spinner>
+                    } @else {
+                        <div class="time-slots-container">
+                            @for (slot of timeSlotsAvailable; track $index) {
+                                <div
+                                    class="time-slot"
+                                    (click)="timeSelected(slot)"
+                                >
+                                    {{ slot.from | onlyHourAndMinutes }} -
+                                    {{ slot.to | onlyHourAndMinutes }}
+                                </div>
+                            }
+                        </div>
+                    }
+                </mat-step>
+
+                <mat-step [completed]="!!timeControl.value">
+                    <h4>Summary</h4>
+                    @if (timeControl.value) {
+                        <div>
+                            On {{ formatDate(dateControl.value) }} From
+                            {{ timeControl.value.from | onlyHourAndMinutes }}
+                        </div>
+                    }
+                    <div>
+                        Duration:
+                        {{ dialogData.service.durationInMinutes }} minutes
+                    </div>
+                    <div>
+                        <span> With </span>
+                        <div class="worker-summary">
+                            <img
+                                [src]="
+                                    isValidUrl(
+                                        workerControl.value.profilePictureUrl
+                                    )
+                                        ? workerControl.value.profilePictureUrl
+                                        : blankProfilePictureUrl
+                                "
+                                alt="profile-picture-of-the-worker"
+                            />
+                            <div>
+                                {{ workerControl.value.firstName
+                                }}{{ workerControl.value.lastName }}
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="actions">
-                        <button mat-button matStepperPrevious type="button">
-                            Back
-                        </button>
                         <button
                             mat-raised-button
                             color="primary"
-                            matStepperNext
-                            type="button"
+                            (click)="createBooking()"
                         >
-                            Next
+                            Confirm
                         </button>
                     </div>
                 </mat-step>

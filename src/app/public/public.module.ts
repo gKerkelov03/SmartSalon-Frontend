@@ -40,6 +40,7 @@ import { PublicRoutingModule } from './public-routing.module';
         RouterModule,
         CommonModule,
         MatProgressSpinnerModule,
+        MatTooltipModule,
         ReactiveFormsModule,
         MatNativeDateModule,
         MatButtonModule,

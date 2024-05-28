@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Optional } from '@angular/core';
 import {
     AbstractControl,
     FormBuilder,
@@ -49,6 +49,7 @@ export class RegisterFormComponent implements OnInit {
         private authService: AuthService,
         private ownersService: OwnersService,
         private workersService: WorkersService,
+        @Optional()
         private dialogRef: MatDialogRef<AddWorkerDialogComponent>,
         private snackBar: MatSnackBar,
         private router: Router,
@@ -190,7 +191,10 @@ export class RegisterFormComponent implements OnInit {
     }
 
     updateProfilePicture(newUrl: string): void {
-        this.profilePictureControl?.setValue(newUrl);
+        console.log('here');
+        if (newUrl) {
+            this.profilePictureControl?.setValue(newUrl);
+        }
     }
 
     togglePasswordVisibility(): void {

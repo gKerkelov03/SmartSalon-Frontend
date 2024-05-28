@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { take } from 'rxjs';
 import { CrudAction } from '../../../../core/enums/crud-action';
 import { getErrorMessages } from '../../../../core/utils/get-error-message';
 import { BookingsService } from '../../services/bookings.service';
@@ -35,10 +34,10 @@ export class DeleteBookingDialogComponent {
             },
         };
 
-        this.bookingsService
-            .delete(this.bookingId.toString())
-            .pipe(take(1))
-            .subscribe(observer);
+        // this.bookingsService
+        //     .delete(this.bookingId.toString())
+        //     .pipe(take(1))
+        //     .subscribe(observer);
     }
 
     closeDialog(): void {

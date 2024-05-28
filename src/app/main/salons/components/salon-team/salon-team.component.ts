@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Worker } from '../../../users/models/worker.model';
 import { JobTitle } from '../../models/job-title.model';
@@ -9,7 +9,10 @@ import { AddWorkerDialogComponent } from '../add-worker-dialog/add-worker-dialog
     templateUrl: './salon-team.component.html',
     styleUrl: './salon-team.component.scss',
 })
-export class SalonTeamComponent {
+export class SalonTeamComponent implements OnInit {
+    @Output()
+    workerSelectedEvent: EventEmitter<Worker> = new EventEmitter<Worker>();
+
     @Input()
     team!: Worker[];
 
@@ -22,7 +25,21 @@ export class SalonTeamComponent {
     @Input()
     jobTitles!: JobTitle[];
 
+    @Input()
+    jobTitlesFilter!: JobTitle[];
+
     constructor(private dialog: MatDialog) {}
+    ngOnInit(): void {
+        if (this.jobTitlesFilter) {
+            this.team = this.team.filter((worker) =>
+                worker.jobTitles.some((workerJobTitleId) =>
+                    this.jobTitlesFilter.some(
+                        (jobTitle) => jobTitle.id === workerJobTitleId,
+                    ),
+                ),
+            );
+        }
+    }
 
     openAddWorkerDialog(): void {
         const dialogRef = this.dialog.open(AddWorkerDialogComponent, {
@@ -43,5 +60,9 @@ export class SalonTeamComponent {
                     this.team.push(result.worker);
                 }
             });
+    }
+
+    workerSelected(worker: Worker) {
+        this.workerSelectedEvent.emit(worker);
     }
 }

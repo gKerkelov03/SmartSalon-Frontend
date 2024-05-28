@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { BookingChange } from '../models/booking-change-model';
 import { Booking } from '../models/booking.model';
+import { TimeSlot } from '../models/time-slot.model';
 
 @Injectable({
     providedIn: 'root',
@@ -22,18 +23,46 @@ export class BookingsService {
         return this.httpClient.get<Booking>(this.bookingsBackendUrl + id);
     }
 
-    getAll(): Observable<Booking[]> {
-        return this.httpClient.get<Booking[]>(this.bookingsBackendUrl);
+    getAvailableTimeSlots(request: {
+        serviceId: string;
+        workerId: string;
+        customerId: string;
+        salonId: string;
+        date: string;
+    }): Observable<TimeSlot[]> {
+        return this.httpClient.post<TimeSlot[]>(
+            this.bookingsBackendUrl + 'GetAvailableTimeSlots',
+            request,
+        );
+    }
+
+    getCustomerBookings(customerId: string): Observable<Booking[]> {
+        return this.httpClient.get<Booking[]>(
+            `${this.bookingsBackendUrl}GetCustomerBookings/${customerId}`,
+        );
+    }
+
+    getWorkerBookings(workerId: string): Observable<Booking[]> {
+        return this.httpClient.get<Booking[]>(
+            `${this.bookingsBackendUrl}/GetWorkerBookings/${workerId}`,
+        );
     }
 
     update(id: string, newBooking: Partial<Booking>): Observable<void> {
         return this.httpClient.patch<void>(
             this.bookingsBackendUrl + id,
-            newBooking
+            newBooking,
         );
     }
 
-    delete(id: string): Observable<void> {
-        return this.httpClient.delete<void>(this.bookingsBackendUrl + id);
+    delete(
+        id: string,
+        salonId: string,
+        customerId: string,
+        workerId: string,
+    ): Observable<void> {
+        return this.httpClient.delete<void>(this.bookingsBackendUrl + id, {
+            body: { salonId, customerId, workerId },
+        });
     }
 }

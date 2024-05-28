@@ -24,7 +24,7 @@ export class SalonDetailsPageComponent implements OnInit {
     salon!: Salon | null;
     workingTime!: WorkingTime;
     workers: Worker[] = [];
-    sections!: Section[];
+    sections: Section[] = [];
 
     constructor(
         private salonsService: SalonsService,

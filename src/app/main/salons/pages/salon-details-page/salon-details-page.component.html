@@ -1,4 +1,4 @@
-@if (workingTime && salon && sections && workers) {
+@if (workingTime && salon) {
     <app-salon-header class="header" [name]="salon.name" [rating]="3.3" />
 
     <app-salon-sections
@@ -8,7 +8,8 @@
         [jobTitles]="salon.jobTitles"
         [mainCurrency]="salon.mainCurrency"
         [workers]="workers"
-        [canEdit]="false"
+        [workingTime]="workingTime"
+        [canEdit]="canEdit"
     />
 
     <app-salon-main-picture
@@ -56,7 +57,7 @@
     <app-salon-team
         class="team"
         [team]="workers"
-        [canEdit]="true"
+        [canEdit]="canEdit"
         [salonId]="salon.id"
         [jobTitles]="salon.jobTitles"
     />

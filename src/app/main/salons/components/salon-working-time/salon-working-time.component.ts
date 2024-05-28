@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DayOfWeek } from '../../../../core/enums/day-of-week';
+import { getDay } from '../../../../core/utils/get-day';
 import { WorkingTime } from '../../models/working-time.model';
 
 @Component({
@@ -16,19 +17,6 @@ export class SalonWorkingTimeComponent {
     DayOfWeek = DayOfWeek;
 
     getCurrentDay(): DayOfWeek {
-        const date = new Date();
-        const dayOfWeek = date.getDay();
-
-        const days = [
-            DayOfWeek.Sunday,
-            DayOfWeek.Monday,
-            DayOfWeek.Tuesday,
-            DayOfWeek.Wednesday,
-            DayOfWeek.Thursday,
-            DayOfWeek.Friday,
-            DayOfWeek.Saturday,
-        ];
-
-        return days[dayOfWeek];
+        return getDay(new Date().getDay());
     }
 }

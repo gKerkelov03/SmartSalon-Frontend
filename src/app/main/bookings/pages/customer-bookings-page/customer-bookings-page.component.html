@@ -13,7 +13,11 @@
             <img
                 class="salon-image"
                 mat-card-image
-                src="{{ booking.salonProfilePictureUrl }}"
+                src="{{
+                    isValidUrl(booking.salonProfilePictureUrl)
+                        ? booking.salonProfilePictureUrl
+                        : blankProfilePictureUrl
+                }}"
                 alt="Salon profile picture"
             />
 
@@ -23,9 +27,23 @@
                 {{ booking.workerNickname }}
             </mat-card-content>
             <mat-card-actions class="actions">
-                <button mat-raised-button color="warn">Cancel</button>
-                <button mat-raised-button color="primary">Salon details</button>
+                <button
+                    mat-raised-button
+                    color="warn"
+                    (click)="cancelBooking(booking)"
+                >
+                    Cancel
+                </button>
+                <button
+                    mat-raised-button
+                    (click)="openSalonDetails(booking.salonId)"
+                    color="primary"
+                >
+                    Salon details
+                </button>
             </mat-card-actions>
         </mat-card>
+    } @empty {
+        <h4 class="no-bookings">No bookings yet</h4>
     }
 </section>
