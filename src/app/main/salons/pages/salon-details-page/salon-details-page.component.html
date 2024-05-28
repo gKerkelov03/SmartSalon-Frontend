@@ -12,10 +12,7 @@
         [canEdit]="canEdit"
     />
 
-    <app-salon-main-picture
-        [profilePictureUrl]="salon.profilePictureUrl"
-        class="main-picture"
-    />
+    <app-salon-main-picture [salon]="salon" class="main-picture" />
 
     <app-salon-working-time
         class="working-time"

@@ -3,14 +3,19 @@
         <div
             [ngStyle]="{
                 'background-image':
-                    'url(' + (profilePictureUrl ?? blankProfilePictureUrl) + ')'
+                    'url(' +
+                    (salon.profilePictureUrl ?? blankProfilePictureUrl) +
+                    ')'
             }"
             alt="Profile picture"
             class="profile-picture"
         ></div>
 
         @if (currentUser.isAdmin || currentUser.isOwner) {
-            <app-upload-widget class="upload-button"></app-upload-widget>
+            <app-upload-widget
+                (newPictureUploaded)="newPictureUploaded($event)"
+                class="upload-button"
+            ></app-upload-widget>
         }
     </div>
 </section>
