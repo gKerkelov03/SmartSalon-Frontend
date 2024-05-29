@@ -1,0 +1,65 @@
+<section>
+    <div mat-dialog-title class="header">
+        <h3 class="title">Change main currency</h3>
+
+        <button
+            type="button"
+            mat-dialog-close
+            mat-icon-button
+            class="close-button"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content class="content">
+        <mat-form-field class="main-currency-field">
+            <mat-label>Main currency</mat-label>
+            <input
+                [matAutocomplete]="auto"
+                matInput
+                [formControl]="mainCurrencyControl"
+            />
+
+            <img
+                matSuffix
+                class="suffix-currency-logo"
+                [src]="dialogData.mainCurrency.logoUrl"
+                alt="currency-logo"
+            />
+        </mat-form-field>
+
+        <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            (optionSelected)="autocompleteOptionSelected($event)"
+        >
+            @for (
+                currencyOption of autocompleteOptions | async;
+                track currencyOption
+            ) {
+                <mat-option [value]="currencyOption">
+                    <img
+                        class="autocomplete-currency-logo"
+                        [src]="currencyOption.logoUrl"
+                        alt="Currency logo"
+                    />
+
+                    {{ currencyOption.code }}</mat-option
+                >
+            }
+        </mat-autocomplete>
+        <app-error-message [control]="mainCurrencyControl"></app-error-message>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="actions" align="center">
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="saveClicked()"
+            class="save-button"
+        >
+            Save
+        </button>
+    </mat-dialog-actions>
+</section>

@@ -41,7 +41,8 @@
         class="currencies"
         [mainCurrency]="salon.mainCurrency"
         [otherAcceptedCurrencies]="salon.otherAcceptedCurrencies"
-        [salonId]="salon.id"
+        [salon]="salon"
+        [canEdit]="canEdit"
     />
 
     <app-salon-specialties

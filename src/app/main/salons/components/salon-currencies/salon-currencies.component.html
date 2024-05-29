@@ -1,29 +1,20 @@
 <section>
-    <h3 class="title">Currencies</h3>
-    <mat-form-field class="main-currency" appearance="outline">
-        <mat-label>Main currency</mat-label>
-
-        <mat-chip-grid #mainCurrencyChipGrid>
-            <mat-chip-row class="currency">
-                <img
-                    matChipAvatar
-                    class="currency-logo"
-                    [src]="mainCurrency.logoUrl"
-                    alt="Currency logo"
-                />
-
-                <span class="currency-code">{{ mainCurrency.code }}</span>
-            </mat-chip-row>
-            <input
-                [placeholder]="canEdit ? 'Change main currency...' : ''"
-                [formControl]="mainCurrencyInputControl"
-                [disabled]="!canEdit"
-                [matChipInputFor]="mainCurrencyChipGrid"
-                [matAutocomplete]="auto"
-                matInput
+    <h3 class="title">
+        Currency
+        <mat-chip-row class="currency">
+            <img
+                matChipAvatar
+                class="currency-logo"
+                [src]="mainCurrency.logoUrl"
+                alt="Currency logo"
             />
-        </mat-chip-grid>
-    </mat-form-field>
+
+            <span class="currency-code">{{ mainCurrency.code }}</span>
+            <button matChipRemove (click)="editMainCurrencyClicked()">
+                <mat-icon>edit_square</mat-icon>
+            </button>
+        </mat-chip-row>
+    </h3>
 
     <mat-form-field class="other-accepted-currencies" appearance="outline">
         <mat-label>Other accepted currencies</mat-label>

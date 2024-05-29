@@ -1,0 +1,39 @@
+@use '../../../../../assets/styles/variables' as *;
+
+.autocomplete-currency-logo {
+    max-height: 1rem;
+    max-width: 1rem;
+}
+
+section {
+    padding: 2rem;
+
+    .header {
+        display: flex;
+
+        .title {
+            display: block;
+            font-size: 1.75rem;
+            color: $black;
+        }
+
+        .close-button {
+            position: relative;
+            bottom: 1rem;
+            left: 1rem;
+            margin-left: auto;
+        }
+    }
+
+    .content {
+        .main-currency-field {
+            width: 100%;
+
+            .suffix-currency-logo {
+                width: 3rem;
+                height: 2rem;
+                margin-right: 1rem;
+            }
+        }
+    }
+}

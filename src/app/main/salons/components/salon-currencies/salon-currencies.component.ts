@@ -1,9 +1,12 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable, catchError, debounceTime, map, mergeMap, of } from 'rxjs';
 import { Currency } from '../../models/currency.model';
+import { Salon } from '../../models/salon.model';
 import { CurrenciesService } from '../../services/currencies.service';
+import { ChangeMainCurrencyDialogComponent } from '../change-main-currency-dialog/change-main-currency-dialog.component';
 
 @Component({
     selector: 'app-salon-currencies',
@@ -13,11 +16,12 @@ import { CurrenciesService } from '../../services/currencies.service';
 export class SalonCurrenciesComponent implements OnInit {
     @ViewChild('otherAcceptedCurrenciesInput')
     otherAcceptedCurrenciesInput!: ElementRef;
-    // @Input()
-    canEdit: boolean = true;
 
     @Input()
-    salonId!: string;
+    canEdit!: boolean;
+
+    @Input()
+    salon!: Salon;
 
     @Input()
     mainCurrency!: Currency;
@@ -27,9 +31,11 @@ export class SalonCurrenciesComponent implements OnInit {
 
     autocompleteOptions!: Observable<Currency[]>;
     otherAcceptedCurrenciesInputControl: FormControl = new FormControl('');
-    mainCurrencyInputControl: FormControl = new FormControl('');
 
-    constructor(private currenciesServcie: CurrenciesService) {}
+    constructor(
+        private currenciesServcie: CurrenciesService,
+        private dialog: MatDialog,
+    ) {}
 
     ngOnInit(): void {
         this.keepTheAutocompleteUpdatedBasedOnTheSearchTerm();
@@ -66,7 +72,7 @@ export class SalonCurrenciesComponent implements OnInit {
         this.otherAcceptedCurrenciesInput.nativeElement.value = '';
 
         this.currenciesServcie
-            .addCurrency(currency.id, this.salonId)
+            .addCurrency(currency.id, this.salon.id)
             .subscribe();
     }
 
@@ -78,7 +84,29 @@ export class SalonCurrenciesComponent implements OnInit {
         }
 
         this.currenciesServcie
-            .removeCurrency(currency.id, this.salonId)
+            .removeCurrency(currency.id, this.salon.id)
             .subscribe();
+    }
+
+    editMainCurrencyClicked(): void {
+        const dialogRef = this.dialog.open(ChangeMainCurrencyDialogComponent, {
+            width: '40vw',
+            autoFocus: false,
+            panelClass: 'round-without-padding',
+            data: {
+                mainCurrency: this.mainCurrency,
+                otherAcceptedCurrencies: this.otherAcceptedCurrencies,
+                salon: this.salon,
+            },
+            enterAnimationDuration: '300ms',
+        });
+
+        dialogRef
+            .afterClosed()
+            .subscribe((result: { mainCurrency: Currency } | null) => {
+                if (result) {
+                    this.mainCurrency = result.mainCurrency;
+                }
+            });
     }
 }
