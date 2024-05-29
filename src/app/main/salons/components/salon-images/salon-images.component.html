@@ -1,5 +1,11 @@
-@if (images.length) {
-    <section>
+<section>
+    <h3 class="title">
+        Images
+        <app-upload-widget
+            (newPictureUploaded)="addImage($event)"
+        ></app-upload-widget>
+    </h3>
+    @if (images.length) {
         <div class="image-slider">
             @if (images.length > 1) {
                 <button
@@ -18,7 +24,15 @@
                     }"
                     alt="Salon image"
                     class="image"
-                ></div>
+                >
+                    <button
+                        mat-fab
+                        class="delete-image-button"
+                        (click)="deleteImage(images[currentImageIndex])"
+                    >
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
 
                 @if (images.length > 1) {
                     <div class="indicators-container">
@@ -44,5 +58,7 @@
                 </button>
             }
         </div>
-    </section>
-}
+    } @else {
+        <p>No images yet</p>
+    }
+</section>

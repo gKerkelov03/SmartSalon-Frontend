@@ -12,7 +12,11 @@
         [canEdit]="canEdit"
     />
 
-    <app-salon-images class="images" [images]="salon.images" />
+    <app-salon-images
+        class="images"
+        [salonId]="salon.id"
+        [images]="salon.images"
+    />
 
     <app-salon-main-picture [salon]="salon" class="main-picture" />
 
