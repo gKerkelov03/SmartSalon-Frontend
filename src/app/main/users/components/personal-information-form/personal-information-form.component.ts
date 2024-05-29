@@ -92,23 +92,4 @@ export class PersonalInformationFormComponent implements OnInit {
             ]),
         });
     }
-
-    changeProfilePicture(newProfilePictureUrl: string): void {
-        var updateObserver = {
-            next: () => {
-                this.userTemplate = Object.assign({}, this.userTemplate);
-                this.currentUser.setCurrentUser(this.userTemplate);
-            },
-            error: (httpError: HttpErrorResponse) =>
-                this.snackBar.open(httpError.error.message, 'Close'),
-        };
-
-        this.usersService
-            .update(this.currentUser.currentUser!.id, {
-                ...this.personalInformationForm.value,
-                profilePictureUrl: newProfilePictureUrl,
-            })
-            .pipe(take(1))
-            .subscribe(updateObserver);
-    }
 }

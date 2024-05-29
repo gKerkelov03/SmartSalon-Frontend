@@ -16,7 +16,7 @@ section {
 
         .name {
             font-size: 2rem;
-            margin-bottom: 1rem;
+            margin-top: 1rem;
             letter-spacing: 2px;
             font-weight: 500;
         }
@@ -24,6 +24,10 @@ section {
         .email {
             font-size: 1rem;
             color: $primary;
+        }
+
+        .upload-button {
+            display: block;
         }
     }
 }

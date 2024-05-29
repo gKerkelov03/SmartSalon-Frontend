@@ -6,6 +6,12 @@
             class="profile-picture"
         />
 
+        <app-upload-widget
+            class="upload-button"
+            buttonText="Change your picture"
+            (newPictureUploaded)="changeProfilePicture($event)"
+        />
+
         <h1 class="name">
             {{ user.firstName + ' ' + user.lastName }}
         </h1>

@@ -1,17 +1,17 @@
-<mat-expansion-panel class="panel">
+<mat-expansion-panel class="panel" expanded>
     <mat-expansion-panel-header class="header">
         <mat-panel-title>Personal information</mat-panel-title>
     </mat-expansion-panel-header>
 
-    @if(isEditIconVisible){
-    <mat-icon
-        class="edit-icon"
-        (click)="allowEditing()"
-        matTooltip="Edit"
-        matTooltipPosition="left"
-    >
-        edit_square
-    </mat-icon>
+    @if (isEditIconVisible) {
+        <mat-icon
+            class="edit-icon"
+            (click)="allowEditing()"
+            matTooltip="Edit"
+            matTooltipPosition="left"
+        >
+            edit_square
+        </mat-icon>
     }
 
     <mat-card-content class="content">
