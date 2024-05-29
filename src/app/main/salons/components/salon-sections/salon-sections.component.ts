@@ -119,13 +119,10 @@ export class SalonSectionsComponent {
                         .afterClosed()
                         .subscribe((result) => {
                             if (result) {
-                                console.log(this.sections);
                                 this.sections.splice(
                                     this.selectedSectionIndex,
                                     1,
                                 );
-
-                                console.log(this.sections);
                             }
                         });
                 }
@@ -239,7 +236,6 @@ export class SalonSectionsComponent {
                     }
                 } else if (result.action === CrudAction.Create) {
                     category.services.push(result.service);
-                    console.log(result.service);
                 } else if (result.action === CrudAction.Delete) {
                     const confirmDeletionDialogRef = this.dialog.open(
                         DeleteServiceDialogComponent,

@@ -64,7 +64,6 @@ export class SalonSpecialtiesComponent {
                     confirmDeletionDialogRef
                         .afterClosed()
                         .subscribe((result) => {
-                            console.log(result);
                             if (result) {
                                 const index = this.specialties.indexOf(
                                     result.specialty,

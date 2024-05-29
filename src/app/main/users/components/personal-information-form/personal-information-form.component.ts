@@ -8,7 +8,6 @@ import {
     Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { take } from 'rxjs';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { getErrorMessages } from '../../../../core/utils/get-error-message';
 import { User } from '../../models/user.model';
@@ -22,7 +21,7 @@ import { UsersService } from '../../services/users.service';
 export class PersonalInformationFormComponent implements OnInit {
     @Input() canEdit!: boolean;
     @Output() setCanEditToFalse = new EventEmitter();
-    userTemplate!: User | null;
+    user!: User | null;
     personalInformationForm!: FormGroup;
 
     constructor(
@@ -45,24 +44,28 @@ export class PersonalInformationFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.userTemplate = this.currentUser.currentUser;
+        this.user = this.currentUser.currentUser;
         this.setupThePersonalInformationForm();
     }
 
     saveClicked(): void {
         const observer = {
-            next: () => {},
+            next: () => {
+                this.currentUser.setCurrentUser({
+                    ...this.user,
+                    ...this.personalInformationForm.value,
+                });
+            },
             error: (httpError: HttpErrorResponse) => {
                 this.snackBar.open(getErrorMessages(httpError), 'Close');
             },
         };
 
         this.usersService
-            .update(
-                this.currentUser.currentUser!.id,
-                this.personalInformationForm.value,
-            )
-            .pipe(take(1))
+            .update(this.currentUser.currentUser!.id, {
+                ...this.user,
+                ...this.personalInformationForm.value,
+            })
             .subscribe(observer);
 
         this.setCanEditToFalse.emit();
@@ -75,17 +78,17 @@ export class PersonalInformationFormComponent implements OnInit {
 
     setupThePersonalInformationForm(): void {
         this.personalInformationForm = this.formBuilder.group({
-            firstName: new FormControl(this.userTemplate?.firstName, [
+            firstName: new FormControl(this.user?.firstName, [
                 Validators.required,
                 Validators.minLength(2),
                 Validators.maxLength(25),
             ]),
-            lastName: new FormControl(this.userTemplate?.lastName, [
+            lastName: new FormControl(this.user?.lastName, [
                 Validators.required,
                 Validators.minLength(2),
                 Validators.maxLength(25),
             ]),
-            phoneNumber: new FormControl(this.userTemplate?.phoneNumber, [
+            phoneNumber: new FormControl(this.user?.phoneNumber, [
                 Validators.required,
                 Validators.minLength(10),
                 Validators.maxLength(25),

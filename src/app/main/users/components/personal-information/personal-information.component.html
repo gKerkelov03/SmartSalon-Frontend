@@ -1,18 +1,20 @@
-<mat-expansion-panel class="panel" expanded>
-    <mat-expansion-panel-header class="header">
-        <mat-panel-title>Personal information</mat-panel-title>
-    </mat-expansion-panel-header>
+<mat-card class="card">
+    <mat-card-header class="header">
+        <mat-card-title class="title">Personal information</mat-card-title>
 
-    @if (isEditIconVisible) {
-        <mat-icon
-            class="edit-icon"
-            (click)="allowEditing()"
-            matTooltip="Edit"
-            matTooltipPosition="left"
-        >
-            edit_square
-        </mat-icon>
-    }
+        @if (isEditIconVisible) {
+            <button
+                mat-icon-button
+                class="edit-icon"
+                (click)="allowEditing()"
+                matTooltip="Edit"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip"
+            >
+                <mat-icon> edit_square </mat-icon>
+            </button>
+        }
+    </mat-card-header>
 
     <mat-card-content class="content">
         <app-personal-information-form
@@ -20,4 +22,4 @@
             (setCanEditToFalse)="ForbidEditing()"
         ></app-personal-information-form>
     </mat-card-content>
-</mat-expansion-panel>
+</mat-card>

@@ -191,7 +191,6 @@ export class RegisterFormComponent implements OnInit {
     }
 
     updateProfilePicture(newUrl: string): void {
-        console.log('here');
         if (newUrl) {
             this.profilePictureControl?.setValue(newUrl);
         }

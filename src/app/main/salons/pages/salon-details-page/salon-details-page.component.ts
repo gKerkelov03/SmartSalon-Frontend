@@ -48,7 +48,6 @@ export class SalonDetailsPageComponent implements OnInit {
                 this.fetchWorkingTime();
                 this.fetchWorkers();
                 this.fetchSections();
-                console.log(salon);
             },
             error: (httpError: HttpErrorResponse) => {
                 this.snackBar
@@ -74,7 +73,6 @@ export class SalonDetailsPageComponent implements OnInit {
                 this.workingTime = workingTime;
             },
             error: (httpError: HttpErrorResponse) => {
-                console.log();
                 this.snackBar.open(getErrorMessages(httpError), 'Close');
             },
         };

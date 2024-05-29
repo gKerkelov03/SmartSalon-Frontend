@@ -42,7 +42,6 @@ export class EmailsHandlerPageComponent {
                 }
             },
             error: (httpError: HttpErrorResponse) => {
-                console.log(httpError);
                 this.snackBar.open(getErrorMessages(httpError), 'Close');
             },
         };

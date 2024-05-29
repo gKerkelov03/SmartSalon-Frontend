@@ -19,7 +19,7 @@ import { ChangeEmailComponent } from './components/change-email/change-email.com
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { PersonalInformationFormComponent } from './components/personal-information-form/personal-information-form.component';
 import { PersonalInformation } from './components/personal-information/personal-information.component';
-import { ProfileHeaderComponent } from './components/profile-header/profile-header-section.component';
+import { ProfileHeaderComponent } from './components/profile-header/profile-header.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { UsersRoutingModule } from './users-routing.module';
 

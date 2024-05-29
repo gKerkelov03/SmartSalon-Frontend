@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { take } from 'rxjs';
 import { blankProfilePictureUrl } from '../../../../core/constants/urls';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { isValidUrl } from '../../../../core/utils/is-valid-url';
@@ -25,23 +24,21 @@ export class ProfileHeaderComponent implements OnInit {
         this.fetchUser();
     }
 
-    setBlankProfilePictureIfNeeded(): void {
-        if (!isValidUrl(this.user.profilePictureUrl)) {
-            this.user.profilePictureUrl = blankProfilePictureUrl;
-        }
-    }
-
     fetchUser(): void {
-        this.currentUser.currentUserObservable
-            .pipe(take(1))
-            .subscribe((user: User | null) => {
-                if (user?.profilePictureUrl === null) {
+        this.currentUser.currentUserObservable.subscribe(
+            (user: User | null) => {
+                if (!user) {
+                    this.snackBar.open('Invalid user', 'Close');
+                    return;
+                }
+
+                if (!isValidUrl(user?.profilePictureUrl)) {
                     user.profilePictureUrl = blankProfilePictureUrl;
                 }
 
-                this.user = user!;
-                this.setBlankProfilePictureIfNeeded();
-            });
+                this.user = user;
+            },
+        );
     }
 
     changeProfilePicture(newProfilePictureUrl: string): void {

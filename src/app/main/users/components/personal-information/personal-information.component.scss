@@ -1,26 +1,29 @@
 @use '../../../../../assets/styles/variables' as *;
 
-.panel {
+.card {
     width: 50%;
     border-radius: 10px;
     margin: auto;
     margin-bottom: 4rem;
+    box-shadow: $form-shadow;
 
     .header {
-        font-size: 1.25rem;
+        padding: 0.5rem 2rem;
 
-        mat-panel-title {
+        .title {
             color: $primary;
+            font-size: 1.5rem;
+        }
+
+        .edit-icon {
+            display: block;
+            margin-left: auto;
+            color: $primary;
+            cursor: pointer;
         }
     }
 
-    .edit-icon {
-        display: block;
-        margin-left: auto;
-        margin-bottom: 1rem;
-        // position: relative;
-        // right: 1.5rem;
-        color: $primary;
-        cursor: pointer;
+    .content {
+        padding: 0rem 2rem;
     }
 }
