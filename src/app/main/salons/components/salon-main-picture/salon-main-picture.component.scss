@@ -1,7 +1,15 @@
+@use '../../../../../assets/styles/variables' as *;
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    .title {
+        margin-bottom: 2rem;
+        font-size: 1.75rem;
+        color: $black;
+    }
 
     .profile-picture {
         width: 500px;

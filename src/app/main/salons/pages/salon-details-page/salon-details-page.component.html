@@ -12,6 +12,8 @@
         [canEdit]="canEdit"
     />
 
+    <app-salon-images class="images" [images]="salon.images" />
+
     <app-salon-main-picture [salon]="salon" class="main-picture" />
 
     <app-salon-working-time
@@ -34,8 +36,6 @@
         [lat]="salon.latitude"
         [lng]="salon.longitude"
     />
-
-    <app-salon-images class="images" [images]="salon.images" />
 
     <app-salon-currencies
         class="currencies"
