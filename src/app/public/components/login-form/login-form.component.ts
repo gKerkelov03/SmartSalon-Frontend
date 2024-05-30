@@ -61,11 +61,27 @@ export class LoginFormComponent implements OnInit {
         });
     }
 
+    requireConfirmedEmail(user: User): void {
+        if (!user.emailConfirmed) {
+            this.snackBar.open('Please confirm your email before you log in');
+            return;
+        }
+
+        this.logTheUserIn(user);
+    }
+
+    logTheUserIn(user: User): void {
+        this.currentUser.setCurrentUser(user);
+        this.router.navigate(['main']);
+    }
+
     onSubmit(): void {
         const observer = {
             next: (user: User) => {
-                this.currentUser.setCurrentUser(user);
-                this.router.navigate(['main']);
+                // this.requireConfirmedEmail(user);
+
+                //TODO: change this to requireConfirmedEmail(user)
+                this.logTheUserIn(user);
             },
             error: () => {
                 this.snackBar.open('Invalid credentials', 'Close');
@@ -78,6 +94,7 @@ export class LoginFormComponent implements OnInit {
                 switchMap((response: LoginResponse) => {
                     var decodedJwt: JwtData = parseJwt(response.jwtToken);
                     this.localStorage.setItem(jwtTokenKey, response.jwtToken);
+
                     return this.usersService.getById(decodedJwt.sub);
                 }),
             )
