@@ -1,9 +1,9 @@
 <section>
     <h3 class="title">
         Images
-        <app-upload-widget
-            (newPictureUploaded)="addImage($event)"
-        ></app-upload-widget>
+        @if (canEdit) {
+            <app-upload-widget (newPictureUploaded)="addImage($event)" />
+        }
     </h3>
     @if (images.length) {
         <div class="image-slider">
@@ -25,13 +25,15 @@
                     alt="Salon image"
                     class="image"
                 >
-                    <button
-                        mat-fab
-                        class="delete-image-button"
-                        (click)="deleteImage(images[currentImageIndex])"
-                    >
-                        <mat-icon>close</mat-icon>
-                    </button>
+                    @if (canEdit) {
+                        <button
+                            mat-fab
+                            class="delete-image-button"
+                            (click)="deleteImage(images[currentImageIndex])"
+                        >
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    }
                 </div>
 
                 @if (images.length > 1) {

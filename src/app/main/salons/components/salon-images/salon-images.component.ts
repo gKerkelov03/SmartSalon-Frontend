@@ -14,6 +14,9 @@ export class SalonImagesComponent implements OnInit {
     images!: Image[];
 
     @Input()
+    canEdit!: boolean;
+
+    @Input()
     salonId!: string;
 
     currentImageIndex!: number;
