@@ -3,11 +3,16 @@
 section {
     margin-left: 3rem;
 
-    .name {
-        font-size: 1.5em;
-        margin-bottom: 1rem;
-        font-weight: bold;
-        color: $black;
+    .header {
+        display: flex;
+        justify-content: space-between;
+
+        .name {
+            font-size: 1.5em;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            color: $black;
+        }
     }
 
     .stars-container {

@@ -1,5 +1,17 @@
 <section>
-    <h3 class="name">{{ name }}</h3>
+    <div class="header">
+        <h3 class="name">{{ name }}</h3>
+
+        @if (
+            !shouldntDisplayLeaveSalonButton &&
+            (currentUser.isWorker || currentUser.isOwner) &&
+            user!.salons.length
+        ) {
+            <button (click)="leaveSalon()" mat-raised-button color="warn">
+                Leave salon
+            </button>
+        }
+    </div>
 
     <div class="stars-container">
         <span class="rating">{{ rating | rating }}</span>

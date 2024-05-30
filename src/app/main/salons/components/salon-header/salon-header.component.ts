@@ -1,5 +1,17 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { catchError, filter, of, switchMap } from 'rxjs';
+import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { createRange } from '../../../../core/utils/create-range';
+import { getErrorMessages } from '../../../../core/utils/get-error-message';
+import { Owner } from '../../../users/models/owner.model';
+import { Worker } from '../../../users/models/worker.model';
+import { OwnersService } from '../../../users/services/owners.service';
+import { WorkersService } from '../../../users/services/workers.service';
+import { ConfirmDeletionDialogComponent } from '../confirm-deletion-dialog/confirm-deletion-dialog.component';
 
 @Component({
     selector: 'app-salon-header',
@@ -8,12 +20,74 @@ import { createRange } from '../../../../core/utils/create-range';
 })
 export class SalonHeaderComponent {
     @Input()
+    user!: Worker | Owner;
+
+    @Input()
     name!: string;
+
+    @Input()
+    salonId!: string;
 
     @Input()
     rating!: number;
 
+    @Input()
+    shouldntDisplayLeaveSalonButton: boolean = false;
+
     createRange = createRange;
+
+    constructor(
+        public currentUser: CurrentUserService,
+        private ownersService: OwnersService,
+        private workersService: WorkersService,
+        private router: Router,
+        private snackBar: MatSnackBar,
+        private dialog: MatDialog,
+    ) {}
+
+    leaveSalon() {
+        const dialogRef = this.dialog.open(ConfirmDeletionDialogComponent, {
+            width: '40vw',
+            autoFocus: false,
+            panelClass: 'round-without-padding',
+            data: {
+                title: 'Are you sure you want to leave?',
+                deleteButtonText: 'Leave',
+            },
+            enterAnimationDuration: '300ms',
+        });
+
+        dialogRef
+            .afterClosed()
+            .pipe(
+                filter((result: { isDeleted: boolean }) => result.isDeleted),
+                switchMap(() => {
+                    if (this.currentUser.isOwner) {
+                        return this.ownersService.removeFromSalon(
+                            this.salonId,
+                            this.currentUser.currentUser!.id,
+                        );
+                    } else if (this.currentUser.isWorker) {
+                        return this.workersService.removeFromSalon(
+                            this.currentUser.currentUser!.id,
+                            this.salonId,
+                        );
+                    }
+
+                    return of(true);
+                }),
+                catchError((error: HttpErrorResponse) => {
+                    this.snackBar.open(getErrorMessages(error));
+                    return of(true);
+                }),
+            )
+            .subscribe((result) => {
+                //TODO: httpClient retuns Observable<null> for requests for no body
+                if (!result) {
+                    this.router.navigate(['main/salons']);
+                }
+            });
+    }
 
     shouldDisplayHalfReviewStar() {
         const fractionalPart = this.rating - parseInt(this.rating.toString());
@@ -24,4 +98,6 @@ export class SalonHeaderComponent {
 
         return false;
     }
+
+    openConfirmLeaveSalonDialog() {}
 }
