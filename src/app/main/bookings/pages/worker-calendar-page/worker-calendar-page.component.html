@@ -1,14 +1,18 @@
 <h2 class="page-title">My bookings</h2>
 
-<section>
-    <button
-        class="create-booking-button"
-        mat-raised-button
-        color="primary"
-        (click)="displayEventDialog()"
-    >
-        Add new event
-    </button>
+@if (worker && worker.salons.length) {
+    <section>
+        <button
+            class="create-booking-button"
+            mat-raised-button
+            color="primary"
+            (click)="displayEventDialog()"
+        >
+            Add new event
+        </button>
 
-    <app-worker-calendar></app-worker-calendar>
-</section>
+        <app-worker-calendar />
+    </section>
+} @else {
+    <p class="no-salons-message">Uneployed</p>
+}

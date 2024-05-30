@@ -36,9 +36,12 @@ export class OwnersService {
     }
 
     removeFromSalon(salonId: string, ownerId: string): Observable<void> {
-        return this.httpClient.patch<void>(this.ownersBackendUrl, {
-            salonId,
-            ownerId,
-        });
+        return this.httpClient.patch<void>(
+            this.ownersBackendUrl + 'RemoveFromSalon',
+            {
+                salonId,
+                ownerId,
+            },
+        );
     }
 }

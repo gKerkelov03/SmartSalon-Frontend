@@ -58,7 +58,10 @@ export class WorkersService {
         );
     }
 
-    delete(id: string): Observable<void> {
-        return this.httpClient.delete<void>(this.workersBackendUrl + id);
+    removeFromSalon(workerId: string, salonId: string): Observable<void> {
+        return this.httpClient.patch<void>(
+            `${this.workersBackendUrl}RemoveFromSalon/${workerId}`,
+            { salonId, workerId },
+        );
     }
 }

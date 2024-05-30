@@ -1,5 +1,11 @@
-@if (workingTime && salon) {
-    <app-salon-header class="header" [name]="salon.name" [rating]="3.3" />
+@if (workingTime && salon && user) {
+    <app-salon-header
+        class="header"
+        [name]="salon.name"
+        [rating]="3.3"
+        [salonId]="salon.id"
+        [user]="user"
+    />
 
     <app-salon-sections
         class="sections"

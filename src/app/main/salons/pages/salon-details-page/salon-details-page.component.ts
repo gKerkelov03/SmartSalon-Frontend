@@ -6,7 +6,9 @@ import { switchMap } from 'rxjs';
 import { idRouteParameterName } from '../../../../core/constants/routing';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { getErrorMessages } from '../../../../core/utils/get-error-message';
+import { Owner } from '../../../users/models/owner.model';
 import { Worker } from '../../../users/models/worker.model';
+import { OwnersService } from '../../../users/services/owners.service';
 import { WorkersService } from '../../../users/services/workers.service';
 import { Salon } from '../../models/salon.model';
 import { Section } from '../../models/section.model';
@@ -25,10 +27,12 @@ export class SalonDetailsPageComponent implements OnInit {
     workingTime!: WorkingTime;
     workers: Worker[] = [];
     sections: Section[] = [];
+    user!: Worker | Owner;
 
     constructor(
         private salonsService: SalonsService,
         private workersService: WorkersService,
+        private ownersService: OwnersService,
         private sectionsService: SectionsService,
         private workingTimesService: WorkingTimesService,
         private route: ActivatedRoute,
@@ -39,6 +43,7 @@ export class SalonDetailsPageComponent implements OnInit {
 
     ngOnInit(): void {
         this.fetchSalon();
+        this.fetchCurrentUser();
     }
 
     fetchSalon(): void {
@@ -93,6 +98,27 @@ export class SalonDetailsPageComponent implements OnInit {
         };
 
         this.workersService.getMany(this.salon!.workers).subscribe(observer);
+    }
+
+    fetchCurrentUser(): void {
+        const observer = {
+            next: (user: Worker | Owner) => {
+                this.user = user;
+            },
+            error: (httpError: HttpErrorResponse) => {
+                this.snackBar.open(getErrorMessages(httpError), 'Close');
+            },
+        };
+
+        if (this.currentUser.isWorker) {
+            this.workersService
+                .getById(this.currentUser.currentUser!.id)
+                .subscribe(observer);
+        } else if (this.currentUser.isOwner) {
+            this.ownersService
+                .getById(this.currentUser.currentUser!.id)
+                .subscribe(observer);
+        }
     }
 
     fetchSections(): void {
