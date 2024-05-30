@@ -27,16 +27,12 @@ export class ProfileHeaderComponent implements OnInit {
     fetchUser(): void {
         this.currentUser.currentUserObservable.subscribe(
             (user: User | null) => {
-                if (!user) {
-                    this.snackBar.open('Invalid user', 'Close');
-                    return;
-                }
-
                 if (!isValidUrl(user?.profilePictureUrl)) {
-                    user.profilePictureUrl = blankProfilePictureUrl;
+                    user!.profilePictureUrl = blankProfilePictureUrl;
                 }
 
-                this.user = user;
+                this.user = user!;
+                return;
             },
         );
     }

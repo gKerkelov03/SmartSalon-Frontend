@@ -8,10 +8,13 @@ import {
     Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Role } from '../../../../core/enums/role';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { getErrorMessages } from '../../../../core/utils/get-error-message';
 import { User } from '../../models/user.model';
+import { Worker } from '../../models/worker.model';
 import { UsersService } from '../../services/users.service';
+import { WorkersService } from '../../services/workers.service';
 
 @Component({
     selector: 'app-personal-information-form',
@@ -21,14 +24,17 @@ import { UsersService } from '../../services/users.service';
 export class PersonalInformationFormComponent implements OnInit {
     @Input() canEdit!: boolean;
     @Output() setCanEditToFalse = new EventEmitter();
-    user!: User | null;
+    @Input()
+    user!: User | Worker;
     personalInformationForm!: FormGroup;
+    Role = Role;
 
     constructor(
         private formBuilder: FormBuilder,
         private snackBar: MatSnackBar,
         private usersService: UsersService,
-        private currentUser: CurrentUserService,
+        public currentUser: CurrentUserService,
+        public workersService: WorkersService,
     ) {}
 
     get firstNameControl(): AbstractControl | null {
@@ -43,23 +49,51 @@ export class PersonalInformationFormComponent implements OnInit {
         return this.personalInformationForm.get('phoneNumber');
     }
 
+    get nicknameControl(): AbstractControl | null {
+        return this.personalInformationForm.get('nickname');
+    }
+
     ngOnInit(): void {
-        this.user = this.currentUser.currentUser;
-        this.setupThePersonalInformationForm();
+        if (this.currentUser.isWorker) {
+            this.workersService
+                .getById(this.currentUser.currentUser!.id)
+                .subscribe((worker: Worker) => {
+                    this.user = worker;
+                    this.setupThePersonalInformationForm();
+                });
+        } else {
+            this.user = this.currentUser.currentUser!;
+            this.setupThePersonalInformationForm();
+        }
     }
 
     saveClicked(): void {
         const observer = {
             next: () => {
-                this.currentUser.setCurrentUser({
+                let newUser: User | Worker = {
                     ...this.user,
                     ...this.personalInformationForm.value,
-                });
+                };
+
+                if (this.currentUser.isWorker) {
+                    newUser = {
+                        ...newUser,
+                        nickname: this.nicknameControl?.value,
+                    };
+                }
+
+                this.currentUser.setCurrentUser(newUser);
             },
             error: (httpError: HttpErrorResponse) => {
                 this.snackBar.open(getErrorMessages(httpError), 'Close');
             },
         };
+
+        if (this.currentUser.isWorker) {
+            this.workersService
+                .updateWorkerNickname(this.user.id, this.nicknameControl?.value)
+                .subscribe();
+        }
 
         this.usersService
             .update(this.currentUser.currentUser!.id, {
@@ -94,5 +128,14 @@ export class PersonalInformationFormComponent implements OnInit {
                 Validators.maxLength(25),
             ]),
         });
+
+        if (this.currentUser.isWorker) {
+            this.personalInformationForm.addControl(
+                'nickname',
+                new FormControl((this.user as Worker).nickname, [
+                    Validators.required,
+                ]),
+            );
+        }
     }
 }

@@ -14,7 +14,7 @@ export class PersonalInformation {
         this.isEditIconVisible = false;
     }
 
-    ForbidEditing(): void {
+    forbidEditing(): void {
         this.canEdit = false;
         this.isEditIconVisible = true;
     }

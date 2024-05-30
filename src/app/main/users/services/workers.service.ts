@@ -35,10 +35,26 @@ export class WorkersService {
         return forkJoin(observables);
     }
 
-    update(id: string, newUser: Partial<Worker>): Observable<void> {
+    updateWorkerJobTitles(
+        workerId: string,
+        salonId: string,
+        jobTitlesIds: string[],
+    ): Observable<void> {
         return this.httpClient.patch<void>(
-            this.workersBackendUrl + id,
-            newUser,
+            this.workersBackendUrl + 'UpdateJobTitles/' + workerId,
+            {
+                salonId,
+                jobTitlesIds,
+            },
+        );
+    }
+
+    updateWorkerNickname(workerId: string, nickname: string): Observable<void> {
+        return this.httpClient.patch<void>(
+            this.workersBackendUrl + 'UpdateNickname/' + workerId,
+            {
+                nickname,
+            },
         );
     }
 
