@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable, catchError, debounceTime, mergeMap, of } from 'rxjs';
@@ -12,9 +12,9 @@ import { SalonsService } from '../../services/salons.service';
     styleUrl: './add-existing-worker-form.component.scss',
 })
 export class AddExistingWorkerFormComponent {
+    @Output() saved = new EventEmitter<unknown>();
     @Input()
     salonId!: string;
-
     workerControl!: FormControl;
     autocompleteOptions!: Observable<Worker[]>;
     workerSelected!: Worker;
@@ -53,6 +53,6 @@ export class AddExistingWorkerFormComponent {
     saveClicked(): void {
         this.salonsService
             .sendWorkerInvitation(this.workerSelected.id, this.salonId)
-            .subscribe();
+            .subscribe(() => this.saved.emit());
     }
 }

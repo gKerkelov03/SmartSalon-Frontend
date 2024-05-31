@@ -1,5 +1,5 @@
 import { Component, Inject, Input } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { JobTitle } from '../../models/job-title.model';
 
 @Component({
@@ -17,5 +17,10 @@ export class AddWorkerDialogComponent {
             salonId: string;
             jobTitles: JobTitle[];
         },
+        public dialogRef: MatDialogRef<AddWorkerDialogComponent>,
     ) {}
+
+    closeTheDialog() {
+        this.dialogRef.close();
+    }
 }

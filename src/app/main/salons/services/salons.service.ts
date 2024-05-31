@@ -60,9 +60,12 @@ export class SalonsService {
     }
 
     sendWorkerInvitation(workerId: string, salonId: string): Observable<void> {
-        return this.httpClient.post<void>(this.salonsBackendUrl, {
-            workerId,
-            salonId,
-        });
+        return this.httpClient.post<void>(
+            `${this.salonsBackendUrl}InviteWorker`,
+            {
+                workerId,
+                salonId,
+            },
+        );
     }
 }

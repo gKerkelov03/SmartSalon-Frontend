@@ -22,7 +22,10 @@
                 />
             </mat-tab>
             <mat-tab label="Add existing account" bodyClass="tab">
-                <app-add-existing-worker-form />
+                <app-add-existing-worker-form
+                    [salonId]="dialogData.salonId"
+                    (saveClicked)="closeTheDialog()"
+                />
             </mat-tab>
         </mat-tab-group>
     </mat-dialog-content>

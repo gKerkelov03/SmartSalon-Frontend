@@ -27,6 +27,9 @@ export class WorkerCalendarPageComponent implements OnInit {
     fetchWorker(): void {
         this.workersService
             .getById(this.currentUser.currentUser!.id)
-            .subscribe((worker: Worker) => (this.worker = worker));
+            .subscribe((worker: Worker) => {
+                console.log(worker);
+                this.worker = worker;
+            });
     }
 }
