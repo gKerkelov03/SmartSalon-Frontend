@@ -1,6 +1,6 @@
 <section>
     <div mat-dialog-title class="header">
-        <h3 class="title">Add worker</h3>
+        <h3 class="title">Add owner</h3>
 
         <button
             type="button"
@@ -21,7 +21,7 @@
                 />
             </mat-tab>
             <mat-tab label="Add existing account" bodyClass="tab">
-                <app-add-existing-worker-form
+                <app-add-existing-owner-form
                     [salonId]="dialogData.salonId"
                     (saveClicked)="closeTheDialog()"
                 />

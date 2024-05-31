@@ -1,0 +1,49 @@
+@use '../../../../../assets/styles/variables' as *;
+
+section {
+    border-radius: 30px;
+    height: 100%;
+    padding: 2rem;
+
+    .header {
+        display: flex;
+
+        .title {
+            display: block;
+            font-size: 1.75rem;
+            color: $black;
+        }
+
+        .close-button {
+            position: relative;
+            bottom: 1rem;
+            left: 1rem;
+            margin-left: auto;
+        }
+    }
+
+    .content {
+        padding: 0rem;
+
+        ::ng-deep .tab {
+            padding: 1rem;
+
+            app-register-form {
+            }
+        }
+
+        &::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $primary;
+            border-radius: 5px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: #ccc;
+        }
+    }
+}

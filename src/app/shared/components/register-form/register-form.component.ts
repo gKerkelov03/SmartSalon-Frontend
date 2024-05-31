@@ -18,6 +18,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { getErrorMessages } from '../../../core/utils/get-error-message';
 import { IsNotEmptyArrayValidator } from '../../../core/utils/validators/is-not-empty-array.validator';
 import { AreMatchingValidator } from '../../../core/utils/validators/matching.validator';
+import { AddOwnerDialogComponent } from '../../../main/salons/components/add-owner-dialog/add-owner-dialog.component';
 import { AddWorkerDialogComponent } from '../../../main/salons/components/add-worker-dialog/add-worker-dialog.component';
 import { JobTitle } from '../../../main/salons/models/job-title.model';
 import { Owner } from '../../../main/users/models/owner.model';
@@ -50,7 +51,9 @@ export class RegisterFormComponent implements OnInit {
         private ownersService: OwnersService,
         private workersService: WorkersService,
         @Optional()
-        private dialogRef: MatDialogRef<AddWorkerDialogComponent>,
+        private addWorkerDialogRef: MatDialogRef<AddWorkerDialogComponent>,
+        @Optional()
+        private addOwnerDialogRef: MatDialogRef<AddOwnerDialogComponent>,
         private snackBar: MatSnackBar,
         private router: Router,
     ) {}
@@ -95,13 +98,13 @@ export class RegisterFormComponent implements OnInit {
     onSubmit(): void {
         const userInfo = this.registerForm.value;
         const createWorkerObserver = {
-            next: (worker: Worker) => this.dialogRef.close({ worker }),
+            next: (worker: Worker) => this.addWorkerDialogRef.close({ worker }),
             error: (error: HttpErrorResponse) =>
                 this.snackBar.open(getErrorMessages(error), 'Close'),
         };
 
         const createOwnerObserver = {
-            next: (owner: Owner) => this.dialogRef.close({ owner }),
+            next: (owner: Owner) => this.addOwnerDialogRef.close({ owner }),
             error: (error: HttpErrorResponse) =>
                 this.snackBar.open(getErrorMessages(error), 'Close'),
         };
@@ -135,6 +138,7 @@ export class RegisterFormComponent implements OnInit {
                 )
                 .subscribe(createWorkerObserver);
         } else if (this.isRegisteringOwner) {
+            console.log(123);
             this.ownersService
                 .create(userInfo)
                 .pipe(

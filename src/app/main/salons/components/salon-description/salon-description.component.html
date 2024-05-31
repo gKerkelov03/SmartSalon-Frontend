@@ -3,14 +3,14 @@
         <h3 class="title">Description</h3>
 
         @if (canEdit) {
-            <button mat-icon-button (click)="openEditDescriptionDialog()">
-                <mat-icon
-                    class="edit-icon"
-                    matTooltip="Edit"
-                    matTooltipPosition="left"
-                >
-                    edit_square
-                </mat-icon>
+            <button
+                mat-icon-button
+                (click)="openEditDescriptionDialog()"
+                matTooltip="Edit"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip"
+            >
+                <mat-icon class="edit-icon"> edit_square </mat-icon>
             </button>
         }
     </div>

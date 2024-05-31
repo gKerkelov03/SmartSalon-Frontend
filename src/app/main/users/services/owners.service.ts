@@ -16,7 +16,7 @@ export class OwnersService {
 
     create(owner: CreateOwnerRequest): Observable<CreatedResponse> {
         return this.httpClient.post<CreatedResponse>(
-            `${environment.backendUrl}`,
+            `${this.ownersBackendUrl}`,
             owner,
         );
     }
@@ -43,5 +43,9 @@ export class OwnersService {
                 ownerId,
             },
         );
+    }
+
+    search(searchTerm: string): Observable<Owner[]> {
+        return this.httpClient.get<Owner[]>(`${this.ownersBackendUrl}Search`);
     }
 }

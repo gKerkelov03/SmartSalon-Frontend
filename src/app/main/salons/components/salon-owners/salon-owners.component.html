@@ -1,0 +1,50 @@
+<section>
+    <h3 class="title">
+        <span>Owners</span>
+
+        @if (canEdit) {
+            <button
+                class="icon"
+                mat-icon-button
+                matTooltip="Add owner"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip"
+                color="primary"
+                (click)="openAddOwnerDialog()"
+            >
+                <mat-icon matTooltipPosition="left"> add_circle </mat-icon>
+            </button>
+        }
+    </h3>
+
+    @if (owners.length) {
+        <div class="flex-container">
+            @for (owner of owners; track $index) {
+                <div class="owner">
+                    @if (canEdit) {
+                        <button
+                            mat-mini-fab
+                            class="delete-owner-button"
+                            (click)="deleteOwner(owner)"
+                        >
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    }
+                    <div class="owner-info-container">
+                        <img
+                            [src]="owner.profilePictureUrl"
+                            alt="owner-image"
+                            class="image"
+                        />
+                        <p class="name">
+                            {{ owner.firstName }} {{ owner.lastName }}
+                        </p>
+                        <p class="phone">
+                            {{ owner.phoneNumber }}
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</section>

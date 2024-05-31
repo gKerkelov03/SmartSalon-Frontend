@@ -1,21 +1,21 @@
 <section>
-    <h3 mat-dialog-title class="title">Invite a worker</h3>
+    <h3 mat-dialog-title class="title">Invite a owner</h3>
 
     <mat-dialog-content class="content">
-        <mat-form-field class="worker-field">
-            <mat-label>Worker</mat-label>
+        <mat-form-field class="owner-field">
+            <mat-label>Owner</mat-label>
             <input
                 [matAutocomplete]="auto"
                 matInput
-                [formControl]="workerControl"
+                [formControl]="ownerControl"
             />
 
-            @if (workerSelected) {
+            @if (ownerSelected) {
                 <img
                     matSuffix
-                    class="suffix-worker-logo"
-                    [src]="workerSelected.profilePictureUrl"
-                    alt="worker-logo"
+                    class="suffix-owner-logo"
+                    [src]="ownerSelected.profilePictureUrl"
+                    alt="owner-logo"
                 />
             }
         </mat-form-field>
@@ -26,21 +26,21 @@
             (optionSelected)="autocompleteOptionSelected($event)"
         >
             @for (
-                workerOption of autocompleteOptions | async;
-                track workerOption
+                ownerOption of autocompleteOptions | async;
+                track ownerOption
             ) {
-                <mat-option [value]="workerOption">
+                <mat-option [value]="ownerOption">
                     <img
                         class="autocomplete-worker-logo"
-                        [src]="workerOption.profilePictureUrl"
+                        [src]="ownerOption.profilePictureUrl"
                         alt="Currency logo"
                     />
 
-                    {{ workerOption.nickname }}
+                    {{ ownerOption.firstName }}
                 </mat-option>
             }
         </mat-autocomplete>
-        <app-error-message [control]="workerControl"></app-error-message>
+        <app-error-message [control]="ownerControl"></app-error-message>
     </mat-dialog-content>
 
     <mat-dialog-actions class="actions" align="center">

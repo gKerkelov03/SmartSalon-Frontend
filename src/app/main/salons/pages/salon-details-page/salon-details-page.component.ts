@@ -27,6 +27,7 @@ export class SalonDetailsPageComponent implements OnInit {
     salon!: Salon | null;
     workingTime!: WorkingTime;
     workers: Worker[] = [];
+    owners: Owner[] = [];
     sections: Section[] = [];
     user: Worker | Owner | User = this.currentUser.currentUser!;
 
@@ -53,6 +54,7 @@ export class SalonDetailsPageComponent implements OnInit {
                 this.salon = salon;
                 this.fetchWorkingTime();
                 this.fetchWorkers();
+                this.fetchOwners();
                 this.fetchSections();
             },
             error: (httpError: HttpErrorResponse) => {
@@ -99,6 +101,19 @@ export class SalonDetailsPageComponent implements OnInit {
         };
 
         this.workersService.getMany(this.salon!.workers).subscribe(observer);
+    }
+
+    fetchOwners(): void {
+        const observer = {
+            next: (owners: Owner[]) => {
+                this.owners = owners ?? [];
+            },
+            error: (httpError: HttpErrorResponse) => {
+                this.snackBar.open(getErrorMessages(httpError), 'Close');
+            },
+        };
+
+        this.ownersService.getMany(this.salon!.owners).subscribe(observer);
     }
 
     fetchCurrentUser(): void {

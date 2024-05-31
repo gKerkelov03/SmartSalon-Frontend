@@ -6,6 +6,9 @@
             <button
                 class="icon"
                 mat-icon-button
+                matTooltip="Add specialty"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip"
                 color="primary"
                 (click)="openSalonSpecialtyDialog('create')"
             >
@@ -24,6 +27,9 @@
                     <button
                         class="icon"
                         mat-icon-button
+                        matTooltip="Edit"
+                        matTooltipPosition="right"
+                        matTooltipClass="tooltip"
                         color="primary"
                         (click)="openSalonSpecialtyDialog('edit', specialty)"
                     >

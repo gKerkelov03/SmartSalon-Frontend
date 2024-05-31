@@ -70,6 +70,13 @@
         [salonId]="salon.id"
         [jobTitles]="salon.jobTitles"
     />
+
+    <app-salon-owners
+        class="owners"
+        [owners]="owners"
+        [canEdit]="canEdit"
+        [salonId]="salon.id"
+    />
 } @else {
     <div class="spinner-container">
         <mat-spinner mode="indeterminate" diameter="200"></mat-spinner>
