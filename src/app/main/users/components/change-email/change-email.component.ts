@@ -1,9 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { take } from 'rxjs';
+import { Subject } from 'rxjs';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
-import { HasUpdateCredentialObserver } from '../../abstractions/has-update-credential-observer';
+import { getErrorMessages } from '../../../../core/utils/get-error-message';
 import { ChangeCredentialSubmitResult } from '../../models/change-credential-submit-result.model';
 import { Credential } from '../../models/credential.model';
 import { UsersService } from '../../services/users.service';
@@ -13,30 +14,41 @@ import { UsersService } from '../../services/users.service';
     templateUrl: './change-email.component.html',
     styleUrls: ['./change-email.component.scss'],
 })
-export class ChangeEmailComponent extends HasUpdateCredentialObserver {
+export class ChangeEmailComponent {
     title: string = 'Change your email';
     credential: Credential = {
         name: 'email',
         validators: [Validators.required, Validators.email],
+        isPassword: false,
     };
+    resetSubject = new Subject();
 
     constructor(
         private usersService: UsersService,
-        currentUser: CurrentUserService,
-        snackBar: MatSnackBar,
-    ) {
-        super(snackBar, currentUser);
-    }
+        private currentUser: CurrentUserService,
+        private snackBar: MatSnackBar,
+    ) {}
 
     submit(formData: ChangeCredentialSubmitResult): void {
+        const observer = {
+            next: () => {
+                this.snackBar.open('Confirm your new email', 'Close');
+                this.resetSubject.next({});
+            },
+            error: (httpError: HttpErrorResponse) => {
+                this.snackBar.open(
+                    getErrorMessages(httpError.error.message),
+                    'Close',
+                );
+            },
+        };
+
         this.usersService
-            //TODO: check the empty strings
             .sendEmailConfirmation(
-                this.currentUser.currentUser?.id ?? '',
+                this.currentUser.currentUser!.id,
                 formData.currentPassword,
-                formData?.credential ?? '',
+                formData.credential,
             )
-            .pipe(take(1))
-            .subscribe(this.updateCredentialObserver);
+            .subscribe(observer);
     }
 }

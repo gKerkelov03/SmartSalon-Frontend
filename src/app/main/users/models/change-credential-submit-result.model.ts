@@ -1,4 +1,4 @@
 export type ChangeCredentialSubmitResult = {
-    credential?: string;
+    credential: string;
     currentPassword: string;
 };

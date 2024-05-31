@@ -48,13 +48,16 @@ export class UsersService {
     }
 
     sendEmailConfirmation(
-        id: string,
+        userId: string,
         password: string,
-        newEmail: string,
+        emailToBeConfirmed: string,
     ): Observable<void> {
-        return this.httpClient.post<void>(this.usersBackendUrl + id, {
-            password,
-            newEmail,
-        });
+        return this.httpClient.post<void>(
+            `${this.usersBackendUrl}${userId}/SendEmailConfirmation`,
+            {
+                password,
+                emailToBeConfirmed,
+            },
+        );
     }
 }

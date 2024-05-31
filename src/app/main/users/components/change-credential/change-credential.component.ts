@@ -15,6 +15,7 @@ import {
 } from '@angular/forms';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { MatStepper } from '@angular/material/stepper';
+import { Observable } from 'rxjs';
 import { passwordRegex } from '../../../../core/constants/regexes';
 import { ChangeCredentialSubmitResult } from '../../models/change-credential-submit-result.model';
 import { Credential } from '../../models/credential.model';
@@ -28,8 +29,13 @@ export class ChangeCredentialComponent implements OnInit {
     credentialForm!: FormGroup | null;
     currentPasswordForm!: FormGroup;
     isCurrentPasswordVisible: boolean = false;
+
+    @Input()
+    resetObservable!: Observable<unknown>;
+
+    @Input()
     isCredentialVisible: boolean = false;
-    @Input() credential!: Credential | null;
+    @Input() credential!: Credential;
     @Input() title!: string;
     @Output() submitted = new EventEmitter<ChangeCredentialSubmitResult>();
     @ViewChild('expansionPanel') expansionPanel!: MatExpansionPanel;
@@ -46,6 +52,8 @@ export class ChangeCredentialComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.resetObservable.subscribe(() => this.reset());
+
         this.currentPasswordForm = this.formBuilder.group({
             currentPassword: new FormControl('', [
                 Validators.required,
@@ -53,14 +61,13 @@ export class ChangeCredentialComponent implements OnInit {
             ]),
         });
 
-        if (this.credential) {
-            this.credentialForm = this.formBuilder.group({
-                credential: new FormControl('', this.credential.validators),
-            });
-        }
+        this.credentialForm = this.formBuilder.group({
+            credential: new FormControl('', this.credential.validators),
+        });
     }
 
-    cancelButtonClicked(): void {
+    reset(): void {
+        console.log('here');
         this.expansionPanel.expanded = false;
         this.stepper.reset();
     }

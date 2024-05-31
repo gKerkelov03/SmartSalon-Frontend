@@ -2,4 +2,6 @@
     [credential]="credential"
     [title]="'Change your email'"
     (submitted)="submit($event)"
-></app-change-credential>
+    [isCredentialVisible]="true"
+    [resetObservable]="resetSubject"
+/>
