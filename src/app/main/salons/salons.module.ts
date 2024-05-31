@@ -55,6 +55,7 @@ import { SearchSalonsPageComponent } from './pages/search-salons-page/search-sal
 import { SalonsRoutingModule } from './salons-routing.module';
 import { ChangeMainCurrencyDialogComponent } from './components/change-main-currency-dialog/change-main-currency-dialog.component';
 import { ConfirmDeletionDialogComponent } from './components/confirm-deletion-dialog/confirm-deletion-dialog.component';
+import { AddExistingWorkerFormComponent } from './components/add-existing-worker-form/add-existing-worker-form.component';
 
 @NgModule({
     declarations: [
@@ -89,6 +90,7 @@ import { ConfirmDeletionDialogComponent } from './components/confirm-deletion-di
         AddWorkerDialogComponent,
         ChangeMainCurrencyDialogComponent,
         ConfirmDeletionDialogComponent,
+        AddExistingWorkerFormComponent,
     ],
     imports: [
         CommonModule,

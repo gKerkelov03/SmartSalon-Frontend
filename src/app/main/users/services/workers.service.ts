@@ -25,6 +25,12 @@ export class WorkersService {
         return this.httpClient.get<Worker>(this.workersBackendUrl + id);
     }
 
+    searchForUnemployedWorker(searchTerm: string): Observable<Worker[]> {
+        return this.httpClient.get<Worker[]>(
+            `${this.workersBackendUrl}Search?searchTerm=${searchTerm}`,
+        );
+    }
+
     getMany(ids: string[]): Observable<Worker[]> {
         const observables: Observable<Worker>[] = [];
 

@@ -1,0 +1,56 @@
+<section>
+    <h3 mat-dialog-title class="title">Invite a worker</h3>
+
+    <mat-dialog-content class="content">
+        <mat-form-field class="main-worker-field">
+            <mat-label>Worker</mat-label>
+            <input
+                [matAutocomplete]="auto"
+                matInput
+                [formControl]="workerControl"
+            />
+
+            @if (workerSelected) {
+                <img
+                    matSuffix
+                    class="suffix-worker-logo"
+                    [src]="workerSelected.profilePictureUrl"
+                    alt="worker-logo"
+                />
+            }
+        </mat-form-field>
+
+        <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            (optionSelected)="autocompleteOptionSelected($event)"
+        >
+            @for (
+                workerOption of autocompleteOptions | async;
+                track workerOption
+            ) {
+                <mat-option [value]="workerOption">
+                    <img
+                        class="autocomplete-worker-logo"
+                        [src]="workerOption.profilePictureUrl"
+                        alt="Currency logo"
+                    />
+
+                    {{ workerOption.nickname }}
+                </mat-option>
+            }
+        </mat-autocomplete>
+        <app-error-message [control]="workerControl"></app-error-message>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="actions" align="center">
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="saveClicked()"
+            class="save-button"
+        >
+            Invite
+        </button>
+    </mat-dialog-actions>
+</section>

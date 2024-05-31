@@ -12,21 +12,21 @@ export class EmailsService {
     changeEmail(token: string): Observable<void> {
         return this.httpClient.patch<void>(
             `${environment.backendUrl}/Users/ChangeEmail?token=${token}`,
-            {}
+            {},
         );
     }
 
-    inviteOwner(token: string): Observable<void> {
+    addeOwner(token: string): Observable<void> {
         return this.httpClient.patch<void>(
             `${environment.backendUrl}/Owners/AddToSalon?token=${token}`,
-            {}
+            {},
         );
     }
 
-    inviteWorker(token: string): Observable<void> {
+    addWorker(token: string): Observable<void> {
         return this.httpClient.patch<void>(
             `${environment.backendUrl}/Workers/AddToSalon?token=${token}`,
-            {}
+            {},
         );
     }
 

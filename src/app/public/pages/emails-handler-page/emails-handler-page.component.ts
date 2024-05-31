@@ -55,9 +55,9 @@ export class EmailsHandlerPageComponent {
                     if (this.emailType == EmailType.EmailConfirmation) {
                         return this.emailsService.changeEmail(this.token);
                     } else if (this.emailType == EmailType.OwnerInvitation) {
-                        return this.emailsService.inviteOwner(this.token);
+                        return this.emailsService.addeOwner(this.token);
                     } else if (this.emailType == EmailType.WorkerInvitation) {
-                        return this.emailsService.inviteWorker(this.token);
+                        return this.emailsService.addWorker(this.token);
                     } else {
                         return of(this.token);
                     }

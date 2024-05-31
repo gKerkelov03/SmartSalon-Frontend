@@ -5,7 +5,7 @@
         @if (
             !shouldntDisplayLeaveSalonButton &&
             (currentUser.isWorker || currentUser.isOwner) &&
-            user!.salons.length
+            userHasSalons
         ) {
             <button (click)="leaveSalon()" mat-raised-button color="warn">
                 Leave salon

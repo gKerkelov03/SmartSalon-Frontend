@@ -52,25 +52,17 @@ export class SalonsService {
         });
     }
 
-    sendOwnerInvitation(
-        id: string,
-        password: string,
-        newPassword: string,
-    ): Observable<void> {
-        return this.httpClient.patch<void>(this.salonsBackendUrl + id, {
-            password,
-            newPassword,
+    sendOwnerInvitation(ownerId: string, salonId: string): Observable<void> {
+        return this.httpClient.patch<void>(this.salonsBackendUrl, {
+            ownerId,
+            salonId,
         });
     }
 
-    sendWorkerInvitation(
-        id: string,
-        password: string,
-        newEmail: string,
-    ): Observable<void> {
-        return this.httpClient.post<void>(this.salonsBackendUrl + id, {
-            password,
-            newEmail,
+    sendWorkerInvitation(workerId: string, salonId: string): Observable<void> {
+        return this.httpClient.post<void>(this.salonsBackendUrl, {
+            workerId,
+            salonId,
         });
     }
 }

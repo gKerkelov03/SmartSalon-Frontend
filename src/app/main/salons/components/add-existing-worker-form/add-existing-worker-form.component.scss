@@ -1,0 +1,28 @@
+@use '../../../../../assets/styles/variables' as *;
+
+.autocomplete-worker-logo {
+    max-height: 1rem;
+    max-width: 1rem;
+}
+
+section {
+    padding: 2rem;
+
+    .title {
+        display: block;
+        font-size: 1.75rem;
+        color: $black;
+    }
+
+    .content {
+        .main-worker-field {
+            width: 100%;
+
+            .suffix-worker-logo {
+                width: 3rem;
+                height: 2rem;
+                margin-right: 1rem;
+            }
+        }
+    }
+}

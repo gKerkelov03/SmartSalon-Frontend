@@ -7,6 +7,7 @@ import { idRouteParameterName } from '../../../../core/constants/routing';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { getErrorMessages } from '../../../../core/utils/get-error-message';
 import { Owner } from '../../../users/models/owner.model';
+import { User } from '../../../users/models/user.model';
 import { Worker } from '../../../users/models/worker.model';
 import { OwnersService } from '../../../users/services/owners.service';
 import { WorkersService } from '../../../users/services/workers.service';
@@ -27,7 +28,7 @@ export class SalonDetailsPageComponent implements OnInit {
     workingTime!: WorkingTime;
     workers: Worker[] = [];
     sections: Section[] = [];
-    user!: Worker | Owner;
+    user: Worker | Owner | User = this.currentUser.currentUser!;
 
     constructor(
         private salonsService: SalonsService,
