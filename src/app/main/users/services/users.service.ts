@@ -28,13 +28,16 @@ export class UsersService {
 
     changePassword(
         userId: string,
-        password: string,
+        currentPassword: string,
         newPassword: string,
     ): Observable<void> {
-        return this.httpClient.patch<void>(this.usersBackendUrl + userId, {
-            password,
-            newPassword,
-        });
+        return this.httpClient.patch<void>(
+            `${this.usersBackendUrl}${userId}/ChangePassword`,
+            {
+                currentPassword,
+                newPassword,
+            },
+        );
     }
 
     restorePassword(token: string, newPassword: string): Observable<void> {

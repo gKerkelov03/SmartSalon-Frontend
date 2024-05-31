@@ -43,7 +43,7 @@ export class JwtTokenInterceptor implements HttpInterceptor {
                         err.status === 401
                     ) {
                         this.localStorage.clearStorage();
-                        this.router.navigate(['public/landing-page']);
+                        this.router.navigate(['public/login']);
                     }
                 },
             }),
