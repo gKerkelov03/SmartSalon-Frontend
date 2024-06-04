@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { JobTitle } from '../../models/job-title.model';
 
@@ -8,9 +8,6 @@ import { JobTitle } from '../../models/job-title.model';
     styleUrl: './add-worker-dialog.component.scss',
 })
 export class AddWorkerDialogComponent {
-    @Input()
-    jobTitles!: JobTitle[];
-
     constructor(
         @Inject(MAT_DIALOG_DATA)
         public dialogData: {
