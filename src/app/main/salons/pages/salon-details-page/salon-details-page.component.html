@@ -7,6 +7,8 @@
         [user]="user"
     />
 
+    <app-update-salon-form class="update-salon" [salon]="this.salon" />
+
     <app-salon-sections
         class="sections"
         [sections]="sections"
@@ -15,14 +17,14 @@
         [mainCurrency]="salon.mainCurrency"
         [workers]="workers"
         [workingTime]="workingTime"
-        [canEdit]="canEdit"
+        [canEdit]="isAdminOrOwner"
     />
 
     <app-salon-images
         class="images"
         [salonId]="salon.id"
         [images]="salon.images"
-        [canEdit]="canEdit"
+        [canEdit]="isAdminOrOwner"
     />
 
     <app-salon-main-picture [salon]="salon" class="main-picture" />
@@ -53,30 +55,32 @@
         [mainCurrency]="salon.mainCurrency"
         [otherAcceptedCurrencies]="salon.otherAcceptedCurrencies"
         [salon]="salon"
-        [canEdit]="canEdit"
+        [canEdit]="isAdminOrOwner"
     />
 
     <app-salon-specialties
         class="specialties"
         [specialties]="salon.specialties"
-        [canEdit]="canEdit"
+        [canEdit]="isAdminOrOwner"
         [salonId]="salon.id"
     />
 
     <app-salon-team
         class="team"
         [team]="workers"
-        [canEdit]="canEdit"
+        [canEdit]="isAdminOrOwner"
         [salonId]="salon.id"
         [jobTitles]="salon.jobTitles"
     />
 
-    <app-salon-owners
-        class="owners"
-        [owners]="owners"
-        [canEdit]="canEdit"
-        [salonId]="salon.id"
-    />
+    @if (isAdminOrOwner) {
+        <app-salon-owners
+            class="owners"
+            [owners]="owners"
+            [canEdit]="currentUser.isAdmin"
+            [salonId]="salon.id"
+        />
+    }
 } @else {
     <div class="spinner-container">
         <mat-spinner mode="indeterminate" diameter="200"></mat-spinner>

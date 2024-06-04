@@ -19,6 +19,7 @@ export interface Salon {
     subscriptionsEnabled: boolean;
     workersCanMoveBookings: boolean;
     workersCanSetNonWorkingPeriods: boolean;
+    workersCanDeleteBookings: boolean;
 
     mainCurrency: Currency;
     otherAcceptedCurrencies: Currency[];

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { Observable, catchError, debounceTime, mergeMap, of } from 'rxjs';
+import { Observable, catchError, debounceTime, map, mergeMap, of } from 'rxjs';
 import { Owner } from '../../../users/models/owner.model';
 import { OwnersService } from '../../../users/services/owners.service';
 import { SalonsService } from '../../services/salons.service';
@@ -33,7 +33,19 @@ export class AddExistingOwnerFormComponent {
         this.autocompleteOptions = this.ownerControl.valueChanges.pipe(
             debounceTime(300),
             mergeMap((value) =>
-                this.ownersService.search(value).pipe(catchError(() => of([]))),
+                this.ownersService.search(value).pipe(
+                    map((owners: Owner[]) =>
+                        owners.filter((owner) => {
+                            console.log(owner.salons);
+                            console.log(this.salonId);
+
+                            return !owner.salons.some(
+                                (salonId) => salonId === this.salonId,
+                            );
+                        }),
+                    ),
+                    catchError(() => of([])),
+                ),
             ),
         );
     }

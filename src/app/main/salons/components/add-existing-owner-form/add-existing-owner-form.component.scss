@@ -1,6 +1,6 @@
 @use '../../../../../assets/styles/variables' as *;
 
-.autocomplete-worker-logo {
+.autocomplete-owner-logo {
     max-height: 1rem;
     max-width: 1rem;
 }
@@ -18,7 +18,7 @@ section {
         .owner-field {
             width: 100%;
 
-            .suffix-worker-logo {
+            .suffix-owner-logo {
                 width: 3rem;
                 height: 2rem;
                 margin-right: 1rem;

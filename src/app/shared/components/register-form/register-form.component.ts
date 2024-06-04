@@ -138,7 +138,6 @@ export class RegisterFormComponent implements OnInit {
                 )
                 .subscribe(createWorkerObserver);
         } else if (this.isRegisteringOwner) {
-            console.log(123);
             this.ownersService
                 .create(userInfo)
                 .pipe(

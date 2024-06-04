@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { Worker } from '../../../users/models/worker.model';
 import { JobTitle } from '../../models/job-title.model';
 import { AddWorkerDialogComponent } from '../add-worker-dialog/add-worker-dialog.component';
@@ -28,7 +29,11 @@ export class SalonTeamComponent implements OnInit {
     @Input()
     jobTitlesFilter!: JobTitle[];
 
-    constructor(private dialog: MatDialog) {}
+    constructor(
+        private dialog: MatDialog,
+        public currentUser: CurrentUserService,
+    ) {}
+
     ngOnInit(): void {
         if (this.jobTitlesFilter) {
             this.team = this.team.filter((worker) =>
@@ -63,6 +68,10 @@ export class SalonTeamComponent implements OnInit {
     }
 
     workerSelected(worker: Worker) {
+        this.workerSelectedEvent.emit(worker);
+    }
+
+    deleteWorker(worker: Worker) {
         this.workerSelectedEvent.emit(worker);
     }
 }

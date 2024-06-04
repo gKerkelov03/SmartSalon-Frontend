@@ -150,7 +150,7 @@ export class SalonDetailsPageComponent implements OnInit {
         this.sectionsService.getMany(this.salon!.sections).subscribe(observer);
     }
 
-    get canEdit(): boolean {
+    get isAdminOrOwner(): boolean {
         return this.currentUser.isAdmin || this.currentUser.isOwner;
     }
 }

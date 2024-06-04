@@ -1,0 +1,78 @@
+<mat-card class="card">
+    <mat-card-header class="header">
+        <mat-card-title class="title">Personal information</mat-card-title>
+
+        @if (isEditing) {
+            <button
+                mat-icon-button
+                class="edit-icon"
+                (click)="isEditing = !isEditing"
+                matTooltip="Edit"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip"
+            >
+                <mat-icon> edit_square </mat-icon>
+            </button>
+        }
+    </mat-card-header>
+
+    <mat-card-content class="content">
+        <form [formGroup]="updateSalonForm">
+            <mat-form-field [appearance]="isEditing ? 'fill' : 'outline'">
+                <mat-label>Location</mat-label>
+                <input
+                    matInput
+                    formControlName="googleMapsLocation"
+                    readonly="{{ !isEditing }}"
+                />
+            </mat-form-field>
+            <app-error-message [control]="googleMapsLocationControl" />
+
+            <mat-form-field [appearance]="isEditing ? 'fill' : 'outline'">
+                <mat-label>Time penalty</mat-label>
+                <input
+                    matInput
+                    formControlName="timePenalty"
+                    readonly="{{ !isEditing }}"
+                />
+            </mat-form-field>
+            <app-error-message [control]="timePenaltyControl" />
+
+            <mat-form-field [appearance]="isEditing ? 'fill' : 'outline'">
+                <mat-label>Phone number</mat-label>
+                <input
+                    matInput
+                    formControlName="bookingsInAdvance"
+                    readonly="{{ !isEditing }}"
+                />
+            </mat-form-field>
+            <app-error-message [control]="bookingsInAdvanceControl" />
+
+            @if (user.isAdmin) {
+                <mat-form-field [appearance]="isEditing ? 'fill' : 'outline'">
+                    <mat-label>Latitude</mat-label>
+                    <input
+                        matInput
+                        formControlName="latitude"
+                        readonly="{{ !isEditing }}"
+                    />
+                </mat-form-field>
+                <app-error-message [control]="latitudeControl" />
+            }
+
+            @if (isEditing) {
+                <div class="actions">
+                    <button mat-raised-button (click)="cancel()">Cancel</button>
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        (click)="saveClicked()"
+                        [disabled]="!updateSalonForm.valid"
+                    >
+                        Save
+                    </button>
+                </div>
+            }
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -46,6 +46,8 @@ export class OwnersService {
     }
 
     search(searchTerm: string): Observable<Owner[]> {
-        return this.httpClient.get<Owner[]>(`${this.ownersBackendUrl}Search`);
+        return this.httpClient.get<Owner[]>(
+            `${this.ownersBackendUrl}Search?searchTerm=${searchTerm}`,
+        );
     }
 }

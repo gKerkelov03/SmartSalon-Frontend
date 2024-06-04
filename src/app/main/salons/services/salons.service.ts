@@ -53,10 +53,13 @@ export class SalonsService {
     }
 
     sendOwnerInvitation(ownerId: string, salonId: string): Observable<void> {
-        return this.httpClient.patch<void>(this.salonsBackendUrl, {
-            ownerId,
-            salonId,
-        });
+        return this.httpClient.post<void>(
+            `${this.salonsBackendUrl}InviteOwner`,
+            {
+                ownerId,
+                salonId,
+            },
+        );
     }
 
     sendWorkerInvitation(workerId: string, salonId: string): Observable<void> {

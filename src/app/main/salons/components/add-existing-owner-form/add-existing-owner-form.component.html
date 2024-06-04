@@ -4,6 +4,7 @@
     <mat-dialog-content class="content">
         <mat-form-field class="owner-field">
             <mat-label>Owner</mat-label>
+
             <input
                 [matAutocomplete]="auto"
                 matInput
@@ -31,7 +32,7 @@
             ) {
                 <mat-option [value]="ownerOption">
                     <img
-                        class="autocomplete-worker-logo"
+                        class="autocomplete-owner-logo"
                         [src]="ownerOption.profilePictureUrl"
                         alt="Currency logo"
                     />
