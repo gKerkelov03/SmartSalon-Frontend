@@ -15,7 +15,7 @@
     <mat-dialog-content class="content">
         <form [formGroup]="createBookingForm">
             <mat-stepper linear #stepper>
-                <mat-step [completed]="!!dateControl.value">
+                <mat-step [completed]="!!dateControl.value" label="Date">
                     <mat-form-field class="date-picker-field">
                         <input
                             matInput
@@ -50,7 +50,7 @@
                     </div>
                 </mat-step>
 
-                <mat-step [completed]="!!workerControl.value">
+                <mat-step [completed]="!!workerControl.value" label="Worker">
                     <app-salon-team
                         [team]="dialogData.workers"
                         [jobTitlesFilter]="dialogData.service.jobTitles"
@@ -59,7 +59,7 @@
                     </app-salon-team>
                 </mat-step>
 
-                <mat-step [completed]="!!timeControl.value">
+                <mat-step [completed]="!!timeControl.value" label="Time">
                     @if (!timeSlotsAvailable) {
                         <mat-spinner></mat-spinner>
                     } @else {
@@ -77,7 +77,7 @@
                     }
                 </mat-step>
 
-                <mat-step [completed]="!!timeControl.value">
+                <mat-step [completed]="!!timeControl.value" label="Summary">
                     <h4>Summary</h4>
                     @if (timeControl.value) {
                         <div>

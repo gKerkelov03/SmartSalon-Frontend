@@ -60,6 +60,7 @@ import { SalonOwnersComponent } from './components/salon-owners/salon-owners.com
 import { AddOwnerDialogComponent } from './components/add-owner-dialog/add-owner-dialog.component';
 import { AddExistingOwnerFormComponent } from './components/add-existing-owner-form/add-existing-owner-form.component';
 import { UpdateSalonFormComponent } from './components/update-salon-form/update-salon-form.component';
+import { UpdateWorkerDialogComponent } from './components/update-worker-dialog/update-worker-dialog.component';
 
 @NgModule({
     declarations: [
@@ -99,6 +100,7 @@ import { UpdateSalonFormComponent } from './components/update-salon-form/update-
         AddOwnerDialogComponent,
         AddExistingOwnerFormComponent,
         UpdateSalonFormComponent,
+        UpdateWorkerDialogComponent,
     ],
     imports: [
         CommonModule,

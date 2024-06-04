@@ -47,10 +47,11 @@ export class WorkersService {
         jobTitlesIds: string[],
     ): Observable<void> {
         return this.httpClient.patch<void>(
-            this.workersBackendUrl + 'UpdateJobTitles/' + workerId,
+            this.workersBackendUrl + 'UpdateJobTitles/',
             {
                 salonId,
                 jobTitlesIds,
+                workerId,
             },
         );
     }

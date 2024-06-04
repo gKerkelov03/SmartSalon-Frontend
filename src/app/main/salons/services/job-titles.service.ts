@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { CreatedResponse } from '../../../core/models/created-response.model';
 import { JobTitle } from '../models/job-title.model';
@@ -17,6 +17,16 @@ export class JobTitlesService {
         return this.httpClient.get<JobTitle>(
             `${this.jobTitlesBackendUrl}/${id}`,
         );
+    }
+
+    getMany(ids: string[]): Observable<JobTitle[]> {
+        const observables: Observable<JobTitle>[] = [];
+
+        for (const id of ids) {
+            observables.push(this.getById(id));
+        }
+
+        return forkJoin(observables);
     }
 
     create(name: string, salonId: string): Observable<CreatedResponse> {

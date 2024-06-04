@@ -120,6 +120,8 @@ export class ServiceDialogComponent {
                         },
                         action: this.dialogData.action,
                     });
+
+                    this.snackBar.open('Service updated successfully', 'OK');
                 });
         } else if (this.dialogData.action === CrudAction.Create) {
             const observer = {

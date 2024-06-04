@@ -22,35 +22,46 @@
             @for (worker of team; track $index) {
                 <div class="team-member">
                     <div class="actions">
-                        @if (canEdit) {
-                            <button
-                                mat-mini-fab
-                                class="action-button"
-                                (click)="editWorker(worker)"
-                            >
-                                <mat-icon>edit</mat-icon>
-                            </button>
-                        }
-
                         @if (currentUser.isAdmin) {
                             <button
                                 mat-mini-fab
                                 class="action-button"
                                 (click)="deleteWorker(worker)"
+                                matTooltip="Remove"
+                                matTooltipPosition="right"
+                                matTooltipClass="tooltip"
                             >
                                 <mat-icon>close</mat-icon>
                             </button>
                         }
+
+                        @if (canEdit) {
+                            <button
+                                mat-mini-fab
+                                [ngClass]="{ right: currentUser.isOwner }"
+                                class="action-button"
+                                (click)="editWorker(worker)"
+                                matTooltip="Edit"
+                                matTooltipPosition="right"
+                                matTooltipClass="tooltip"
+                            >
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        }
+
+                        @if (this.jobTitlesFilter) {
+                            <button
+                                matTooltip="Select"
+                                matTooltipPosition="right"
+                                matTooltipClass="tooltip"
+                                mat-mini-fab
+                                class="action-button right"
+                                (click)="workerSelected(worker)"
+                            >
+                                <mat-icon>check_circle</mat-icon>
+                            </button>
+                        }
                     </div>
-                    @if (this.jobTitlesFilter) {
-                        <button
-                            mat-raised-button
-                            class="top-right-button"
-                            (click)="workerSelected(worker)"
-                        >
-                            <mat-icon>check_box</mat-icon>
-                        </button>
-                    }
                     <img
                         [src]="worker.profilePictureUrl"
                         alt="Team member image"

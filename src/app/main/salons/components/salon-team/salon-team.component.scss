@@ -33,12 +33,16 @@ section {
                 .action-button {
                     position: relative;
                     bottom: 1.5rem;
+
+                    &.right {
+                        margin-left: auto;
+                    }
                 }
             }
 
             .image {
                 border-radius: 50%;
-                max-width: 50%;
+                max-width: 80%;
                 margin-bottom: 0.5rem;
             }
 

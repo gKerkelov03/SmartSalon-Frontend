@@ -4,6 +4,7 @@ import { CurrentUserService } from '../../../../core/services/current-user.servi
 import { Worker } from '../../../users/models/worker.model';
 import { JobTitle } from '../../models/job-title.model';
 import { AddWorkerDialogComponent } from '../add-worker-dialog/add-worker-dialog.component';
+import { UpdateWorkerDialogComponent } from '../update-worker-dialog/update-worker-dialog.component';
 
 @Component({
     selector: 'app-salon-team',
@@ -75,5 +76,17 @@ export class SalonTeamComponent implements OnInit {
         this.workerSelectedEvent.emit(worker);
     }
 
-    editWorker(worker: Worker): void {}
+    editWorker(worker: Worker): void {
+        this.dialog.open(UpdateWorkerDialogComponent, {
+            width: '40vw',
+            autoFocus: false,
+            panelClass: 'round-without-padding',
+            data: {
+                worker,
+                jobTitles: this.jobTitles,
+                salonId: this.salonId,
+            },
+            enterAnimationDuration: '300ms',
+        });
+    }
 }

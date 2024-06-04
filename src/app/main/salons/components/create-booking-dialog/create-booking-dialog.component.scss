@@ -81,5 +81,9 @@ section {
                 margin-left: 1rem;
             }
         }
+
+        ::ng-deep .mat-horizontal-content-container {
+            margin-top: 2rem;
+        }
     }
 }
