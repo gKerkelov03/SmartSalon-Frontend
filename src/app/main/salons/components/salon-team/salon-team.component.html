@@ -21,15 +21,27 @@
         <div class="flex-container">
             @for (worker of team; track $index) {
                 <div class="team-member">
-                    @if (currentUser.isAdmin) {
-                        <button
-                            mat-mini-fab
-                            class="top-right-button"
-                            (click)="deleteWorker(worker)"
-                        >
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    }
+                    <div class="actions">
+                        @if (canEdit) {
+                            <button
+                                mat-mini-fab
+                                class="action-button"
+                                (click)="editWorker(worker)"
+                            >
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        }
+
+                        @if (currentUser.isAdmin) {
+                            <button
+                                mat-mini-fab
+                                class="action-button"
+                                (click)="deleteWorker(worker)"
+                            >
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        }
+                    </div>
                     @if (this.jobTitlesFilter) {
                         <button
                             mat-raised-button

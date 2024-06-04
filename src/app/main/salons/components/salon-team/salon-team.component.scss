@@ -25,12 +25,15 @@ section {
                 rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
                 rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 
-            .top-right-button {
-                margin-left: auto;
-                display: block;
-                position: relative;
-                bottom: 1.5rem;
-                left: 1rem;
+            .actions {
+                width: 110%;
+                display: flex;
+                justify-content: space-between;
+
+                .action-button {
+                    position: relative;
+                    bottom: 1.5rem;
+                }
             }
 
             .image {

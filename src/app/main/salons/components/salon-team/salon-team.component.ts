@@ -67,11 +67,13 @@ export class SalonTeamComponent implements OnInit {
             });
     }
 
-    workerSelected(worker: Worker) {
+    workerSelected(worker: Worker): void {
         this.workerSelectedEvent.emit(worker);
     }
 
-    deleteWorker(worker: Worker) {
+    deleteWorker(worker: Worker): void {
         this.workerSelectedEvent.emit(worker);
     }
+
+    editWorker(worker: Worker): void {}
 }
