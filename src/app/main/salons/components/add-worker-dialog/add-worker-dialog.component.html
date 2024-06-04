@@ -16,8 +16,9 @@
         <mat-tab-group>
             <mat-tab label="Create new account" bodyClass="tab">
                 <app-register-form
-                    [isRegisteringOwner]="true"
+                    [isRegisteringWorker]="true"
                     [salonId]="dialogData.salonId"
+                    [jobTitles]="jobTitles"
                 />
             </mat-tab>
             <mat-tab label="Add existing account" bodyClass="tab">

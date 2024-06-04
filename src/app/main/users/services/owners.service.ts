@@ -35,12 +35,11 @@ export class OwnersService {
         return forkJoin(observables);
     }
 
-    removeFromSalon(salonId: string, ownerId: string): Observable<void> {
+    removeFromSalon(ownerId: string, salonId: string): Observable<void> {
         return this.httpClient.patch<void>(
-            this.ownersBackendUrl + 'RemoveFromSalon',
+            `${this.ownersBackendUrl}${ownerId}/RemoveFromSalon`,
             {
                 salonId,
-                ownerId,
             },
         );
     }

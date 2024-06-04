@@ -57,6 +57,16 @@
                         readonly="{{ !isEditing }}"
                     />
                 </mat-form-field>
+
+                <mat-form-field [appearance]="isEditing ? 'fill' : 'outline'">
+                    <mat-label>Longitude</mat-label>
+                    <input
+                        matInput
+                        formControlName="longitude"
+                        readonly="{{ !isEditing }}"
+                    />
+                </mat-form-field>
+
                 <app-error-message [control]="latitudeControl" />
             }
 
