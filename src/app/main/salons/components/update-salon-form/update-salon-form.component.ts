@@ -125,6 +125,5 @@ export class UpdateSalonFormComponent {
                 new FormControl(this.salon.longitude, [Validators.required]),
             );
         }
-        console.log(this.updateSalonForm.controls);
     }
 }

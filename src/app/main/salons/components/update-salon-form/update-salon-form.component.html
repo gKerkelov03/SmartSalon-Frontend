@@ -2,7 +2,7 @@
     <mat-card-header class="header">
         <mat-card-title class="title">Personal information</mat-card-title>
 
-        @if (isEditing) {
+        @if (!isEditing) {
             <button
                 mat-icon-button
                 class="edit-icon"
@@ -39,7 +39,7 @@
             <app-error-message [control]="timePenaltyControl" />
 
             <mat-form-field [appearance]="isEditing ? 'fill' : 'outline'">
-                <mat-label>Phone number</mat-label>
+                <mat-label>Bookings in advance</mat-label>
                 <input
                     matInput
                     formControlName="bookingsInAdvance"
@@ -69,6 +69,42 @@
 
                 <app-error-message [control]="latitudeControl" />
             }
+
+            <div class="toggle-field-container">
+                <mat-label class="toggle-label">
+                    Workers can move bookings
+                </mat-label>
+                <mat-button-toggle-group
+                    formControlName="workersCanMoveBookings"
+                >
+                    <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                    <mat-button-toggle [value]="false">No</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+
+            <div class="toggle-field-container">
+                <mat-label class="toggle-label">
+                    Workers can delete bookings
+                </mat-label>
+                <mat-button-toggle-group
+                    formControlName="workersCanDeleteBookings"
+                >
+                    <mat-button-toggle [value]="true"> Yes </mat-button-toggle>
+                    <mat-button-toggle [value]="false"> No </mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+
+            <div class="toggle-field-container">
+                <mat-label class="toggle-label">
+                    Workers can set non working periods
+                </mat-label>
+                <mat-button-toggle-group
+                    formControlName="workersCanSetNonWorkingPeriods"
+                >
+                    <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                    <mat-button-toggle [value]="false">No</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
 
             @if (isEditing) {
                 <div class="actions">

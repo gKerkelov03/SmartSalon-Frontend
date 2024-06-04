@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -23,8 +24,13 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { SharedModule } from '../../shared/shared.module';
+import { AddExistingOwnerFormComponent } from './components/add-existing-owner-form/add-existing-owner-form.component';
+import { AddExistingWorkerFormComponent } from './components/add-existing-worker-form/add-existing-worker-form.component';
+import { AddOwnerDialogComponent } from './components/add-owner-dialog/add-owner-dialog.component';
 import { AddWorkerDialogComponent } from './components/add-worker-dialog/add-worker-dialog.component';
 import { CategoryDialogComponent } from './components/category-dialog/category-dialog.component';
+import { ChangeMainCurrencyDialogComponent } from './components/change-main-currency-dialog/change-main-currency-dialog.component';
+import { ConfirmDeletionDialogComponent } from './components/confirm-deletion-dialog/confirm-deletion-dialog.component';
 import { CreateBookingDialogComponent } from './components/create-booking-dialog/create-booking-dialog.component';
 import { DailyWorkingTimeComponent } from './components/daily-working-time/daily-working-time.component';
 import { DeleteCategoryDialogComponent } from './components/delete-category-dialog/delete-category-dialog.component';
@@ -41,6 +47,7 @@ import { SalonInfoDialogComponent } from './components/salon-info-form/salon-inf
 import { SalonJobTitlesComponent } from './components/salon-job-titles/salon-job-titles.component';
 import { SalonLocationComponent } from './components/salon-location/salon-location.component';
 import { SalonMainPictureComponent } from './components/salon-main-picture/salon-main-picture.component';
+import { SalonOwnersComponent } from './components/salon-owners/salon-owners.component';
 import { SalonSectionsComponent } from './components/salon-sections/salon-sections.component';
 import { SalonSpecialtiesComponent } from './components/salon-specialties/salon-specialties.component';
 import { SalonSpecialtyDialogComponent } from './components/salon-specialty-dialog/salon-specialty-dialog.component';
@@ -49,18 +56,12 @@ import { SalonWorkingTimeComponent } from './components/salon-working-time/salon
 import { SalonsMapComponent } from './components/salons-map/salons-map.component';
 import { SectionDialogComponent } from './components/section-dialog/section-dialog.component';
 import { ServiceDialogComponent } from './components/service-dialog/service-dialog.component';
+import { UpdateSalonFormComponent } from './components/update-salon-form/update-salon-form.component';
+import { UpdateWorkerDialogComponent } from './components/update-worker-dialog/update-worker-dialog.component';
 import { MySalonsPageComponent } from './pages/my-salons-page/my-salons-page.component';
 import { SalonDetailsPageComponent } from './pages/salon-details-page/salon-details-page.component';
 import { SearchSalonsPageComponent } from './pages/search-salons-page/search-salons-page.component';
 import { SalonsRoutingModule } from './salons-routing.module';
-import { ChangeMainCurrencyDialogComponent } from './components/change-main-currency-dialog/change-main-currency-dialog.component';
-import { ConfirmDeletionDialogComponent } from './components/confirm-deletion-dialog/confirm-deletion-dialog.component';
-import { AddExistingWorkerFormComponent } from './components/add-existing-worker-form/add-existing-worker-form.component';
-import { SalonOwnersComponent } from './components/salon-owners/salon-owners.component';
-import { AddOwnerDialogComponent } from './components/add-owner-dialog/add-owner-dialog.component';
-import { AddExistingOwnerFormComponent } from './components/add-existing-owner-form/add-existing-owner-form.component';
-import { UpdateSalonFormComponent } from './components/update-salon-form/update-salon-form.component';
-import { UpdateWorkerDialogComponent } from './components/update-worker-dialog/update-worker-dialog.component';
 
 @NgModule({
     declarations: [
@@ -129,6 +130,7 @@ import { UpdateWorkerDialogComponent } from './components/update-worker-dialog/u
         MatCardModule,
         MatDividerModule,
         MatStepperModule,
+        MatButtonToggleModule,
     ],
 })
 export class SalonsModule {}
