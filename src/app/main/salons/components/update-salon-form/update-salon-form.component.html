@@ -1,12 +1,12 @@
 <mat-card class="card">
     <mat-card-header class="header">
-        <mat-card-title class="title">Personal information</mat-card-title>
+        <mat-card-title class="title">Salon information</mat-card-title>
 
         @if (!isEditing) {
             <button
                 mat-icon-button
                 class="edit-icon"
-                (click)="isEditing = !isEditing"
+                (click)="isEditing = true"
                 matTooltip="Edit"
                 matTooltipPosition="right"
                 matTooltipClass="tooltip"
@@ -77,8 +77,12 @@
                 <mat-button-toggle-group
                     formControlName="workersCanMoveBookings"
                 >
-                    <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-                    <mat-button-toggle [value]="false">No</mat-button-toggle>
+                    <mat-button-toggle [disabled]="!isEditing" [value]="true">
+                        Yes
+                    </mat-button-toggle>
+                    <mat-button-toggle [disabled]="!isEditing" [value]="false">
+                        No
+                    </mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
 
@@ -89,8 +93,12 @@
                 <mat-button-toggle-group
                     formControlName="workersCanDeleteBookings"
                 >
-                    <mat-button-toggle [value]="true"> Yes </mat-button-toggle>
-                    <mat-button-toggle [value]="false"> No </mat-button-toggle>
+                    <mat-button-toggle [disabled]="!isEditing" [value]="true">
+                        Yes
+                    </mat-button-toggle>
+                    <mat-button-toggle [disabled]="!isEditing" [value]="false">
+                        No
+                    </mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
 
@@ -101,8 +109,12 @@
                 <mat-button-toggle-group
                     formControlName="workersCanSetNonWorkingPeriods"
                 >
-                    <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-                    <mat-button-toggle [value]="false">No</mat-button-toggle>
+                    <mat-button-toggle [disabled]="!isEditing" [value]="true">
+                        Yes
+                    </mat-button-toggle>
+                    <mat-button-toggle [disabled]="!isEditing" [value]="false">
+                        No
+                    </mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
 

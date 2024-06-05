@@ -77,13 +77,13 @@ export class SalonOwnersComponent {
                     ),
                 ),
             )
-            .subscribe(() =>
+            .subscribe(() => {
                 this.owners.splice(
                     this.owners.findIndex(
                         (owner) => owner.id === ownerToDelete.id,
                     ),
                     1,
-                ),
-            );
+                );
+            });
     }
 }

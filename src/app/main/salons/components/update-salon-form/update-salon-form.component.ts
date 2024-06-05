@@ -73,15 +73,27 @@ export class UpdateSalonFormComponent {
 
     saveClicked(): void {
         const observer = {
-            next: () => {},
+            next: () => {
+                this.isEditing = false;
+                this.salon = { ...this.salon, ...this.updateSalonForm.value };
+                this.setupTheUpdateSalonForm();
+            },
             error: (httpError: HttpErrorResponse) => {
                 this.snackBar.open(getErrorMessages(httpError), 'Close');
             },
         };
+
+        this.salonsService
+            .update(this.salon.id, {
+                ...this.salon,
+                ...this.updateSalonForm.value,
+            })
+            .subscribe(observer);
     }
 
     cancel(): void {
         this.setupTheUpdateSalonForm();
+        this.isEditing = false;
     }
 
     setupTheUpdateSalonForm(): void {
