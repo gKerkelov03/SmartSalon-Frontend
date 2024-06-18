@@ -8,12 +8,17 @@
 .job-titles,
 .sections,
 .owners,
-.main-picture {
+.main-picture,
+.location {
     font-size: 1.5rem;
     margin: auto;
     margin-top: 4rem;
     display: block;
     width: 50%;
+
+    &.height500 {
+        height: 500px;
+    }
 }
 
 .update-salon {
@@ -22,19 +27,6 @@
     margin-top: 4rem;
     display: block;
     width: 30%;
-}
-
-.images {
-    height: 500px;
-    margin-bottom: 10rem;
-}
-
-.location {
-    margin: auto;
-    margin-top: 4rem;
-    display: block;
-    width: 50%;
-    height: 500px;
 }
 
 .spinner-container {

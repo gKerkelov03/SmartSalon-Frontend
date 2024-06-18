@@ -22,6 +22,9 @@
 
     <app-salon-images
         class="images"
+        [ngClass]="{
+            height500: salon.images.length
+        }"
         [salonId]="salon.id"
         [images]="salon.images"
         [canEdit]="isAdminOrOwner"
@@ -44,7 +47,7 @@
     <app-salon-description class="description" [salon]="salon" />
 
     <app-salon-location
-        class="location"
+        class="location heigth500"
         [googleMapsLocation]="salon.googleMapsLocation"
         [lat]="salon.latitude"
         [lng]="salon.longitude"
