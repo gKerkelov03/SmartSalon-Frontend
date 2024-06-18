@@ -51,16 +51,12 @@ export class SalonImagesComponent implements OnInit {
             });
     }
 
-    deleteImage(imageToDelete: Image) {
+    deleteCurrentImage() {
         this.imagesService
-            .removeImage(imageToDelete.id, this.salonId)
+            .removeImage(this.images[this.currentImageIndex].id, this.salonId)
             .subscribe(() => {
-                this.images.splice(
-                    this.images.findIndex(
-                        (image) => image.id == imageToDelete.id,
-                    ),
-                    1,
-                );
+                this.images.splice(this.currentImageIndex, 1);
+                this.currentImageIndex--;
             });
     }
 }
