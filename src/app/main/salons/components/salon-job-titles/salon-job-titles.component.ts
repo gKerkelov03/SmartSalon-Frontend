@@ -78,12 +78,20 @@ export class SalonJobTitlesComponent {
     }
 
     removeJobTitle(jobTitle: JobTitle): void {
-        const index = this.jobTitles.indexOf(jobTitle);
+        const observer = {
+            next: () => {
+                const index = this.jobTitles.indexOf(jobTitle);
 
-        if (index >= 0) {
-            this.jobTitles.splice(index, 1);
-        }
+                if (index >= 0) {
+                    this.jobTitles.splice(index, 1);
+                }
+            },
+            error: (error: HttpErrorResponse) =>
+                this.snackBar.open(getErrorMessages(error)),
+        };
 
-        this.jobTitlesService.delete(jobTitle.id, this.salonId).subscribe();
+        this.jobTitlesService
+            .delete(jobTitle.id, this.salonId)
+            .subscribe(observer);
     }
 }

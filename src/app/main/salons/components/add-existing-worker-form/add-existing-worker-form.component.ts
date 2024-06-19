@@ -12,7 +12,7 @@ import { SalonsService } from '../../services/salons.service';
     styleUrl: './add-existing-worker-form.component.scss',
 })
 export class AddExistingWorkerFormComponent {
-    @Output() saved = new EventEmitter<unknown>();
+    @Output() invited = new EventEmitter<unknown>();
     @Input()
     salonId!: string;
     workerControl!: FormControl;
@@ -50,9 +50,9 @@ export class AddExistingWorkerFormComponent {
         this.workerSelected = worker;
     }
 
-    saveClicked(): void {
+    inviteClicked(): void {
         this.salonsService
             .sendWorkerInvitation(this.workerSelected.id, this.salonId)
-            .subscribe(() => this.saved.emit());
+            .subscribe(() => this.invited.emit());
     }
 }
