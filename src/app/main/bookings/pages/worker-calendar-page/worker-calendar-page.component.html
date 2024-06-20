@@ -8,10 +8,10 @@
             color="primary"
             (click)="displayEventDialog()"
         >
-            Add new event
+            Create booking
         </button>
 
-        <app-worker-calendar />
+        <app-worker-calendar [worker]="worker" />
     </section>
 } @else {
     <p class="no-salons-message">Uneployed</p>

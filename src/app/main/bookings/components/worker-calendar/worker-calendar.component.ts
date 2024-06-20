@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { isSameDay, isSameMonth } from 'date-fns';
@@ -17,6 +17,7 @@ import { CrudAction } from '../../../../core/enums/crud-action';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { BookingsFormComponent } from '../../../bookings/components/bookings-form/bookings-form.component';
 import { BookingChange } from '../../../bookings/models/booking-change-model';
+import { Worker } from '../../../users/models/worker.model';
 import { Booking } from '../../models/booking.model';
 import { BookingsService } from '../../services/bookings.service';
 import { MoreInfoAboutBookingComponent } from '../more-info-about-booking/more-info-about-booking.component';
@@ -27,6 +28,7 @@ import { MoreInfoAboutBookingComponent } from '../more-info-about-booking/more-i
     styleUrl: './worker-calendar.component.scss',
 })
 export class WorkerCalendarComponent implements OnInit, OnDestroy {
+    @Input() worker!: Worker;
     view: CalendarView = CalendarView.Month;
     CalendarView = CalendarView;
     viewDate: Date = new Date();
@@ -82,7 +84,7 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
 
     populateTheCalendarWithBookings(): void {
         this.bookingsService
-            .getWorkerBookings(this.currentUser.currentUser!.id)
+            .getWorkerBookings(this.worker.id)
             .pipe(
                 take(1),
                 finalize(

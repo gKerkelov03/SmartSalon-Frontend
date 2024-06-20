@@ -166,6 +166,9 @@ export class CreateBookingDialogComponent implements OnInit {
                 workerId: this.workerControl.value.id,
                 date: formatDate(this.dateControl.value),
             })
-            .subscribe(() => this.dialogRef.close());
+            .subscribe(() => {
+                this.snackBar.open('Your booking was made', 'OK');
+                this.dialogRef.close();
+            });
     }
 }

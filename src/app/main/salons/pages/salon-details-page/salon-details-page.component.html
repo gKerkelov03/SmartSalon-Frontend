@@ -7,7 +7,9 @@
         [user]="user"
     />
 
-    <app-update-salon-form class="update-salon" [salon]="this.salon" />
+    @if (isAdminOrOwner) {
+        <app-update-salon-form class="update-salon" [salon]="this.salon" />
+    }
 
     <app-salon-sections
         class="sections"

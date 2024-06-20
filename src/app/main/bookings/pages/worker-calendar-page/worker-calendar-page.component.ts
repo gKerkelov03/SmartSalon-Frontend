@@ -28,7 +28,6 @@ export class WorkerCalendarPageComponent implements OnInit {
         this.workersService
             .getById(this.currentUser.currentUser!.id)
             .subscribe((worker: Worker) => {
-                console.log(worker);
                 this.worker = worker;
             });
     }
