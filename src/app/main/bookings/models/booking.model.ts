@@ -3,10 +3,12 @@ export interface Booking {
     date: Date;
     startTime: string;
     endTime: string;
-    durationInMinutes: number;
+    serviceDurationInMinutes: number;
 
     serviceName: string;
-    customerName: string;
+    customerFirstName: string;
+    customerProfilePictureUrl: string;
+    customerLastName: string;
     workerNickname: string;
     salonName: string;
     salonProfilePictureUrl: string;

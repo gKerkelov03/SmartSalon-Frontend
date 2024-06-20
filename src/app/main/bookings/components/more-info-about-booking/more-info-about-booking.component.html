@@ -1,10 +1,56 @@
-@if (isLoading) {
-    <mat-spinner></mat-spinner>
-} @else {
-    < mat-dialog-content class="modal-container scrollbar">
-    <div class="actions">
-        <button type="button" mat-icon-button class="action">
-            <mat-icon mat-dialog-close>close</mat-icon>
+<section>
+    <div mat-dialog-title class="header">
+        @if (booking.customerProfilePictureUrl) {
+            <img
+                [src]="booking.customerProfilePictureUrl"
+                alt="customer-image"
+                class="main-image"
+            />
+        }
+
+        <h3 class="title">
+            {{ booking.customerFirstName }} {{ booking.customerLastName }}
+        </h3>
+
+        <button
+            type="button"
+            mat-dialog-close
+            mat-icon-button
+            class="close-button"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content class="content">
+        <p class="booking-data">Start date: {{ booking.date | date }}</p>
+        <p class="booking-data">
+            Start time: {{ booking.startTime | onlyHourAndMinutes }}
+        </p>
+
+        @if (bookingHoursDuration !== 0) {
+            <p class="booking-data">
+                Duration: {{ bookingHoursDuration }} hours and
+                {{ bookingMinutesDuration }} minutes
+            </p>
+        }
+        @if (bookingHoursDuration === 0) {
+            <p class="booking-data">
+                Duration: {{ bookingMinutesDuration }} minutes
+            </p>
+        }
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="actions" align="center">
+        <button
+            type="button"
+            (click)="openBookingsHistory()"
+            mat-icon-button
+            class="action"
+            mat-icon-button
+            class="action"
+        >
+            <mat-icon>history</mat-icon>
         </button>
         <button
             type="button"
@@ -24,24 +70,5 @@
         >
             <mat-icon>delete</mat-icon>
         </button>
-    </div>
-
-    <div class="header">
-        <h3 class="booking-data title">This is hard coded</h3>
-    </div>
-
-    <p class="booking-data">Start date: {{ startDate }}</p>
-    <p class="booking-data">Start time: {{ startTime }}</p>
-
-    @if (bookingHoursDuration !== 0) {
-        <p class="booking-data">
-            Duration: {{ bookingHoursDuration }} hours and
-            {{ bookingMinutesDuration }} minutes
-        </p>
-    }
-    @if (bookingHoursDuration === 0) {
-        <p class="booking-data">
-            Duration: {{ bookingMinutesDuration }} minutes
-        </p>
-    }
-}
+    </mat-dialog-actions>
+</section>

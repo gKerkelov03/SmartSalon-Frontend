@@ -17,7 +17,7 @@ import { JobTitlesService } from '../../services/job-titles.service';
 export class SalonJobTitlesComponent {
     @ViewChild('jobTitlesInputs')
     jobTitlesInput!: ElementRef;
-    // @Input()
+    @Input()
     canEdit: boolean = true;
     @Input()
     salonId!: string;

@@ -1,5 +1,4 @@
 <div class="container">
-    <h3 class="title">Main picture</h3>
     <div
         [ngStyle]="{
             'background-image':
@@ -15,6 +14,7 @@
         <app-upload-widget
             (newPictureUploaded)="newPictureUploaded($event)"
             class="upload-button"
+            buttonText="Change"
         />
     }
 </div>

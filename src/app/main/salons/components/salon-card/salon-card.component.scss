@@ -3,10 +3,15 @@
 .salon-card {
     margin: auto;
     margin-bottom: 3rem;
-    padding: 1rem;
+    padding: 2rem;
+    border-radius: 30px;
 
     .header {
         margin-bottom: 2rem;
+    }
+
+    .image {
+        border-radius: 20px;
     }
 
     .actions {

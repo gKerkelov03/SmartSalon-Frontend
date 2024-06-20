@@ -5,7 +5,7 @@
         @for (salon of salons.concat(salons); track salon.id) {
             <div class="salon-overview">
                 <app-salon-header
-                    [name]="salon.name"
+                    [salon]="salon"
                     [rating]="3.3"
                     [shouldntDisplayLeaveSalonButton]="true"
                 />

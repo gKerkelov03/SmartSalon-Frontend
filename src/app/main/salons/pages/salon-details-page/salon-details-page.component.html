@@ -1,14 +1,26 @@
 @if (workingTime && salon && user) {
     <app-salon-header
         class="header"
-        [name]="salon.name"
         [rating]="3.3"
-        [salonId]="salon.id"
+        [salon]="salon"
         [user]="user"
     />
 
+    <app-salon-images
+        class="images"
+        [ngClass]="{
+            height500: salon.images.length
+        }"
+        [salonId]="salon.id"
+        [images]="salon.images"
+        [canEdit]="isAdminOrOwner"
+    />
+
     @if (isAdminOrOwner) {
-        <app-update-salon-form class="update-salon" [salon]="this.salon" />
+        <app-update-salon-form
+            class="salon-information big-margin"
+            [salon]="this.salon"
+        />
     }
 
     <app-salon-sections
@@ -22,18 +34,6 @@
         [canEdit]="isAdminOrOwner"
     />
 
-    <app-salon-images
-        class="images"
-        [ngClass]="{
-            height500: salon.images.length
-        }"
-        [salonId]="salon.id"
-        [images]="salon.images"
-        [canEdit]="isAdminOrOwner"
-    />
-
-    <app-salon-main-picture [salon]="salon" class="main-picture" />
-
     <app-salon-working-time
         class="working-time"
         [workingTime]="workingTime"
@@ -44,6 +44,7 @@
         class="job-titles"
         [salonId]="salon.id"
         [jobTitles]="salon.jobTitles"
+        [canEdit]="isAdminOrOwner"
     />
 
     <app-salon-description class="description" [salon]="salon" />

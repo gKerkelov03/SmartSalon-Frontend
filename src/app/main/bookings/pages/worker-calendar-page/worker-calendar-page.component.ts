@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 import { Worker } from '../../../users/models/worker.model';
 import { WorkersService } from '../../../users/services/workers.service';
@@ -13,7 +12,6 @@ export class WorkerCalendarPageComponent implements OnInit {
     worker!: Worker;
 
     constructor(
-        private dialog: MatDialog,
         public currentUser: CurrentUserService,
         private workersService: WorkersService,
     ) {}

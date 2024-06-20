@@ -181,7 +181,7 @@ export class BookingsFormComponent implements OnInit, OnDestroy {
                 .pipe(take(1))
                 .subscribe((booking: Booking) => {
                     this.bookingsForm.setValue({
-                        duration: booking.durationInMinutes,
+                        duration: booking.serviceDurationInMinutes,
                     });
                 });
         }

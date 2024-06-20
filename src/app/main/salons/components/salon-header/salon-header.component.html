@@ -1,6 +1,44 @@
 <section>
     <div class="header">
-        <h3 class="name">{{ name }}</h3>
+        <div>
+            <h3 class="name">{{ salon.name }}</h3>
+
+            <div class="stars-container">
+                <span class="rating">{{ rating | rating }}</span>
+
+                @for (_ of createRange(rating); track $index) {
+                    <img
+                        class="star"
+                        src="../../../../../assets/icons/review-star.svg"
+                        alt="Star"
+                    />
+                }
+
+                @if (shouldDisplayHalfReviewStar()) {
+                    <img
+                        class="star"
+                        src="../../../../../assets/icons/review-half-star.svg"
+                        alt="Half star"
+                    />
+                }
+
+                @for (
+                    _ of createRange(
+                        6 -
+                            (shouldDisplayHalfReviewStar()
+                                ? rating + 1
+                                : rating)
+                    );
+                    track $index
+                ) {
+                    <img
+                        class="star"
+                        src="../../../../../assets/icons/review-empty-star.svg"
+                        alt="Star"
+                    />
+                }
+            </div>
+        </div>
 
         @if (
             !shouldntDisplayLeaveSalonButton &&
@@ -13,36 +51,5 @@
         }
     </div>
 
-    <div class="stars-container">
-        <span class="rating">{{ rating | rating }}</span>
-
-        @for (_ of createRange(rating); track $index) {
-            <img
-                class="star"
-                src="../../../../../assets/icons/review-star.svg"
-                alt="Star"
-            />
-        }
-
-        @if (shouldDisplayHalfReviewStar()) {
-            <img
-                class="star"
-                src="../../../../../assets/icons/review-half-star.svg"
-                alt="Half star"
-            />
-        }
-
-        @for (
-            _ of createRange(
-                6 - (shouldDisplayHalfReviewStar() ? rating + 1 : rating)
-            );
-            track $index
-        ) {
-            <img
-                class="star"
-                src="../../../../../assets/icons/review-empty-star.svg"
-                alt="Star"
-            />
-        }
-    </div>
+    <app-salon-main-picture [salon]="salon" class="main-picture" />
 </section>

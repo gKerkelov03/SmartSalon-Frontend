@@ -12,6 +12,7 @@ import { User } from '../../../users/models/user.model';
 import { Worker } from '../../../users/models/worker.model';
 import { OwnersService } from '../../../users/services/owners.service';
 import { WorkersService } from '../../../users/services/workers.service';
+import { Salon } from '../../models/salon.model';
 import { ConfirmDeletionDialogComponent } from '../confirm-deletion-dialog/confirm-deletion-dialog.component';
 
 @Component({
@@ -24,10 +25,7 @@ export class SalonHeaderComponent {
     user!: Worker | Owner | User;
 
     @Input()
-    name!: string;
-
-    @Input()
-    salonId!: string;
+    salon!: Salon;
 
     @Input()
     rating!: number;
@@ -65,13 +63,13 @@ export class SalonHeaderComponent {
                 switchMap(() => {
                     if (this.currentUser.isOwner) {
                         return this.ownersService.removeFromSalon(
-                            this.salonId,
+                            this.salon.id,
                             this.currentUser.currentUser!.id,
                         );
                     } else if (this.currentUser.isWorker) {
                         return this.workersService.removeFromSalon(
                             this.currentUser.currentUser!.id,
-                            this.salonId,
+                            this.salon.id,
                         );
                     }
 

@@ -33,6 +33,7 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
     CalendarView = CalendarView;
     viewDate: Date = new Date();
     calendarEvents: CalendarEvent[] = [];
+    bookings!: Booking[];
     activeDayIsOpen: boolean = true;
     destroy$: Subject<void> = new Subject();
 
@@ -43,7 +44,7 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.populateTheCalendarWithBookings();
+        this.fetchBookings();
         this.keepTheCalendarInformedAboutBookingChanges();
     }
 
@@ -82,7 +83,7 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
             });
     }
 
-    populateTheCalendarWithBookings(): void {
+    fetchBookings(): void {
         this.bookingsService
             .getWorkerBookings(this.worker.id)
             .pipe(
@@ -91,9 +92,10 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
                     () => (this.calendarEvents = [...this.calendarEvents]),
                 ),
             )
-            .subscribe((response: Booking[]) =>
-                response.forEach((booking) => this.addCalendarEvent(booking)),
-            );
+            .subscribe((response: Booking[]) => {
+                this.bookings = response;
+                response.forEach((booking) => this.addCalendarEvent(booking));
+            });
     }
 
     openTheBookingsFormWithPrefilledStartTime(
@@ -155,9 +157,10 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
 
     addCalendarEvent(booking: Booking) {
         this.calendarEvents.push({
-            title: booking.customerName,
+            id: booking.id,
+            title: `${booking.customerFirstName} ${booking.customerLastName} - ${booking.serviceName}`,
             start: new Date(`${booking.date}T${booking.startTime}`),
-            end: new Date(`${booking.date}T${booking.startTime}`),
+            end: new Date(`${booking.date}T${booking.endTime}`),
         });
     }
 
@@ -187,7 +190,7 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
             width: '60vw',
             autoFocus: false,
             panelClass: ['round-without-padding', 'modal-container'],
-            data: event.id,
+            data: this.bookings.find((booking) => booking.id === event.id),
         });
     }
 }

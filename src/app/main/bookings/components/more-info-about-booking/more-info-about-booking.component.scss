@@ -1,106 +1,46 @@
-.modal-container {
-	padding: 20px;
-	background-color: var(--background-light);
-	max-width: 100%;
+@use '../../../../../assets/styles/variables' as *;
 
-	&.mat-dialog-content {
-		margin: 0;
-	}
+section {
+    padding: 2rem;
+    border-radius: 30px;
+    height: 100%;
 
-	.actions {
-		width: 24px;
-		z-index: 3;
-		position: -webkit-sticky;
-		position: sticky;
-		top: 0;
-		left: 100%;
+    .header {
+        display: flex;
 
-		.action {
-			width: 24px;
-			height: 24px;
-			margin-bottom: 0.5rem;
-			display: flex;
-			align-self: center;
-			justify-content: center;
-			background-color: var(--primary);
-			color: var(--accent);
-			border-radius: 50%;
-			font-weight: bold;
-			cursor: pointer;
+        .main-image {
+            margin-right: 2rem;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+        }
 
-			.mat-icon {
-				height: 20px;
-				width: 20px;
-				display: flex;
-				align-self: center;
-				justify-content: center;
+        .title {
+            display: block;
+            font-size: 1.75rem;
+            color: $black;
+        }
 
-				&:hover {
-					height: 23px;
-					width: 23px;
-				}
-			}
+        .close-button {
+            margin-left: auto;
+        }
+    }
 
-			&:hover {
-				width: 26px;
-				height: 26px;
-			}
-		}
-	}
+    .content {
+        padding: 0;
 
-	.header {
-		display: flex;
-		justify-content: space-between;
-	}
+        &::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
 
-	.event-data {
-		margin: 1rem 0;
-		font-size: 1.5rem;
+        &::-webkit-scrollbar-thumb {
+            background-color: $primary;
+            border-radius: 5px;
+        }
 
-		&.title {
-			text-align: center;
-			font-size: 2rem;
-			margin-top: 0;
-			color: var(--blue-orange);
-		}
-	}
-}
-
-@media (max-width: 1200px) {
-	.modal-container {
-		.event-data {
-			font-size: 1.2rem;
-
-			&.title {
-				font-size: 1.75rem;
-			}
-		}
-	}
-}
-
-@media (max-width: 660px) {
-	.modal-container {
-		.event-data {
-			font-size: 1.2rem;
-
-			&.title {
-				font-size: 1.5rem;
-			}
-		}
-	}
-}
-
-@media (max-width: 426px) {
-	.modal-container {
-		min-height: 80vh;
-
-		.event-data {
-			font-size: 1rem;
-
-			&.title {
-				margin-top: 2rem;
-				font-size: 1.25rem;
-			}
-		}
-	}
+        &::-webkit-scrollbar-track {
+            background-color: #ccc;
+        }
+    }
 }
