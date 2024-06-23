@@ -49,7 +49,7 @@
             <app-error-message [control]="priceControl"></app-error-message>
 
             <mat-form-field class="field">
-                <mat-label>Job titles</mat-label>
+                <mat-label>Types of professionals</mat-label>
                 <mat-select formControlName="jobTitlesNames" multiple>
                     @for (jobTitle of dialogData.jobTitles; track jobTitle) {
                         <mat-option [value]="jobTitle.name">

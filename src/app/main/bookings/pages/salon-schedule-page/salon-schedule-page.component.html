@@ -1,0 +1,31 @@
+@if (salon && workers?.length) {
+    <section>
+        <h3 class="title">{{ salon.name }}'s schedule</h3>
+
+        <mat-tab-group
+            class="workers"
+            (selectedIndexChange)="workerIndexChanged($event)"
+        >
+            @for (worker of workers; track worker?.id) {
+                <mat-tab [label]="worker.nickname" class="content">
+                    <ng-template mat-tab-label="">
+                        <div class="worker-label">
+                            <div
+                                class="worker-image"
+                                [ngStyle]="{
+                                    'background-image':
+                                        'url(' + worker.profilePictureUrl + ')'
+                                }"
+                            ></div>
+
+                            <p>
+                                {{ worker.nickname }}
+                            </p>
+                        </div>
+                    </ng-template>
+                    <app-worker-calendar [worker]="worker" />
+                </mat-tab>
+            }
+        </mat-tab-group>
+    </section>
+}

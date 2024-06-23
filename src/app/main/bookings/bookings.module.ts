@@ -7,6 +7,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { SharedModule } from '../../shared/shared.module';
@@ -16,6 +17,7 @@ import { MoreInfoAboutBookingComponent } from './components/more-info-about-book
 import { WorkerCalendarComponent } from './components/worker-calendar/worker-calendar.component';
 import { CustomerBookingsPageComponent } from './pages/customer-bookings-page/customer-bookings-page.component';
 import { CustomerHistoryPageComponent } from './pages/customer-history-page/customer-history-page.component';
+import { SalonSchedulePageComponent } from './pages/salon-schedule-page/salon-schedule-page.component';
 import { WorkerCalendarPageComponent } from './pages/worker-calendar-page/worker-calendar-page.component';
 
 @NgModule({
@@ -27,10 +29,12 @@ import { WorkerCalendarPageComponent } from './pages/worker-calendar-page/worker
         BookingsFormComponent,
         BookingsFormComponent,
         MoreInfoAboutBookingComponent,
+        SalonSchedulePageComponent,
     ],
     imports: [
         CommonModule,
         MatButtonModule,
+        MatTabsModule,
         MatCardModule,
         BoookingsRoutingModule,
         SharedModule,

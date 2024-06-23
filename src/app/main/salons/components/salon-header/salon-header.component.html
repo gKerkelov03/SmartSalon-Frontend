@@ -1,5 +1,6 @@
 <section>
     <div class="header">
+        <app-salon-main-picture [salon]="salon" class="main-picture" />
         <div>
             <h3 class="name">{{ salon.name }}</h3>
 
@@ -50,6 +51,4 @@
             </button>
         }
     </div>
-
-    <app-salon-main-picture [salon]="salon" class="main-picture" />
 </section>

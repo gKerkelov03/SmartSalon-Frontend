@@ -1,0 +1,42 @@
+@use '../../../../../assets/styles/variables' as *;
+
+section {
+    position: relative;
+    left: 2rem;
+    width: 80%;
+    margin: auto;
+
+    .title {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        font-size: 1.75rem;
+        color: $black;
+        text-align: center;
+    }
+
+    .workers {
+        ::ng-deep .mat-mdc-tab:not(.mdc-tab--stacked) {
+            height: 100%;
+        }
+
+        .worker-label {
+            margin: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .worker-image {
+                width: 5vw;
+                height: 5vw;
+                border-radius: 50%;
+                margin-bottom: 1rem;
+                background-size: contain;
+                background-repeat: repeat;
+            }
+        }
+
+        ::ng-deep .mat-mdc-tab-body {
+            margin-top: 2rem;
+        }
+    }
+}

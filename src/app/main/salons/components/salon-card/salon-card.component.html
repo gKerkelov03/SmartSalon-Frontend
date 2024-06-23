@@ -14,8 +14,15 @@
     />
 
     <mat-card-actions class="actions">
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="openSalonSchedule(salon.id)"
+        >
+            See schedule
+        </button>
         <button mat-raised-button color="primary" (click)="openSalon(salon.id)">
-            Salon details
+            See page
         </button>
     </mat-card-actions>
 </mat-card>

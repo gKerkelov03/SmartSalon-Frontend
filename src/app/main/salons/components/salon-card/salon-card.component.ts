@@ -28,4 +28,8 @@ export class SalonCardComponent implements OnInit {
     openSalon(salonId: string) {
         this.router.navigate([`main/salons/${salonId}`]);
     }
+
+    openSalonSchedule(salonId: string) {
+        this.router.navigate([`main/bookings/salon-schedule/${salonId}`]);
+    }
 }
