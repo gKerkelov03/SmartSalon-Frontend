@@ -1,12 +1,14 @@
 <section>
     <h3 class="title">
-        <span>{{ this.jobTitlesFilter ? 'Choose specialist' : 'Team' }}</span>
+        <span>
+            {{ this.jobTitlesFilter ? 'Choose specialist' : 'Team members' }}
+        </span>
 
         @if (canEdit) {
             <button
                 class="icon"
                 mat-icon-button
-                matTooltip="Add worker"
+                matTooltip="Add specialist"
                 matTooltipPosition="right"
                 matTooltipClass="tooltip"
                 color="primary"

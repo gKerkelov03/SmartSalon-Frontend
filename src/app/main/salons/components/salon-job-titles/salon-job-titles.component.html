@@ -8,7 +8,7 @@
             @for (jobTitle of jobTitles; track jobTitle.id) {
                 <mat-chip-row
                     (removed)="removeJobTitle(jobTitle)"
-                    [editable]="true"
+                    [editable]="canEdit"
                     (edited)="editJobTitle(jobTitle, $event)"
                 >
                     <span class="name">{{ jobTitle.name }}</span>

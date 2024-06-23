@@ -2,19 +2,17 @@
     <h3 class="title">
         <span>Owners</span>
 
-        @if (canEdit) {
-            <button
-                class="icon"
-                mat-icon-button
-                matTooltip="Add owner"
-                matTooltipPosition="right"
-                matTooltipClass="tooltip"
-                color="primary"
-                (click)="openAddOwnerDialog()"
-            >
-                <mat-icon matTooltipPosition="left"> add_circle </mat-icon>
-            </button>
-        }
+        <button
+            class="icon"
+            mat-icon-button
+            matTooltip="Add owner"
+            matTooltipPosition="right"
+            matTooltipClass="tooltip"
+            color="primary"
+            (click)="openAddOwnerDialog()"
+        >
+            <mat-icon matTooltipPosition="left"> add_circle </mat-icon>
+        </button>
     </h3>
 
     @if (owners.length) {
