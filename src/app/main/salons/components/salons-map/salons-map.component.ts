@@ -1,6 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, debounceTime, map, startWith } from 'rxjs';
+import { Observable, debounceTime, map, startWith, tap } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import { blankProfilePictureUrl } from '../../../../core/constants/urls';
 import { isValidUrl } from '../../../../core/utils/is-valid-url';
@@ -11,13 +19,14 @@ import { Salon } from '../../models/salon.model';
     templateUrl: './salons-map.component.html',
     styleUrl: './salons-map.component.scss',
 })
-export class SalonsMapComponent implements OnInit {
+export class SalonsMapComponent implements OnInit, OnChanges {
     @Input()
-    center!: google.maps.LatLngLiteral;
+    userLocation!: google.maps.LatLngLiteral;
     @Input()
     zoom!: number;
     @Input()
     salons!: Salon[];
+    allSalons!: Salon[];
     @Output()
     salonSelected: EventEmitter<Salon> = new EventEmitter<Salon>();
     mapId = environment.googleMaps.mapId;
@@ -25,32 +34,48 @@ export class SalonsMapComponent implements OnInit {
         mapTypeControl: false,
         fullscreenControl: false,
     };
+    userLocationIndicatorOptions: google.maps.CircleOptions = {
+        fillOpacity: 1,
+        fillColor: '#0000FF',
+        strokeColor: '#0000FF',
+    };
     isValidUrl = isValidUrl;
     blankProfilePictureUrl = blankProfilePictureUrl;
     salonsControl = new FormControl('');
     autocompleteOptions!: Observable<Salon[]>;
 
     constructor() {}
-
-    ngOnInit(): void {
-        this.keepTheAutocompleteUpdatedBasedOnTheSearchTerm();
+    ngOnChanges(changes: SimpleChanges): void {
+        this.allSalons = changes['salons'].currentValue;
     }
 
-    keepTheAutocompleteUpdatedBasedOnTheSearchTerm(): void {
+    ngOnInit(): void {
+        this.keepTheAutocompleteAndTheMapMarkersUpdatedBasedOnTheSearchTerm();
+    }
+
+    keepTheAutocompleteAndTheMapMarkersUpdatedBasedOnTheSearchTerm(): void {
         this.autocompleteOptions = this.salonsControl.valueChanges.pipe(
             startWith(''),
             debounceTime(300),
-            map((value) =>
-                this.salons.filter(
+            tap((searchTerm) => {
+                if (!searchTerm) {
+                    this.salons = this.allSalons;
+                }
+            }),
+            map((searchTerm) => {
+                const filteredSalons = this.salons.filter(
                     (salon) =>
                         salon.name
                             .toLowerCase()
-                            .includes(value!.toLowerCase()) ||
+                            .includes(searchTerm!.toLowerCase()) ||
                         salon.googleMapsLocation
                             .toLowerCase()
-                            .includes(value!.toLowerCase()),
-                ),
-            ),
+                            .includes(searchTerm!.toLowerCase()),
+                );
+
+                this.salons = filteredSalons;
+                return filteredSalons;
+            }),
         );
     }
 

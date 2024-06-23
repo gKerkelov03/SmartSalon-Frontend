@@ -31,7 +31,7 @@
     </div>
     <div class="container">
         <app-salons-map
-            [center]="userLocation"
+            [userLocation]="userLocation"
             [zoom]="mapZoomLevel"
             [salons]="salons"
             (salonSelected)="showMoreInfoAboutSalon($event)"

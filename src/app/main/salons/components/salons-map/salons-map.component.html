@@ -37,11 +37,18 @@
         </mat-autocomplete>
     </mat-form-field>
     <google-map
-        [center]="center"
+        [center]="userLocation"
         [zoom]="zoom"
         [mapId]="mapId"
         [options]="mapOptions"
     >
+        <map-circle
+            class="circle"
+            [options]="userLocationIndicatorOptions"
+            [center]="userLocation"
+            [radius]="150"
+        />
+
         @for (salon of salons; track salon.id) {
             <map-advanced-marker
                 (mapClick)="mapMarkerClicked($event)"
