@@ -1,1 +1,14 @@
+@use '../../../../assets/styles/variables' as *;
 
+.text-button {
+    background: none;
+    font-size: 1.25rem;
+    color: $primary;
+    font-weight: bold;
+    position: relative;
+    bottom: 1rem;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

@@ -1,3 +1,19 @@
-<button type="button" mat-raised-button (click)="showWidget()" color="primary">
-    <mat-icon>upload</mat-icon> {{ buttonText }}
-</button>
+@if (shouldDisplayAsJustText) {
+    <button
+        class="text-button"
+        type="button"
+        (click)="showWidget()"
+        color="primary"
+    >
+        {{ buttonText }}
+    </button>
+} @else {
+    <button
+        type="button"
+        (click)="showWidget()"
+        mat-raised-button
+        color="primary"
+    >
+        <mat-icon>upload</mat-icon> {{ buttonText }}
+    </button>
+}

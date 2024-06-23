@@ -12,6 +12,7 @@ const cloudName = environment.cloudinary.cloudName,
 })
 export class UploadWidgetComponent {
     @Input() buttonText: string = 'Upload';
+    @Input() shouldDisplayAsJustText: boolean = false;
     @Output() newPictureUploaded = new EventEmitter<string>();
 
     //@ts-ignore
