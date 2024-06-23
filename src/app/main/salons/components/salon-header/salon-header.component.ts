@@ -33,6 +33,9 @@ export class SalonHeaderComponent {
     @Input()
     shouldntDisplayLeaveSalonButton: boolean = false;
 
+    @Input()
+    shouldntDisplayMainPicture: boolean = false;
+
     createRange = createRange;
 
     constructor(

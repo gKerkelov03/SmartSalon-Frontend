@@ -1,52 +1,60 @@
 <section>
     <div class="header">
-        <app-salon-main-picture [salon]="salon" class="main-picture" />
-        <div>
-            <h3 class="name">{{ salon.name }}</h3>
+        <div class="picture-title-container">
+            @if (!shouldntDisplayMainPicture) {
+                <app-salon-main-picture [salon]="salon" class="main-picture" />
+            }
+            <div>
+                <h3 class="name">{{ salon.name }}</h3>
 
-            <div class="stars-container">
-                <span class="rating">{{ rating | rating }}</span>
+                <div class="stars-container">
+                    <span class="rating">{{ rating | rating }}</span>
 
-                @for (_ of createRange(rating); track $index) {
-                    <img
-                        class="star"
-                        src="../../../../../assets/icons/review-star.svg"
-                        alt="Star"
-                    />
-                }
+                    @for (_ of createRange(rating); track $index) {
+                        <img
+                            class="star"
+                            src="../../../../../assets/icons/review-star.svg"
+                            alt="Star"
+                        />
+                    }
 
-                @if (shouldDisplayHalfReviewStar()) {
-                    <img
-                        class="star"
-                        src="../../../../../assets/icons/review-half-star.svg"
-                        alt="Half star"
-                    />
-                }
+                    @if (shouldDisplayHalfReviewStar()) {
+                        <img
+                            class="star"
+                            src="../../../../../assets/icons/review-half-star.svg"
+                            alt="Half star"
+                        />
+                    }
 
-                @for (
-                    _ of createRange(
-                        6 -
-                            (shouldDisplayHalfReviewStar()
-                                ? rating + 1
-                                : rating)
-                    );
-                    track $index
-                ) {
-                    <img
-                        class="star"
-                        src="../../../../../assets/icons/review-empty-star.svg"
-                        alt="Star"
-                    />
-                }
+                    @for (
+                        _ of createRange(
+                            6 -
+                                (shouldDisplayHalfReviewStar()
+                                    ? rating + 1
+                                    : rating)
+                        );
+                        track $index
+                    ) {
+                        <img
+                            class="star"
+                            src="../../../../../assets/icons/review-empty-star.svg"
+                            alt="Star"
+                        />
+                    }
+                </div>
             </div>
         </div>
-
         @if (
             !shouldntDisplayLeaveSalonButton &&
             (currentUser.isWorker || currentUser.isOwner) &&
             userHasSalons
         ) {
-            <button (click)="leaveSalon()" mat-raised-button color="warn">
+            <button
+                (click)="leaveSalon()"
+                class="leave-salon-button"
+                mat-raised-button
+                color="warn"
+            >
                 Leave salon
             </button>
         }

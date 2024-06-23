@@ -2,12 +2,13 @@
     <div class="search-side">
         <h3 class="title">Nearest salons</h3>
 
-        @for (salon of salons.concat(salons); track salon.id) {
+        @for (salon of salons; track salon.id) {
             <div class="salon-overview">
                 <app-salon-header
                     [salon]="salon"
                     [rating]="3.3"
                     [shouldntDisplayLeaveSalonButton]="true"
+                    [shouldntDisplayMainPicture]="true"
                 />
 
                 <img

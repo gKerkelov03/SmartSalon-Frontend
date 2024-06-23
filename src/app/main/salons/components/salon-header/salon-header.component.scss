@@ -6,14 +6,21 @@ section {
         display: flex;
         justify-content: space-between;
 
+        .picture-title-container {
+            flex: 1;
+            display: flex;
+        }
+
         .name {
+            margin-top: 1rem;
+            margin-left: 1rem;
             font-size: 1.5em;
-            margin-bottom: 1rem;
             font-weight: bold;
             color: $black;
         }
 
         .stars-container {
+            margin-left: 1rem;
             display: flex;
             gap: 0.1rem;
 
@@ -27,6 +34,10 @@ section {
                 height: 1rem;
                 color: $black;
             }
+        }
+
+        .leave-salon-button {
+            margin-top: 1rem;
         }
     }
 }

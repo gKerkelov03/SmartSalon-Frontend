@@ -12,6 +12,7 @@
 
     @if (currentUser.isAdmin || currentUser.isOwner) {
         <app-upload-widget
+            [shouldDisplayAsJustText]="true"
             (newPictureUploaded)="newPictureUploaded($event)"
             class="upload-button"
             buttonText="Change"

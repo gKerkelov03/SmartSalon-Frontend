@@ -17,7 +17,7 @@ section {
     }
 
     .search-side {
-        width: 25vw;
+        width: 30vw;
         display: flex;
         flex-direction: column;
         max-height: 100vh;
@@ -41,7 +41,11 @@ section {
         }
 
         app-salon-header {
-            font-size: 1rem;
+            // width: 70%;
+            // margin: auto;
+            font-size: 1.1rem;
+            position: relative;
+            bottom: 2rem;
         }
 
         .salon-overview {
@@ -49,13 +53,18 @@ section {
             flex-direction: column;
             justify-content: center;
             padding: 3rem;
-            margin: 3rem;
+            margin: 2rem 5rem;
             border-radius: 20px;
             gap: 1rem;
-            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 25px 0px;
 
             .image {
                 border-radius: 30px;
+            }
+
+            button {
+                width: 50%;
+                align-self: center;
             }
         }
     }
