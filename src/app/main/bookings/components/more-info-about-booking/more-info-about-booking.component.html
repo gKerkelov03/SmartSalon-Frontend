@@ -23,9 +23,12 @@
     </div>
 
     <mat-dialog-content class="content">
-        <p class="booking-data">Start date: {{ booking.date | date }}</p>
         <p class="booking-data">
-            Start time: {{ booking.startTime | onlyHourAndMinutes }}
+            <span class="bold">Start date:</span> {{ booking.date | date }}
+        </p>
+        <p class="booking-data">
+            <span class="bold">Start time:</span>
+            {{ booking.startTime | onlyHourAndMinutes }}
         </p>
 
         @if (bookingHoursDuration !== 0) {
@@ -36,39 +39,38 @@
         }
         @if (bookingHoursDuration === 0) {
             <p class="booking-data">
-                Duration: {{ bookingMinutesDuration }} minutes
+                <span class="bold"> Duration: </span>
+                {{ bookingMinutesDuration }} minutes
             </p>
         }
     </mat-dialog-content>
 
-    <mat-dialog-actions class="actions" align="center">
+    <mat-dialog-actions class="actions">
+        <button
+            type="button"
+            (click)="deleteIconClicked()"
+            mat-raised-button
+            color="warn"
+            class="action delete-button"
+        >
+            Delete
+        </button>
         <button
             type="button"
             (click)="openBookingsHistory()"
             mat-icon-button
-            class="action"
-            mat-icon-button
-            class="action"
+            class="action history-button"
         >
             <mat-icon>history</mat-icon>
         </button>
+
         <button
             type="button"
-            (click)="editIconClicked()"
+            (click)="doneClicked()"
             mat-icon-button
-            class="action"
+            class="action done-button"
         >
-            <mat-icon>edit</mat-icon>
-        </button>
-        <button
-            type="button"
-            (click)="deleteIconClicked()"
-            mat-icon-button
-            class="action"
-            mat-icon-button
-            class="action"
-        >
-            <mat-icon>delete</mat-icon>
+            <mat-icon>done</mat-icon>
         </button>
     </mat-dialog-actions>
 </section>

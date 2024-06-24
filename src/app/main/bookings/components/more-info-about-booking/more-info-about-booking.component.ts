@@ -5,6 +5,9 @@ import {
     MatDialogRef,
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { filter, switchMap } from 'rxjs';
+import { CrudAction } from '../../../../core/enums/crud-action';
+import { ConfirmDeletionDialogComponent } from '../../../salons/components/confirm-deletion-dialog/confirm-deletion-dialog.component';
 import { Booking } from '../../models/booking.model';
 import { BookingsService } from '../../services/bookings.service';
 
@@ -35,35 +38,49 @@ export class MoreInfoAboutBookingComponent implements OnInit {
             this.booking.serviceDurationInMinutes % 60;
     }
 
-    editIconClicked(): void {
-        // this.dialogRef.close();
-        // this.dialog.open(BookingsFormComponent, {
-        //     width: '60vw',
-        //     autoFocus: false,
-        //     panelClass: 'round-without-padding',
-        //     data: this.bookingId,
-        // });
-    }
-
     deleteIconClicked(): void {
-        // const deleteBookingDialogRef = this.dialog.open(
-        //     DeleteBookingDialogComponent,
-        //     {
-        //         data: this.bookingId,
-        //         autoFocus: false,
-        //         panelClass: 'round-without-padding',
-        //     },
-        // );
-        // deleteBookingDialogRef
-        //     .afterClosed()
-        //     .pipe(take(1))
-        //     .subscribe((isDeletedSuccessfully: boolean) => {
-        //         if (isDeletedSuccessfully) {
-        //             this.snackBar.open('Successfully canceled a booking', 'Ok');
-        //             this.dialogRef.close();
-        //         }
-        //     });
+        this.dialogRef.close();
+        const dialogRef = this.dialog.open(ConfirmDeletionDialogComponent, {
+            width: '40vw',
+            autoFocus: false,
+            panelClass: 'round-without-padding',
+            data: {
+                title: 'Are you sure you want to cancel the booking',
+                deleteButtonText: 'Yes',
+            },
+            enterAnimationDuration: '300ms',
+        });
+
+        dialogRef
+            .afterClosed()
+            .pipe(
+                filter((result: { isDeleted: boolean }) => result.isDeleted),
+                switchMap(() =>
+                    this.bookingsService.delete(
+                        this.booking.id,
+                        this.booking.salonId,
+                        this.booking.customerId,
+                        this.booking.workerId,
+                    ),
+                ),
+            )
+            .subscribe(() =>
+                this.bookingsService.bookingsChangeSubject.next({
+                    action: CrudAction.Delete,
+                    bookingId: this.booking.id,
+                }),
+            );
     }
 
     openBookingsHistory(): void {}
+
+    doneClicked(): void {
+        this.bookingsService
+            .update(this.booking.id, {
+                ...this.booking,
+                note: 'new note',
+                done: true,
+            })
+            .subscribe();
+    }
 }

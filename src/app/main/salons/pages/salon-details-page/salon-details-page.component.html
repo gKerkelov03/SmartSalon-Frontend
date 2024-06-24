@@ -40,13 +40,14 @@
         [salonId]="salon.id"
     />
 
-    <app-salon-job-titles
-        class="job-titles"
-        [salonId]="salon.id"
-        [jobTitles]="salon.jobTitles"
-        [canEdit]="isAdminOrOwner"
-    />
-
+    @if (isAdminOrOwner) {
+        <app-salon-job-titles
+            class="job-titles"
+            [salonId]="salon.id"
+            [jobTitles]="salon.jobTitles"
+            [canEdit]="isAdminOrOwner"
+        />
+    }
     <app-salon-description class="description" [salon]="salon" />
 
     <app-salon-location

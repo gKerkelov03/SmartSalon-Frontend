@@ -4,6 +4,8 @@ export interface Booking {
     startTime: string;
     endTime: string;
     serviceDurationInMinutes: number;
+    note: string;
+    done: boolean;
 
     serviceName: string;
     customerFirstName: string;

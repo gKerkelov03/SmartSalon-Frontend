@@ -3,7 +3,6 @@ import {
     EventEmitter,
     Input,
     OnChanges,
-    OnInit,
     Output,
     SimpleChanges,
 } from '@angular/core';
@@ -19,7 +18,7 @@ import { Salon } from '../../models/salon.model';
     templateUrl: './salons-map.component.html',
     styleUrl: './salons-map.component.scss',
 })
-export class SalonsMapComponent implements OnInit, OnChanges {
+export class SalonsMapComponent implements OnChanges {
     @Input()
     userLocation!: google.maps.LatLngLiteral;
     @Input()
@@ -44,13 +43,11 @@ export class SalonsMapComponent implements OnInit, OnChanges {
     salonsControl = new FormControl('');
     autocompleteOptions!: Observable<Salon[]>;
 
-    constructor() {}
     ngOnChanges(changes: SimpleChanges): void {
-        this.allSalons = changes['salons'].currentValue;
-    }
-
-    ngOnInit(): void {
-        this.keepTheAutocompleteAndTheMapMarkersUpdatedBasedOnTheSearchTerm();
+        this.allSalons = changes['salons']?.currentValue;
+        if (this.allSalons?.length) {
+            this.keepTheAutocompleteAndTheMapMarkersUpdatedBasedOnTheSearchTerm();
+        }
     }
 
     keepTheAutocompleteAndTheMapMarkersUpdatedBasedOnTheSearchTerm(): void {
@@ -63,7 +60,7 @@ export class SalonsMapComponent implements OnInit, OnChanges {
                 }
             }),
             map((searchTerm) => {
-                const filteredSalons = this.salons.filter(
+                const filteredSalons = this.allSalons.filter(
                     (salon) =>
                         salon.name
                             .toLowerCase()

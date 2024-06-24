@@ -146,9 +146,12 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
     }
 
     deleteBookingWithId(id: string): void {
-        // this.bookings = this.bookings.filter(
-        //     (booking: CalendarEvent) => booking.id !== id
-        // );
+        this.bookings = this.bookings.filter(
+            (booking: Booking) => booking.id !== id,
+        );
+
+        this.calendarEvents = [];
+        this.bookings.forEach((booking) => this.addCalendarEvent(booking));
     }
 
     setView(view: CalendarView): void {
@@ -187,7 +190,7 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
 
     bookingClicked(event: CalendarEvent): void {
         this.dialog.open(MoreInfoAboutBookingComponent, {
-            width: '60vw',
+            width: '30vw',
             autoFocus: false,
             panelClass: ['round-without-padding', 'modal-container'],
             data: this.bookings.find((booking) => booking.id === event.id),

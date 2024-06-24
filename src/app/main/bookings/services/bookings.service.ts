@@ -49,10 +49,10 @@ export class BookingsService {
     }
 
     update(id: string, newBooking: Partial<Booking>): Observable<void> {
-        return this.httpClient.patch<void>(
-            this.bookingsBackendUrl + id,
-            newBooking,
-        );
+        return this.httpClient.patch<void>(this.bookingsBackendUrl + id, {
+            ...newBooking,
+            workerId: newBooking.workerId,
+        });
     }
 
     delete(

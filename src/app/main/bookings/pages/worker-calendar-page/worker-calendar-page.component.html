@@ -2,14 +2,14 @@
 
 @if (worker && worker.salons.length) {
     <section>
-        <button
+        <!-- <button
             class="create-booking-button"
             mat-raised-button
             color="primary"
             (click)="displayEventDialog()"
         >
             Create booking
-        </button>
+        </button> -->
 
         <app-worker-calendar [worker]="worker" />
     </section>

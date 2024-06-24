@@ -27,7 +27,14 @@ section {
     }
 
     .content {
-        padding: 0;
+        padding: 1rem;
+
+        .booking-data {
+            .bold {
+                font-weight: bold;
+                font-size: 1.25rem;
+            }
+        }
 
         &::-webkit-scrollbar {
             width: 10px;
@@ -41,6 +48,19 @@ section {
 
         &::-webkit-scrollbar-track {
             background-color: #ccc;
+        }
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-between;
+
+        .history-button {
+            color: $primary;
+        }
+
+        .done-button {
+            color: green;
         }
     }
 }

@@ -28,14 +28,14 @@ export class SidenavComponent implements OnInit {
                 icon: 'account_circle',
                 path: '/main/users/profile',
             },
-            {
-                title: 'Search salons',
-                icon: 'search',
-                path: '/main/salons',
-            },
         ];
 
         if (this.currentUser.isCustomer) {
+            routes.push({
+                title: 'Search salons',
+                icon: 'search',
+                path: '/main/salons',
+            });
             routes.push({
                 title: 'My bookings',
                 icon: 'bookmark_added',
@@ -52,6 +52,12 @@ export class SidenavComponent implements OnInit {
                 title: 'My salons',
                 icon: 'storefront',
                 path: '/main/salons/my-salons',
+            });
+        } else if (this.currentUser.isAdmin) {
+            routes.push({
+                title: 'Search salons',
+                icon: 'search',
+                path: '/main/salons',
             });
         }
 

@@ -19,11 +19,7 @@ export class SearchSalonsPageComponent implements OnInit {
     cityName: string = 'Sofia';
     countryName: string = 'Bulgaria';
     mapZoomLevel: number = mapZoomLevelConstants.city;
-    userLocation: google.maps.LatLngLiteral = {
-        lat: 42.698334,
-        lng: 23.319941,
-    };
-
+    userLocation!: google.maps.LatLngLiteral;
     salons: Salon[] = [];
     isValidUrl = isValidUrl;
     blankProfilePictureUrl = blankProfilePictureUrl;
@@ -36,13 +32,40 @@ export class SearchSalonsPageComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.getUserLocationInfo();
         this.fetchSalons();
     }
 
     fetchSalons(): void {
         this.salonsService
             .getAll('bulgaria')
-            .subscribe((salons: Salon[]) => (this.salons = salons));
+            .subscribe(async (salons: Salon[]) => {
+                this.salons =
+                    await this.sortSalonsBasedOnDistanceFromUserLocation(
+                        salons,
+                    );
+            });
+    }
+
+    async sortSalonsBasedOnDistanceFromUserLocation(
+        salons: Salon[],
+    ): Promise<Salon[]> {
+        const distancesPromises = salons.map((salon) =>
+            this.calculateDistance(this.userLocation, {
+                lat: Number(salon.latitude),
+                lng: Number(salon.longitude),
+            }),
+        );
+
+        const distances = await Promise.all(distancesPromises);
+        const sorted = distances
+            .map((distance, index) => {
+                return { distance, salon: salons[index] };
+            })
+            .sort((a, b) => a.distance - b.distance)
+            .map((salonAndDistanceObj) => salonAndDistanceObj.salon);
+
+        return sorted;
     }
 
     showMoreInfoAboutSalon(salon: Salon) {
@@ -64,6 +87,38 @@ export class SearchSalonsPageComponent implements OnInit {
 
     openSalonDetails(salon: Salon) {
         this.router.navigate([`main/salons/${salon?.id}`]);
+    }
+
+    calculateDistance(
+        origin: google.maps.LatLngLiteral,
+        destination: google.maps.LatLngLiteral,
+    ): Promise<number> {
+        return new Promise((resolve, reject) => {
+            const service = new google.maps.DistanceMatrixService();
+
+            service.getDistanceMatrix(
+                {
+                    origins: [new google.maps.LatLng(origin.lat, origin.lng)],
+                    destinations: [
+                        new google.maps.LatLng(
+                            destination.lat,
+                            destination.lng,
+                        ),
+                    ],
+                    travelMode: google.maps.TravelMode.WALKING,
+                },
+                (response, status) => {
+                    if (status === google.maps.DistanceMatrixStatus.OK) {
+                        const results = response!.rows[0].elements;
+                        const distance = results[0].distance.value;
+
+                        resolve(distance);
+                    } else {
+                        reject(status);
+                    }
+                },
+            );
+        });
     }
 
     private getUserLocationInfo(): Observable<void> {
