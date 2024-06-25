@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { passwordRegex } from '../../../../core/constants/regexes';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
-import { getErrorMessages } from '../../../../core/utils/get-error-message';
 import { ChangeCredentialSubmitResult } from '../../models/change-credential-submit-result.model';
 import { Credential } from '../../models/credential.model';
 import { UsersService } from '../../services/users.service';
@@ -34,12 +33,12 @@ export class ChangePasswordComponent {
         const observer = {
             next: () => {
                 this.snackBar.open('Your password was changed', 'Close');
+                this.resetSubject.next({});
             },
             error: (httpError: HttpErrorResponse) => {
-                this.snackBar.open(
-                    getErrorMessages(httpError.error.message),
-                    'Close',
-                );
+                if (httpError.status === 401) {
+                    this.snackBar.open('Wrong password', 'Close');
+                }
             },
         };
 

@@ -15,12 +15,11 @@ import { BoookingsRoutingModule } from './bookings-routing.module';
 import { BookingsFormComponent } from './components/bookings-form/bookings-form.component';
 import { MoreInfoAboutBookingComponent } from './components/more-info-about-booking/more-info-about-booking.component';
 import { WorkerCalendarComponent } from './components/worker-calendar/worker-calendar.component';
+import { BookingsHistoryPageComponent } from './pages/bookings-history-page/bookings-history-page.component';
 import { CustomerBookingsPageComponent } from './pages/customer-bookings-page/customer-bookings-page.component';
 import { CustomerHistoryPageComponent } from './pages/customer-history-page/customer-history-page.component';
 import { SalonSchedulePageComponent } from './pages/salon-schedule-page/salon-schedule-page.component';
 import { WorkerCalendarPageComponent } from './pages/worker-calendar-page/worker-calendar-page.component';
-import { BookingsHistoryComponent } from './pages/bookings-history/bookings-history.component';
-import { BookingsHistoryPageComponent } from './pages/bookings-history-page/bookings-history-page.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +31,6 @@ import { BookingsHistoryPageComponent } from './pages/bookings-history-page/book
         BookingsFormComponent,
         MoreInfoAboutBookingComponent,
         SalonSchedulePageComponent,
-        BookingsHistoryComponent,
         BookingsHistoryPageComponent,
     ],
     imports: [

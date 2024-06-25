@@ -1,5 +1,4 @@
 import {
-    HttpErrorResponse,
     HttpEvent,
     HttpHandler,
     HttpInterceptor,
@@ -38,13 +37,13 @@ export class JwtTokenInterceptor implements HttpInterceptor {
             tap({
                 next: () => {},
                 error: (err: unknown) => {
-                    if (
-                        err instanceof HttpErrorResponse &&
-                        err.status === 401
-                    ) {
-                        this.localStorage.clearStorage();
-                        this.router.navigate(['public/login']);
-                    }
+                    // if (
+                    //     err instanceof HttpErrorResponse &&
+                    //     err.status === 401
+                    // ) {
+                    //     this.localStorage.clearStorage();
+                    //     this.router.navigate(['public/login']);
+                    // }
                 },
             }),
         );

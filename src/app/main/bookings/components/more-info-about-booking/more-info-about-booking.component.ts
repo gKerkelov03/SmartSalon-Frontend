@@ -81,6 +81,13 @@ export class MoreInfoAboutBookingComponent implements OnInit {
                 note: 'new note',
                 done: true,
             })
-            .subscribe();
+            .subscribe(() => {
+                this.bookingsService.bookingsChangeSubject.next({
+                    action: CrudAction.Delete,
+                    bookingId: this.booking.id,
+                });
+
+                this.dialogRef.close();
+            });
     }
 }
