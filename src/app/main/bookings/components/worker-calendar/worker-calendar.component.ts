@@ -71,7 +71,7 @@ export class WorkerCalendarComponent implements OnInit, OnDestroy {
             .subscribe((result) => {
                 const { action, booking, bookingId } = result;
 
-                if (booking === null) {
+                if (booking === null || action === CrudAction.Delete) {
                     this.deleteBookingWithId(bookingId);
                 } else if (action === CrudAction.Create) {
                     this.addCalendarEvent(booking);

@@ -1,0 +1,38 @@
+@use '../../../../../assets/styles/variables' as *;
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .title {
+        font-size: 2rem;
+        margin-top: 2rem;
+        margin-bottom: 6rem;
+    }
+
+    .past-booking {
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        margin-bottom: 6rem;
+        font-size: 1.25rem;
+        background-color: $white;
+        padding: 1rem 3rem;
+
+        .booking-data {
+            margin-bottom: 0.2rem;
+
+            .bold {
+                font-weight: bold;
+            }
+        }
+
+        .delete-booking-button {
+            display: block;
+            margin-left: auto;
+            position: relative;
+            left: 2rem;
+        }
+    }
+}

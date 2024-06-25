@@ -1,1 +1,39 @@
-<p>bookings-history-page works!</p>
+@if (customer && bookings?.length) {
+    <section>
+        <h3 class="title">
+            {{ customer.firstName }} {{ customer.lastName }}'s past bookings
+        </h3>
+
+        @for (booking of bookings; track $index) {
+            <div class="past-booking">
+                <button
+                    mat-mini-fab
+                    class="delete-booking-button"
+                    (click)="deleteBooking(booking)"
+                >
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <p class="booking-data">
+                    <span class="bold">Date:</span>
+                    {{ booking.date | date }}
+                </p>
+                <p class="booking-data">
+                    <span class="bold">Start time:</span>
+                    {{ booking.startTime | onlyHourAndMinutes }}
+                </p>
+
+                <p class="booking-data">
+                    <span class="bold"> Duration: </span>
+                    {{ booking.serviceDurationInMinutes }} minutes
+                </p>
+
+                @if (booking.note) {
+                    <p class="booking-data">
+                        <span class="bold"> Note: </span>
+                        {{ booking.note }}
+                    </p>
+                }
+            </div>
+        }
+    </section>
+}

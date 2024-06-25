@@ -32,7 +32,12 @@ export class CustomerBookingsPageComponent implements OnInit {
     fetchBookings(): void {
         this.bookingsService
             .getCustomerBookings(this.currentUser.currentUser!.id)
-            .subscribe((bookings: Booking[]) => (this.bookings = bookings));
+            .subscribe(
+                (bookings: Booking[]) =>
+                    (this.bookings = bookings.filter(
+                        (booking) => !booking.done,
+                    )),
+            );
     }
 
     cancelBooking(bookingForCancellation: Booking): void {

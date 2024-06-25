@@ -1,10 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import {
     MAT_DIALOG_DATA,
     MatDialog,
     MatDialogRef,
 } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { filter, switchMap } from 'rxjs';
 import { CrudAction } from '../../../../core/enums/crud-action';
 import { ConfirmDeletionDialogComponent } from '../../../salons/components/confirm-deletion-dialog/confirm-deletion-dialog.component';
@@ -20,6 +21,7 @@ export class MoreInfoAboutBookingComponent implements OnInit {
     isLoading: boolean = false;
     bookingHoursDuration!: number;
     bookingMinutesDuration!: number;
+    noteFormControl: FormControl = new FormControl('');
 
     constructor(
         private bookingsService: BookingsService,
@@ -27,7 +29,7 @@ export class MoreInfoAboutBookingComponent implements OnInit {
         public booking: Booking,
         private dialogRef: MatDialogRef<MoreInfoAboutBookingComponent>,
         private dialog: MatDialog,
-        private snackBar: MatSnackBar,
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -72,13 +74,18 @@ export class MoreInfoAboutBookingComponent implements OnInit {
             );
     }
 
-    openBookingsHistory(): void {}
+    openBookingsHistory(): void {
+        this.dialogRef.close();
+        this.router.navigate([
+            '/main/bookings/bookings-history/' + this.booking.customerId,
+        ]);
+    }
 
     doneClicked(): void {
         this.bookingsService
             .update(this.booking.id, {
                 ...this.booking,
-                note: 'new note',
+                note: this.noteFormControl.value,
                 done: true,
             })
             .subscribe(() => {
@@ -89,5 +96,16 @@ export class MoreInfoAboutBookingComponent implements OnInit {
 
                 this.dialogRef.close();
             });
+    }
+
+    get canFinishTheBooking() {
+        const minutesDifferenceAllowed = 60;
+        const bookingDateISOString = `${this.booking.date}T${this.booking.startTime}`;
+        const bookingDate = new Date(bookingDateISOString);
+
+        const timeDifference = bookingDate.getTime() - new Date().getTime();
+        const minutesDifference = Math.abs(timeDifference / (1000 * 60));
+
+        return minutesDifference <= minutesDifferenceAllowed;
     }
 }

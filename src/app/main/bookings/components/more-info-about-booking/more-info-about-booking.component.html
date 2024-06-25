@@ -43,6 +43,13 @@
                 {{ bookingMinutesDuration }} minutes
             </p>
         }
+
+        @if (canFinishTheBooking) {
+            <mat-form-field class="note-field">
+                <mat-label>Note</mat-label>
+                <input matInput [formControl]="noteFormControl" />
+            </mat-form-field>
+        }
     </mat-dialog-content>
 
     <mat-dialog-actions class="actions">
@@ -64,13 +71,15 @@
             <mat-icon>history</mat-icon>
         </button>
 
-        <button
-            type="button"
-            (click)="doneClicked()"
-            mat-icon-button
-            class="action done-button"
-        >
-            <mat-icon>done</mat-icon>
-        </button>
+        @if (canFinishTheBooking) {
+            <button
+                type="button"
+                (click)="doneClicked()"
+                mat-icon-button
+                class="action done-button"
+            >
+                <mat-icon>done</mat-icon>
+            </button>
+        }
     </mat-dialog-actions>
 </section>
